@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="https://idangero.us/swiper/dist/css/swiper.min.css">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            position: relative;
+            height: 100%;
+        }
+        
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+        
+        button {
+            border: 0;
+            background-color: transparent;
+        }
+        
+        .swiper-container {
+            width: 100%;
+            height: 50%;
+        }
+        
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows -->
+        <button type="button" class="swiper-button-next"></button>
+        <button type="button" class="swiper-button-prev"></button>
+    </div>
+    <ol>
+        <li>정지 버튼이 없는 자동 슬라이드 입니다.</li>
+        <li>슬라이드를 넘기면 자동 슬라이드가 정지 됩니다.</li>
+        <li>데스크톱에서는 슬라이드 영역에서 초점이 빠지면 재생이 시작됩니다.</li>
+        <li>모바일에서는 도큐먼트 터치무브가 되면 재생이 시작됩니다.</li>
+    </ol>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script>
+        jQuery(function($) {
+            var mySwiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+                paginationClickable: true,
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: 1000,
+                autoplayDisableOnInteraction: true, // 쓸어 넘기거나 버튼 클릭 시 자동 슬라이드 정지.
+                loop: true
+            });
+
+            // 데스크톱에서는 포커스가 빠진 경우 자동 슬라이드 재생.
+            $(".swiper-container").on("mouseover", function() {
+                setTimeout(function() {
+                    if ($(this).find(":focus").length === 0) {
+                        mySwiper.startAutoplay();
+                        console.log("focusout, startAutoplay");
+                    }
+                }, 100);
+            });
+
+            // 모바일에서는 화면을 움직이면 자동 슬라이드 기능 재생.
+            $(document).on("touchmove", function() {
+                mySwiper.startAutoplay();
+                console.log("touchmove, startAutoplay");
+            });
+
+        });
+
+    </script>
+</body>
+
+</html>
