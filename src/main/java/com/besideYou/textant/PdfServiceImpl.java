@@ -10,7 +10,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -26,9 +25,13 @@ import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.imgscalr.Scalr;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.besideYou.textant.Dao.CommentDao;
+import com.besideYou.textant.Dto.CommentDto;
 
 @Service
 public class PdfServiceImpl implements PdfServiceText{
@@ -360,5 +363,15 @@ public class PdfServiceImpl implements PdfServiceText{
 		   file.delete();
 		  }
 		 }
+
+	@Autowired
+	CommentDao commentDao;
+	@Override
+	public void scroll(CommentDto commentDto) {
+		commentDao.scroll(commentDto);
+		
+	}
+	
+	
 	
 }

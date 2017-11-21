@@ -1,19 +1,15 @@
 package com.besideYou.textant;
 
-import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
@@ -27,10 +23,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.besideYou.textant.Dto.CommentDto;
 import com.besideYou.textant.Dto.LoginDto;
 
 /**
@@ -42,11 +37,26 @@ public class HomeController {
 	@Autowired
 	PdfService pdfService;
 	
+	@Autowired
+	PdfServiceText pdfServiceText;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	@RequestMapping(value="/scroll.text", method = RequestMethod.GET)
+	public String scroll() {
+		return "scroll";
+	}
+	
+	@RequestMapping(value="/scroll.text", method = RequestMethod.POST)
+	public String scrollWrite(CommentDto commentDto) {
+		
+		pdfServiceText.scroll(commentDto);
+		return "scroll";
+	}
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
-	 */ 
+	 */
 	@RequestMapping(value = "/main.text", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -106,8 +116,7 @@ public class HomeController {
 		return "progress";
 	}*/
 	
-	@Autowired
-	PdfServiceText pdfServiceText;
+	
 
 	
 	@RequestMapping(value="/write.text",method=RequestMethod.GET)
@@ -211,5 +220,6 @@ public class HomeController {
 			}
 			return entity;
 	}
+	
 	
 }
