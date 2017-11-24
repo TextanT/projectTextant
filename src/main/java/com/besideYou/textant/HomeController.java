@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
@@ -21,8 +22,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.besideYou.textant.Dto.CommentDto;
@@ -43,13 +46,29 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value="/scroll.text", method = RequestMethod.GET)
-	public String scroll() {
+	public String scroll(Model model) {
+		
 		return "scroll";
 	}
 	
-	@RequestMapping(value="/scroll.text", method = RequestMethod.POST)
-	public String scrollWrite(CommentDto commentDto) {
+	@RequestMapping(value="/commentRead.text")
+	@ResponseBody
+	public List<CommentDto> commentRead(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut){
 		
+		return pdfServiceText.scrollView(page,nextPage,pageListCount,pageCountBlock,pageCut);
+	}
+	
+	@RequestMapping(value="/commentCount.text")
+	@ResponseBody
+	public List<Integer> commentCount(int page){
+		return pdfServiceText.commentCount(page);
+	}
+	
+	@RequestMapping(value="/scroll.text", method = RequestMethod.POST)
+	public String scrollWrite(CommentDto commentDto,int page) {
+		
+		commentDto.setPageGroup(page);
+		commentDto.setUserId("obscu");
 		pdfServiceText.scroll(commentDto);
 		return "scroll";
 	}

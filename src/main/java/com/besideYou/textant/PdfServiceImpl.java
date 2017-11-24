@@ -10,8 +10,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
@@ -366,11 +370,109 @@ public class PdfServiceImpl implements PdfServiceText{
 
 	@Autowired
 	CommentDao commentDao;
+	@Resource(name="pageBlock")
+	Integer pageBlock;
+	
+	@Resource(name="pageSize")
+	Integer pageSize;
+	
 	@Override
 	public void scroll(CommentDto commentDto) {
 		commentDao.scroll(commentDto);
 		
 	}
+
+
+//	@Override
+//	public List<CommentDto> scrollView(int page, int nextPage) {
+//		List<CommentDto> commentList;
+//		HashMap<String,Integer>  pageBlockMin = new HashMap<String,Integer>();
+//		pageBlockMin.put("page", page);
+//		pageBlockMin.put("pageBlock", pageBlock);
+//		int pageCountBlock = commentDao.pageCountBloack(pageBlockMin);
+//		pageBlockMin.put("pageCountBlock",pageCountBlock);
+//		int pageListCount=commentDao.commentListCount(pageBlockMin);
+//		int pageCut=(int)Math.ceil((double)pageListCount/pageSize);
+//		if(nextPage<=pageCut){
+//			int pageStart=0;
+//			if(nextPage==1){
+//				pageStart=1;
+//			}else {
+//				pageStart=((nextPage-1)*pageSize)-1;
+//			}
+//			int pageStop=nextPage*pageSize;
+//			pageBlockMin.put("pageStart",pageStart);
+//			pageBlockMin.put("pageStop",pageStop);
+//			return commentList=commentDao.commentList(pageBlockMin);	
+//		}else {
+//			return commentList=null;
+//		}
+//	}
+	
+	@Override
+	public List<CommentDto> scrollView(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut) {
+		List<CommentDto> commentList;
+		HashMap<String,Integer>  pageBlockMin = new HashMap<String,Integer>();
+		pageBlockMin.put("page", page);
+		pageBlockMin.put("pageBlock", pageBlock);
+//		int pageCountBlock =0;
+//		if(pageBlock>=page) {
+//			pageCountBlock=1;
+//		}else {
+//			int pageCountCut=pageBlock;
+//			pageCountCut--;
+//			pageCountBlock=page-pageCountCut;
+//			
+//		}
+		
+		pageBlockMin.put("pageCountBlock",pageCountBlock);
+//		int pageListCount=commentDao.commentListCount(pageBlockMin);
+//		int pageCut=(int)Math.ceil((double)pageListCount/pageSize);
+		if(nextPage<=pageCut){
+			int pageStart=0;
+			if(nextPage==1){
+				pageStart=1;
+			}else {
+				pageStart=((nextPage-1)*pageSize)+1;
+			}
+			int pageStop=nextPage*pageSize;
+			pageBlockMin.put("pageStart",pageStart);
+			pageBlockMin.put("pageStop",pageStop);
+			return commentList=commentDao.commentList(pageBlockMin);	
+		}else {
+			return commentList=null;
+		}
+	}
+
+
+	@Override
+	public List<Integer> commentCount(int page) {
+		List<Integer> pagePoint = new ArrayList<Integer>();
+		HashMap<String,Integer>  pageBlockMin = new HashMap<String,Integer>();
+		pageBlockMin.put("page", page);
+		pageBlockMin.put("pageBlock", pageBlock);
+		int pageCountBlock =0;
+		if(pageBlock>=page) {
+			pageCountBlock=1;
+		}else {
+			int pageCountCut=pageBlock;
+			pageCountCut--;
+			pageCountBlock=page-pageCountCut;
+			
+		}
+		pageBlockMin.put("pageCountBlock",pageCountBlock);
+		int pageListCount=commentDao.commentListCount(pageBlockMin);
+		int pageCut=(int)Math.ceil((double)pageListCount/pageSize);
+		System.out.println("++++++++++++++++"+pageCut);
+		pagePoint.add(pageListCount);
+		pagePoint.add(pageCountBlock);
+		pagePoint.add(page);
+		pagePoint.add(pageCut);
+		return pagePoint;
+	}
+	
+	
+	
 	
 	
 	

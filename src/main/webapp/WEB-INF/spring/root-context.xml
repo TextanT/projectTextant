@@ -43,12 +43,12 @@
 	
 	<bean id="pageSize" class="java.lang.Integer" >
 		<constructor-arg>
-			<value>10</value>
+			<value>5</value>
 		</constructor-arg>
 	</bean>
 	
 	<bean id="pageBlock" class="java.lang.Integer">
-		<constructor-arg value="10"/>
+		<constructor-arg value="5"/>
 	</bean>
 	
 </beans>

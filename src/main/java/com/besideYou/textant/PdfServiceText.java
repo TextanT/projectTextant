@@ -1,5 +1,8 @@
 package com.besideYou.textant;
 
+import java.util.List;
+
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.besideYou.textant.Dto.CommentDto;
@@ -9,4 +12,6 @@ public interface PdfServiceText {
 	public String pdfWrite(MultipartFile mFile,MultipartFile bookImg);
 	public String check(PdfFileDto fileDto)throws Exception;
 	public void scroll(CommentDto commentDto);
+	public List<CommentDto> scrollView(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut);
+	public List<Integer> commentCount(int page);
 }
