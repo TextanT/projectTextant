@@ -257,7 +257,7 @@ a {
 	text-align: center;
 	/* 	float:right; */
 	font-size: 15px;
-	color: white;
+	color: gray;  
 }
 
 .swiper-wrapper {
@@ -783,22 +783,7 @@ li {
 
 
 
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
+	<div style="height: 2000px;"></div>
 	<div style="position: fixed; bottom: 15px; right: 30px;">
 		<a href="#" id="MOVE_TOP_BTN"><img
 			src="/textant/resources/icon_img/top.jpg"></a>
