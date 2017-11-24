@@ -51,17 +51,17 @@ public class HomeController {
 		return "scroll";
 	}
 	
-	@RequestMapping(value="/commentRead.text")
-	@ResponseBody
-	public List<CommentDto> commentRead(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut){
-		
-		return pdfServiceText.scrollView(page,nextPage,pageListCount,pageCountBlock,pageCut);
-	}
-	
 	@RequestMapping(value="/commentCount.text")
 	@ResponseBody
-	public List<Integer> commentCount(int page){
-		return pdfServiceText.commentCount(page);
+	public List<Integer> commentCount(int page,int bookArticleNum){
+		return pdfServiceText.commentCount(page,bookArticleNum);
+	}
+	
+	@RequestMapping(value="/commentRead.text")
+	@ResponseBody
+	public List<CommentDto> commentRead(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum){
+		
+		return pdfServiceText.scrollView(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum);
 	}
 	
 	@RequestMapping(value="/scroll.text", method = RequestMethod.POST)

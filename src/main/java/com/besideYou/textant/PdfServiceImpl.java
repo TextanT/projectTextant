@@ -410,9 +410,10 @@ public class PdfServiceImpl implements PdfServiceText{
 //	}
 	
 	@Override
-	public List<CommentDto> scrollView(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut) {
+	public List<CommentDto> scrollView(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum) {
 		List<CommentDto> commentList;
 		HashMap<String,Integer>  pageBlockMin = new HashMap<String,Integer>();
+		pageBlockMin.put("bookArticleNum", bookArticleNum);
 		pageBlockMin.put("page", page);
 		pageBlockMin.put("pageBlock", pageBlock);
 //		int pageCountBlock =0;
@@ -446,7 +447,7 @@ public class PdfServiceImpl implements PdfServiceText{
 
 
 	@Override
-	public List<Integer> commentCount(int page) {
+	public List<Integer> commentCount(int page,int bookArticleNum) {
 		List<Integer> pagePoint = new ArrayList<Integer>();
 		HashMap<String,Integer>  pageBlockMin = new HashMap<String,Integer>();
 		pageBlockMin.put("page", page);
@@ -461,6 +462,7 @@ public class PdfServiceImpl implements PdfServiceText{
 			
 		}
 		pageBlockMin.put("pageCountBlock",pageCountBlock);
+		pageBlockMin.put("bookArticleNum",bookArticleNum);
 		int pageListCount=commentDao.commentListCount(pageBlockMin);
 		int pageCut=(int)Math.ceil((double)pageListCount/pageSize);
 		System.out.println("++++++++++++++++"+pageCut);
@@ -468,6 +470,7 @@ public class PdfServiceImpl implements PdfServiceText{
 		pagePoint.add(pageCountBlock);
 		pagePoint.add(page);
 		pagePoint.add(pageCut);
+		pagePoint.add(bookArticleNum);
 		return pagePoint;
 	}
 	

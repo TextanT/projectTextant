@@ -21,7 +21,8 @@ $(document).ready(function(){
 		url:"/textant/commentCount.text",
 //			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
 		data:{				
-			page:$("#page").val()
+			page:$("#page").val(),
+			bookArticleNum:$("#bookArticleNum").val()
 		},
 		beforeSend : function(){
 //				alert("시작전");
@@ -50,7 +51,8 @@ function comentRead(read){
 			nextPage:$("#nextPage").val(),
 			pageListCount:read[0],
 			pageCountBlock:read[1],
-			pageCut:read[3]
+			pageCut:read[3],
+			bookArticleNum:read[4]
 		},
 		beforeSend : function(){
 //				alert("시작전");
@@ -82,7 +84,8 @@ function commentGet(){
 			nextPage:$("#nextPage").val(),
 			pageListCount:$("#pageListCount").val(),
 			pageCountBlock:$("#pageCountBlock").val(),
-			pageCut:$("#pageCut").val()
+			pageCut:$("#pageCut").val(),
+			bookArticleNum:$("#bookArticleNum").val()
 		},
 		beforeSend : function(){
 //				alert("시작전");
@@ -119,7 +122,8 @@ function commentGet(){
 </style>
 <title>Insert title here</title>
 </head>
-<body>
+<body>	
+	<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="1">
 	<input id="page" type="hidden" name="page" value="5">
 	<input id="nextPage" type="hidden" name="nextPage" value="1">
 	<input id='pageListCount' type='hidden' name='pageListCount'>

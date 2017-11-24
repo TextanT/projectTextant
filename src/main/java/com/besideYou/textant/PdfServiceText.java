@@ -12,6 +12,6 @@ public interface PdfServiceText {
 	public String pdfWrite(MultipartFile mFile,MultipartFile bookImg);
 	public String check(PdfFileDto fileDto)throws Exception;
 	public void scroll(CommentDto commentDto);
-	public List<CommentDto> scrollView(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut);
-	public List<Integer> commentCount(int page);
+	public List<CommentDto> scrollView(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum);
+	public List<Integer> commentCount(int page,int bookArticleNum);
 }

@@ -26,7 +26,7 @@
 		SELECT COUNT(*)
 		FROM (SELECT ROWNUM RM, human.* FROM 
 		(SELECT * FROM  comments 
-        WHERE pagegroup BETWEEN #{pageCountBlock} and #{page} and commentgroup=0
+        WHERE pagegroup BETWEEN #{pageCountBlock} and #{page} and commentgroup=0 and bookarticlenum=#{bookArticleNum}
 		ORDER BY pagegroup desc,commentNUM desc) human)  
 	</select>
 	
@@ -34,7 +34,7 @@
 		SELECT *
 		FROM (SELECT ROWNUM RM, human.* FROM 
 		(SELECT * FROM  comments 
-        WHERE pagegroup BETWEEN #{pageCountBlock} and #{page} and commentgroup=0
+        WHERE pagegroup BETWEEN #{pageCountBlock} and #{page} and commentgroup=0 and bookarticlenum=#{bookArticleNum}
 		ORDER BY pagegroup desc,commentNUM desc) human)  
 		WHERE RM BETWEEN  #{pageStart} AND #{pageStop}
 	</select>
