@@ -10,97 +10,44 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style>
 body {
-	background-image: url(resources/background_img/book-2572101_1920.jpg);
-	background-position: 50% 0%;
-	background-size: 100%;
+	background-image: url(/textant/resources/background_img/book-2572101_1920.jpg);
+	/*            background-image: url(slick-1.8.0/slick-1.8.0/slick/1300.png);*/
+	background-position: center center;
+	background-size: cover;
+	background-attachment: fixed;
 	background-repeat: no-repeat;
-	position: fixed;
+	/*            position: fixed;*/
 	overflow: hidden;
+	word-break: break-word;
 }
 
-.btn.block, .btn-two.block, .btn-gradient.block, .btn-effect.block {
-	display: block;
-	width: 40%;
-	margin-left: auto;
-	margin-right: auto;
+.container {
+	width: 55%;
+	height: 55%;
+	margin: 40px auto;
+	/*            background-color: red;*/
+}
+
+.outer {
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+
+.inner {
+	display: table-cell;
+	vertical-align: middle;
 	text-align: center;
+	width: 100%;
 }
 
-.btn.cyan, .btn-two.cyan {
-	background-color: #7fccde;
-}
-
-.rounded {
-	border-radius: 10px;
-}
-/* default button style */
-.btn {
+.centered {
 	position: relative;
-	border: 0;
-	padding: 15px 25px;
 	display: inline-block;
-	text-align: center;
+	width: 50%;
+	padding: 1em;
+	/*            background: orange;*/
 	color: white;
-}
-
-.btn:active {
-	top: 4px;
-}
-/* color classes for .btn */
-.btn.cyan {
-	box-shadow: 0px 4px 0px #73B9C9;
-}
-
-.btn.cyan:active {
-	box-shadow: 0 0 #73B9C9;
-	background-color: #70B4C4;
-}
-
-.signupDiv {
-	border-radius: 1em;
-	border-top-left-radius: 0.1em;
-	border-top-right-radius: 0.1em;
-	border-bottom-left-radius: 0.1em;
-	border-bottom-right-radius: 0.1em;
-	position: absolute;
-	top: 80%;
-	left: 48%;
-	width: 300px;
-	height: 600px;
-	margin: 50px 0 0 0px;
-	margin-top: 100px;
-	/*            padding-left:40%;*/
-}
-
-.sign_button1 {
-	position: absolute;
-	top: 80%;
-	left: 12%;
-	width: 70%;
-}
-
-.back_button2 {
-	position: absolute;
-	top: 90%;
-	left: 12%;
-	width: 70%;
-}
-
-a {
-	text-decoration: none
-}
-
-ul li {
-	list-style-type: none;
-}
-
-ul li label {
-	width: 70px;
-	float: left;
-}
-/*        id Div*/
-.idDivc:first-child {
-	border-bottom: none;
 }
 
 .idDivc {
@@ -109,10 +56,17 @@ ul li label {
 	box-sizing: border-box;
 	padding: 11px 11px 11px 13px;
 	background: #fff;
+	/*            width: 340px;*/
+	/*            margin-left: 25%;*/
+	position: absolute;
+	top: 25%;
+	left: 38%;
+	width: 24%;
 }
 
 .id_sp.int_id {
-	background-position: 100% -57px;
+	/*            background-position: 100% -57px;*/
+	
 }
 
 .id_sp {
@@ -132,11 +86,29 @@ ul li label {
 	z-index: 10;
 	width: 100%;
 	height: 16px;
-	padding: 6px 0;
 	border: none;
 	background: #fff;
 	apperance: none;
 	-webkit-apperance: none;
+}
+
+.idDivc {
+	/*            border-top: none;*/
+	border: 1px solid #D8D8D8;
+	padding: 10px;
+}
+
+.PassDivc {
+	/*            border-top: none;*/
+	border: 1px solid #D8D8D8;
+}
+
+.PasscDivc {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 11px 11px 11px 13px;
+	background: #fff;
 }
 
 .PassDivc:first-child {
@@ -149,6 +121,10 @@ ul li label {
 	box-sizing: border-box;
 	padding: 11px 11px 11px 13px;
 	background: #fff;
+	position: absolute;
+	top: 35%;
+	left: 38%;
+	width: 24%;
 }
 
 .pass_sp.int_pass {
@@ -179,21 +155,86 @@ ul li label {
 	-webkit-apperance: none;
 }
 
-input {
-	font-family: '돋움', Dotum, Helvetica, sans-serif;
-	font-size: 12px;
-	-webkit-text-size-adjust: none;
-}
-/*        border line*/
-.idDivc {
-	/*            border-top: none;*/
-	border: 1px solid #D8D8D8;
-	padding: 10px;
+.header_icon {
+	position: absolute;
+	top: 48%;
+	left: 37.5%;
+	width: 25%;
 }
 
-.PassDivc {
-	/*            border-top: none;*/
-	border: 1px solid #D8D8D8;
+.header_icon {
+	opacity: 1;
+}
+
+a {
+	text-decoration: none
+}
+
+ul li {
+	list-style-type: none;
+}
+
+ul li label {
+	width: 70px;
+	float: left;
+}
+
+.signn {
+	width: 200px;
+	height: 40px;
+	background-color: #9f793e;
+	padding: 13px 106px;
+	border: 1px solid #9f793e;
+}
+
+.signn:hover {
+	background: none;
+	transition: 0.5s;
+	border: 1px solid white;
+}
+
+.loginn {
+	width: 200px;
+	height: 40px;
+	background-color: #9f793e;
+	padding: 13px 100px;
+	border: 1px solid #9f793e;
+}
+
+.loginn:hover {
+	background: none;
+	transition: 0.5s;
+	border: 1px solid white;
+}
+
+.login_box {
+	position: absolute;
+	top: 55%;
+	left: 40%;
+	width: 20%;
+}
+
+.sign_box {
+	position: absolute;
+	top: 65%;
+	left: 40%;
+	width: 20%;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+	text-align: center;
+}
+
+#idCheckStatus {
+	height: 28px;
+	margin-bottom: 16px;
+}
+
+#status {
+	height: 28px;
+	margin-bottom: 16px;
 }
 
 .PasscDivc {
@@ -225,6 +266,10 @@ input {
 	box-sizing: border-box;
 	padding: 11px 11px 11px 13px;
 	background: #fff;
+	position: absolute;
+	top: 40%;
+	left: 38%;
+	width: 24%;
 }
 
 .passc_sp.int_passc {
@@ -261,6 +306,10 @@ input {
 	box-sizing: border-box;
 	padding: 11px 11px 11px 13px;
 	background: #fff;
+	position: absolute;
+	top: 50%;
+	left: 38%;
+	width: 24%;
 }
 
 .name_sp.int_name {
@@ -297,6 +346,10 @@ input {
 	box-sizing: border-box;
 	padding: 11px 11px 11px 13px;
 	background: #fff;
+	position: absolute;
+	top: 55%;
+	left: 38%;
+	width: 24%;
 }
 
 .email_sp.int_email {
@@ -328,9 +381,10 @@ input {
 }
 /* 데모페이지 설정 */
 .wrap {
-	/*            padding: 20px 30px;*/
-	padding-top: 20px;
-	/*            padding-left: 5px;*/
+	position: absolute;
+	top: 63%;
+	left: 37%;
+	width: 26%;
 }
 /* 인풋 */
 input[type=radio] {
@@ -432,134 +486,124 @@ input[type=radio] {
 .login_box {
 	position: absolute;
 	top: 70%;
-	left: 1.5%;
+	left: 38.6%;
 	width: 20%;
 }
 
 .back_box {
 	position: absolute;
-	top: 85%;
-	left: 1.5%;
+	top: 80%;
+	left: 38.6%;
 	width: 20%;
-}
-
-a {
-	text-decoration: none;
-	color: white;
-	text-align: center;
-}
-
-ul li {
-	list-style-type: none;
-}
-
-ul li label {
-	width: 70px;
-	float: left;
 }
 
 #idCheckStatus {
 	height: 28px;
-	margin-bottom: 16px;
+	position: absolute;
+	top: 30%;
+	left: 33.5%;
+	width: 20%;
 }
 
 #status {
 	height: 28px;
-	margin-bottom: 16px;
+	position: absolute;
+	top: 45%;
+	left: 30.5%;
+	width: 20%;
 }
-.aass{
-	display: none;
+
+.aass {
+ 	display: none; 
+	
 }
 </style>
 </head>
+
 <body>
-	<form action="sign.bbs" method="post" id="signForm" name="joinForm">
+	<div class="container">
+		<img src="/textant/resources/icon_img/fristLogo2.png" class="outer">
+		<div class="outer">
+			<form action="sign.text" method="post" id="signForm" name="joinForm">
+				<div class="inner">
+					<button type="submit" class="aass" id="sasd"></button>
 
+					<div id="idDiv" class="idDivc">
+						<span class="id_sp int_id"> <input type="text" id="id"
+							class="int" value maxlength="20" autocomplete="off"
+							placeholder="아이디" name="id">
+						</span>
+					</div>
+					<div id="idCheckStatus"></div>
 
+					<div id="PassDiv" class="PassDivc">
+						<span class="pass_sp int_pass"> <input type="password"
+							id="pass" class="int" value maxlength="20" autocomplete="off"
+							placeholder="비밀번호" name="pass">
+						</span>
+					</div>
+					<div id="PasscDiv" class="PasscDivc">
+						<span class="passc_sp int_passc"> <input type="password"
+							id="passcheck" class="int" value maxlength="20"
+							autocomplete="off" placeholder="비밀번호 확인" onblur="checkvalue()">
+						</span>
+					</div>
+					<div id="status"></div>
+					<!-- 			<div id="status" -->
+					<!-- 				style="border: 0; font size: 10px 굴림; width: 160px; height: 20px;background:none;" -->
+					<!-- 				readonly onfocus="this.blur();" value=""> -->
+					<!-- 			</div> -->
+					<div id="nameDiv" class="nameDivc">
+						<span class="name_sp int_name"> <input type="text"
+							id="name" class="int" value maxlength="20" autocomplete="off"
+							placeholder="이름" name="name">
+						</span>
+					</div>
+					<div id="emailDiv" class="emailDivc">
+						<span class="email_sp int_email"> <input type="text"
+							id="email" class="int" value maxlength="20" autocomplete="off"
+							placeholder="E-Mail" name="mail">
+						</span>
+					</div>
 
-		<div class="main_logo">
-			<img src="resources/icon_img/fristLogo2.png" class="logo">
+					<div class="wrap">
+						<input name="radio" type="radio" id="radio0" class="radio"
+							onclick="gender1()"> <label for="radio0"
+							class="radio-label"> <i class="fa fa-check"></i> <span>남자</span>
+						</label> <input type="text" name="gender" id="gender" hidden="hidden">
+
+						<input name="radio" type="radio" id="radio1" class="radio"
+							onclick="gender2()"> <label for="radio1"
+							class="radio-label"> <i class="fa fa-check"></i> <span>여자</span>
+						</label>
+
+					</div>
+					<div class="login_box" id="login">
+						<a href="" class="loginn" style="width: 100%;" id="btn1"> SIGN
+						</a>
+					</div>
+
+					<div class="back_box" onclick="">
+						<a href="main.bbs" class="backk" style="width: 10%;" id="btn2">
+							BACK </a>
+						<!-- 						onclick="javascript:history.back(-1)" -->
+					</div>
+
+					<div class="centered"></div>
+
+				</div>
+			</form>
+
 		</div>
 
-		<div class="signupDiv">
-			<div id="idDiv" class="idDivc">
-				<span class="id_sp int_id"> <input type="text" id="id"
-					class="int" value maxlength="20" autocomplete="off"
-					placeholder="아이디" name="id">
-				</span>
-			</div>
-
-			<div id="idCheckStatus"></div>
-
-			<div id="PassDiv" class="PassDivc">
-				<span class="pass_sp int_pass"> <input type="password"
-					id="pass" class="int" value maxlength="20" autocomplete="off"
-					placeholder="비밀번호" onblur="checkvalue()" name="pass">
-				</span>
-			</div>
-			<div id="PasscDiv" class="PasscDivc">
-				<span class="passc_sp int_passc"> <input type="password"
-					id="passcheck" class="int" value maxlength="20" autocomplete="off"
-					placeholder="비밀번호 확인" onblur="checkvalue()">
-				</span>
-			</div>
-			<div id="status"></div>
-			<!-- 			<div id="status" -->
-			<!-- 				style="border: 0; font size: 10px 굴림; width: 160px; height: 20px;background:none;" -->
-			<!-- 				readonly onfocus="this.blur();" value=""> -->
-			<!-- 			</div> -->
-			<div id="nameDiv" class="nameDivc">
-				<span class="name_sp int_name"> <input type="text" id="name"
-					class="int" value maxlength="20" autocomplete="off"
-					placeholder="이름" name="name">
-				</span>
-			</div>
-			<div id="emailDiv" class="emailDivc">
-				<span class="email_sp int_email"> <input type="text"
-					id="email" class="int" value maxlength="20" autocomplete="off"
-					placeholder="E-Mail" name="mail">
-				</span>
-			</div>
-
-			<div class="wrap">
-				<input name="radio" type="radio" id="radio0" class="radio"
-					onclick="gender1()"> <label for="radio0"
-					class="radio-label"> <i class="fa fa-check"></i> <span>남자</span>
-				</label> 
-				
-				<input type="text" name="gender" id="gender" hidden="hidden">
-
-				<input name="radio" type="radio" id="radio1" class="radio"
-					onclick="gender2()"> <label for="radio1"
-					class="radio-label"> <i class="fa fa-check"></i> <span>여자</span>
-				</label>
-
-			</div>
-			<div class="btnbox">
-				<div class="login_box" onclick="submi()">
-					<a href="" class="loginn" style="width: 100%;" id="btn1">
-						SIGN </a>
-				</div>
-
-				<div class="back_box" onclick="">
-					<a href="main.bbs" class="backk" style="width: 10%;" id="btn2"> BACK </a>
-<!-- 						onclick="javascript:history.back(-1)" -->
-				</div>
-				
-<!-- 				<button type="submit" class="aass" id="sasd"></button> -->
-
-			</div>
-		</div>
-	</form>
-
+	</div>
 <script type="text/javascript">
 
-function submi() {
-	var form = document.joinForm;
-	
-	form.submit();
-	
-
+window.onload = function() {
+	document.getElementById('btn1').onclick = function() {
+		document.getElementById('signForm').submit();
+		return false;
+	};
 };
 
 </script>
@@ -578,8 +622,7 @@ function submi() {
 		};
 		
 	</script>
-
-	<script language="javascript">
+<script language="javascript">
 		$.ajaxSetup({
 			type : "POST",
 			async : true,
@@ -594,7 +637,7 @@ function submi() {
 					"blur",
 					function() {
 						$.ajax({
-							url : "joinIdCheck.bbs",
+							url : "joinIdCheck.text",
 							data : {
 								inputId : $("#id").val()
 							},
@@ -610,7 +653,9 @@ function submi() {
 												"font-size", "12px");
 										$("#idCheckStatus").html(html).css(
 												"height", "16.3px");
-										
+										$("#idCheckStatus").html(html).css(
+												"left", "33.5%");
+
 										;
 									} else if (data == 0) {
 										html = "<p>중복된 아이디입니다</p>";
@@ -620,6 +665,8 @@ function submi() {
 												"font-size", "12px");
 										$("#idCheckStatus").html(html).css(
 												"height", "16.3px");
+										$("#idCheckStatus").html(html).css(
+												"left", "33%");
 									}
 
 								} else {
@@ -635,6 +682,7 @@ function submi() {
 						});
 					})
 		});
+	
 
 		function signUpCheck() {
 			var form = document.joinForm;
@@ -700,6 +748,7 @@ function submi() {
 					$("#status").html(html).css("color", "red");
 					$("#status").html(html).css("font-size", "12px");
 					$("#status").html(html).css("height", "16.3px");
+					$("#status").html(html).css("left", "32%");
 
 					// status 필드에 일치하지 않는다는 문장 출력
 					// 					joinForm.status.value = "일치하지 않습니다";
@@ -715,6 +764,7 @@ function submi() {
 					$("#status").html(html).css("color", "highlight");
 					$("#status").html(html).css("font-size", "12px");
 					$("#status").html(html).css("height", "16.3px");
+					$("#status").html(html).css("left", "30.5%");
 
 					// status 필드에 일치한다는 문장 출력
 					// 					joinForm.status.value = "일치합니다";
