@@ -9,7 +9,7 @@
 	
 	<insert id="scroll" parameterType="comment">
 		INSERT INTO comments values(comments_seq.nextval,#{conet}
-					,#{pageGroup},0,0,0,#{userId},sysdate)
+					,#{pageGroup},0,0,0,#{userId},sysdate,#{bookArticleNum})
 	</insert>
 	
 <!-- 	<select id="pageCountBloack" parameterType="HashMap" resultType="int"> -->

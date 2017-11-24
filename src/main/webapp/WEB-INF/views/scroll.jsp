@@ -34,13 +34,20 @@ $(document).ready(function(){
 			var html;
 			html+="<div id='commentCount' name='commentCount'>"+"page: "+data[1]+"~"+data[2]+"   전체답글: "+data[0]+"</div>"
 			$(".bbb").append(html);
-			
 				$("#pageListCount").val(data[0]);
 				$("#pageCountBlock").val(data[1]);
 				$("#pageCut").val(data[3]);
 				comentRead(data);
 		}					
 	}); 
+	
+	$(".chk").change(function(){
+	    if($(".chk").is(":checked")){
+	        alert("체크박스 체크했음!");
+	    }else{
+	        alert("체크박스 체크 해제!");
+	    }
+	});
 });
 function comentRead(read){
 	$.ajax({	
@@ -63,8 +70,17 @@ function comentRead(read){
 		success:function(data){
 			var html;
 			 $.each(data, function(index,item) {
-					 html+="<div>"+item.conet+"</div>"
-		        });
+// 					 html+="<div>"+item.conet+"</div>"
+// 					 +"<label class='switch'>"
+// 					  +"<input type='checkbox'>"
+// 					  +"<div class='slider'>답글:"+data[index].commentCount+"</div>"
+// 					+"</label><hr>"
+// 		        });
+			 
+			 html+="<div>"+item.conet+"</div>"
+				+"<input type='checkbox' name='chk' value='a'>"+data[index].commentCount+"<br/>"
+	        });
+		 	
 			 
 			 $(".aaa").append(html);
 			 
@@ -94,14 +110,12 @@ function commentGet(){
 //				alert("완료후");
 		},
 		success:function(data){
-			if(data==null){
-				alert("성공");
-			}
 			var html;
 			 $.each(data, function(index) {
 					 html+="<div>"+data[index].conet+"</div>"
+					+"<input type='checkbox' name='chk' value='a' onClick='setCheckBoxAsRadio();'> "+data[index].commentCount+"<br/>"
 		        });
-			 
+			 	html+="</form>"
 			 $(".aaa").append(html);
 			 
 			 var num=$("#nextPage").val()
@@ -117,12 +131,27 @@ function commentGet(){
 		}					
 	}); 
 };
+
+// //체크박스 하나만 체크되도록. form 태그 안에 form 태그를 사용하면 안된다
+// function setCheckBoxAsRadio(targetObj, inObj){
+//  var len = targetObj.length;
+ 
+//  if(len>1){ // 객체가 배열이라면. 배열이 아니면 그냥 체크박스로 작동
+//   for(var i=0; i<len; i++){
+//    if(targetObj[i] != inObj)
+//     targetObj[i].checked = false;
+//   }
+//  }
+// }
+
+
 </script>
 <style>
 </style>
 <title>Insert title here</title>
 </head>
 <body>	
+	<form action="/textant/scroll.text" method="post">
 	<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="1">
 	<input id="page" type="hidden" name="page" value="5">
 	<input id="nextPage" type="hidden" name="nextPage" value="1">
@@ -136,7 +165,6 @@ function commentGet(){
 		</div>
 	<input class="scrollView" id="scrollView" type="button" onclick="commentGet()" value="더보기" style="width:380px;">
 	</div>
-	<form action="/textant/scroll.text" method="post">
 		<input name="page" type="text">
 		<input name="conet" type="text">
 		<input class="commentWrite" type="submit" value="채팅">

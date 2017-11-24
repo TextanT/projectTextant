@@ -9,6 +9,7 @@ public class CommentDto {
 	private int commentGroup;
 	private String userId;
 	private String writeDate;
+	private int bookArticleNum;
 	
 	public int getCommentNum() {
 		return commentNum;
@@ -58,13 +59,21 @@ public class CommentDto {
 	public void setWriteDate(String writeDate) {
 		this.writeDate = writeDate;
 	}
+	public int getBookArticleNum() {
+		return bookArticleNum;
+	}
+	public void setBookArticleNum(int bookArticleNum) {
+		this.bookArticleNum = bookArticleNum;
+	}
 	
 	@Override
 	public String toString() {
 		return "CommentDto [commentNum=" + commentNum + ", conet=" + conet + ", pageGroup=" + pageGroup + ", depth="
 				+ depth + ", commentCount=" + commentCount + ", commentGroup=" + commentGroup + ", userId=" + userId
-				+ ", writeDate=" + writeDate + "]";
+				+ ", writeDate=" + writeDate + ", bookArticleNum=" + bookArticleNum + "]";
 	}
+	
+	
 	
 	
 }

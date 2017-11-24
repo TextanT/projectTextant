@@ -100,42 +100,7 @@ public class HomeController {
 		
 		return "main";
 	}
-	/*
-	@RequestMapping(value = "/write.text", method = RequestMethod.GET)
-	public String writeForm() {
-		return "writeForm1";
-	}
-	*/
-	/*
-	@RequestMapping(value = "/write.text", method = RequestMethod.POST)
-	public String write(String title, String content, @RequestPart("textFile") List<MultipartFile> mFile, Model model) {
-		for(MultipartFile file : mFile) {
-			
-			System.out.println(file.getOriginalFilename());
-			File files = new File("d:/temp/temp/"+file.getOriginalFilename());
-			
-			try {
-				BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(files));
-				bos.flush();
-				bos.write(file.getBytes());
-				bos.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			pdfService.setOldFileName(files.getName());
-			pdfService.setModel(model);
-			Thread thread = new Thread(pdfService);
-			thread.start();
-//			pdfService.run();
-		}
-		
-		return "progress";
-	}*/
-	
-	
+
 
 	
 	@RequestMapping(value="/write.text",method=RequestMethod.GET)
@@ -156,10 +121,7 @@ public class HomeController {
 		
 		return view;
 	}
-//	@RequestMapping(value="/viewer.text")
-//	public String viewer(){
-//		return "viewer/viewer";
-//	}
+
 	@RequestMapping(value="/getProgress.text", produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public HashMap<String,String> getProgress(Model model) {
