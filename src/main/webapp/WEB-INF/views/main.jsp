@@ -159,7 +159,19 @@ body {
 	-ms-flex-align: center;
 	-webkit-align-items: center;
 	align-items: center;
-	display: -webkit-box
+	display: -webkit-box;
+/* 	height: 300px; */
+/* 	width: 204.33px; */
+
+}
+.boxing{
+
+text-align: center;
+overflow: hidden;
+}
+.bookimg{
+width: 200px;
+height: 300px;
 }
 
 .slide_img {
@@ -624,86 +636,16 @@ li {
 			<c:forEach var="files" items="${fileList}">
 
 				<div class="swiper-slide">
-					<a href="/textant/read.text?fileName=${files}"><img
-						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
-						height="300px" style="display: block;" class="bookimg" /> <span
-						class="bookname">${files}</span></br> <span class="bookname">기시미
+				<div class="boxing">
+					<a href="/textant/read.text?fileName=${files}">
+					<img src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
+						class="bookimg" /> 
+<!-- 						style="display: block; background-size: cover;"  -->
+					<span class="bookname">${files}</span><br/> <span class="bookname">기시미
 							이치로작가</span> </a>
-
-
-				</div>
-<%-- 
-				<div class="swiper-slide">
-					<a href="/textant/read.text?fileName=${files}"> <img
-						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
-						height="300px" style="display: block;" class="bookimg" /> <span
-						class="bookname">${files}</span>
-					</a>
+							</div>
 				</div>
 
-				<div class="swiper-slide">
-					<a href="/textant/read.text?fileName=${files}"> <img
-						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
-						height="300px" style="display: block;" class="bookimg" /> <span
-						class="bookname">${files}</span>
-					</a>
-				</div>
-
-				<div class="swiper-slide">
-					<a href="/textant/read.text?fileName=${files}"> <img
-						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
-						height="300px" style="display: block;" class="bookimg" /> <span
-						class="bookname">${files}</span>
-					</a>
-				</div>
-
-				<div class="swiper-slide">
-					<a href="/textant/read.text?fileName=${files}"> <img
-						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
-						height="300px" style="display: block;" class="bookimg" /> <span
-						class="bookname">${files}</span>
-					</a>
-				</div>
-
-				<div class="swiper-slide">
-					<a href="/textant/read.text?fileName=${files}"> <img
-						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
-						height="300px" style="display: block;" class="bookimg" /> <span
-						class="bookname">${files}</span>
-					</a>
-				</div>
-
-				<div class="swiper-slide">
-					<a href="/textant/read.text?fileName=${files}"> <img
-						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
-						height="300px" style="display: block;" class="bookimg" /> <span
-						class="bookname">${files}</span>
-					</a>
-				</div>
-
-				<div class="swiper-slide">
-					<a href="/textant/read.text?fileName=${files}"> <img
-						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
-						height="300px" style="display: block;" class="bookimg" /> <span
-						class="bookname">${files}</span>
-					</a>
-				</div>
-
-				<div class="swiper-slide">
-					<a href="/textant/read.text?fileName=${files}"> <img
-						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
-						height="300px" style="display: block;" class="bookimg" /> <span
-						class="bookname">${files}</span>
-					</a>
-				</div>
-
-				<div class="swiper-slide">
-					<a href="/textant/read.text?fileName=${files}"> <img
-						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
-						height="300px" style="display: block;" class="bookimg" /> <span
-						class="bookname">${files}</span>
-					</a>
-				</div> --%>
 			</c:forEach>
 		</div>
 		<!-- Add Pagination -->
