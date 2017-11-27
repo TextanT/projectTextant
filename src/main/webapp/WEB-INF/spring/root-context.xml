@@ -4,7 +4,6 @@
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >
 		<property name="location" value="classpath:db.properties" />
@@ -37,7 +36,7 @@
 <!-- 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>		 -->
 <!-- 	</bean> -->
 
-<mybatis-spring:scan base-package="com.besideYou.textant.Dao"/>	
+<!-- <mybatis-spring:scan base-package="com.besideYou.textant.dao"/>	 -->
 <!-- 서블릿에서 스캔한 빈과 중복되어서 에러발생 -->
 <!-- 	<mybatis-spring:scan base-package="com.pknu.bbs"/>	 -->
 	
