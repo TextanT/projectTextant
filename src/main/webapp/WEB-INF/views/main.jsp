@@ -61,7 +61,7 @@ body {
 }
 
 .swiper-container {
-	margin-top:15px;
+	margin-top: 15px;
 	width: 60%;
 	height: 400px;
 	border: 1px solid #D8D8D8;
@@ -159,19 +159,7 @@ body {
 	-ms-flex-align: center;
 	-webkit-align-items: center;
 	align-items: center;
-	display: -webkit-box;
-/* 	height: 300px; */
-/* 	width: 204.33px; */
-
-}
-.boxing{
-
-text-align: center;
-overflow: hidden;
-}
-.bookimg{
-width: 200px;
-height: 300px;
+	display: -webkit-box
 }
 
 .slide_img {
@@ -269,7 +257,7 @@ a {
 	text-align: center;
 	/* 	float:right; */
 	font-size: 15px;
-	color: white;
+	color: gray;
 }
 
 .swiper-wrapper {
@@ -313,6 +301,7 @@ li {
 li {
 	list-style: none;
 }
+
 .menu_box1 {
 	height: 100px;
 	width: 100%;
@@ -326,6 +315,7 @@ li {
 	position: absolute;
 	z-index: 1000;
 }
+
 .list_box1 {
 	float: left;
 	padding-left: 30px;
@@ -405,8 +395,6 @@ li {
 	font-size: 13px;
 }
 
-
-
 .menu_top {
 	width: 100%;
 	/* 	height: 100px; */
@@ -415,7 +403,8 @@ li {
 .book_list_box {
 	display: block;
 	margin-left: auto;
-	margin-right: auto; margin-top : 10%;
+	margin-right: auto;
+	margin-top: 10%;
 	padding-top: 1%;
 	padding-bottom: 1%;
 	border: 1px solid #D8D8D8;
@@ -514,9 +503,256 @@ li {
 	float: left;
 	padding-bottom: 2%;
 }
-.book_img_size{
+
+.book_img_size {
 	height: 257px;
 }
+
+.data_box {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	/* 	margin-top: 10%; */
+	/* 	padding-top: 1%; */
+	padding-bottom: 1%;
+	/* 	border: 1px solid #D8D8D8; */
+	border-left: none;
+	border-top: none;
+	width: 1012px;
+	height: 160px;
+	/* 	background: white; */
+	margin-top: 20px;
+	width: 1012px;
+}
+
+ul.tabs {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	height: 32px;
+	border-bottom: 1px solid #eee;
+	border-left: 1px solid #d8d8d8;
+	/*            width: 350px;*/
+	font-family: "dotum";
+	font-size: 12px;
+}
+
+ul.tabs li {
+	float: left;
+	text-align: center;
+	cursor: pointer;
+	width: 244.5px;
+	height: 31px;
+	line-height: 26px;
+	border: 1px solid #d8d8d8;
+	border-left: none;
+	font-weight: bold;
+	background: #fafafa;
+	overflow: hidden;
+	position: relative;
+}
+
+ul.tabs li.active {
+	background: #FFFFFF;
+	border-bottom: 1px solid #FFFFFF;
+}
+
+.tab_container {
+	border: 1px solid #d8d8d8;
+	border-top: none;
+	clear: both;
+	float: left;
+	width: 490px;
+	background: #FFFFFF;
+}
+
+.tab_content {
+	padding: 5px;
+	font-size: 13px;
+	display: none;
+}
+
+.tab_container .tab_content ul {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+.tab_container .tab_content ul li {
+	padding: 5px;
+	list-style: none;
+}
+
+.tab_container .tab_content ul li:before {
+	content: ">";
+	padding: 5px;
+	list-style: none;
+}
+
+.tab_container .tab_content ul li a {
+	color: black;
+}
+
+.tab_container .tab_content ul li a:hover {
+	color: red;
+}
+
+#container {
+	width: 249px;
+	margin: 0 auto;
+}
+
+a {
+	text-decoration: none;
+}
+
+.tab_menu {
+	
+}
+/*두번째 슬라이드*/
+.hidden {
+	border: 0;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+}
+
+.visual {
+	position: relative;
+	width: 490px;
+	z-index: 0;
+	float: right;
+	bottom: 41px;
+}
+
+.simg {
+	border: 1px solid #d8d8d8;
+}
+
+.visual-list {
+	overflow: hidden;
+	padding-bottom: 235px;
+}
+
+.visual-list ul {
+	width: 100%;
+	position: relative;
+}
+
+.visual-list ul li {
+	width: 100%;
+	position: absolute;
+	left: 50%;
+	margin-left: -50%;
+	display: block;
+	z-index: 0;
+}
+
+.visual-list ul li.active {
+	z-index: 1;
+}
+
+.visual-list .img {
+	text-align: center;
+	height: 151px;
+	overflow: hidden;
+}
+
+.visual-list .disc {
+	position: absolute;
+	bottom: 50px;
+	min-width: 60px;
+	min-height: 50px;
+	padding: 10px;
+	/* right: 50%;  margin-right: -100px;*/
+	background: #000;
+	opacity: 0.5;
+	left: 120px;
+}
+
+.visual-list .disc .tit {
+	/*            color: #cbcbcb;*/
+	font-size: 14px;
+	letter-spacing: .05em;
+}
+
+.visual-list .disc .date {
+	color: #a2a2a2;
+	font-size: 12px;
+	letter-spacing: .03em;
+	margin-top: 10px;
+}
+
+.visual-list .disc p {
+	position: relative;
+}
+
+.visual-list .disc .btn-more {
+	position: absolute;
+	bottom: 10px;
+	right: 15px;
+	width: 100px;
+	height: 20px;
+	line-height: 18px;
+	color: #fff;
+	font-size: 11px;
+	border: 1px solid #fff;
+	border-radius: 5px;
+	text-decoration: none;
+	text-align: center;
+}
+
+.visual .visual-controller {
+	position: absolute;
+	bottom: 95px;
+	width: 100%;
+	left: 100px;
+	text-align: center;
+	z-index: 9000;
+}
+
+/* .visual .visual-controller + .visual-list {padding-bottom: 240px;} */
+.visual .visual-controller a {
+	width: 8px;
+	height: 8px;
+	display: inline-block;
+	text-indent: -999em;
+	/*            vertical-align: middle;*/
+	/*            border: 1px solid #ccc;*/
+	border-radius: 8px;
+	background-color: #ccc;
+}
+
+.visual .visual-controller a.active {
+	background-color: black;
+}
+
+.visual .visual-controller [class*="btn-"] {
+	display: none;
+}
+
+.visual .visual-controller .btn-play.active, .visual .visual-controller .btn-stop.active
+	{
+	display: inline-block;
+}
+
+.visual .visual-controller .btn-play, .visual .visual-controller .btn-stop
+	{
+	padding-left: 180px;
+}
+
+.footer {
+	height: 300px;
+	border-top: 1px solid #d8d8d8;
+	background: white;
+}
+
+
 </style>
 </head>
 
@@ -636,16 +872,86 @@ li {
 			<c:forEach var="files" items="${fileList}">
 
 				<div class="swiper-slide">
-				<div class="boxing">
-					<a href="/textant/read.text?fileName=${files}">
-					<img src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
-						class="bookimg" /> 
-<!-- 						style="display: block; background-size: cover;"  -->
-					<span class="bookname">${files}</span><br/> <span class="bookname">기시미
+					<a href="/textant/read.text?fileName=${files}"><img
+						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${files}</span></br> <span class="bookname">기시미
 							이치로작가</span> </a>
-							</div>
+
+
 				</div>
 
+				<div class="swiper-slide">
+					<a href="/textant/read.text?fileName=${files}"> <img
+						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${files}</span>
+					</a>
+				</div>
+
+				<div class="swiper-slide">
+					<a href="/textant/read.text?fileName=${files}"> <img
+						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${files}</span>
+					</a>
+				</div>
+
+				<div class="swiper-slide">
+					<a href="/textant/read.text?fileName=${files}"> <img
+						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${files}</span>
+					</a>
+				</div>
+
+				<div class="swiper-slide">
+					<a href="/textant/read.text?fileName=${files}"> <img
+						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${files}</span>
+					</a>
+				</div>
+
+				<div class="swiper-slide">
+					<a href="/textant/read.text?fileName=${files}"> <img
+						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${files}</span>
+					</a>
+				</div>
+
+				<div class="swiper-slide">
+					<a href="/textant/read.text?fileName=${files}"> <img
+						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${files}</span>
+					</a>
+				</div>
+
+				<div class="swiper-slide">
+					<a href="/textant/read.text?fileName=${files}"> <img
+						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${files}</span>
+					</a>
+				</div>
+
+				<div class="swiper-slide">
+					<a href="/textant/read.text?fileName=${files}"> <img
+						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${files}</span>
+					</a>
+				</div>
+
+				<div class="swiper-slide">
+					<a href="/textant/read.text?fileName=${files}"> <img
+						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${files}</span>
+					</a>
+				</div>
 			</c:forEach>
 		</div>
 		<!-- Add Pagination -->
@@ -662,59 +968,59 @@ li {
 		</div>
 		<div class="book_list2">
 			<a href="#"><img src="/textant/resources/book_img/자존감수업.jpg"
-				style="border: 1px solid #D8D8D8;"class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
 		</div>
 		<div class="book_list3">
 			<a href="#"><img src="/textant/resources/book_img/신경끄기의 기술.jpg"
-				style="border: 1px solid #D8D8D8;"class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
 		</div>
 		<div class="book_list4">
 			<a href="#"><img src="/textant/resources/book_img/세도나메서드.jpg"
-				style="border: 1px solid #D8D8D8;"class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
 		</div>
 		<div class="book_list5">
 			<a href="#"><img src="/textant/resources/book_img/언어의온도.jpg"
-				style="border: 1px solid #D8D8D8;"class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
 		</div>
 		<div class="book_list6">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;"class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
 		</div>
 		<div class="book_list7">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;"class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
 		</div>
 		<div class="book_list8">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;"class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
 		</div>
 		<div class="book_list9">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;"class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
 		</div>
 		<div class="book_list10">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;"class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
 		</div>
 		<div class="book_list11">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;"class="book_img_size"> </a>
-		</div> 
+				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+		</div>
 		<div class="book_list12">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;"class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
 		</div>
 		<div class="book_list13">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;"class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
 		</div>
 		<div class="book_list14">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;"class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
 		</div>
 		<div class="book_list15">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;"class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
 		</div>
 
 		<div class="book_list4"></div>
@@ -722,25 +1028,96 @@ li {
 	</div>
 
 
+	<div class="data_box">
+		<div class="tab_menu">
+			<div class="tab_box">
+				<ul class="tabs">
+					<li class="active" rel="tab1">공지사항</li>
+					<li rel="tab2">업데이트</li>
+				</ul>
+				<div class="tab_container">
+					<div id="tab1" class="tab_content">
+						<ul>
+							<li><a href="#">17/11/24 공지사항 입니다.</a></li>
+							<li><a href="#">17/11/25 공지사항 입니다.</a></li>
+							<li><a href="#">17/11/26 공지사항 입니다.</a></li>
+							<li><a href="#">17/11/27 공지사항 입니다.</a></li>
+						</ul>
+					</div>
+					<div id="tab2" class="tab_content">
+						<ul>
+							<li><a href="#">17/11/24 업데이트 입니다.</a></li>
+							<li><a href="#">17/11/24 업데이트 입니다.</a></li>
+							<li><a href="#">17/11/24 업데이트 입니다.</a></li>
+							<li><a href="#">17/11/24 업데이트 입니다.</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="visual">
+
+			<div class="visual-controller">
+				<a href="#visual-01">1번보기</a> <a href="#visual-01">2번보기</a> <a
+					href="#visual-01">3번보기</a> <a href="#visual-01">4번보기</a>
+				<div type="button" class="btn-stop">
+					<img src="/textant/resources/slide_img/start.jpg">
+				</div>
+				<div type="button" class="btn-play">
+					<img src="/textant/resources/slide_img/stop.jpg">
+				</div>
+			</div>
+
+
+			<div class="visual-list">
+				<ul>
+					<li id="visual-01">
+						<div class="img">
+							<img src="/textant/resources/slide_img/event1.jpg" alt=""
+								class="simg" />
+						</div>
+					</li>
+					<li id="visual-02">
+						<div class="img">
+							<img src="/textant/resources/slide_img/event2.jpg" alt=""
+								class="simg" />
+						</div>
+					</li>
+					<li id="visual-03">
+						<div class="img">
+							<img src="/textant/resources/slide_img/event3.jpg" alt=""
+								class="simg" />
+						</div>
+					</li>
+					<li id="visual-04">
+						<div class="img">
+							<img src="/textant/resources/slide_img/event4.jpg" alt=""
+								class="simg" />
+						</div>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+
+	</div>
 
 
 
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
-	<div style="height: 100px;"></div>
+
+	<footer class="footer">
+		<div class="footer1">
+			<span>
+			<img src="/textant/resources/icon_img/footer_logo.png"
+			style="padding-left:10%; padding-top:20px;">
+			</span>
+		</div>
+		<div class="footer2">
+		
+		</div>
+	</footer>
+
 	<div style="position: fixed; bottom: 15px; right: 30px;">
 		<a href="#" id="MOVE_TOP_BTN"><img
 			src="/textant/resources/icon_img/top.jpg"></a>
@@ -821,9 +1198,127 @@ li {
 			});
 		});
 	</script>
+	<script type="text/javascript">
+		$(function() {
 
+			$(".tab_content").hide();
+			$(".tab_content:first").show();
 
+			$("ul.tabs li").click(function() {
+				$("ul.tabs li").removeClass("active").css("color", "#333");
+				//$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
+				$(this).addClass("active").css("color", "darkred");
+				$(".tab_content").hide()
+				var activeTab = $(this).attr("rel");
+				$("#" + activeTab).fadeIn()
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		var KNBUI = KNBUI || {};
 
+		KNBUI.keyVisual = (function($) {
+
+			// start visual
+			function visual() {
+				if (!$('.visual').length) {
+					return;
+				}
+
+				var visual = $('.visual'), ctrlBtn = $('.visual-controller a'), visualList = $('.visual-list li'), btnStop = $('.btn-stop'), btnPlay = $('.btn-play'), max = visualList
+						.size() - 1, current = 0, auto, autoPlay = true, // 자동재생
+				start = 2, // 시작설정 0부터 시작
+				playSpeed = 4000; // 단위 1000/1초
+
+				function show(num) {
+					ctrlBtn.eq(num).addClass('active');
+					visualList.eq(num).fadeIn().addClass('active');
+				}
+
+				function next() {
+					var n = current;
+					if (n < max) {
+						n++;
+					} else {
+						n = 0;
+					}
+					return n;
+				}
+
+				function clear(num) {
+					ctrlBtn.eq(num).removeClass('active');
+					visualList.eq(num).fadeOut().removeClass('active');
+				}
+
+				function play() {
+					ctrlBtn.eq(next()).trigger('click');
+				}
+
+				ctrlBtn.eq(start).addClass('active');
+				show(start);
+
+				ctrlBtn.each(function(index) {
+					$(this).data('number', index);
+				});
+
+				current = start;
+
+				if (autoPlay) {
+					auto = setInterval(play, playSpeed);
+					btnStop.addClass('active');
+				}
+
+				ctrlBtn.on('click', function(e) {
+					e.preventDefault();
+					var idx = $(this).data('number');
+					clear(current);
+					show(idx);
+					current = idx;
+				});
+
+				ctrlBtn.hover(function() {
+					if (autoPlay) {
+						clearInterval(auto);
+					}
+				}, function() {
+					if (autoPlay) {
+						auto = setInterval(play, playSpeed);
+					}
+				});
+
+				btnStop.on('click', function(e) {
+					e.preventDefault();
+					clearInterval(auto);
+
+					btnStop.removeClass('active');
+					btnPlay.addClass('active');
+					autoPlay = false;
+
+				});
+
+				btnPlay.on('click', function(e) {
+					e.preventDefault();
+					auto = setInterval(play, playSpeed);
+
+					btnPlay.removeClass('active');
+					btnStop.addClass('active');
+					autoPlay = true;
+				});
+
+			}
+			// end visual
+
+			return {
+				visual : visual,
+			// gallery : gallery
+			}
+
+		}(jQuery));
+
+		$(document).ready(function() {
+			KNBUI.keyVisual.visual();
+		});
+	</script>
 </body>
 
 </html>
