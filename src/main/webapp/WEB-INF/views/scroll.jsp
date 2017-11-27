@@ -17,6 +17,7 @@ $.ajaxSetup({
 });
 
 $(document).ready(function(){
+			let html = ""; /* ""없으면 undefined가 뜸 */
 	$.ajax({	
 		url:"/textant/commentCount.text",
 //			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
@@ -24,14 +25,13 @@ $(document).ready(function(){
 			page:$("#page").val(),
 			bookArticleNum:$("#bookArticleNum").val()
 		},
-		beforeSend : function(){
+		/* beforeSend : function(){
 //				alert("시작전");
-		},
-		complete: function(){
+		}, */
+		/* complete: function(){
 //				alert("완료후");
-		},
+		}, */
 		success:function(data){
-			var html;
 			html+="<div id='commentCount' name='commentCount'>"+"page: "+data[1]+"~"+data[2]+"   전체답글: "+data[0]+"</div>"
 			$(".bbb").append(html);
 				$("#pageListCount").val(data[0]);
@@ -50,6 +50,7 @@ $(document).ready(function(){
 	});
 });
 function comentRead(read){
+	var html = "";
 	$.ajax({	
 		url:"/textant/commentRead.text",
 //			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
@@ -68,7 +69,6 @@ function comentRead(read){
 //				alert("완료후");
 		},
 		success:function(data){
-			var html;
 			 $.each(data, function(index,item) {
 // 					 html+="<div>"+item.conet+"</div>"
 // 					 +"<label class='switch'>"
@@ -92,6 +92,7 @@ function comentRead(read){
 };
 
 function commentGet(){
+	var html2 = "";
 	$.ajax({	
 		url:"/textant/commentRead.text",
 //			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
@@ -110,15 +111,15 @@ function commentGet(){
 //				alert("완료후");
 		},
 		success:function(data){
-			var html;
 			 $.each(data, function(index) {
-					 html+="<div>"+data[index].conet+"</div>"
+					 html2+="<div>"+data[index].conet+"</div>"
 					+"<input type='checkbox' name='chk' value='a' onClick='setCheckBoxAsRadio();'> "+data[index].commentCount+"<br/>"
 		        });
-			 	html+="</form>"
-			 $(".aaa").append(html);
+			 	html2+="</form>"
+			 $(".aaa").append(html2);
 			 
 			 var num=$("#nextPage").val()
+			 alert(num);
 			 num++;
 			 
 			 

@@ -632,7 +632,7 @@ li {
 
 
 				</div>
-
+<%-- 
 				<div class="swiper-slide">
 					<a href="/textant/read.text?fileName=${files}"> <img
 						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1"
@@ -703,7 +703,7 @@ li {
 						height="300px" style="display: block;" class="bookimg" /> <span
 						class="bookname">${files}</span>
 					</a>
-				</div>
+				</div> --%>
 			</c:forEach>
 		</div>
 		<!-- Add Pagination -->

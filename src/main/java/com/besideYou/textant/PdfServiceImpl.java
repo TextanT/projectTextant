@@ -34,8 +34,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.besideYou.textant.Dao.CommentDao;
 import com.besideYou.textant.Dto.CommentDto;
+import com.besideYou.textant.dao.CommentDao;
 
 @Service
 public class PdfServiceImpl implements PdfServiceText{
