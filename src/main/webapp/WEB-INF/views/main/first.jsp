@@ -28,11 +28,11 @@
         .outer {
             display: table;
             width: 100%;
-            height: 100%;
+            height: 600px;
         }
         
         .inner {
-            display: table-cell;
+            display: table-cell; 
             vertical-align: middle;
             text-align: center;
         }
@@ -46,30 +46,26 @@
             color: white;
         }
         
-        .logo {
-            padding-left: 10%;
-        }
+        
         
         .login_box {
-            position: absolute;
-            top: 37%;
-            left: 40%;
-            width: 20%;
+/*             position: absolute; */
+/*             top: 37%; */
+/*             left: 40%; */
+/*             width: 20%; */
+margin-top : 10px
+width: 100%;
         }
         
         .guest_box {
-            position: absolute;
-            top: 55%;
-            left: 40%;
-            width: 20%;
+/*             position: absolute; */
+/*             top: 55%; */
+/*             left: 40%; */
+/*             width: 20%; */
+margin-top:200px;
+width: 100%;
         }
         
-        .sign_box {
-            position: absolute;
-            top: 60%;
-            left: 4.5%;
-            width: 50%;
-        }
         /*
         .login_box:hover {
             background: none;
@@ -111,16 +107,28 @@
             border: 1px solid white;
         }
         
- 
-   
+ 	.introduce{
+ 		display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        width: 50%;
+ 	}
+   	.introimg{
+   	width: 100%;
+    	height: 400px; 
+   	}
     </style>
 </head>
 
 <body>
     <div class="container">
-        <img src="/textant/resources/icon_img/fristLogo2.png" class="outer">
+    <div class="logo">
+        <img src="/textant/resources/icon_img/fristLogo2.png" class="logoimg">
+        </div>
         <div class="outer">
-
+<div class="introduce">
+<img src="/textant/resources/background_img/men-2425121_960_720.jpg" class="introimg">
+</div>
             <div class="inner">
 
                 

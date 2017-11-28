@@ -10,7 +10,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style>
 body {
-	background-image: url(/textant/resources/background_img/book-2572101_1920.jpg);
+	/* background-image: url(/textant/resources/background_img/book-2572101_1920.jpg);
 	/*            background-image: url(slick-1.8.0/slick-1.8.0/slick/1300.png);*/
 	background-position: center center;
 	background-size: cover;
@@ -18,7 +18,7 @@ body {
 	background-repeat: no-repeat;
 	/*            position: fixed;*/
 	overflow: hidden;
-	word-break: break-word;
+	word-break: break-word; */
 }
 
 .container {
@@ -193,7 +193,7 @@ ul li label {
 	border: 1px solid white;
 }
 
-.loginn {
+.loginn2 {
 	width: 200px;
 	height: 40px;
 	background-color: #9f793e;
@@ -201,13 +201,13 @@ ul li label {
 	border: 1px solid #9f793e;
 }
 
-.loginn:hover {
+.loginn2:hover {
 	background: none;
 	transition: 0.5s;
 	border: 1px solid white;
 }
 
-.login_box {
+.login_box2 {
 	position: absolute;
 	top: 55%;
 	left: 40%;
@@ -469,7 +469,7 @@ input[type=radio] {
 	border: 1px solid white;
 }
 
-.loginn {
+.loginn2 {
 	width: 200px;
 	height: 40px;
 	background-color: #9f793e;
@@ -477,13 +477,13 @@ input[type=radio] {
 	border: 1px solid #9f793e;
 }
 
-.loginn:hover {
+.loginn2:hover {
 	background: none;
 	transition: 0.5s;
 	border: 1px solid white;
 }
 
-.login_box {
+.login_box2 {
 	position: absolute;
 	top: 70%;
 	left: 38.6%;
@@ -578,13 +578,13 @@ input[type=radio] {
 						</label>
 
 					</div>
-					<div class="login_box" id="login">
-						<a href="" class="loginn" style="width: 100%;" id="btn1"> SIGN
+					<div class="login_box2" id="login">
+						<a href="" class="loginn2" style="width: 100%;" id="btn1"> SIGN
 						</a>
 					</div>
 
 					<div class="back_box" onclick="">
-						<a href="main.bbs" class="backk" style="width: 10%;" id="btn2">
+						<a href="login.text" class="backk" style="width: 10%;" id="btn2">
 							BACK </a>
 						<!-- 						onclick="javascript:history.back(-1)" -->
 					</div>

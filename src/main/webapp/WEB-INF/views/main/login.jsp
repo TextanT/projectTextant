@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
 body {
-	background-image:
+	/* background-image:
 		url(/textant/resources/background_img/book-2572101_1920.jpg);
 	/*            background-image: url(slick-1.8.0/slick-1.8.0/slick/1300.png);*/
 	background-position: center center;
@@ -15,7 +15,7 @@ body {
 	background-repeat: no-repeat;
 	/*            position: fixed;*/
 	overflow: hidden;
-	word-break: break-word;
+	word-break: break-word; */
 }
 
 .container {
@@ -242,6 +242,45 @@ a {
 .aass{
 	display:none;
 }
+
+/* .signupdis{ */
+/* 	display: none; */
+/* } */
+
+
+
+
+
+/* .signupdiv { */
+.signupdiv{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+.signupdiv:target {
+/* .signupdiv:target { */
+    opacity:1;
+    pointer-events: auto;
+}
+.signupdiv > signform{
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	width: 50%;
+	height: 50%;
+	padding: 16px;
+	border: 16px solid orange;
+	background-color: white;
+	overflow: auto;	
+}
 </style>
 </head>
 
@@ -285,8 +324,8 @@ a {
 						</a>
 					</div>
 
-					<div class="sign_box" onclick="back()">
-						<a href="sign.text" class="signn" style="width: 100%;" id="btn2"> <span
+					<div class="sign_box" >
+						<a href="#open" class="signn" style="width: 100%;" id="btn2"> <span
 							class="btn2_text">SIGN</span>
 						</a>
 					</div>
@@ -297,6 +336,12 @@ a {
 			</form>
 		</div>
 	</div>
+	<div class="signupdiv" >
+	<div class="signform"style="width: 800px;"id="open" >
+	<%@include file="signup.jsp" %>
+	<a href="#close">닫기</a>
+	</div>
+	</div>
 	<script type="text/javascript">
 		window.onload = function() {
 			document.getElementById('btn1').onclick = function() {
@@ -304,6 +349,10 @@ a {
 				return false;
 			};
 		};
+// 		document.getElementById('btn2').onclick = function() {
+			
+// 			return false;
+// 		};
 	</script>
 </body>
 </html>
