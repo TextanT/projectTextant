@@ -36,7 +36,7 @@
 <!-- 		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>		 -->
 <!-- 	</bean> -->
 
-<mybatis-spring:scan base-package="com.besideYou.textant.dao"/>	
+<mybatis-spring:scan base-package="com.besideYou.textant.Dao"/>	
 <!-- 서블릿에서 스캔한 빈과 중복되어서 에러발생 -->
 <!-- 	<mybatis-spring:scan base-package="com.pknu.bbs"/>	 -->
 	

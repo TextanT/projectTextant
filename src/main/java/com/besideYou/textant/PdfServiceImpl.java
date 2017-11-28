@@ -34,8 +34,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.besideYou.textant.Dao.CommentDao;
 import com.besideYou.textant.Dto.CommentDto;
-import com.besideYou.textant.dao.CommentDao;
 
 @Service
 public class PdfServiceImpl implements PdfServiceText{
@@ -377,8 +377,25 @@ public class PdfServiceImpl implements PdfServiceText{
 	Integer pageSize;
 	
 	@Override
-	public void scroll(CommentDto commentDto) {
-		commentDao.scroll(commentDto);
+	public void scroll(CommentDto commentDto,int commentTo,int commentTop) {
+		if(commentTo!=0) {
+			commentDto.setDepth(1);
+			commentDto.setCommentGroup(commentTop);
+//			String a="CommentDto [commentNum=" + commentDto.getCommentNum()+ ", conet=" + commentDto.getConet() + ", pageGroup=" + commentDto.getPageGroup() + ", depth="
+//					+ commentDto.getDepth() + ", commentCount=" + commentDto.getCommentCount() + ", commentGroup=" + commentDto.getCommentGroup() + ", userId=" + commentDto.getUserId()
+//					+ ", writeDate=" + commentDto.getWriteDate() + ", bookArticleNum=" + commentDto.getBookArticleNum() + "]";
+			commentDao.scroll(commentDto);
+			commentDao.scrollComment(commentTop);
+//			System.out.println(a);
+		}else {
+//			String a="CommentDto [commentNum=" + commentDto.getCommentNum()+ ", conet=" + commentDto.getConet() + ", pageGroup=" + commentDto.getPageGroup() + ", depth="
+//					+ commentDto.getDepth() + ", commentCount=" + commentDto.getCommentCount() + ", commentGroup=" + commentDto.getCommentGroup() + ", userId=" + commentDto.getUserId()
+//					+ ", writeDate=" + commentDto.getWriteDate() + ", bookArticleNum=" + commentDto.getBookArticleNum() + "]";
+//			System.out.println(a);
+			commentDto.setDepth(0);
+			commentDto.setCommentGroup(0);
+			commentDao.scroll(commentDto);
+		}
 		
 	}
 
@@ -409,26 +426,16 @@ public class PdfServiceImpl implements PdfServiceText{
 //		}
 //	}
 	
+	
 	@Override
-	public List<CommentDto> scrollView(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum) {
-		List<CommentDto> commentList;
+	public List<CommentDto> scrollView(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum,int commentNum) {
+		List<CommentDto> commentList = null;
 		HashMap<String,Integer>  pageBlockMin = new HashMap<String,Integer>();
 		pageBlockMin.put("bookArticleNum", bookArticleNum);
 		pageBlockMin.put("page", page);
-		pageBlockMin.put("pageBlock", pageBlock);
-//		int pageCountBlock =0;
-//		if(pageBlock>=page) {
-//			pageCountBlock=1;
-//		}else {
-//			int pageCountCut=pageBlock;
-//			pageCountCut--;
-//			pageCountBlock=page-pageCountCut;
-//			
-//		}
-		
+		pageBlockMin.put("pageBlock", pageBlock);	
 		pageBlockMin.put("pageCountBlock",pageCountBlock);
-//		int pageListCount=commentDao.commentListCount(pageBlockMin);
-//		int pageCut=(int)Math.ceil((double)pageListCount/pageSize);
+		pageBlockMin.put("commentNum",commentNum);
 		if(nextPage<=pageCut){
 			int pageStart=0;
 			if(nextPage==1){
@@ -441,7 +448,7 @@ public class PdfServiceImpl implements PdfServiceText{
 			pageBlockMin.put("pageStop",pageStop);
 			return commentList=commentDao.commentList(pageBlockMin);	
 		}else {
-			return commentList=null;
+			return commentList;
 		}
 	}
 
@@ -465,12 +472,12 @@ public class PdfServiceImpl implements PdfServiceText{
 		pageBlockMin.put("bookArticleNum",bookArticleNum);
 		int pageListCount=commentDao.commentListCount(pageBlockMin);
 		int pageCut=(int)Math.ceil((double)pageListCount/pageSize);
-		System.out.println("++++++++++++++++"+pageCut);
 		pagePoint.add(pageListCount);
 		pagePoint.add(pageCountBlock);
 		pagePoint.add(page);
 		pagePoint.add(pageCut);
 		pagePoint.add(bookArticleNum);
+		pagePoint.add(pageSize);
 		return pagePoint;
 	}
 	

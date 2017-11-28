@@ -1,4 +1,4 @@
-package com.besideYou.textant.dao;
+package com.besideYou.textant.Dao;
 
 import com.besideYou.textant.Dto.SignDto;
 
