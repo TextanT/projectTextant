@@ -1,4 +1,4 @@
-package com.besideYou.textant.Dao;
+package com.besideYou.textant.dao;
 
 import java.util.HashMap;
 import java.util.List;
