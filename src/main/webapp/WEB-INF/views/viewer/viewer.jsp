@@ -46,9 +46,6 @@ ${fileName}
 			<div class="hard page1"></div>
 				
 			
-			<img class="leftPage" alt="" src="displayFile.text?fileName=${fileName}&pageNum=1"/>
-			<img class="leftPage" alt="" src="displayFile.text?fileName=${fileName}&pageNum=2"/>
-			
 		</div>
 	</div>
 
@@ -117,9 +114,9 @@ maxPage = '${totalPageNum}';
 // alert(maxPage);
 
 $(document).ready(function(){
-	for(let i = 3; i <= maxPage; i++){
+	for(let i = 1; i <= maxPage; i++){
         
-        $(".sample-docs").append('<img class="leftPage" alt="" src="displayFile.text?fileName=${fileName}&pageNum='+ i +'"/>');	    
+        $(".sample-docs").append('<img class="leftPage" alt="" src="displayFile.text?fileName=${fileName}&pageNum='+ i +'&fileType=txt'+'"/>');	    
         
 	}
     

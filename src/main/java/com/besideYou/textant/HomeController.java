@@ -1,11 +1,7 @@
 package com.besideYou.textant;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,12 +12,9 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.besideYou.textant.Dto.CommentDto;
 import com.besideYou.textant.Dto.SignDto;
+import com.besideYou.textant.display.DisplayService;
 import com.besideYou.textant.login.LoginService;
 import com.besideYou.textant.sign.SignService;
 
@@ -55,6 +49,9 @@ public class HomeController {
 	
 	@Autowired
 	PdfServiceText pdfServiceText;
+	
+	@Autowired 
+	DisplayService displayService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -250,35 +247,8 @@ public class HomeController {
 	
 	
 	@RequestMapping(value="/displayFile.text")
-	public ResponseEntity<byte[]> displayFile(String fileName,String pageNum) throws IOException {
-		String realName = fileName.substring(0,fileName.lastIndexOf("."));
-		File file = new File("d:/temp/Converted_PdfFiles_to_Image/"+fileName+"/"+/*realName+"_"+*/pageNum+".jpg");
-		System.out.println(file.getName());
-		BufferedInputStream bis=null;
-		ResponseEntity<byte[]> entity = null;
-		try {
-			bis = new BufferedInputStream(new FileInputStream(file));
-		} catch (FileNotFoundException e1) {
-			System.out.println("마지막 페이지 입니다");
-//			e1.printStackTrace();
-			bis = new BufferedInputStream(new FileInputStream("d:/temp/temp/TEXTANT.png"));
-			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(bis),HttpStatus.BAD_REQUEST);
-			bis.close();
-			return entity;
-		}
-			try {
-				HttpHeaders headers = new HttpHeaders();
-				System.out.println(file);
-				headers.add("Content-Disposition",
-						"attachment; filename=\"" + URLEncoder.encode(file.getName(), "utf-8").replace("+", "%20") + "\"");
-				entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(bis), headers, HttpStatus.CREATED);
-			} catch (Exception e) {
-				e.printStackTrace();
-				entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
-			} finally {
-				bis.close();
-			}
-			return entity;
+	public ResponseEntity<byte[]> displayFile(String fileName,String pageNum, String fileType) throws IOException {
+		return displayService.display(fileName, pageNum, fileType);
 	}
 	
 	
