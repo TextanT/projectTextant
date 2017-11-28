@@ -56,7 +56,7 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value="/scroll.text", method = RequestMethod.GET)
-	public String scroll(Model model) {
+	public String scroll() {
 		
 		return "scroll";
 	}
@@ -69,17 +69,18 @@ public class HomeController {
 	
 	@RequestMapping(value="/commentRead.text")
 	@ResponseBody
-	public List<CommentDto> commentRead(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum){
-		
-		return pdfServiceText.scrollView(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum);
+	public List<CommentDto> commentRead(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum,int commentNum){
+		System.out.println(page+""+nextPage+""+pageListCount+" "+pageCountBlock+" "+pageCut+" "+bookArticleNum+" "+commentNum);
+		return pdfServiceText.scrollView(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum);
 	}
 	
 	@RequestMapping(value="/scroll.text", method = RequestMethod.POST)
-	public String scrollWrite(CommentDto commentDto,int page) {
-		
+	public String scrollWrite(CommentDto commentDto,int page,int commentTo,int commentTop) {
 		commentDto.setPageGroup(page);
 		commentDto.setUserId("obscu");
-		pdfServiceText.scroll(commentDto);
+		pdfServiceText.scroll(commentDto,commentTo,commentTop);
+		
+		
 		return "scroll";
 	}
 	

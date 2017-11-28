@@ -17,50 +17,13 @@ $.ajaxSetup({
 });
 
 $(document).ready(function(){
-			let html = ""; /* ""없으면 undefined가 뜸 */
+	var html = "";
 	$.ajax({	
 		url:"/textant/commentCount.text",
 //			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
 		data:{				
 			page:$("#page").val(),
 			bookArticleNum:$("#bookArticleNum").val()
-		},
-		/* beforeSend : function(){
-//				alert("시작전");
-		}, */
-		/* complete: function(){
-//				alert("완료후");
-		}, */
-		success:function(data){
-			html+="<div id='commentCount' name='commentCount'>"+"page: "+data[1]+"~"+data[2]+"   전체답글: "+data[0]+"</div>"
-			$(".bbb").append(html);
-				$("#pageListCount").val(data[0]);
-				$("#pageCountBlock").val(data[1]);
-				$("#pageCut").val(data[3]);
-				comentRead(data);
-		}					
-	}); 
-	
-	$(".chk").change(function(){
-	    if($(".chk").is(":checked")){
-	        alert("체크박스 체크했음!");
-	    }else{
-	        alert("체크박스 체크 해제!");
-	    }
-	});
-});
-function comentRead(read){
-	var html = "";
-	$.ajax({	
-		url:"/textant/commentRead.text",
-//			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
-		data:{				
-			page:$("#page").val(),
-			nextPage:$("#nextPage").val(),
-			pageListCount:read[0],
-			pageCountBlock:read[1],
-			pageCut:read[3],
-			bookArticleNum:read[4]
 		},
 		beforeSend : function(){
 //				alert("시작전");
@@ -69,30 +32,81 @@ function comentRead(read){
 //				alert("완료후");
 		},
 		success:function(data){
+			
+			html+="<div id='commentCount' name='commentCount'>"+"page: "+data[1]+"~"+data[2]+"   전체답글: "+data[0]+"</div>"
+			$(".bbb").append(html);
+				$("#pageListCount").val(data[0]);
+				$("#pageCountBlock").val(data[1]);
+				$("#pageCut").val(data[3]);
+				$("#pageSize").val(data[5]);
+				comentRead(data);
+		}					
+	}); 
+	
+	var commentNumBer="";
+	$(".commentWrite").on("mousedown", function() {
+		commentNumBer = 0;
+		$("#commentTo").val(commentNumBer);
+		commentNumBer = $(".conetText").val();
+		$("#conet").val(commentNumBer);
+	});
+	
+
+});
+function comentRead(read){
+			var html = "";
+	$.ajax({	
+		url:"/textant/commentRead.text",
+//			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
+		error : function(xhr){
+			 $("#scrollView").attr("type", "hidden");
+		},
+		data:{				
+			page:$("#page").val(),
+			nextPage:$("#nextPage").val(),
+			pageListCount:read[0],
+			pageCountBlock:read[1],
+			pageCut:read[3],
+			bookArticleNum:read[4],
+			commentNum:0
+		},
+		beforeSend : function(){
+//				alert("시작전");
+		},
+		complete: function(){
+//				alert("완료후");
+		},
+		success:function(data){
+			
 			 $.each(data, function(index,item) {
-// 					 html+="<div>"+item.conet+"</div>"
-// 					 +"<label class='switch'>"
-// 					  +"<input type='checkbox'>"
-// 					  +"<div class='slider'>답글:"+data[index].commentCount+"</div>"
-// 					+"</label><hr>"
-// 		        });
-			 
+				 var commentNum=item.commentNum;
+				 var commentCount=item.commentCount;
 			 html+="<div>"+item.conet+"</div>"
-				+"<input type='checkbox' name='chk' value='a'>"+data[index].commentCount+"<br/>"
-	        });
+			 +"<input type='checkbox' class='comment"+commentNum+"' name='chk' onClick='kokoko("+commentNum+","+commentCount+")' value='"+commentNum+"'>답글: "+data[index].commentCount+"<br/>"
+			 +"<input id='nextToPage"+commentNum+"' type='hidden' name='nextToPage"+commentNum+"' value='1'>"	
+			 +"<input id='commentGroup"+commentNum+"' type='hidden' name='commentGroup' value='0'>"
+			 +"<div class='fon"+commentNum+"'></div><hr>"
+			 });
 		 	
 			 
 			 $(".aaa").append(html);
 			 
 			 var num=$("#nextPage").val()
 			 num++;
+			 var nextPageNum = $("#nextPage").val(); 
+			 var pageCutNum = $("#pageCut").val();
+			 if(nextPageNum==pageCutNum){
+				 $("#scrollView").attr("type", "hidden");
+			 }
 			 $("#nextPage").val(num);
 		}					
-	}); 
+	});
+	
+	
 };
 
 function commentGet(){
-	var html2 = "";
+			var html="";
 	$.ajax({	
 		url:"/textant/commentRead.text",
 //			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
@@ -102,7 +116,8 @@ function commentGet(){
 			pageListCount:$("#pageListCount").val(),
 			pageCountBlock:$("#pageCountBlock").val(),
 			pageCut:$("#pageCut").val(),
-			bookArticleNum:$("#bookArticleNum").val()
+			bookArticleNum:$("#bookArticleNum").val(),
+			commentNum:0
 		},
 		beforeSend : function(){
 //				alert("시작전");
@@ -111,15 +126,22 @@ function commentGet(){
 //				alert("완료후");
 		},
 		success:function(data){
-			 $.each(data, function(index) {
-					 html2+="<div>"+data[index].conet+"</div>"
-					+"<input type='checkbox' name='chk' value='a' onClick='setCheckBoxAsRadio();'> "+data[index].commentCount+"<br/>"
-		        });
-			 	html2+="</form>"
-			 $(".aaa").append(html2);
+		
+			 $.each(data, function(index,item) {
+				 var commentNum=item.commentNum;
+				 var commentCount=item.commentCount;
+
+			 html+="<div>"+item.conet+"</div>"
+			 +"<input type='checkbox' class='comment"+commentNum+"' name='chk' onClick='kokoko("+commentNum+","+commentCount+")' value='"+commentNum+"'>답글: "+data[index].commentCount+"<br/>"
+			 +"<input id='nextToPage"+commentNum+"' type='hidden' name='nextToPage"+commentNum+"' value='1'>"	
+			 +"<input id='commentGroup"+commentNum+"' type='hidden' name='commentGroup' value='0'>"
+			 +"<div class='fon"+commentNum+"'></div><hr>"
+			 });
+			 
+		
+			 $(".aaa").append(html);
 			 
 			 var num=$("#nextPage").val()
-			 alert(num);
 			 num++;
 			 
 			 
@@ -133,18 +155,126 @@ function commentGet(){
 	}); 
 };
 
-// //체크박스 하나만 체크되도록. form 태그 안에 form 태그를 사용하면 안된다
-// function setCheckBoxAsRadio(targetObj, inObj){
-//  var len = targetObj.length;
- 
-//  if(len>1){ // 객체가 배열이라면. 배열이 아니면 그냥 체크박스로 작동
-//   for(var i=0; i<len; i++){
-//    if(targetObj[i] != inObj)
-//     targetObj[i].checked = false;
-//   }
-//  }
-// }
 
+function kokoko(commentNum,commentCount){
+	console.log(commentCount);
+	var num=commentCount/$("#pageSize").val();
+	var number=Math.ceil(num);
+	 if($(".comment"+commentNum).is(":checked")){
+		 $.ajax({	
+				url:"/textant/commentRead.text",
+				error : function(xhr){
+					alert("읽어들일 코맨트 업엉ㅋ");
+					html="<div>답글을 남겨주세요.</div>"
+					  +"<input class='conetToText' name='conetToText' type='text'>"
+					  +"<input class='commentToWrite' type='submit' value='채팅'>"
+					  $(".fon"+commentNum).append(html);
+				},
+				data:{		
+					page:$("#page").val(),
+					nextPage:$("#nextToPage"+commentNum).val(),
+					pageListCount:commentCount,
+					pageCountBlock:$("#pageCountBlock").val(),
+					pageCut:number,
+					bookArticleNum:$("#bookArticleNum").val(),
+					commentNum:commentNum
+				},
+				beforeSend : function(){
+
+				},
+				complete: function(){
+					 var commentNumBer="";
+						$(".commentToWrite").on("mousedown", function() {
+							commentNumBer = 1;
+							$("#commentTo").val(commentNumBer);
+							commentNumBer = $(".conetToText").val();
+							$("#conet").val(commentNumBer);
+							commentNumBer = commentNum;
+							$("#commentTop").val(commentNumBer);
+						});
+				},
+				success:function(data){
+					var html="<hr>";
+					 $.each(data, function(index,item) {
+						 var commentNum=item.commentNum;
+						 var commentCount=item.commentCount;
+					 html+="<div>답글에답글: "+item.conet+"</div>"
+					 +"<hr>"
+					 });
+					 $(".fon"+commentNum).append(html);
+					 html="<input class='scrollViewTo' id='scrollViewTo' type='button' onclick='commentToGet("+commentNum+","+commentCount+")' value='더보기' style='width:380px;'>"
+						  +"<input class='conetToText' name='conetToText' type='text'>"
+						  +"<input class='commentToWrite' type='submit' value='채팅'>"
+						  $(".fon"+commentNum).append(html);
+						  
+					 var num=$("#nextToPage"+commentNum).val()
+					 num++;
+					 	
+					 var nextPageNum = $("#nextToPage"+commentNum).val();
+					 if(nextPageNum==number){
+						 $("#scrollViewTo").attr("type", "hidden");
+					 }
+					 $("#nextToPage"+commentNum).val(num);
+					 $("#commentGroup"+commentNum).val(1);
+				}					
+			}); 
+		 
+	 	}else{
+	 		$("#commentGroup"+commentNum).val(0);
+	 		$("#nextToPage"+commentNum).val(1);
+	 		$(".fon"+commentNum).empty();
+	 	}
+	
+}
+
+function commentToGet(commentNum,commentCount){
+	var num=commentCount/$("#pageSize").val();
+	var number=Math.ceil(num);
+		 $.ajax({	
+				url:"/textant/commentRead.text",
+
+				data:{		
+					page:$("#page").val(),
+					nextPage:$("#nextToPage"+commentNum).val(),
+					pageListCount:commentCount,
+					pageCountBlock:$("#pageCountBlock").val(),
+					pageCut:number,
+					bookArticleNum:$("#bookArticleNum").val(),
+					commentNum:commentNum
+				},
+				beforeSend : function(){
+
+				},
+				complete: function(){
+
+				},
+				success:function(data){
+				
+					var html="";
+					 $.each(data, function(index,item) {
+						 var commentNum=item.commentNum;
+					 html+="<div>답글에답글: "+item.conet+"</div>"
+					 +"<hr>"
+					 });
+					 $(html).insertAfter($(".fon"+commentNum).children("hr").last());
+					 //$(".fon"+commentNum).children("hr").last().append(html);
+					 var num=$("#nextToPage"+commentNum).val()
+					 num++;
+					 
+					 
+					 var nextPageNum = $("#nextToPage"+commentNum).val();
+					 if(nextPageNum==number){
+						 $("#scrollViewTo").attr("type", "hidden");
+					 }
+					 $("#nextToPage"+commentNum).val(num);
+					
+				}					
+			}); 
+		
+}
+
+
+	
 
 </script>
 <style>
@@ -154,20 +284,23 @@ function commentGet(){
 <body>	
 	<form action="/textant/scroll.text" method="post">
 	<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="1">
-	<input id="page" type="hidden" name="page" value="5">
+	<input id="page" type="hidden" name="page" value="70">
 	<input id="nextPage" type="hidden" name="nextPage" value="1">
 	<input id='pageListCount' type='hidden' name='pageListCount'>
 	<input id='pageCountBlock' type='hidden' name='pageCountBlock'>
 	<input id='pageCut' type='hidden' name='pageCut'>
-
+	<input id='pageSize' type='hidden' name='pageSize'>
+	<input id='commentTo' type='hidden' name='commentTo'>
+	<input id='conet' type='hidden' name='conet'>
+	<input id='commentTop' type='hidden' name='commentTop' value='0'>
+	
 	<div class="bbb"></div>
 	<div class="ccc" style="overflow-y:scroll;width:400px;height:500px;">
 		<div class="aaa">
 		</div>
 	<input class="scrollView" id="scrollView" type="button" onclick="commentGet()" value="더보기" style="width:380px;">
 	</div>
-		<input name="page" type="text">
-		<input name="conet" type="text">
+		<input class="conetText" name="conetText" type="text">
 		<input class="commentWrite" type="submit" value="채팅">
 	</form>
 </body>

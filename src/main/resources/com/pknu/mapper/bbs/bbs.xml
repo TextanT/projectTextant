@@ -3,14 +3,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
               "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
-<mapper namespace="com.besideYou.textant.dao.CommentDao">	
+<mapper namespace="com.besideYou.textant.Dao.CommentDao">	
 
 
 	
 	<insert id="scroll" parameterType="comment">
 		INSERT INTO comments values(comments_seq.nextval,#{conet}
-					,#{pageGroup},0,0,0,#{userId},sysdate,#{bookArticleNum})
+					,#{pageGroup},#{depth},0,#{commentGroup},#{userId},sysdate,#{bookArticleNum})
 	</insert>
+	
+	<update id="scrollComment" parameterType="int">
+		update comments
+		set commentCount=commentCount+1
+		where commentNum=#{commentTop}
+	</update>
 	
 <!-- 	<select id="pageCountBloack" parameterType="HashMap" resultType="int"> -->
 <!-- 		SELECT min(pagegroup) -->
@@ -34,7 +40,7 @@
 		SELECT *
 		FROM (SELECT ROWNUM RM, human.* FROM 
 		(SELECT * FROM  comments 
-        WHERE pagegroup BETWEEN #{pageCountBlock} and #{page} and commentgroup=0 and bookarticlenum=#{bookArticleNum}
+        WHERE pagegroup BETWEEN #{pageCountBlock} and #{page} and commentgroup=#{commentNum} and bookarticlenum=#{bookArticleNum}
 		ORDER BY pagegroup desc,commentNUM desc) human)  
 		WHERE RM BETWEEN  #{pageStart} AND #{pageStop}
 	</select>
