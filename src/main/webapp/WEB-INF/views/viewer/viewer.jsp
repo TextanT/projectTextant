@@ -123,7 +123,6 @@ ${fileName}
 <%-- <iframe style="float:right;" src = "displayFile.text?fileName=${fileName}&pageNum=1&fileType=txt" width='400' height='300' allowfullscreen webkitallowfullscreen></iframe> --%>
 
 
-
 <script type="text/javascript">
 let bookType = "txt";
 bookType = '${bookType}';
@@ -140,7 +139,7 @@ let startFunction = function(){
 $(document).ready(function(){
 	if(bookType=="txt"){
 		for(let i = 1; i <= maxPage; i++){
-			$(".sample-docs").append('<div style="width:100%;height:100%;"><embed width="100%" height="100%" type="text/html" src="displayFile.text?fileName=${fileName}&pageNum='+i+'&fileType='+bookType+'"></embed></div>');
+			$(".sample-docs").append('<div style="width:100%;height:100%;text-align: center;"><embed width="95%" height="100%" type="text/html" src="displayFile.text?fileName=${fileName}&pageNum='+i+'&fileType='+bookType+'"></embed></div>');
 		}
 	}else if(bookType=="jpg"){
 		for(let i = 1; i <= maxPage; i++){
