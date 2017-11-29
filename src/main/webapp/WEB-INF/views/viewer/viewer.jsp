@@ -122,7 +122,6 @@ ${fileName}
 <%-- <c:import url="displayFile.text?fileName=${fileName}&pageNum=1&fileType=txt"></c:import> --%>
 <%-- <iframe style="float:right;" src = "displayFile.text?fileName=${fileName}&pageNum=1&fileType=txt" width='400' height='300' allowfullscreen webkitallowfullscreen></iframe> --%>
 
-		
 
 
 <script type="text/javascript">
@@ -141,22 +140,13 @@ let startFunction = function(){
 $(document).ready(function(){
 	if(bookType=="txt"){
 		for(let i = 1; i <= maxPage; i++){
-	        
-//		      $(".sample-docs").append('<img class="leftPage" alt="" src="displayFile.text?fileName=${fileName}&pageNum='+ i +'&fileType=jpg'+'"/>');
-
-
-		     $(".sample-docs").append('<iframe style="float:right;" src = "displayFile.text?fileName=${fileName}&pageNum='+i+'&fileType='+bookType+'" width="400" height="300" allowfullscreen webkitallowfullscreen></iframe>');
-//		      $(".sample-docs").append('<input type="text" value="displayFile.text?fileName=${fileName}&pageNum='+ i +'&fileType=txt'+'"/>');
-			}
+			$(".sample-docs").append('<div style="width:100%;height:100%;"><embed width="100%" height="100%" type="text/html" src="displayFile.text?fileName=${fileName}&pageNum='+i+'&fileType='+bookType+'"></embed></div>');
+		}
 	}else if(bookType=="jpg"){
 		for(let i = 1; i <= maxPage; i++){
 	        
-		     $(".sample-docs").append('<img class="leftPage" alt="" src="displayFile.text?fileName=${fileName}&pageNum='+ i +'&fileType='+bookType+'"/>');
-
-
-//		      $(".sample-docs").append('<iframe style="float:right;" src = "displayFile.text?fileName=${fileName}&pageNum='+i+'&fileType='+bookType+'" width="400" height="300" allowfullscreen webkitallowfullscreen></iframe>');
-//		      $(".sample-docs").append('<input type="text" value="displayFile.text?fileName=${fileName}&pageNum='+ i +'&fileType=txt'+'"/>');
-			}		
+		$(".sample-docs").append('<img class="leftPage" alt="" src="displayFile.text?fileName=${fileName}&pageNum='+ i +'&fileType='+bookType+'"/>');
+		}		
 	}		
 });
 function onclick1(){
