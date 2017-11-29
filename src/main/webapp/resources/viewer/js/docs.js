@@ -5,12 +5,14 @@ function loadPage(page) {
 	var img = $('<img />');
 	img.load(function() {
 		var container = $('.sample-docs .p'+page);
+		alert(page);
 		img.css({width: container.width(), height: container.height()});
 		img.appendTo($('.sample-docs .p'+page));
 		container.find('.loader').remove();
 	});
 
-	img.attr('src', 'pages/' +  (page-2) + '.png');
+	img.attr('src', '/textant/resources/viewer/pages/' +  (page-2) + '.png');
+//	img.attr('src', "'displayFile.text?fileName=${fileName}&pageNum='+ i +'&fileType='+bookType+'");
 
 }
 
@@ -21,7 +23,7 @@ function addPage(page, book) {
 	var element = $('<div />', {});
 
 	if (book.turn('addPage', element, page)) {
-		if (page<28) {
+		if (page<maxPage) {
 			element.html('<div class="gradient"></div><div class="loader"></div>');
 			loadPage(page);
 		}

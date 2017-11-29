@@ -174,4 +174,10 @@ public class HomeController {
 	public ResponseEntity<byte[]> displayFile(String fileName,String pageNum, String fileType) throws IOException {
 		return displayService.display(fileName, pageNum, fileType);
 	}
+	
+	@RequestMapping(value="/test.text")
+	public String test(String fileName, Model model, String bookType) throws Exception{
+		readService.read(fileName, model, bookType);
+		return "viewer/test";
+	}
 }

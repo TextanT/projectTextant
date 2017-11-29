@@ -43,6 +43,7 @@ body{
 </head>
 
 <body>
+<a href="/textant/test.text?fileName=${fileName}&bookType=jpg">테스트</a>
 ${fileName}
 <br/>
 
