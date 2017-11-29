@@ -1,6 +1,6 @@
 package com.besideYou.textant.dao;
 
-import com.besideYou.textant.Dto.SignDto;
+import com.besideYou.textant.dto.SignDto;
 
 public interface LoginDao {
 

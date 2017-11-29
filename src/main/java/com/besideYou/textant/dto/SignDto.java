@@ -1,4 +1,4 @@
-package com.besideYou.textant.Dto;
+package com.besideYou.textant.dto;
 
 /**
  * @author Jin

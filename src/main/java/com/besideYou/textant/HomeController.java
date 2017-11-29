@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.besideYou.textant.Dto.CommentDto;
-import com.besideYou.textant.Dto.SignDto;
 import com.besideYou.textant.display.DisplayService;
+import com.besideYou.textant.dto.CommentDto;
+import com.besideYou.textant.dto.SignDto;
 import com.besideYou.textant.login.LoginService;
 import com.besideYou.textant.sign.SignService;
 

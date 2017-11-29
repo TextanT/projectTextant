@@ -11,7 +11,7 @@
 			SELECT PASS FROM LOGIN1 WHERE ID=#{id}
 	</select>
 	
-	<insert id="sign" parameterType="com.besideYou.textant.Dto.SignDto">
+	<insert id="sign" parameterType="com.besideYou.textant.dto.SignDto">
 		INSERT INTO LOGIN1 VALUES(#{id},#{pass},#{name},#{mail},#{jender})
 	</insert>
 	

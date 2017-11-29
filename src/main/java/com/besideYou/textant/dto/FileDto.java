@@ -1,4 +1,4 @@
-package com.besideYou.textant.Dto;
+package com.besideYou.textant.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 

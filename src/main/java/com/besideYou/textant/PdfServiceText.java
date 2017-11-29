@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.besideYou.textant.Dto.CommentDto;
+import com.besideYou.textant.dto.CommentDto;
 
 public interface PdfServiceText {
 	public String txtWrite(MultipartFile BookFile,MultipartFile bookImg,int line,int getNumOfOneLine,int getLineOfOnePage);

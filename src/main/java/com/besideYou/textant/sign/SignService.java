@@ -1,6 +1,6 @@
 package com.besideYou.textant.sign;
 
-import com.besideYou.textant.Dto.SignDto;
+import com.besideYou.textant.dto.SignDto;
 
 public interface SignService {
 	

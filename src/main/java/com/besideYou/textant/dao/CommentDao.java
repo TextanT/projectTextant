@@ -3,7 +3,7 @@ package com.besideYou.textant.dao;
 import java.util.HashMap;
 import java.util.List;
 
-import com.besideYou.textant.Dto.CommentDto;
+import com.besideYou.textant.dto.CommentDto;
 
 public interface CommentDao {
 	public void scroll(CommentDto commentDto);
