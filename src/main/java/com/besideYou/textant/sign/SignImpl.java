@@ -15,11 +15,11 @@ public class SignImpl implements SignService{
 	LoginDao loDao;
 	
 	@Override
-	public String sign(SignDto sDto) {
-		
+	public String sign(SignDto sDto, byte jender) {
+		sDto.setJender(jender);
 		loDao.sign(sDto);
 		
-		return null;
+		return "main/login";
 	}
 
 	@Override

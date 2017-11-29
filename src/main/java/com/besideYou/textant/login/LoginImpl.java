@@ -6,8 +6,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.besideYou.textant.dao.LoginDao;
+import com.besideYou.textant.dto.SignDto;
 
 
 @Service
@@ -31,6 +33,7 @@ public class LoginImpl implements LoginService {
 			if (dbPass.equals(pass)) {
 				
 				session.setAttribute("id", id);
+				model.addAttribute("id",id);
 				
 				// view = "redirect:"+prveUrl;
 				view = "redirect:main.text";
@@ -43,10 +46,6 @@ public class LoginImpl implements LoginService {
 		}
 		return view;
 	}
-	@Override
-	public String logout(HttpServletRequest req) {
-		return null;
-	}
-
 	
+		
 }

@@ -1,4 +1,4 @@
-package com.besideYou.textant;
+package com.besideYou.textant.converter;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;

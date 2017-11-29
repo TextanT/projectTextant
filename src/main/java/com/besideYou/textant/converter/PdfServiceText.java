@@ -1,10 +1,11 @@
-package com.besideYou.textant;
+package com.besideYou.textant.converter;
 
 import java.util.List;
 
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.besideYou.textant.PdfFileDto;
 import com.besideYou.textant.dto.CommentDto;
 
 public interface PdfServiceText {

@@ -1,4 +1,4 @@
-package com.besideYou.textant;
+package com.besideYou.textant.converter;
 
 
 import java.awt.image.BufferedImage;
@@ -34,6 +34,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.besideYou.textant.PdfFileDto;
 import com.besideYou.textant.dao.CommentDao;
 import com.besideYou.textant.dto.CommentDto;
 
