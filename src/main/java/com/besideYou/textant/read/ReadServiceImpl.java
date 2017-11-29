@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 
 @Service
 public class ReadServiceImpl implements ReadService {
-	public String read(String fileName, Model model) throws Exception{
+	public String read(String fileName, Model model, String bookType) throws Exception{
 		
 	int totalPageNum = 0;
 	System.out.println(fileName);
@@ -31,6 +31,7 @@ public class ReadServiceImpl implements ReadService {
 	}
 	model.addAttribute("fileName", fileName);
 	model.addAttribute("totalPageNum", totalPageNum);
+	model.addAttribute("bookType", bookType);
 //	return "content";
 	return "viewer/viewer";
 	}

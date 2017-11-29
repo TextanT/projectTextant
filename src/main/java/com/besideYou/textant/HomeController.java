@@ -166,8 +166,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/read.text")
-	public String read(String fileName, Model model) throws Exception{
-		return readService.read(fileName, model);
+	public String read(String fileName, Model model, String bookType) throws Exception{
+		return readService.read(fileName, model, bookType);
 	}
 	
 	@RequestMapping(value="/displayFile.text")

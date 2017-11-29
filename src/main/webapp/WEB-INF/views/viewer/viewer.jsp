@@ -22,7 +22,9 @@ body{
 #coShow{margin-top:30px;}
 
 #comment table{width:100%; border:1px white dashed; }
-
+.convert:hover{
+	cursor: pointer;
+}
 </style>
 
 
@@ -33,12 +35,25 @@ body{
 <script type="text/javascript" src="/textant/resources/viewer/js/modernizr.2.5.3.min.js"></script>
 <script type="text/javascript" src="/textant/resources/viewer/js/hash.js"></script>
 
+
+
+
+
+
 </head>
 
 <body>
 ${fileName}
+<br/>
+
 	<a href="/textant/main.text" style="float: left;">뒤로</a>
 	<br/>
+	<c:if test="${bookType=='txt'}">
+	<p class="convertToJpg convert" onclick="onclick1()">jpg로</p>
+	</c:if>
+	<c:if test="${bookType=='jpg'}">
+	<p class="convertToTxt convert" onclick="onclick2()">text로</p>
+	</c:if>
 <div id="canvas">
 	<div id="book-zoom">
 		<div class="sample-docs">
@@ -101,10 +116,18 @@ ${fileName}
 			</div> <!--#coShow  -->
 		</div> <!--//#comment -->
 	</div> <!--//.RightWrap -->
+<%-- <c:out value="displayFile.text?fileName=${fileName}&pageNum=1&fileType=jpg"> --%>
+<%-- </c:out> --%>
+
+<%-- <c:import url="displayFile.text?fileName=${fileName}&pageNum=1&fileType=txt"></c:import> --%>
+<%-- <iframe style="float:right;" src = "displayFile.text?fileName=${fileName}&pageNum=1&fileType=txt" width='400' height='300' allowfullscreen webkitallowfullscreen></iframe> --%>
+
 		
 
 
 <script type="text/javascript">
+let bookType = "txt";
+bookType = '${bookType}';
  
 let pageNum =3;
 let maxPage = 9999;
@@ -112,17 +135,37 @@ let maxPage = 9999;
 
 maxPage = '${totalPageNum}';
 // alert(maxPage);
-
-$(document).ready(function(){
-	for(let i = 1; i <= maxPage; i++){
-        
-        $(".sample-docs").append('<img class="leftPage" alt="" src="displayFile.text?fileName=${fileName}&pageNum='+ i +'&fileType=txt'+'"/>');	    
-        
-	}
-    
+let startFunction = function(){
 	
-});
+};
+$(document).ready(function(){
+	if(bookType=="txt"){
+		for(let i = 1; i <= maxPage; i++){
+	        
+//		      $(".sample-docs").append('<img class="leftPage" alt="" src="displayFile.text?fileName=${fileName}&pageNum='+ i +'&fileType=jpg'+'"/>');
 
+
+		     $(".sample-docs").append('<iframe style="float:right;" src = "displayFile.text?fileName=${fileName}&pageNum='+i+'&fileType='+bookType+'" width="400" height="300" allowfullscreen webkitallowfullscreen></iframe>');
+//		      $(".sample-docs").append('<input type="text" value="displayFile.text?fileName=${fileName}&pageNum='+ i +'&fileType=txt'+'"/>');
+			}
+	}else if(bookType=="jpg"){
+		for(let i = 1; i <= maxPage; i++){
+	        
+		     $(".sample-docs").append('<img class="leftPage" alt="" src="displayFile.text?fileName=${fileName}&pageNum='+ i +'&fileType='+bookType+'"/>');
+
+
+//		      $(".sample-docs").append('<iframe style="float:right;" src = "displayFile.text?fileName=${fileName}&pageNum='+i+'&fileType='+bookType+'" width="400" height="300" allowfullscreen webkitallowfullscreen></iframe>');
+//		      $(".sample-docs").append('<input type="text" value="displayFile.text?fileName=${fileName}&pageNum='+ i +'&fileType=txt'+'"/>');
+			}		
+	}		
+});
+function onclick1(){
+	location.href="read.text?fileName=${fileName}&bookType=jpg";
+};
+
+function onclick2(){
+	location.href="read.text?fileName=${fileName}&bookType=txt";
+};
 /*
 $(document).ready(function(){
 // 	let pageNum = 1;
