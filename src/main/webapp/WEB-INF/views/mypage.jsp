@@ -5,9 +5,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="/textant/resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="/textant/resources/css/header.css" rel="stylesheet"
+	type="text/css">
 <title>Insert title here</title>
-
+<style>
+.book_list_box {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10%;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	border: 1px solid #D8D8D8;
+	width: 1012px;
+	height: 820px;
+	background: white;
+	margin-top: 20px;
+}
+</style>
 </head>
 <body>
 	<div class="header">
@@ -15,7 +30,9 @@
 			<a href="/textant/main.text" class="logo_a"> <img
 				src="/textant/resources/icon_img/logo_mini.png" class="logo">
 			</a>
+			
 		</div>
+		
 		<div class="menu_box">
 			<c:if test="${id!=null}">
 				<c:out
@@ -100,6 +117,22 @@
 			</div>
 
 		</div>
+	</div>
+	<div class="book_list_box">
+	 	이름 <input type="text" class="user_name">
+	 	별명<input type="text" class="nickname">
+	 	아이디<input type="text" class="user_id">
+	 	비밀번호<input type="text" class="user_pass">
+	 	비밀번호확인<input type="text" class="user_passch">
+	 	메일<input type="text" class="user_mail">
+	 	성별<input type="text" class="user_jender">
+	 	나이<input type="text" class="user_age">
+	 	소개<input type="text" class="user_comment">
+	 	<tr>
+	 		<td></td>
+	 		<td></td>
+	 		<td></td>
+	 	</tr>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js"
