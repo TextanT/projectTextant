@@ -205,7 +205,9 @@ $(".nextPage").on("click",function(){
 	$('.flipbook').turn('next');
 });
 $(".currPage").on("click",function(){
-	alert("The current page is: "+$(".flipbook").turn("page"));
+	let currPage = $(".flipbook").turn("page");
+	alert(currPage);
+	alert("The current page is: "+(Math.floor(currPage/2))*2);
 });
 // Slider
 
