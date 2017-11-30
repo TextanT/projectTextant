@@ -22,7 +22,7 @@
 					value="
 			<a href='#' class='menu_title'><span class='menu1' id='menu1'>${id}</span></a>
 			
-			<a href='#' class='menu_title'><span class='menu2'id='menu2'>마이페이지</span></a> 
+			<a href='mypage.text' class='menu_title'><span class='menu2'id='menu2'>내정보</span></a> 
 
 			<a href='logout.text' class='menu_title'><span class='menu3'id='menu3'>로그아웃</span></a> 
 			
@@ -30,22 +30,6 @@
 			 "
 					escapeXml="false" />
 			</c:if>
-
-			<c:if test="${id==null}">
-				<c:out
-					value="
-			<a href='login.text' class='menu_title'><span class='menu1' id='menu1'>로그인</span></a>
-			
-			<a href='sign.text' class='menu_title'><span class='menu2'id='menu2'>회원가입</span></a> 
-
-			<a href='#' class='menu_title'><span class='menu3'id='menu3'>meme</span></a> 
-			
-			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
-			 "
-					escapeXml="false" />
-			</c:if>
-
-
 
 		</div>
 	</div>
