@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mybatis map 선언 표시 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.besideYou.textant.dao.LoginDao">	
+
+	
+
+	<select id="loginCheck" parameterType="String" resultType="String">
+			SELECT PASS FROM LOGIN1 WHERE ID=#{id}
+	</select>
+	
+	<insert id="sign" parameterType="com.besideYou.textant.dto.SignDto">
+		INSERT INTO LOGIN1 VALUES(#{id},#{pass},#{name},#{mail},#{jender})
+	</insert>
+	
+	<select id="joinchek" parameterType="String" resultType="String">
+		SELECT ID FROM LOGIN1 WHERE ID=#{id}
+	</select>
+	
+</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

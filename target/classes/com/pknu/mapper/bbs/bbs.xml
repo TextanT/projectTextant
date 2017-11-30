@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mybatis map 선언 표시 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.besideYou.textant.dao.CommentDao">	
+
+
+	
+	<insert id="scroll" parameterType="comment">
+		INSERT INTO comments values(comments_seq.nextval,#{conet}
+					,#{pageGroup},#{depth},0,#{commentGroup},#{userId},sysdate,#{bookArticleNum})
+	</insert>
+	
+	<update id="scrollComment" parameterType="int">
+		update comments
+		set commentCount=commentCount+1
+		where commentNum=#{commentTop}
+	</update>
+	
+<!-- 	<select id="pageCountBloack" parameterType="HashMap" resultType="int"> -->
+<!-- 		SELECT min(pagegroup) -->
+<!-- 		FROM (SELECT ROWNUM RM, human.* FROM  -->
+<!-- 		(SELECT DISTINCT pagegroup  -->
+<!--         FROM comments -->
+<!--         WHERE pagegroup <![CDATA[ < ]]>= #{page} and commentgroup=0 -->
+<!--         ORDER BY pagegroup desc) human)   -->
+<!-- 		WHERE RM BETWEEN  1 AND #{pageBlock} -->
+<!-- 	</select> -->
+	
+	<select id="commentListCount" parameterType="HashMap" resultType="int">
+		SELECT COUNT(*)
+		FROM (SELECT ROWNUM RM, human.* FROM 
+		(SELECT * FROM  comments 
+        WHERE pagegroup BETWEEN #{pageCountBlock} and #{page} and commentgroup=0 and bookarticlenum=#{bookArticleNum}
+		ORDER BY pagegroup desc,commentNUM desc) human)  
+	</select>
+	
+	<select id="commentList" parameterType="HashMap" resultType="comment">
+		SELECT *
+		FROM (SELECT ROWNUM RM, human.* FROM 
+		(SELECT * FROM  comments 
+        WHERE pagegroup BETWEEN #{pageCountBlock} and #{page} and commentgroup=#{commentNum} and bookarticlenum=#{bookArticleNum}
+		ORDER BY pagegroup desc,commentNUM desc) human)  
+		WHERE RM BETWEEN  #{pageStart} AND #{pageStop}
+	</select>
+</mapper>	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
