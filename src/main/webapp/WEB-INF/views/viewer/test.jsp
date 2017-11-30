@@ -58,8 +58,10 @@ ${fileName}
 		<div id="slider"></div>
 	</div>
 </div>
-
-
+<button class="previousPage">←</button>
+<input type="number" class="pageGo"><button class="pageGoEnter">여기로 가자</button>
+<button class="nextPage">→</button>
+<button class="currPage">현재 페이지?</button>
 <a href="#" class="open1">답글 보기</a>
 <div class="RightWrap">
 
@@ -190,6 +192,21 @@ $(document).keydown(function(e){
 
 });
 
+$(".pageGoEnter").on("click",function(){
+	let pageNum = $('.pageGo').val();
+	
+	$('.flipbook').turn('page',pageNum);
+});
+
+$(".previousPage").on("click",function(){
+	$('.flipbook').turn('previous');
+});
+$(".nextPage").on("click",function(){
+	$('.flipbook').turn('next');
+});
+$(".currPage").on("click",function(){
+	alert("The current page is: "+$(".flipbook").turn("page"));
+});
 // Slider
 
 $( "#slider" ).slider({
