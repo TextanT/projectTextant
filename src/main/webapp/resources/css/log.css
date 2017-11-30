@@ -248,50 +248,7 @@ ul li label {
     float: left;
 }
 
-.exia {
-    width: 200px;
-    height: 40px;
-    background-color: #9f793e;
-    padding: 13px 109px;
-    border: 1px solid #9f793e;
-    text-align: center;
-}
 
-.exia:hover {
-    background: none;
-    transition: 0.5s;
-    border: 1px solid #9f793e;
-    color: #9f793e;
-}
-
-.signa {
-    width: 200px;
-    height: 40px;
-    background-color: #9f793e;
-    padding: 13px 106px;
-    border: 1px solid #9f793e;
-}
-
-.signa:hover {
-    background: none;
-    transition: 0.5s;
-    border: 1px solid #9f793e;
-    color: #9f793e;
-}
-
-.sign_div {
-    position: absolute;
-    top: 75%;
-    left: 16.5%;
-    width: 20%;
-}
-
-.exit_div {
-    position: absolute;
-    top: 85%;
-    left: 16.5%;
-    width: 20%;
-}
 
 a {
     text-decoration: none;
@@ -320,7 +277,7 @@ a {
 }
 
 
-/* �뜲紐⑦럹�씠吏� �꽕�젙 */
+/* 데모페이지 설정 */
 
 .wrap {
     position: absolute;
@@ -330,7 +287,7 @@ a {
 }
 
 
-/* �씤�뭼 */
+/* 인풋 */
 
 input[type=radio] {
     display: none;
@@ -378,9 +335,9 @@ input[type=radio] {
     position: absolute;
     top: 300px;
     left: 200px;
-    width: 400px;
+    width: 350px;
     height: 700px;
     padding: 10px;
-    border: 2px solid #E2E2E2;
+    border: 1px solid #E2E2E2;
     z-Index: 9999
 }
