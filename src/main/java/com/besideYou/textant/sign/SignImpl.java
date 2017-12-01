@@ -19,7 +19,7 @@ public class SignImpl implements SignService{
 		sDto.setJender(jender);
 		loDao.sign(sDto);
 		
-		return "main/login";
+		return "main/first";
 	}
 
 	@Override

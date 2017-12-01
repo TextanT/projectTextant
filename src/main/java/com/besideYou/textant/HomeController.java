@@ -139,13 +139,8 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(value="/sign.text", method=RequestMethod.GET)
-	public String  signForm(){	
-		return "main/signup";
-	}
-	
 	@RequestMapping(value="/sign.text", method=RequestMethod.POST)
-	public String  sign(SignDto sDto ,@RequestParam("gender") byte jender){
+	public String  sign(SignDto sDto ,@RequestParam("jender") byte jender){
 		return signService.sign(sDto,jender);
 	}
 	
@@ -158,7 +153,11 @@ public class HomeController {
 	public String first() {
 		return "main/first";
 	}
-	
+	@RequestMapping(value="/mypage.text")
+	public String mypage() {
+		
+		return "mypage";
+	}
 	@ResponseBody
 	@RequestMapping(value="/joinIdCheck.text")
 	public int joinIdCheck(String inputId){

@@ -549,10 +549,7 @@ input[type=radio] {
 						</span>
 					</div>
 					<div id="status"></div>
-					<!-- 			<div id="status" -->
-					<!-- 				style="border: 0; font size: 10px 굴림; width: 160px; height: 20px;background:none;" -->
-					<!-- 				readonly onfocus="this.blur();" value=""> -->
-					<!-- 			</div> -->
+					
 					<div id="nameDiv" class="nameDivc">
 						<span class="name_sp int_name"> <input type="text"
 							id="name" class="int" value maxlength="20" autocomplete="off"
