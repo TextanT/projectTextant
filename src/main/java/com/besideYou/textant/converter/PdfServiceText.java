@@ -18,5 +18,5 @@ public interface PdfServiceText {
 	public List<CommentDto> scrollView(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum,int commentNum,int commentDelete,int userNum);
 	public List<Integer> commentCount(int page,int bookArticleNum);
 	public List<Integer> commentGoodOrBad(int commentNum,int commentGoodOrBad,int userNum);
-	public int commentDelete(int commentNum,int commentCount);
+	public int commentDelete(int commentNum,int commentGroup);
 }

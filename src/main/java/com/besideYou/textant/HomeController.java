@@ -55,48 +55,63 @@ public class HomeController {
 	String view;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
+	
+	@RequestMapping(value = "/main.text", method = RequestMethod.GET)
+	public String home(Model model, HttpSession session) {
+		return mainService.home(model, session);
+	}
+	
 	@RequestMapping(value = "/scroll.text", method = RequestMethod.GET)
 	public String scroll() {
 
 		return "scroll";
 	}
 
-	@RequestMapping(value = "/main.text", method = RequestMethod.GET)
-	public String home(Model model, HttpSession session) {
-		return mainService.home(model, session);
-	}
+	
 
-	@RequestMapping(value = "/commentCount.text")
+	@RequestMapping(value="/scroll.text", method = RequestMethod.GET)
+	public String scroll() {
+		
+		return "scroll";
+	}
+	
+	@RequestMapping(value="/commentCount.text")
 	@ResponseBody
-	public List<Integer> commentCount(int page, int bookArticleNum) {
-		return pdfServiceText.commentCount(page, bookArticleNum);
+	public List<Integer> commentCount(int page,int bookArticleNum){
+		return pdfServiceText.commentCount(page,bookArticleNum);
 	}
-
-	@RequestMapping(value = "/commentRead.text")
+	
+	@RequestMapping(value="/commentRead.text")
 	@ResponseBody
-	public List<CommentDto> commentRead(HttpSession session, int page, int nextPage, int pageListCount,
-			int pageCountBlock, int pageCut, int bookArticleNum, int commentNum, int commentDelete) {
-		int userNum = 1;
-		return pdfServiceText.scrollView(page, nextPage, pageListCount, pageCountBlock, pageCut, bookArticleNum,
-				commentNum, commentDelete, userNum);
+	public List<CommentDto> commentRead(HttpSession session,int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum,int commentNum,int commentDelete){
+		int userNum=1;
+		return pdfServiceText.scrollView(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete,userNum);
 	}
-
-	@RequestMapping(value = "/commentDelete.text")
+	
+	@RequestMapping(value="/commentDelete.text")
 	@ResponseBody
-	public int commentDelete(int commentNum, int commentCount, HttpSession session) {
-		int userNum = 1;
-		pdfServiceText.commentDelete(commentNum, commentCount);
-		return userNum;
+	public int commentDelete(int commentNum,int commentGroup,HttpSession session){
+		int userNum=1;
+		
+		return pdfServiceText.commentDelete(commentNum,commentGroup);
 	}
-
-	@RequestMapping(value = "/scroll.text", method = RequestMethod.POST)
-	public String scrollWrite(CommentDto commentDto, int page, int commentTo, int commentTop, HttpSession session) {
+	
+	@RequestMapping(value="/scroll.text", method = RequestMethod.POST)
+	public String scrollWrite(CommentDto commentDto,int page,int commentTo,int commentTop,HttpSession session) {
 		commentDto.setPageGroup(page);
 		commentDto.setUserNum(1);
-		pdfServiceText.scroll(commentDto, commentTo, commentTop);
-
+		pdfServiceText.scroll(commentDto,commentTo,commentTop);
+		
+		
 		return "scroll";
+	}
+
+	@RequestMapping(value="/commentGoodOrBad.text")
+	@ResponseBody
+	public List<Integer> commentGoodOrBad(HttpSession session, int commentNum,int commentGoodOrBad){
+//		String userNum = (String)session.getAttribute("userNum");
+		int userNum=2;
+		return pdfServiceText.commentGoodOrBad(commentNum,commentGoodOrBad,userNum);
 	}
 
 	@RequestMapping(value = "/commentGoodOrBad.text")

@@ -542,11 +542,13 @@ public class PdfServiceImpl implements PdfServiceText{
 
 
 	@Override
-	public int commentDelete(int commentNum, int commentCount) {
+	public int commentDelete(int commentNum, int commentGroup) {
 		HashMap<String, Integer> commentDelete=new HashMap<String, Integer>();
 		commentDelete.put("commentNum", commentNum);
+		commentDelete.put("commentGroup", commentGroup);
 		int commentDeleteCheck=0;
-		if(commentCount==0) {
+		int commentCountCheck=0;
+		if(commentGroup==0) {
 			commentDelete.put("commentDeleteCheck", commentDeleteCheck);
 			System.out.println("++++++++++++++++++++++++"+1);
 			commentDao.commentDelete(commentDelete);
@@ -555,9 +557,12 @@ public class PdfServiceImpl implements PdfServiceText{
 			commentDelete.put("commentDeleteCheck", commentDeleteCheck);
 			System.out.println("++++++++++++++++++++++++"+2);
 			commentDao.commentDelete(commentDelete);
+			commentDao.commentCountUpdate(commentDelete);
+			commentCountCheck=commentDao.commentCountCheck(commentDelete);
 			
 		}
-		return 0;
+		System.out.println("+++++++yyyyyyyyyy+++++++++++++"+commentCountCheck);
+		return commentCountCheck;
 	}
 	
 	

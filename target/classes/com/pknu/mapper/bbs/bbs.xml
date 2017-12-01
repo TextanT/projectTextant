@@ -102,6 +102,18 @@
 			WHERE commentNum=#{commentNum} or commentgroup=#{commentgroup}
 		</if>  
 	</delete>
+	
+	<update id="commentCountUpdate" parameterType="HashMap">
+		update comments
+		set commentCount=commentCount-1
+		where commentNum=#{commentGroup}
+	</update>
+	
+	<select id="commentCountCheck" parameterType="HashMap" resultType="int">
+		select commentCount
+		FROM comments
+		where commentNum=#{commentGroup}
+	</select>
 </mapper>	
 	
 

@@ -194,15 +194,4 @@ public class CommentDto {
 				+ commentGroup + ", userNum=" + userNum + ", writeDate=" + writeDate + ", commentGood=" + commentGood
 				+ ", commentBad=" + commentBad + ", nickName=" + nickName + "]";
 	}
-
-	
-
-
-
-
-	
-	
-	
-	
-	
 }

@@ -34,7 +34,7 @@ $(document).ready(function(){
 		},
 		success:function(data){
 			
-			html+="<div id='commentCount' name='commentCount'>"+"page: "+data[1]+"~"+data[2]+"   전체답글: "+data[0]+"</div>"
+			html+="<div id='commentCount' name='commentCount'>"+"page: "+data[1]+"~"+data[2]+"  현재페이지:"+data[2]+"   전체답글: "+data[0]+"</div>"
 			$(".bbb").append(html);
 				$("#pageListCount").val(data[0]);
 				$("#pageCountBlock").val(data[1]);
@@ -94,10 +94,11 @@ function comentRead(read){
 			 $.each(data, function(index,item) {
 				 var commentNum=item.commentNum;
 				 var commentCount=item.commentCount;
+				 var commentGroup=item.commentGroup;
 			 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
-			 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentCount+")' value='삭제'>"
+			 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
 			 +"<div>답글: "+item.conet+"</div>"			 
-			 +"<input type='checkbox' class='comment"+commentNum+"' name='chk' onClick='kokoko("+commentNum+","+commentCount+")' value='"+commentNum+"'>답글: "+data[index].commentCount+"<br/>"
+			 +"<input type='checkbox' class='comment"+commentNum+"' name='chk' onClick='kokoko("+commentNum+","+commentCount+")' value='"+commentNum+"'><div class='commentCount"+commentNum+"'>답글: "+data[index].commentCount+"</div><br/>"
 			 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
 			 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
 			 +"<input id='nextToPage"+commentNum+"' type='hidden' name='nextToPage"+commentNum+"' value='1'>"	
@@ -153,10 +154,11 @@ function commentGet(){
 			 $.each(data, function(index,item) {
 				 var commentNum=item.commentNum;
 				 var commentCount=item.commentCount;
+				 var commentGroup=item.commentGroup;
 			 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
-			 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentCount+")' value='삭제'>"
-			 +"<div>답글에답글: "+item.conet+"</div>"			
-			 +"<input type='checkbox' class='comment"+commentNum+"' name='chk' onClick='kokoko("+commentNum+","+commentCount+")' value='"+commentNum+"'>답글: "+data[index].commentCount+"<br/>"
+			 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
+			 +"<div>답글: "+item.conet+"</div>"				
+			 +"<input type='checkbox' class='comment"+commentNum+"' name='chk' onClick='kokoko("+commentNum+","+commentCount+")' value='"+commentNum+"'><div class='commentCount"+commentNum+"'>답글: "+data[index].commentCount+"</div><br/>"
 			 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
 			 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
 			 +"<input id='nextToPage"+commentNum+"' type='hidden' name='nextToPage"+commentNum+"' value='1'>"	
@@ -224,9 +226,10 @@ function kokoko(commentNum,commentCount){
 					 $.each(data, function(index,item) {
 						 var commentNum=item.commentNum;
 						 var commentCount=item.commentCount;
+						 var commentGroup=item.commentGroup;
 					 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
-					 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentCount+")' value='삭제'>"
-					 +"<div>답글에답글: "+item.conet+"</div>"		
+					 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
+					 +"<div>답글: "+item.conet+"</div>"			
 					 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
 					 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
 					 +"<hr></div>"
@@ -286,9 +289,10 @@ function commentToGet(commentNum,commentCount){
 					 $.each(data, function(index,item) {
 						 var commentNum=item.commentNum;
 						 var commentCount=item.commentCount;
+						 var commentGroup=item.commentGroup;
 					 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
-					 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentCount+")' value='삭제'>"
-					 +"<div>답글에답글: "+item.conet+"</div>"	
+					 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
+					 +"<div>답글: "+item.conet+"</div>"		
 					 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
 					 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
 					 +"<hr></div>"
@@ -368,13 +372,13 @@ function commentDelete(page,nextPage,pageListCount,pageCountBlock,pageCut,bookAr
 		});
 }
 
-function commentDeleteOk(commentNum,commentCount){
+function commentDeleteOk(commentNum,commentGroup){
 	$.ajax({	
 		url:"/textant/commentDelete.text",
 
 		data:{		
 			commentNum:commentNum,
-			commentCount:commentCount
+			commentGroup:commentGroup
 		},
 		beforeSend : function(){
 
@@ -383,7 +387,12 @@ function commentDeleteOk(commentNum,commentCount){
 			
 		},
 		success:function(data){
-		
+			if(commentGroup!=0){
+				$(".commentCount"+commentGroup).html("답글: "+data);	
+			}else{
+				
+			}
+			
 			$(".commentDelete"+commentNum).empty();
 			
 			
