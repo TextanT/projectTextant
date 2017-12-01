@@ -61,6 +61,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/scroll.text", method = RequestMethod.GET)
 	public String scroll() {
+		
 		return "scroll";
 	}
 	
@@ -72,27 +73,36 @@ public class HomeController {
 	
 	@RequestMapping(value="/commentRead.text")
 	@ResponseBody
-	public List<CommentDto> commentRead(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum,int commentNum){
-		System.out.println(page+""+nextPage+""+pageListCount+" "+pageCountBlock+" "+pageCut+" "+bookArticleNum+" "+commentNum);
-		return pdfServiceText.scrollView(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum);
+	public List<CommentDto> commentRead(HttpSession session,int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum,int commentNum,int commentDelete){
+		int userNum=1;
+		return pdfServiceText.scrollView(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete,userNum);
 	}
-	// 임시 스크롤 테스트
+	
+	@RequestMapping(value="/commentDelete.text")
+	@ResponseBody
+	public int commentDelete(int commentNum,int commentCount,HttpSession session){
+		int userNum=1;
+		pdfServiceText.commentDelete(commentNum,commentCount);
+		return userNum;
+	}
+	
 	@RequestMapping(value="/scroll.text", method = RequestMethod.POST)
-	public String scrollWrite(CommentDto commentDto,int page,int commentTo,int commentTop) {
+	public String scrollWrite(CommentDto commentDto,int page,int commentTo,int commentTop,HttpSession session) {
 		commentDto.setPageGroup(page);
-		commentDto.setUserId("obscu");
+		commentDto.setUserNum(1);
 		pdfServiceText.scroll(commentDto,commentTo,commentTop);
 		
 		
 		return "scroll";
 	}
-	
-		@RequestMapping(value = "/main.text", method = RequestMethod.GET)
-	public String home(Model model, HttpSession session) {
-		return mainService.home(model, session);
+
+	@RequestMapping(value="/commentGoodOrBad.text")
+	@ResponseBody
+	public List<Integer> commentGoodOrBad(HttpSession session, int commentNum,int commentGoodOrBad){
+//		String userNum = (String)session.getAttribute("userNum");
+		int userNum=2;
+		return pdfServiceText.commentGoodOrBad(commentNum,commentGoodOrBad,userNum);
 	}
-
-
 	
 	@RequestMapping(value="/write.text",method=RequestMethod.GET)
 	public String text(){

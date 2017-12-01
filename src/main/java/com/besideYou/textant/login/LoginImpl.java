@@ -31,8 +31,8 @@ public class LoginImpl implements LoginService {
 		String view = null;
 		if (dbPass != null) {
 			if (dbPass.equals(pass)) {
-				
-				session.setAttribute("id", id);
+//				int userNum = where userid="" and from 1 
+				session.setAttribute("userNum", "1");
 				model.addAttribute("id",id);
 				
 				// view = "redirect:"+prveUrl;

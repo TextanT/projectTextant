@@ -11,4 +11,10 @@ public interface CommentDao {
 	public int pageCountBloack(HashMap<String,Integer>  pageBlockMin);
 	public List<CommentDto> commentList(HashMap<String,Integer> pageBlockMin);
 	public int commentListCount(HashMap<String,Integer> pageBlockMin);
+	public int commentGoodOrBad(HashMap<String,Integer> commentGoodOrBadCheck);
+	public int commentGoodOrBadWrite(HashMap<String,Integer> commentGoodOrBadCheck);
+	public int commentGoodOrBadCount(HashMap<String,Integer> commentGoodOrBadCheck);
+	public int commentGoodOrBadUpdate(HashMap<String,Integer> commentGoodOrBadCheck);
+	public void commentDelete(HashMap<String,Integer> commentDelete);
+	public void commentGoodOrBadDelete(HashMap<String,Integer> commentDelete);
 }
