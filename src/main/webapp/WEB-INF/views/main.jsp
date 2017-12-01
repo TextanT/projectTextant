@@ -7,6 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet"
 	href="/textant/resources/Swiper-master/dist/css/swiper.min.css">
 <link href="/textant/resources/css/header.css" rel="stylesheet"
 	type="text/css">
