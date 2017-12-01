@@ -28,90 +28,102 @@ import com.besideYou.textant.main.MainService;
 import com.besideYou.textant.read.ReadService;
 import com.besideYou.textant.sign.SignService;
 
-
-
-
 @Controller
 public class HomeController {
-	
+
 	@Autowired
 	SignService signService;
-	
+
 	@Autowired
 	LoginService loginService;
-	
+
 	@Autowired
 	PdfService pdfService;
-	
+
 	@Autowired
 	PdfServiceText pdfServiceText;
-	
-	@Autowired 
+
+	@Autowired
 	DisplayService displayService;
-	
+
 	@Autowired
 	MainService mainService;
-	
+
 	@Autowired
 	ReadService readService;
-	
+
 	String view;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	@RequestMapping(value="/scroll.text", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/scroll.text", method = RequestMethod.GET)
 	public String scroll() {
+
 		return "scroll";
 	}
-	
-	@RequestMapping(value="/commentCount.text")
-	@ResponseBody
-	public List<Integer> commentCount(int page,int bookArticleNum){
-		return pdfServiceText.commentCount(page,bookArticleNum);
-	}
-	
-	@RequestMapping(value="/commentRead.text")
-	@ResponseBody
-	public List<CommentDto> commentRead(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum,int commentNum){
-		System.out.println(page+""+nextPage+""+pageListCount+" "+pageCountBlock+" "+pageCut+" "+bookArticleNum+" "+commentNum);
-		return pdfServiceText.scrollView(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum);
-	}
-	// 임시 스크롤 테스트
-	@RequestMapping(value="/scroll.text", method = RequestMethod.POST)
-	public String scrollWrite(CommentDto commentDto,int page,int commentTo,int commentTop) {
-		commentDto.setPageGroup(page);
-		commentDto.setUserId("obscu");
-		pdfServiceText.scroll(commentDto,commentTo,commentTop);
-		
-		
-		return "scroll";
-	}
-	
-		@RequestMapping(value = "/main.text", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/main.text", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
 		return mainService.home(model, session);
 	}
 
+	@RequestMapping(value = "/commentCount.text")
+	@ResponseBody
+	public List<Integer> commentCount(int page, int bookArticleNum) {
+		return pdfServiceText.commentCount(page, bookArticleNum);
+	}
 
-	
-	@RequestMapping(value="/write.text",method=RequestMethod.GET)
-	public String text(){
+	@RequestMapping(value = "/commentRead.text")
+	@ResponseBody
+	public List<CommentDto> commentRead(HttpSession session, int page, int nextPage, int pageListCount,
+			int pageCountBlock, int pageCut, int bookArticleNum, int commentNum, int commentDelete) {
+		int userNum = 1;
+		return pdfServiceText.scrollView(page, nextPage, pageListCount, pageCountBlock, pageCut, bookArticleNum,
+				commentNum, commentDelete, userNum);
+	}
+
+	@RequestMapping(value = "/commentDelete.text")
+	@ResponseBody
+	public int commentDelete(int commentNum, int commentCount, HttpSession session) {
+		int userNum = 1;
+		pdfServiceText.commentDelete(commentNum, commentCount);
+		return userNum;
+	}
+
+	@RequestMapping(value = "/scroll.text", method = RequestMethod.POST)
+	public String scrollWrite(CommentDto commentDto, int page, int commentTo, int commentTop, HttpSession session) {
+		commentDto.setPageGroup(page);
+		commentDto.setUserNum(1);
+		pdfServiceText.scroll(commentDto, commentTo, commentTop);
+
+		return "scroll";
+	}
+
+	@RequestMapping(value = "/commentGoodOrBad.text")
+	@ResponseBody
+	public List<Integer> commentGoodOrBad(HttpSession session, int commentNum, int commentGoodOrBad) {
+		// String userNum = (String)session.getAttribute("userNum");
+		int userNum = 2;
+		return pdfServiceText.commentGoodOrBad(commentNum, commentGoodOrBad, userNum);
+	}
+
+	@RequestMapping(value = "/write.text", method = RequestMethod.GET)
+	public String text() {
 		return "writeForm";
 	}
 
-	
-	@RequestMapping(value="/write.text",method=RequestMethod.POST)
-	public String write(PdfFileDto fileDto)throws Exception{
-		view=pdfServiceText.check(fileDto);
-		if(view==null) {
-			view="redirect:main.text";
+	@RequestMapping(value = "/write.text", method = RequestMethod.POST)
+	public String write(PdfFileDto fileDto) throws Exception {
+		view = pdfServiceText.check(fileDto);
+		if (view == null) {
+			view = "redirect:main.text";
 		}
 		return view;
 	}
 
-	@RequestMapping(value="/getProgress.text", produces="application/json;charset=UTF-8")
+	@RequestMapping(value = "/getProgress.text", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public HashMap<String,String> getProgress(Model model) {
+	public HashMap<String, String> getProgress(Model model) {
 		try {
 			Thread.sleep(200);
 		} catch (InterruptedException e) {
@@ -131,51 +143,52 @@ public class HomeController {
 		return loginService.login(id, pass, session, model);
 
 	}
-	
-	@RequestMapping(value="/logout.text")
-	public String  logout(HttpSession session){		
+
+	@RequestMapping(value = "/logout.text")
+	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:main.text";
 	}
-	
-	
-	@RequestMapping(value="/sign.text", method=RequestMethod.POST)
-	public String  sign(SignDto sDto ,@RequestParam("jender") byte jender){
-		return signService.sign(sDto,jender);
+
+	@RequestMapping(value = "/sign.text", method = RequestMethod.POST)
+	public String sign(SignDto sDto, @RequestParam("jender") byte jender) {
+		return signService.sign(sDto, jender);
 	}
-	
-	@RequestMapping(value="/guest.text")
+
+	@RequestMapping(value = "/guest.text")
 	public String guest() {
 		return "redirect:main.text";
 	}
 
-	@RequestMapping(value="/first.text")
+	@RequestMapping(value = "/first.text")
 	public String first() {
 		return "main/first";
 	}
-	@RequestMapping(value="/mypage.text")
+
+	@RequestMapping(value = "/mypage.text")
 	public String mypage() {
-		
+
 		return "mypage";
 	}
+
 	@ResponseBody
-	@RequestMapping(value="/joinIdCheck.text")
-	public int joinIdCheck(String inputId){
+	@RequestMapping(value = "/joinIdCheck.text")
+	public int joinIdCheck(String inputId) {
 		return signService.joinIdCheck(inputId);
 	}
-	
-	@RequestMapping(value="/read.text")
-	public String read(String fileName, Model model, String bookType) throws Exception{
+
+	@RequestMapping(value = "/read.text")
+	public String read(String fileName, Model model, String bookType) throws Exception {
 		return readService.read(fileName, model, bookType);
 	}
-	
-	@RequestMapping(value="/displayFile.text")
-	public ResponseEntity<byte[]> displayFile(String fileName,String pageNum, String fileType) throws IOException {
+
+	@RequestMapping(value = "/displayFile.text")
+	public ResponseEntity<byte[]> displayFile(String fileName, String pageNum, String fileType) throws IOException {
 		return displayService.display(fileName, pageNum, fileType);
 	}
-	
-	@RequestMapping(value="/test.text")
-	public String test(String fileName, Model model, String bookType) throws Exception{
+
+	@RequestMapping(value = "/test.text")
+	public String test(String fileName, Model model, String bookType) throws Exception {
 		readService.read(fileName, model, bookType);
 		return "viewer/test";
 	}

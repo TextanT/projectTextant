@@ -17,6 +17,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.pdfbox.cos.COSName;
@@ -429,7 +430,7 @@ public class PdfServiceImpl implements PdfServiceText{
 	
 	
 	@Override
-	public List<CommentDto> scrollView(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum,int commentNum) {
+	public List<CommentDto> scrollView(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum,int commentNum,int commentDelete,int userNum) {
 		List<CommentDto> commentList = null;
 		HashMap<String,Integer>  pageBlockMin = new HashMap<String,Integer>();
 		pageBlockMin.put("bookArticleNum", bookArticleNum);
@@ -437,6 +438,13 @@ public class PdfServiceImpl implements PdfServiceText{
 		pageBlockMin.put("pageBlock", pageBlock);	
 		pageBlockMin.put("pageCountBlock",pageCountBlock);
 		pageBlockMin.put("commentNum",commentNum);
+		pageBlockMin.put("userNum",userNum);
+		if(commentDelete==1) {
+			commentDelete=1;
+		}else if(commentDelete==0) {
+			commentDelete=0;
+		}
+		pageBlockMin.put("commentDelete",commentDelete);
 		if(nextPage<=pageCut){
 			int pageStart=0;
 			if(nextPage==1){
@@ -480,6 +488,76 @@ public class PdfServiceImpl implements PdfServiceText{
 		pagePoint.add(bookArticleNum);
 		pagePoint.add(pageSize);
 		return pagePoint;
+	}
+
+
+	@Override
+	public List<Integer> commentGoodOrBad(int commentNum, int commentGoodOrBad,int userNum) {
+		List<Integer> commentGoodOrBadList = new ArrayList<Integer>();
+		int commentGoodCheck=1;
+		int commentBadCheck=2;
+		int commentGoodCheckOk=0;
+		int commentBadCheckOk=0;
+		int commentGoodOrBadAllCount=0;
+		int commentGoodOrBadAllCheck=0;
+		int a=0;
+		int b=0;
+		int c=0;
+		HashMap<String, Integer> commentGoodOrBadCheck=new HashMap<String, Integer>();
+		commentGoodOrBadCheck.put("commentNum", commentNum);
+		commentGoodOrBadCheck.put("userNum", userNum);
+		
+		commentGoodOrBadCheck.put("commentGoodOrBadCheck", commentGoodCheck);
+		commentGoodCheckOk=commentDao.commentGoodOrBad(commentGoodOrBadCheck);
+		
+		commentGoodOrBadCheck.put("commentGoodOrBadCheck", commentBadCheck);
+		commentBadCheckOk=commentDao.commentGoodOrBad(commentGoodOrBadCheck);
+		
+		if(commentGoodOrBad==1) {
+			commentGoodOrBadCheck.put("commentGoodOrBadCheck", commentGoodCheck);
+		}else {
+			commentGoodOrBadCheck.put("commentGoodOrBadCheck", commentBadCheck);
+		}
+		
+		if(commentGoodCheckOk==0&&commentBadCheckOk==0){
+			commentDao.commentGoodOrBadWrite(commentGoodOrBadCheck);
+			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+			commentDao.commentGoodOrBadUpdate(commentGoodOrBadCheck);
+			System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+			commentGoodOrBadAllCount=commentDao.commentGoodOrBadCount(commentGoodOrBadCheck);
+			System.out.println("cccccccccccccccccccccccccccccccccccccccccc");
+		}else if(commentGoodCheckOk==0) {
+			commentGoodOrBadCheck.put("commentGoodOrBadCheck", commentGoodCheck);
+		}else {
+			commentGoodOrBadCheck.put("commentGoodOrBadCheck", commentBadCheck);
+		}
+		
+		commentGoodOrBadAllCheck=commentGoodOrBadCheck.get("commentGoodOrBadCheck");
+		
+		commentGoodOrBadList.add(0, commentGoodOrBadAllCount);
+		commentGoodOrBadList.add(1, commentGoodOrBadAllCheck);
+		
+		return commentGoodOrBadList;
+	}
+
+
+	@Override
+	public int commentDelete(int commentNum, int commentCount) {
+		HashMap<String, Integer> commentDelete=new HashMap<String, Integer>();
+		commentDelete.put("commentNum", commentNum);
+		int commentDeleteCheck=0;
+		if(commentCount==0) {
+			commentDelete.put("commentDeleteCheck", commentDeleteCheck);
+			System.out.println("++++++++++++++++++++++++"+1);
+			commentDao.commentDelete(commentDelete);
+		}else {
+			commentDeleteCheck=1;
+			commentDelete.put("commentDeleteCheck", commentDeleteCheck);
+			System.out.println("++++++++++++++++++++++++"+2);
+			commentDao.commentDelete(commentDelete);
+			
+		}
+		return 0;
 	}
 	
 	

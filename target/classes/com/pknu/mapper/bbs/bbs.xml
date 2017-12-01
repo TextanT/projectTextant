@@ -7,9 +7,10 @@
 
 
 	
+	
 	<insert id="scroll" parameterType="comment">
 		INSERT INTO comments values(comments_seq.nextval,#{conet}
-					,#{pageGroup},#{depth},0,#{commentGroup},#{userId},sysdate,#{bookArticleNum})
+					,#{pageGroup},#{depth},#{bookArticleNum},0,#{commentGroup},#{userNum},sysdate,0,0)
 	</insert>
 	
 	<update id="scrollComment" parameterType="int">
@@ -36,14 +37,71 @@
 		ORDER BY pagegroup desc,commentNUM desc) human)  
 	</select>
 	
-	<select id="commentList" parameterType="HashMap" resultType="comment">
-		SELECT *
-		FROM (SELECT ROWNUM RM, human.* FROM 
-		(SELECT * FROM  comments 
-        WHERE pagegroup BETWEEN #{pageCountBlock} and #{page} and commentgroup=#{commentNum} and bookarticlenum=#{bookArticleNum}
-		ORDER BY pagegroup desc,commentNUM desc) human)  
-		WHERE RM BETWEEN  #{pageStart} AND #{pageStop}
+	<select id="commentGoodOrBad" parameterType="HashMap" resultType="int">
+		SELECT COUNT(*)
+		FROM COMMENTGOODBADUSER
+		WHERE COMMENTNUM=#{commentNum} AND USERNUM=#{userNum} AND GOODORBAD=#{commentGoodOrBadCheck} 
 	</select>
+	
+	<insert id="commentGoodOrBadWrite" parameterType="HashMap">
+		INSERT INTO COMMENTGOODBADUSER values(commentgoodbaduser_seq.nextval,#{commentNum},#{userNum},sysdate,#{commentGoodOrBadCheck})
+	</insert>
+	
+	<select id="commentGoodOrBadCount" parameterType="HashMap" resultType="int">
+		SELECT COUNT(*)
+		FROM COMMENTGOODBADUSER
+		WHERE COMMENTNUM=#{commentNum} AND GOODORBAD=#{commentGoodOrBadCheck} 
+	</select>
+	
+	<update id="commentGoodOrBadUpdate" parameterType="HashMap">
+		
+		<if test="commentGoodOrBadCheck==1">
+			update comments
+		set commentgood=commentgood+1
+		where commentNum=#{commentNum}
+		</if>
+		<if test="commentGoodOrBadCheck==2">
+			update comments
+		set commentbad=commentbad+1
+		where commentNum=#{commentNum}
+		</if>
+	</update>
+	
+	<select id="commentList" parameterType="HashMap" resultType="comment">
+		<if test="commentDelete==0">
+			SELECT *
+			FROM (SELECT ROWNUM RM, human.* FROM 
+			(SELECT C.*,L.nickName
+			FROM  comments C,login L 
+			WHERE C.pagegroup BETWEEN #{pageCountBlock} and #{page} and C.commentgroup=#{commentNum} and C.bookarticlenum=1 and C.userNum=L.userNum
+			ORDER BY C.pagegroup desc,C.commentNUM desc) human)  
+			WHERE RM BETWEEN  #{pageStart} AND #{pageStop}
+		</if>
+		
+		<if test="commentDelete==1">
+			SELECT *
+			FROM (SELECT ROWNUM RM, human.* FROM 
+			(SELECT C.*,L.nickName
+			FROM  comments C,login L 
+			WHERE C.pagegroup BETWEEN #{pageCountBlock} and #{page}  and C.commentgroup=#{commentNum} and C.bookarticlenum=1 and C.userNum=L.userNum
+			ORDER BY C.pagegroup desc,C.commentNUM desc) human)  
+			WHERE RM BETWEEN  #{pageStart} AND #{pageStop} and userNum= #{userNum}
+		</if>
+	</select>
+	
+	<delete id="commentDelete" parameterType="HashMap">
+		<if test="commentDeleteCheck==0">
+			DELETE 
+			FROM comments 
+			WHERE commentNum=#{commentNum}
+		</if>
+		
+		<if test="commentDeleteCheck==1">
+			DELETE 
+			FROM comments 
+			WHERE commentNum=#{commentNum} or commentgroup=#{commentgroup}
+		</if>  
+	</delete>
 </mapper>	
 	
 
