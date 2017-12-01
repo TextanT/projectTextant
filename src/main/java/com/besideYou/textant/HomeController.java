@@ -69,11 +69,6 @@ public class HomeController {
 
 	
 
-	@RequestMapping(value="/scroll.text", method = RequestMethod.GET)
-	public String scroll() {
-		
-		return "scroll";
-	}
 	
 	@RequestMapping(value="/commentCount.text")
 	@ResponseBody
@@ -114,13 +109,7 @@ public class HomeController {
 		return pdfServiceText.commentGoodOrBad(commentNum,commentGoodOrBad,userNum);
 	}
 
-	@RequestMapping(value = "/commentGoodOrBad.text")
-	@ResponseBody
-	public List<Integer> commentGoodOrBad(HttpSession session, int commentNum, int commentGoodOrBad) {
-		// String userNum = (String)session.getAttribute("userNum");
-		int userNum = 2;
-		return pdfServiceText.commentGoodOrBad(commentNum, commentGoodOrBad, userNum);
-	}
+	
 
 	@RequestMapping(value = "/write.text", method = RequestMethod.GET)
 	public String text() {
