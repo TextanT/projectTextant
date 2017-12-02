@@ -19,4 +19,5 @@ public interface PdfServiceText {
 	public List<Integer> commentCount(int page,int bookArticleNum);
 	public List<Integer> commentGoodOrBad(int commentNum,int commentGoodOrBad,int userNum);
 	public int commentDelete(int commentNum,int commentGroup);
+	public int reportComment(int commentNum,int userNum);
 }

@@ -4,11 +4,7 @@
               "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
 <mapper namespace="com.besideYou.textant.dao.CommentDao">	
-
-
-	
-	
-	<insert id="scroll" parameterType="comment">
+<insert id="scroll" parameterType="comment">
 		INSERT INTO comments values(comments_seq.nextval,#{conet}
 					,#{pageGroup},#{depth},#{bookArticleNum},0,#{commentGroup},#{userNum},sysdate,0,0)
 	</insert>
@@ -114,6 +110,18 @@
 		FROM comments
 		where commentNum=#{commentGroup}
 	</select>
+	
+	<select id="reportCommentCheck" parameterType="HashMap" resultType="String">
+		select reportCommentNum
+		FROM reportComment
+		where commentNum=#{commentNum}
+		and userNum=#{userNum}
+	</select>
+	
+	<insert id="reportCommentWrite" parameterType="HashMap">
+		INSERT INTO reportComment values(reportComment_seq.nextval,#{commentNum},#{userNum},sysdate)
+	</insert>
+	
 </mapper>	
 	
 

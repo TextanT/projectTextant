@@ -500,9 +500,6 @@ public class PdfServiceImpl implements PdfServiceText{
 		int commentBadCheckOk=0;
 		int commentGoodOrBadAllCount=0;
 		int commentGoodOrBadAllCheck=0;
-		int a=0;
-		int b=0;
-		int c=0;
 		HashMap<String, Integer> commentGoodOrBadCheck=new HashMap<String, Integer>();
 		commentGoodOrBadCheck.put("commentNum", commentNum);
 		commentGoodOrBadCheck.put("userNum", userNum);
@@ -521,11 +518,8 @@ public class PdfServiceImpl implements PdfServiceText{
 		
 		if(commentGoodCheckOk==0&&commentBadCheckOk==0){
 			commentDao.commentGoodOrBadWrite(commentGoodOrBadCheck);
-			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 			commentDao.commentGoodOrBadUpdate(commentGoodOrBadCheck);
-			System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
 			commentGoodOrBadAllCount=commentDao.commentGoodOrBadCount(commentGoodOrBadCheck);
-			System.out.println("cccccccccccccccccccccccccccccccccccccccccc");
 		}else if(commentGoodCheckOk==0) {
 			commentGoodOrBadCheck.put("commentGoodOrBadCheck", commentGoodCheck);
 		}else {
@@ -550,24 +544,33 @@ public class PdfServiceImpl implements PdfServiceText{
 		int commentCountCheck=0;
 		if(commentGroup==0) {
 			commentDelete.put("commentDeleteCheck", commentDeleteCheck);
-			System.out.println("++++++++++++++++++++++++"+1);
 			commentDao.commentDelete(commentDelete);
 		}else {
 			commentDeleteCheck=1;
 			commentDelete.put("commentDeleteCheck", commentDeleteCheck);
-			System.out.println("++++++++++++++++++++++++"+2);
 			commentDao.commentDelete(commentDelete);
 			commentDao.commentCountUpdate(commentDelete);
 			commentCountCheck=commentDao.commentCountCheck(commentDelete);
 			
 		}
-		System.out.println("+++++++yyyyyyyyyy+++++++++++++"+commentCountCheck);
 		return commentCountCheck;
 	}
-	
-	
-	
-	
+
+
+	@Override
+	public int reportComment(int commentNum, int userNum) {
+		HashMap<String, Integer> reportCommentCheck=new HashMap<String, Integer>();
+		reportCommentCheck.put("commentNum", commentNum);
+		reportCommentCheck.put("userNum", userNum);
+		String reportCommentCheckOk=null;
+		int reportCommentCheckAllOk=0;
+		reportCommentCheckOk=commentDao.reportCommentCheck(reportCommentCheck);
+		if(reportCommentCheckOk==null) {
+			reportCommentCheckAllOk=1;
+			commentDao.reportCommentWrite(reportCommentCheck);
+		}
+		return reportCommentCheckAllOk;
+	}
 	
 	
 }

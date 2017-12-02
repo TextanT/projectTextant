@@ -19,4 +19,8 @@ public interface CommentDao {
 	public void commentCountUpdate(HashMap<String,Integer> commentDelete);
 	public int commentCountCheck(HashMap<String,Integer> commentDelete);
 	public void commentGoodOrBadDelete(HashMap<String,Integer> commentDelete);
+	public String reportCommentCheck(HashMap<String,Integer> reportCommentCheck);
+	public void reportCommentWrite(HashMap<String,Integer> reportCommentCheck);
+	
+	
 }

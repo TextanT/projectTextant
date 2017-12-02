@@ -8,15 +8,15 @@
 	
 
 	<select id="loginCheck" parameterType="String" resultType="String">
-			SELECT PASS FROM LOGIN1 WHERE ID=#{id}
+			SELECT PASS FROM LOGIN WHERE ID=#{id}
 	</select>
 	
 	<insert id="sign" parameterType="com.besideYou.textant.dto.SignDto">
-		INSERT INTO LOGIN1 VALUES(#{id},#{pass},#{name},#{mail},#{jender})
+		INSERT INTO LOGIN VALUES(#{id},#{pass},#{name},#{mail},#{jender})
 	</insert>
 	
 	<select id="joinchek" parameterType="String" resultType="String">
-		SELECT ID FROM LOGIN1 WHERE ID=#{id}
+		SELECT ID FROM LOGIN WHERE ID=#{id}
 	</select>
 	
 </mapper>
