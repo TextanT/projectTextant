@@ -274,7 +274,7 @@ body {
 			<div id="idDiv" class="idDivc">
 				<span class="id_sp int_id"> <input type="text" id="signid"
 					class="int" value maxlength="20" autocomplete="off"
-					placeholder="아이디" name="id">
+					placeholder="아이디" name="userId">
 				</span>
 			</div>
 			<div id="idCheckStatus"></div>
@@ -297,15 +297,15 @@ body {
 			<div id="status"></div>
 
 			<div id="mailDiv" class="mailDivc">
-				<span class="mail_sp int_pass"> <input type="email" id="mail"
+				<span class="mail_sp int_pass"> <input type="email" id="email"
 					class="int" value maxlength="20" autocomplete="off"
-					placeholder="E-mail" name="mail">
+					placeholder="E-mail" name="email">
 				</span>
 			</div>
 			<div id="nicknameDiv" class="nicknameDivc">
 				<span class="nickname_sp int_pass"> <input type="text"
 					id="nickname" class="int" value maxlength="20" autocomplete="off"
-					placeholder="별명" name="name">
+					placeholder="별명" name="nickName">
 				</span>
 			</div>
 			<div class="wrap">
@@ -339,7 +339,7 @@ body {
 		<form action="login.text" method="post" id="loginForm">
 			<div id="box1_Id" class="box1_Id">
 				<span class=""> <input type="text" id="loginid" class="int"
-					value maxlength="20" complete="off" placeholder="아이디" name="id">
+					value maxlength="20" complete="off" placeholder="아이디" name="userId">
 				</span>
 			</div>
 			<div id="box1_pass" class="box1_pass">

@@ -3,8 +3,8 @@ package com.besideYou.textant.sign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.besideYou.textant.dao.LoginDao;
-import com.besideYou.textant.dto.SignDto;
+import com.besideYou.textant.dao.LoginServiceDao;
+import com.besideYou.textant.dto.LoginDto;
 
 
 
@@ -12,20 +12,21 @@ import com.besideYou.textant.dto.SignDto;
 public class SignImpl implements SignService{
 
 	@Autowired
-	LoginDao loDao;
+	LoginServiceDao loDao;
 	
 	@Override
-	public String sign(SignDto sDto, byte jender) {
-		sDto.setJender(jender);
-		loDao.sign(sDto);
+	public String sign(LoginDto login, byte jender) {
+		System.out.println(login);
+		login.setGender(jender);
+		loDao.sign(login);
 		
 		return "main/first";
 	}
 
 	@Override
 	public int joinIdCheck(String inputId) {
-		
-		String dbId = loDao.joinchek(inputId);
+		String dbId;
+		dbId = loDao.joinchek(inputId);
 		
 		int re = 0;
 		

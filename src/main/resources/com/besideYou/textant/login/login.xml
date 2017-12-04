@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mybatis map 선언 표시 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.besideYou.textant.dao.LoginServiceDao">	
+
+	<select id="loginCheck" parameterType="String" resultType="String">
+			SELECT PASS FROM LOGIN WHERE USERID=#{userId} AND SITEFROM=0
+	</select>
+	
+	<insert id="sign" parameterType="login">
+		INSERT INTO LOGIN VALUES(login_seq.nextval,#{userId},#{pass},#{siteFrom},#{grade},#{email},#{nickName},#{profilePicture},#{realName},#{age},#{gender},#{comments})
+	</insert>
+	
+	<select id="joinchek" parameterType="String" resultType="String">
+		SELECT USERID FROM LOGIN WHERE USERID=#{id} AND SITEFROM=0
+	</select>
+	
+	<select id="getUserNum" parameterType="login" resultType="Integer">
+		SELECT USERNUM FROM LOGIN WHERE USERID=#{userId} AND SITEFROM = #{siteFrom}
+	</select>
+	
+</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

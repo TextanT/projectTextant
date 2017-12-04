@@ -1,13 +1,29 @@
 package com.besideYou.textant.dto;
 
 public class LoginDto {
-	String id;
+	int userNum;
+	String userId;
 	String pass;
-	public String getId() {
-		return id;
+	int siteFrom;
+	int grade;
+	String email;
+	String nickName;
+	String profilePicture;
+	String realName;
+	int age;
+	int gender;
+	String comments;
+	public int getUserNum() {
+		return userNum;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setUserNum(int userNum) {
+		this.userNum = userNum;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public String getPass() {
 		return pass;
@@ -15,8 +31,65 @@ public class LoginDto {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+	public int getSiteFrom() {
+		return siteFrom;
+	}
+	public void setSiteFrom(int siteFrom) {
+		this.siteFrom = siteFrom;
+	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public String getProfilePicture() {
+		return profilePicture;
+	}
+	public void setProfilePicture(String profilePicture) {
+		this.profilePicture = profilePicture;
+	}
+	public String getRealName() {
+		return realName;
+	}
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public int getGender() {
+		return gender;
+	}
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
 	@Override
 	public String toString() {
-		return "LoginDto [id=" + id + ", pass=" + pass + "]";
+		return "LoginDto [userNum=" + userNum + ", userId=" + userId + ", pass=" + pass + ", siteFrom=" + siteFrom
+				+ ", grade=" + grade + ", email=" + email + ", nickName=" + nickName + ", profilePicture=" + profilePicture
+				+ ", realName=" + realName + ", age=" + age + ", gender=" + gender + ", comments=" + comments + "]";
 	}
+	
 }

@@ -1,5 +1,6 @@
 package com.besideYou.textant.converter;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -19,4 +20,5 @@ public interface PdfServiceText {
 	public List<Integer> commentCount(int page,int bookArticleNum);
 	public List<Integer> commentGoodOrBad(int commentNum,int commentGoodOrBad,int userNum);
 	public int commentDelete(int commentNum,int commentGroup);
+	HashMap<String,String> getProgress(Model model);
 }

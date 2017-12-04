@@ -1,14 +1,11 @@
 package com.besideYou.textant;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,7 +19,7 @@ import com.besideYou.textant.converter.PdfService;
 import com.besideYou.textant.converter.PdfServiceText;
 import com.besideYou.textant.display.DisplayService;
 import com.besideYou.textant.dto.CommentDto;
-import com.besideYou.textant.dto.SignDto;
+import com.besideYou.textant.dto.LoginDto;
 import com.besideYou.textant.login.LoginService;
 import com.besideYou.textant.main.MainService;
 import com.besideYou.textant.read.ReadService;
@@ -54,7 +51,43 @@ public class HomeController {
 
 	String view;
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	@RequestMapping(value = "/login.text", method = RequestMethod.GET)
+	public String loginForm(HttpServletRequest req, Model model) {
+		return "main/login";
+	}
+
+	@RequestMapping(value = "/login.text", method = RequestMethod.POST)
+	public String login(LoginDto loginDto, HttpSession session, Model model) {
+		return loginService.login(loginDto, session, model);
+	}
+
+	@RequestMapping(value = "/logout.text")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:main.text";
+	}
+
+	@RequestMapping(value = "/sign.text", method = RequestMethod.POST)
+	public String sign(LoginDto login, @RequestParam("jender") byte jender) {
+		return signService.sign(login, jender);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/joinIdCheck.text")
+	public int joinIdCheck(String inputId) {
+		return signService.joinIdCheck(inputId);
+	}
+
+	@RequestMapping(value = "/guest.text")
+	public String guest() {
+		return "redirect:main.text";
+	}
+
+	@RequestMapping(value = "/first.text")
+	public String first() {
+		return "main/first";
+	}
 	
 	@RequestMapping(value = "/main.text", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
@@ -63,13 +96,9 @@ public class HomeController {
 	
 	@RequestMapping(value = "/scroll.text", method = RequestMethod.GET)
 	public String scroll() {
-
 		return "scroll";
 	}
 
-	
-
-	
 	@RequestMapping(value="/commentCount.text")
 	@ResponseBody
 	public List<Integer> commentCount(int page,int bookArticleNum){
@@ -125,49 +154,18 @@ public class HomeController {
 		return view;
 	}
 
-	@RequestMapping(value = "/getProgress.text", produces = "application/json;charset=UTF-8")
+	/*@RequestMapping(value = "/getProgress.text", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public HashMap<String, String> getProgress(Model model) {
 		try {
 			Thread.sleep(200);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return pdfService.getProgress(model);
-	}
+	}*/
 
-	@RequestMapping(value = "/login.text", method = RequestMethod.GET)
-	public String loginForm(HttpServletRequest req, Model model) {
-		return "main/login";
-	}
-
-	@RequestMapping(value = "/login.text", method = RequestMethod.POST)
-	public String login(String id, String pass, String prveUrl, HttpSession session, Model model) {
-		return loginService.login(id, pass, session, model);
-
-	}
-
-	@RequestMapping(value = "/logout.text")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:main.text";
-	}
-
-	@RequestMapping(value = "/sign.text", method = RequestMethod.POST)
-	public String sign(SignDto sDto, @RequestParam("jender") byte jender) {
-		return signService.sign(sDto, jender);
-	}
-
-	@RequestMapping(value = "/guest.text")
-	public String guest() {
-		return "redirect:main.text";
-	}
-
-	@RequestMapping(value = "/first.text")
-	public String first() {
-		return "main/first";
-	}
+	
 
 	@RequestMapping(value = "/mypage.text")
 	public String mypage() {
@@ -175,11 +173,6 @@ public class HomeController {
 		return "mypage";
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/joinIdCheck.text")
-	public int joinIdCheck(String inputId) {
-		return signService.joinIdCheck(inputId);
-	}
 
 	@RequestMapping(value = "/read.text")
 	public String read(String fileName, Model model, String bookType) throws Exception {

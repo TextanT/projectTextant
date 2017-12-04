@@ -1,49 +1,52 @@
 package com.besideYou.textant.login;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.besideYou.textant.dao.LoginDao;
-import com.besideYou.textant.dto.SignDto;
+import com.besideYou.textant.dao.LoginServiceDao;
+import com.besideYou.textant.dto.LoginDto;
 
 
 @Service
 public class LoginImpl implements LoginService {
 
 	@Autowired
-	LoginDao loginDao;
+	LoginServiceDao loginDao;
 	
 	@Override
-	public String login(String id, String pass, HttpSession session,Model model) {
+	public String login(LoginDto loginDto, HttpSession session,Model model) {
 		
+		String dbPass;
+		String view;
+		String id;
+		String pass;
+		int userNum;
 		
-		System.out.println("----**----**---"+id+pass);
+		id = loginDto.getUserId();
+		pass = loginDto.getPass();
 		
-		String dbPass = loginDao.loginCheck(id);
+		dbPass = loginDao.loginCheck(id);
 		
 		System.out.println(dbPass);
 		
-		String view = null;
 		if (dbPass != null) {
 			if (dbPass.equals(pass)) {
-//				int userNum = where userid="" and from 1 
-//				session.setAttribute("userNum", "1");
 				session.setAttribute("id", id);
-				model.addAttribute("id",id); 
+				userNum = loginDao.getUserNum(loginDto);
+				session.setAttribute("userNum", userNum);
 				
-				// view = "redirect:"+prveUrl;
+				System.out.println(userNum);
+				
 				view = "redirect:main.text";
 				
 			} else {
-				view = "passFail";
+				view = "main/passFail";
 			}
 		} else {
-			view = "signup";
+			view = "main/noId";
 		}
 		return view;
 	}

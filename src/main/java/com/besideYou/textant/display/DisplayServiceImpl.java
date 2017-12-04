@@ -20,14 +20,23 @@ import org.springframework.stereotype.Service;
 public class DisplayServiceImpl implements DisplayService {
 	@Override
 	public ResponseEntity<byte[]> display(String fileName, String pageNum, String fileType) throws IOException {
+		File file;
+		BufferedInputStream bis = null;
+		ResponseEntity<byte[]> entity = null;
+		HttpHeaders headers;
+		String realName;
+		String s;
+		StringBuilder sb;
+		BufferedReader br;
+		byte[] b;
 		if (fileType.equals("jpg")) { //만약 jpg로 보려고 한다면
 
 			
-			File file = new File(
+			file = new File(
 					"d:/temp/Converted_PdfFiles_to_Image/" + fileName + "/" + /* realName+"_"+ */pageNum + ".jpg");
 			System.out.println(file.getName());
-			BufferedInputStream bis = null;
-			ResponseEntity<byte[]> entity = null;
+			
+			
 			try {
 				bis = new BufferedInputStream(new FileInputStream(file));
 			} catch (FileNotFoundException e1) {
@@ -39,7 +48,7 @@ public class DisplayServiceImpl implements DisplayService {
 				return entity;
 			}
 			try {
-				HttpHeaders headers = new HttpHeaders();
+				headers = new HttpHeaders();
 				System.out.println(file);
 				headers.add("Content-Disposition", "attachment; filename=\""
 						+ URLEncoder.encode(file.getName(), "utf-8").replace("+", "%20") + "\"");
@@ -52,26 +61,26 @@ public class DisplayServiceImpl implements DisplayService {
 			}
 			return entity;
 		} else { //아니라면
-			ResponseEntity<byte[]> entity = null;
 			System.out.println(fileName);
-			String realName = fileName.substring(0, fileName.lastIndexOf("."));
-			File file = new File(
+			realName = fileName.substring(0, fileName.lastIndexOf("."));
+			file = new File(
 					"d:/temp/Converted_PdfFiles_to_Image/" + fileName + "/" + pageNum + "/" + realName + ".txt");
 			System.out.println("text파일은 "+ file.getName());
-			BufferedReader br = new BufferedReader(new FileReader(file));
-			StringBuilder sb = new StringBuilder();
-			String s;
+			br = new BufferedReader(new FileReader(file));
+			sb = new StringBuilder();
+			
 			while((s=br.readLine())!=null) {
 				sb.append(s+"<br/>");
 			}
 			System.out.println("sb.toString()"+sb.toString());
-			byte[] b = sb.toString().getBytes("UTF-8");
+			b = sb.toString().getBytes("UTF-8");
 			System.out.println("byte[] : "+b);
-			HttpHeaders headers = new HttpHeaders();
+			headers = new HttpHeaders();
 			System.out.println(file);
 			headers.add("Content-Disposition", "attachment; filename=\""
 					+ URLEncoder.encode(file.getName(), "utf-8").replace("+", "%20") + "\"");
 			entity = new ResponseEntity<byte[]>(b,HttpStatus.OK);
+			br.close();
 			return entity;
 		}
 	}

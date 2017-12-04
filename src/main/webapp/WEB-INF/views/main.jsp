@@ -82,7 +82,7 @@
 			<div id="idDiv" class="idDivc">
 				<span class="id_sp int_id"> <input type="text"
 					class="int" value maxlength="20" autocomplete="off"
-					placeholder="아이디" name="id">
+					placeholder="아이디" name="userId">
 				</span>
 			</div>
 
@@ -116,7 +116,7 @@
 			<div id="idDiv" class="idDivc">
 				<span class="id_sp int_id"> <input type="text" id="signid"
 					class="int" value maxlength="20" autocomplete="off"
-					placeholder="아이디" name="id">
+					placeholder="아이디" name="userId">
 				</span>
 			</div>
 			<div id="idCheckStatus"></div>
@@ -141,13 +141,13 @@
 			<div id="mailDiv" class="mailDivc">
 				<span class="mail_sp int_pass"> <input type="email" id="mail"
 					class="int" value maxlength="20" autocomplete="off"
-					placeholder="E-mail" name="mail">
+					placeholder="E-mail" name="email">
 				</span>
 			</div>
 			<div id="nicknameDiv" class="nicknameDivc">
 				<span class="nickname_sp int_pass"> <input type="text"
 					id="nickname" class="int" value maxlength="20" autocomplete="off"
-					placeholder="별명" name="name">
+					placeholder="별명" name="nickName">
 				</span>
 			</div>
 			<div class="wrap">
@@ -249,15 +249,12 @@
 		onmouseout="slidestart()">
 		<div class="swiper-wrapper">
 			<c:forEach var="files" items="${fileList}">
-
 				<div class="swiper-slide">
 					<a href="/textant/read.text?fileName=${files}"><img
 						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1&fileType=jpg"
 						height="300px" style="display: block;" class="bookimg" /> <span
 						class="bookname">${files}</span></br> <span class="bookname">기시미
 							이치로작가</span> </a>
-
-
 				</div>
 			</c:forEach>
 		</div>
@@ -330,8 +327,8 @@
 				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
 		</div>
 
-		<div class="book_list4"></div>
-		<div class="book_list5"></div>
+<!-- 		<div class="book_list4"></div> -->
+<!-- 		<div class="book_list5"></div> -->
 	</div>
 
 
@@ -415,7 +412,7 @@
 
 	<footer>
 	<div>
-		<img src="icon_img/footer_logo.png" class="footer_img">
+		<img height="50px"src="/textant/resources/icon_img/footer_logo.png" class="footer_img">
 	</div>
 	<address>
 		Tel. 010-1234-1234<br> Fax. 051)555-555<br> E-Mail.

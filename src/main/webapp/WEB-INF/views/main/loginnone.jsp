@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<table>
 	<tr class="header_tr">
 				<!--           /*로그인이 되면 로그인에서 마이페이지로 변환*/-->
 				<td class="header_tr_td"><a href="redirect:main.bbs" class="header_tr_td_a">HOME</a>
@@ -18,6 +19,7 @@
 				</td>
 				
 			</tr>
+			</table>
 			<div class="header_icon">
 				<a href="#" class="header_tr_td_a"> <img
 					src="resources/icon_img/facebook.png">

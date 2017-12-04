@@ -1,6 +1,5 @@
 package com.besideYou.textant.converter;
 
-
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -17,9 +16,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -32,7 +29,9 @@ import org.apache.pdfbox.text.PDFTextStripper;
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.besideYou.textant.PdfFileDto;
@@ -40,118 +39,118 @@ import com.besideYou.textant.dao.CommentDao;
 import com.besideYou.textant.dto.CommentDto;
 
 @Service
-public class PdfServiceImpl implements PdfServiceText{
-	
+public class PdfServiceImpl implements PdfServiceText {
+	int totalPageNum, currPageNum;
+
 	@Override
-	public String check(PdfFileDto fileDto)throws Exception {
-		//이미지 확장자 검사
-		if(!fileDto.getBookImg().isEmpty()){
-		String type =fileDto.getBookImg().getContentType();
-		String imageType=type.substring(type.lastIndexOf("/")+1);
-			if(!(imageType.equalsIgnoreCase("jpg")||imageType.equalsIgnoreCase("png")||imageType.equalsIgnoreCase("jpeg"))) {
+	public String check(PdfFileDto fileDto) throws Exception {
+		
+		String view;
+		String type;
+		String imageType;
+		
+		// 이미지 확장자 검사
+		if (!fileDto.getBookImg().isEmpty()) {
+			type = fileDto.getBookImg().getContentType();
+			imageType = type.substring(type.lastIndexOf("/") + 1);
+			if (!(imageType.equalsIgnoreCase("jpg") || imageType.equalsIgnoreCase("png")
+					|| imageType.equalsIgnoreCase("jpeg"))) {
 				return "500";
 			}
 		}
-		String error=null;
-		int line=fileDto.getLine();
-			if(line==1||line==2){
-				error=txtWrite(fileDto.getBookFile(),fileDto.getBookImg(),line,
-						fileDto.getNumOfOneLine(),fileDto.getLineOfOnePage());
-			}else{
-				error=pdfWrite(fileDto.getBookFile(),fileDto.getBookImg());
-			}
-		
-
-		return error;
+		int line = fileDto.getLine();
+		if (line == 1 || line == 2) {
+			view = txtWrite(fileDto.getBookFile(), fileDto.getBookImg(), line, fileDto.getNumOfOneLine(),
+					fileDto.getLineOfOnePage());
+		} else {
+			view = pdfWrite(fileDto.getBookFile(), fileDto.getBookImg());
+		}
+		return view;
 	}
 
+	public String txtWrite(MultipartFile bookFile, MultipartFile bookImg, int lineNum, int numLine, int linePage) {
+		
+		UUID uid;
+		String oldFileName;
+		String destinationDir;
+		String line;
+		StringBuilder textBuilder; 
+		BufferedReader br;
+		File destinationFile;
+		int numOfOneLine, lineOfOnePage, page, numOfEnter;
+		
 
-	public String txtWrite(MultipartFile bookFile,MultipartFile bookImg,int lineNum,int numLine,int linePage){
-		UUID uid = UUID.randomUUID(); 
-		String oldFileName=uid.toString()+"_"+bookFile.getOriginalFilename();
-		String destinationDir = "D:/temp/Converted_txt/";
-		BufferedReader br=null;
-		File destinationFile =null;
-		int numOfOneLine = 0;
-		int lineOfOnePage = 0;
+		uid = UUID.randomUUID();
+		oldFileName = uid.toString() + "_" + bookFile.getOriginalFilename();
+		destinationDir = "D:/temp/Converted_txt/";
 		
 		destinationFile = new File(destinationDir + oldFileName);
 		try {
-	if (!destinationFile.exists()) {
-		 destinationFile.mkdirs();
-		}
-//	Writer myWriter= new BufferedWriter(new OutputStreamWriter(
-//		    new FileOutputStream(oldFileName), "UTF-8"));
-//		try {
-//		    myWriter.write(destinationDir + oldFileName+"/"+ oldFileName);
-//		} catch(Exception e){
-//		e.printStackTrace();
-//		}
-		new File(destinationDir + oldFileName+"/orgFile/"+ oldFileName).mkdirs();
-		bookFile.transferTo(new File(destinationDir + oldFileName+"/orgFile/"+ oldFileName));
-		//br = new BufferedReader(new FileReader(destinationDir + oldFileName+"/"+ oldFileName)); //Read .txt file  //"euc-kr"
-		br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(destinationDir + oldFileName+"/orgFile/"+ oldFileName)),"euc-kr"));
-		if(numLine==0) {
-			numOfOneLine=30;
-		}else {
-			numOfOneLine = numLine;	// Number of one line
-		}
-		if(linePage==0) {
-			lineOfOnePage=30;
-		}else {
-			lineOfOnePage = linePage;	// Number of lines of One page
-		}
-		
-		int page = 1;	// For count pages
-		int numOfEnter;	// For search the number of Enter
-		StringBuilder sb = new StringBuilder();
-		String line = br.readLine(); // Read one line
-		
-		while (line != null) { // While line is exist
-			if (line.length() <= numOfOneLine) {//길이가 3이하면 뒤에 엔터추가 하고  StringBuilder 에추가
-				sb.append(line + "\r\n");
-				line = br.readLine();	// Read next line when current line is lesser than numOfOneLine 
-			} else {//길이가 3이하가 아니면 길이가 3문자에 잘라서 엔터추가 StringBuilder 에추가 하고 나머지는 line 에초기화
-				sb.append(line.substring(0, numOfOneLine) + "\r\n");
-				line = line.substring(numOfOneLine); // Cut line and reunite
-			}//StringBuilder 에 엔터가 3이상이면 마지막에추가한 엔터값을 삭제하고 저장 및 StringBuilder 초기화 page++
-			
-			
-			
-//			if (line.length() <= numOfOneLine) {//길이가 3이하면 뒤에 엔터추가 하고  StringBuilder 에추가
-//				sb.append(line + "\r\n");
-//				line = br.readLine();	// Read next line when current line is lesser than numOfOneLine 
-//			} else {//길이가 3이하가 아니면 길이가 3문자에 잘라서 엔터추가 StringBuilder 에추가 하고 나머지는 line 에초기화
-//				sb.append(line.substring(0, numOfOneLine) + "\r\n");
-//				line = line.substring(numOfOneLine); // Cut line and reunite
-//			}//StringBuilder 에 엔터가 3이상이면 마지막에추가한 엔터값을 삭제하고 저장 및 StringBuilder 초기화 page++
-			
-			
-			numOfEnter = StringUtils.countOccurrencesOf(sb.toString(), "\r\n");
-			if(numOfEnter >= lineOfOnePage) {
-				page = write(page,sb,oldFileName); // Write and return the number of page for increase
+			if (!destinationFile.exists()) {
+				destinationFile.mkdirs();
 			}
-					
-		} // Exit when line is not exist
-		
-		write(page,sb,oldFileName); // Write the left text 
-		br.close();
-		}catch (Exception e) {
+			new File(destinationDir + oldFileName + "/orgFile/" + oldFileName).mkdirs();
+			bookFile.transferTo(new File(destinationDir + oldFileName + "/orgFile/" + oldFileName));
+			br = new BufferedReader(new InputStreamReader(
+					new FileInputStream(new File(destinationDir + oldFileName + "/orgFile/" + oldFileName)), "euc-kr"));
+
+			if (numLine <= 0) {
+				numOfOneLine = 30;
+			} else {
+				numOfOneLine = numLine; // Number of one line
+			}
+
+			if (linePage <= 0) {
+				lineOfOnePage = 30;
+			} else {
+				lineOfOnePage = linePage; // Number of lines of One page
+			}
+
+			page = 1; // For count pages
+			
+			textBuilder = new StringBuilder();
+			line = br.readLine(); // Read one line
+
+			while (line != null) { // While line is exist
+				if (line.length() <= numOfOneLine) {// 길이가 3이하면 뒤에 엔터추가 하고 StringBuilder 에추가
+					textBuilder.append(line + "\r\n");
+					line = br.readLine(); // Read next line when current line is lesser than numOfOneLine
+				} else {// 길이가 3이하가 아니면 길이가 3문자에 잘라서 엔터추가 StringBuilder 에추가 하고 나머지는 line 에초기화
+					textBuilder.append(line.substring(0, numOfOneLine) + "\r\n");
+					line = line.substring(numOfOneLine); // Cut line and reunite
+				} // StringBuilder 에 엔터가 3이상이면 마지막에추가한 엔터값을 삭제하고 저장 및 StringBuilder 초기화 page++
+				numOfEnter = StringUtils.countOccurrencesOf(textBuilder.toString(), "\r\n");
+				if (numOfEnter >= lineOfOnePage) {
+					page = write(page, textBuilder, oldFileName); // Write and return the number of page for increase
+				}
+			} // Exit when line is not exist
+
+			write(page, textBuilder, oldFileName); // Write the left text
+			br.close();
+		} catch (Exception e) {
 			allFileDelete(destinationFile);
 			return "500";
 		}
-		fileImg(bookImg,oldFileName,destinationDir);
+		fileImg(bookImg, oldFileName, destinationDir);
 		return null;
 	}
-	public static int write(int page, StringBuilder sb,String oldFileName) throws Exception{
-		if(sb.toString().equals("\r\n")) {System.out.println("\\r\\n");return page;}
-		if(sb.toString().equals("")) {System.out.println("space");return page;}
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("D:/temp/Converted_txt/"+oldFileName+"/"+ page +".txt")),"euc-kr"));
-		//BufferedWriter bw = new BufferedWriter(new FileWriter(new File("D:/temp/Converted_txt/"+oldFileName+"/"+ page + oldFileName)));
-		String withoutLastEnter = sb.toString().substring(0, sb.toString().lastIndexOf("\r\n"));
+
+	
+	public static int write(int page, StringBuilder sb, String oldFileName) throws Exception {
+		BufferedWriter bw;
+		String withoutLastEnter;
+		
+		if (sb.toString().equals("\r\n")) {
+			return page;
+		}
+		if (sb.toString().equals("")) {
+			return page;
+		}
+		bw = new BufferedWriter(new OutputStreamWriter(
+				new FileOutputStream(new File("D:/temp/Converted_txt/" + oldFileName + "/" + page + ".txt")),
+				"euc-kr"));
+		withoutLastEnter = sb.toString().substring(0, sb.toString().lastIndexOf("\r\n"));
 		bw.write(withoutLastEnter);
-//		Writer wit=bw;
-//		wit.write(withoutLastEnter);
 		bw.flush();
 		bw.close();
 		System.out.println("sb : " + withoutLastEnter);
@@ -159,153 +158,107 @@ public class PdfServiceImpl implements PdfServiceText{
 		page++;
 		return page;
 	}
-	
-	
-	
-	public String pdfWrite(MultipartFile mFile,MultipartFile bookImg) {
+
+	// pdf파일 컨버팅
+	public String pdfWrite(MultipartFile mFile, MultipartFile bookImg) {
+
+		File destinationFile = null;
+		File sourceFile;
+		File outputfile;
+		File file;
+		String sourceDir;
+		String destinationDir;
+		String oldFileName;
+		String fileName;
+		String imageDest;
+		PDDocument document;
+		PDFRenderer pdfRenderer;
+		PDFTextStripper reader;
+		FileOutputStream fos;
+		BufferedOutputStream bos;
+		PDResources pdResources;
+		PDXObject xobject;
+		BufferedImage bi;
+		BufferedImage bim;
+		long startTime;
+		int pageCounter;
 		
-		File destinationFile =null;
-		String sourceDir = "D:/temp/"; // Pdf files are read from this folder
-		String destinationDir = "D:/temp/Converted_PdfFiles_to_Image/"; // converted images from pdf document are
-//		UUID uid = UUID.randomUUID();														// saved here
-		String oldFileName = /*uid.toString()+"_"+*/mFile.getOriginalFilename();
+		sourceDir = "D:/temp/"; // Pdf files are read from this folder
+		destinationDir = "D:/temp/Converted_PdfFiles_to_Image/"; // converted images from pdf document are
+		// UUID uid = UUID.randomUUID(); // saved here
+		oldFileName = /* uid.toString()+"_"+ */mFile.getOriginalFilename();
 		try {
 			destinationFile = new File(destinationDir + oldFileName);
-			//						D:/temp/Converted_PdfFiles_to_Image/+gameOfThrone.pdf
-		if (!destinationFile.exists()) {
-			destinationFile.mkdirs();
-			System.out.println("Folder Created -> " + destinationFile.getAbsolutePath());
-		}
-			
-		    new File(destinationDir+oldFileName+"/orgFile/"+oldFileName).mkdirs();
-			mFile.transferTo(new File(destinationDir+oldFileName+"/orgFile/"+oldFileName));//************************
-			Long startTime = System.currentTimeMillis();
+			if (!destinationFile.exists()) {
+				destinationFile.mkdirs();
+				System.out.println("Folder Created -> " + destinationFile.getAbsolutePath());
+			}
+
+			new File(destinationDir + oldFileName + "/orgFile/" + oldFileName).mkdirs();
+			mFile.transferTo(new File(destinationDir + oldFileName + "/orgFile/" + oldFileName));// ************************
+			startTime = System.currentTimeMillis();
 			System.out.println(startTime);
 
-			File sourceFile = new File(destinationDir + oldFileName+"/orgFile/" + oldFileName);//************************
-			//							D:/temp/+gameOfThrone.pdf
-			
-			if (sourceFile.exists()) {
-				
-				System.out.println("Images copied to Folder: " + destinationFile.getName());
-				
-				PDDocument document = PDDocument.load(sourceFile);
+			sourceFile = new File(destinationDir + oldFileName + "/orgFile/" + oldFileName);// ************************
 
-//				PdfImageCounter counter = new PdfImageCounter();
-//				counter.countImagesWithProcessor(document);
-				PDFRenderer pdfRenderer = new PDFRenderer(document);
-				int pageCounter = 0;
-				String fileName = sourceFile.getName().replace(".pdf", "");
-				System.out.println("Total files to be converted -> " + document.getPages().getCount());
+			//파일이 있는지 먼저 체크
+			if (sourceFile.exists()) {
+
+				System.out.println("Images copied to Folder: " + destinationFile.getName());
+
+				document = PDDocument.load(sourceFile);
+				pdfRenderer = new PDFRenderer(document);
 				
+				pageCounter = 0;
+				fileName = sourceFile.getName().replace(".pdf", "");
+				System.out.println("Total files to be converted -> " + document.getPages().getCount());
+
 				int pageNumber = 1;
-				for (PDPage page : document.getPages())	{
-					// 기존의 방식
-/*				    // note that the page number parameter is zero based
-				    BufferedImage bim = pdfRenderer.renderImageWithDPI(pageCounter, 300, ImageType.RGB);
-				    File outputfile = new File(
-							destinationDir + oldFileName + "/" + fileName + "_" + pageNumber + ".png");
-					
-				    // suffix in filename will be used as the file format
-				    ImageIO.write(bim, "png", outputfile);
-*/
-					//새로운 방식 <훨씬 빠른듯>
-					
-					BufferedImage bim = pdfRenderer.renderImageWithDPI(pageCounter, 144, ImageType.RGB);
-					
-//					byte[] imageByte = ((DataBufferByte)bim.getData().getDataBuffer()).getData();
-					
-					ByteArrayOutputStream baos = new ByteArrayOutputStream();
-					ImageIO.write( bim, "jpg", baos );
-					baos.flush();
-					byte[] imageInByte = baos.toByteArray();
-					baos.close();
-//					DataBufferInt imageByte = (DataBufferInt)bim.getData().getDataBuffer();
-//					int[] imageInt = imageByte.getData();
-				    FileOutputStream fos3 = new FileOutputStream(new File(
-							destinationDir + oldFileName + "/" + pageNumber + ".jpg"));
-					BufferedOutputStream bos3 = new BufferedOutputStream(fos3);
-//					bos3.write(imageByte);
-					bos3.write(imageInByte);
-					bos3.close();
-					fos3.close();
-					
-					
-					PDFTextStripper reader = new PDFTextStripper();
+				
+				// pdf파일을 페이지 별로 나누기
+				for (PDPage page : document.getPages()) {
+					bim = pdfRenderer.renderImageWithDPI(pageCounter, 300, ImageType.RGB);
+					outputfile = new File(
+							destinationDir + oldFileName + "/" + /* fileName + "_" + */pageNumber + ".jpg");
+					ImageIO.write(bim, "jpg", outputfile);
+
+					// pdf파일을 텍스트로 변환
+					reader = new PDFTextStripper();
 					reader.setStartPage(pageNumber);
 					reader.setEndPage(pageNumber);
 					String pageText = reader.getText(document);
 					new File(destinationDir + oldFileName + "/" + pageNumber).mkdir();
-					FileOutputStream fos = new FileOutputStream(
-							new File(destinationDir + oldFileName + "/" + pageNumber + "/"+fileName + ".txt"));
+					fos = new FileOutputStream(
+							new File(destinationDir + oldFileName + "/" + pageNumber + "/" + fileName + ".txt"));
 
-					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					bos = new BufferedOutputStream(fos);
 					bos.write(pageText.getBytes());
 					System.out.println("TextCreated" + destinationDir + pageNumber + "/" + fileName + ".txt");
 					bos.close();
 					fos.close();
-					
-					
-					PDResources pdResources = page.getResources();
+
+					pdResources = page.getResources();
 					int imageCount = 1;
-			        for (COSName cosName : pdResources.getXObjectNames()) {
-			            PDXObject xobject = pdResources.getXObject(cosName);
-			            if (xobject instanceof PDImageXObject) {
-			            	//기존의 방식
-			            	/*
-			            	BufferedImage bi = ((PDImageXObject) xobject).getImage();
-			            	String imageDest =destinationDir + oldFileName + "/" + pageNumber + "/" + fileName
-									+ "_" + imageCount + ".png";
-			            	System.out.println("Image created as " + imageDest);
-			            	File file = new File(imageDest);
-			            	ImageIO.write(bi, "png", file);
-			            	*/
-			            	
-			            	//새로운 방식 <훨씬 빠른듯>
-							
-							
-//							byte[] imageByte = ((DataBufferByte)bim.getData().getDataBuffer()).getData();
-			            	BufferedImage bi = ((PDImageXObject) xobject).getImage();
-							ByteArrayOutputStream baossa = new ByteArrayOutputStream();
-							ImageIO.write( bi, "jpg", baossa );
-							baossa.flush();
-							byte[] imageInByteSa = baossa.toByteArray();
-							baossa.close();
-//							DataBufferInt imageByte = (DataBufferInt)bim.getData().getDataBuffer();
-//							int[] imageInt = imageByte.getData();
-							String imageDest4 =destinationDir + oldFileName + "/" + pageNumber + "/" + fileName
-									+ "_" + imageCount + ".png";
-						    FileOutputStream fos4 = new FileOutputStream(new File(imageDest4));
-							BufferedOutputStream bos4 = new BufferedOutputStream(fos4);
-//							bos3.write(imageByte);
-							bos4.write(imageInByteSa);
-							bos4.close();
-							fos4.close();
-			            	
-			            	
-			                imageCount++;
-			                if (imageCount % 100 == 0) {
-			                    System.out.println("Found image: #" + imageCount);
-			                }
-			            }
-			        }
-			        
-			       
-			        
-					/*PDResources pdResources = page.getResources();
-					int totalImages = 1;
-					Map pageImages = pdResources.getImages();
-					if (pageImages != null) {
-						Iterator imageIter = pageImages.keySet().iterator();
-						while (imageIter.hasNext()) {
-							String key = (String) imageIter.next();
-							PDImageXObject pdxObjectImage = (PDImageXObject) pageImages.get(key);
-							pdxObjectImage.(destinationDir + oldFileName + "/" + pageNumber + "/" + fileName
-									+ "_" + totalImages);
-							totalImages++;
+					for (COSName cosName : pdResources.getXObjectNames()) {
+						xobject = pdResources.getXObject(cosName);
+						if (xobject instanceof PDImageXObject) {
+							// 기존의 방식
+
+							bi = ((PDImageXObject) xobject).getImage();
+							imageDest = destinationDir + oldFileName + "/" + pageNumber + "/" + fileName + "_"
+									+ imageCount + ".jpg";
+							System.out.println("Image created as " + imageDest);
+							file = new File(imageDest);
+							ImageIO.write(bi, "jpg", file);
+
+							imageCount++;
+							if (imageCount % 100 == 0) {
+								System.out.println("Found image: #" + imageCount);
+							}
 						}
-					}*/
-			        System.out.println("pageNumber : " + pageNumber);
+					}
+
+					System.out.println("pageNumber : " + pageNumber);
 					pageNumber++;
 					pageCounter++;
 				}
@@ -318,169 +271,165 @@ public class PdfServiceImpl implements PdfServiceText{
 			allFileDelete(destinationFile);
 			return "500";
 		}
-		fileImg(bookImg,oldFileName,destinationDir);
+		fileImg(bookImg, oldFileName, destinationDir);
 		return "redirect:main.text";
 	}
-	
+
 	public void fileImg(MultipartFile fileImg, String oldFileName, String destinationDir) {
-		if(!fileImg.isEmpty()) {
-		String oldFileNames=null;
-		if(oldFileName.contains(".txt")) {
-			oldFileNames=oldFileName.replace(".txt", "");
-		}else if(oldFileName.contains(".pdf")) {
-			oldFileNames=oldFileName.replace(".pdf", "");
-		}
-		String formatName = fileImg.getOriginalFilename().substring(fileImg.getOriginalFilename().lastIndexOf(".")+1);    
-		File file =new File(destinationDir+oldFileName+"/OriginImg/"+/*oldFileNames+*/"1."+"jpg"/*formatName*/);
-		if(!file.exists()) {
-			file.mkdirs();
-		}
-		try {
-			fileImg.transferTo(new File(destinationDir+oldFileName+"/OriginImg/"+/*oldFileNames+*/"1.jpg"/*+formatName*/));
-			BufferedImage sourceImg = ImageIO.read(new File(destinationDir+oldFileName+"/OriginImg/"+/*oldFileNames+*/"1.jpg"/*+formatName*/));
-			BufferedImage destImg = Scalr.resize(sourceImg, 
-									Scalr.Method.AUTOMATIC, 
-										Scalr.Mode.FIT_TO_HEIGHT,280);   
-			String thumbnailName =	destinationDir+oldFileName+"/OriginImg/"+"s_"+oldFileNames+"."+formatName;   
-			File newFile = new File(thumbnailName);  
-			ImageIO.write(destImg, formatName.toUpperCase(), newFile);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		String oldFileNames = null;
+		String formatName;
+		File file;
+		BufferedImage sourceImg;
+		BufferedImage destImg;
+		String thumbnailName;
+		File newFile;
 		
+		if (!fileImg.isEmpty()) {
+			if (oldFileName.contains(".txt")) {
+				oldFileNames = oldFileName.replace(".txt", "");
+			} else if (oldFileName.contains(".pdf")) {
+				oldFileNames = oldFileName.replace(".pdf", "");
+			}
+			formatName = fileImg.getOriginalFilename()
+					.substring(fileImg.getOriginalFilename().lastIndexOf(".") + 1);
+			file = new File(
+					destinationDir + oldFileName + "/OriginImg/" + /* oldFileNames+ */"1." + "jpg"/* formatName */);
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			try {
+				fileImg.transferTo(new File(
+						destinationDir + oldFileName + "/OriginImg/" + /* oldFileNames+ */"1.jpg"/* +formatName */));
+				sourceImg = ImageIO.read(new File(
+						destinationDir + oldFileName + "/OriginImg/" + /* oldFileNames+ */"1.jpg"/* +formatName */));
+				destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 280);
+				thumbnailName = destinationDir + oldFileName + "/OriginImg/" + "s_" + oldFileNames + "."
+						+ formatName;
+				newFile = new File(thumbnailName);
+				ImageIO.write(destImg, formatName.toUpperCase(), newFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		} else {
-			
+
 		}
-		
+
 	}
-	
-	public void allFileDelete(File file) { 
-		  if (file.isDirectory()) {   
-		   if (file.listFiles().length != 0) { 
-		    File[] fileList = file.listFiles();
-		    for (int i = 0; i < fileList.length; i++) {
-		    	allFileDelete(fileList[i]);
-		     file.delete();
-		    }
-		   } else {
-		    file.delete();
-		   }
-		  } else {
-		   file.delete();
-		  }
-		 }
+
+	public void allFileDelete(File file) {
+		
+		File[] fileList;
+		
+		if (file.isDirectory()) {
+			if (file.listFiles().length != 0) {
+				fileList = file.listFiles();
+				for (int i = 0; i < fileList.length; i++) {
+					allFileDelete(fileList[i]);
+					file.delete();
+				}
+			} else {
+				file.delete();
+			}
+		} else {
+			file.delete();
+		}
+	}
 
 	@Autowired
 	CommentDao commentDao;
-	@Resource(name="pageBlock")
+	@Resource(name = "pageBlock")
 	Integer pageBlock;
-	
-	@Resource(name="pageSize")
+
+	@Resource(name = "pageSize")
 	Integer pageSize;
-	
+
 	@Override
-	public void scroll(CommentDto commentDto,int commentTo,int commentTop) {
-		if(commentTo!=0) {
+	public void scroll(CommentDto commentDto, int commentTo, int commentTop) {
+		if (commentTo != 0) {
 			commentDto.setDepth(1);
 			commentDto.setCommentGroup(commentTop);
-//			String a="CommentDto [commentNum=" + commentDto.getCommentNum()+ ", conet=" + commentDto.getConet() + ", pageGroup=" + commentDto.getPageGroup() + ", depth="
-//					+ commentDto.getDepth() + ", commentCount=" + commentDto.getCommentCount() + ", commentGroup=" + commentDto.getCommentGroup() + ", userId=" + commentDto.getUserId()
-//					+ ", writeDate=" + commentDto.getWriteDate() + ", bookArticleNum=" + commentDto.getBookArticleNum() + "]";
+			// String a="CommentDto [commentNum=" + commentDto.getCommentNum()+ ", conet=" +
+			// commentDto.getConet() + ", pageGroup=" + commentDto.getPageGroup() + ",
+			// depth="
+			// + commentDto.getDepth() + ", commentCount=" + commentDto.getCommentCount() +
+			// ", commentGroup=" + commentDto.getCommentGroup() + ", userId=" +
+			// commentDto.getUserId()
+			// + ", writeDate=" + commentDto.getWriteDate() + ", bookArticleNum=" +
+			// commentDto.getBookArticleNum() + "]";
 			commentDao.scroll(commentDto);
 			commentDao.scrollComment(commentTop);
-//			System.out.println(a);
-		}else {
-//			String a="CommentDto [commentNum=" + commentDto.getCommentNum()+ ", conet=" + commentDto.getConet() + ", pageGroup=" + commentDto.getPageGroup() + ", depth="
-//					+ commentDto.getDepth() + ", commentCount=" + commentDto.getCommentCount() + ", commentGroup=" + commentDto.getCommentGroup() + ", userId=" + commentDto.getUserId()
-//					+ ", writeDate=" + commentDto.getWriteDate() + ", bookArticleNum=" + commentDto.getBookArticleNum() + "]";
-//			System.out.println(a);
+			// System.out.println(a);
+		} else {
+			// String a="CommentDto [commentNum=" + commentDto.getCommentNum()+ ", conet=" +
+			// commentDto.getConet() + ", pageGroup=" + commentDto.getPageGroup() + ",
+			// depth="
+			// + commentDto.getDepth() + ", commentCount=" + commentDto.getCommentCount() +
+			// ", commentGroup=" + commentDto.getCommentGroup() + ", userId=" +
+			// commentDto.getUserId()
+			// + ", writeDate=" + commentDto.getWriteDate() + ", bookArticleNum=" +
+			// commentDto.getBookArticleNum() + "]";
+			// System.out.println(a);
 			commentDto.setDepth(0);
 			commentDto.setCommentGroup(0);
 			commentDao.scroll(commentDto);
 		}
-		
+
 	}
 
 
-//	@Override
-//	public List<CommentDto> scrollView(int page, int nextPage) {
-//		List<CommentDto> commentList;
-//		HashMap<String,Integer>  pageBlockMin = new HashMap<String,Integer>();
-//		pageBlockMin.put("page", page);
-//		pageBlockMin.put("pageBlock", pageBlock);
-//		int pageCountBlock = commentDao.pageCountBloack(pageBlockMin);
-//		pageBlockMin.put("pageCountBlock",pageCountBlock);
-//		int pageListCount=commentDao.commentListCount(pageBlockMin);
-//		int pageCut=(int)Math.ceil((double)pageListCount/pageSize);
-//		if(nextPage<=pageCut){
-//			int pageStart=0;
-//			if(nextPage==1){
-//				pageStart=1;
-//			}else {
-//				pageStart=((nextPage-1)*pageSize)-1;
-//			}
-//			int pageStop=nextPage*pageSize;
-//			pageBlockMin.put("pageStart",pageStart);
-//			pageBlockMin.put("pageStop",pageStop);
-//			return commentList=commentDao.commentList(pageBlockMin);	
-//		}else {
-//			return commentList=null;
-//		}
-//	}
-	
-	
 	@Override
-	public List<CommentDto> scrollView(int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum,int commentNum,int commentDelete,int userNum) {
+	public List<CommentDto> scrollView(int page, int nextPage, int pageListCount, int pageCountBlock, int pageCut,
+			int bookArticleNum, int commentNum, int commentDelete, int userNum) {
 		List<CommentDto> commentList = null;
-		HashMap<String,Integer>  pageBlockMin = new HashMap<String,Integer>();
+		HashMap<String, Integer> pageBlockMin = new HashMap<String, Integer>();
 		pageBlockMin.put("bookArticleNum", bookArticleNum);
 		pageBlockMin.put("page", page);
-		pageBlockMin.put("pageBlock", pageBlock);	
-		pageBlockMin.put("pageCountBlock",pageCountBlock);
-		pageBlockMin.put("commentNum",commentNum);
-		pageBlockMin.put("userNum",userNum);
-		if(commentDelete==1) {
-			commentDelete=1;
-		}else if(commentDelete==0) {
-			commentDelete=0;
+		pageBlockMin.put("pageBlock", pageBlock);
+		pageBlockMin.put("pageCountBlock", pageCountBlock);
+		pageBlockMin.put("commentNum", commentNum);
+		pageBlockMin.put("userNum", userNum);
+		if (commentDelete == 1) {
+			commentDelete = 1;
+		} else if (commentDelete == 0) {
+			commentDelete = 0;
 		}
-		pageBlockMin.put("commentDelete",commentDelete);
-		if(nextPage<=pageCut){
-			int pageStart=0;
-			if(nextPage==1){
-				pageStart=1;
-			}else {
-				pageStart=((nextPage-1)*pageSize)+1;
+		pageBlockMin.put("commentDelete", commentDelete);
+		if (nextPage <= pageCut) {
+			int pageStart = 0;
+			if (nextPage == 1) {
+				pageStart = 1;
+			} else {
+				pageStart = ((nextPage - 1) * pageSize) + 1;
 			}
-			int pageStop=nextPage*pageSize;
-			pageBlockMin.put("pageStart",pageStart);
-			pageBlockMin.put("pageStop",pageStop);
-			return commentList=commentDao.commentList(pageBlockMin);	
-		}else {
+			int pageStop = nextPage * pageSize;
+			pageBlockMin.put("pageStart", pageStart);
+			pageBlockMin.put("pageStop", pageStop);
+			return commentList = commentDao.commentList(pageBlockMin);
+		} else {
 			return commentList;
 		}
 	}
 
-
 	@Override
-	public List<Integer> commentCount(int page,int bookArticleNum) {
+	public List<Integer> commentCount(int page, int bookArticleNum) {
 		List<Integer> pagePoint = new ArrayList<Integer>();
-		HashMap<String,Integer>  pageBlockMin = new HashMap<String,Integer>();
+		HashMap<String, Integer> pageBlockMin = new HashMap<String, Integer>();
 		pageBlockMin.put("page", page);
 		pageBlockMin.put("pageBlock", pageBlock);
-		int pageCountBlock =0;
-		if(pageBlock>=page) {
-			pageCountBlock=1;
-		}else {
-			int pageCountCut=pageBlock;
+		int pageCountBlock = 0;
+		if (pageBlock >= page) {
+			pageCountBlock = 1;
+		} else {
+			int pageCountCut = pageBlock;
 			pageCountCut--;
-			pageCountBlock=page-pageCountCut;
-			
+			pageCountBlock = page - pageCountCut;
+
 		}
-		pageBlockMin.put("pageCountBlock",pageCountBlock);
-		pageBlockMin.put("bookArticleNum",bookArticleNum);
-		int pageListCount=commentDao.commentListCount(pageBlockMin);
-		int pageCut=(int)Math.ceil((double)pageListCount/pageSize);
+		pageBlockMin.put("pageCountBlock", pageCountBlock);
+		pageBlockMin.put("bookArticleNum", bookArticleNum);
+		int pageListCount = commentDao.commentListCount(pageBlockMin);
+		int pageCut = (int) Math.ceil((double) pageListCount / pageSize);
 		pagePoint.add(pageListCount);
 		pagePoint.add(pageCountBlock);
 		pagePoint.add(page);
@@ -490,84 +439,92 @@ public class PdfServiceImpl implements PdfServiceText{
 		return pagePoint;
 	}
 
-
 	@Override
-	public List<Integer> commentGoodOrBad(int commentNum, int commentGoodOrBad,int userNum) {
+	public List<Integer> commentGoodOrBad(int commentNum, int commentGoodOrBad, int userNum) {
 		List<Integer> commentGoodOrBadList = new ArrayList<Integer>();
-		int commentGoodCheck=1;
-		int commentBadCheck=2;
-		int commentGoodCheckOk=0;
-		int commentBadCheckOk=0;
-		int commentGoodOrBadAllCount=0;
-		int commentGoodOrBadAllCheck=0;
-		int a=0;
-		int b=0;
-		int c=0;
-		HashMap<String, Integer> commentGoodOrBadCheck=new HashMap<String, Integer>();
+		int commentGoodCheck = 1;
+		int commentBadCheck = 2;
+		int commentGoodCheckOk = 0;
+		int commentBadCheckOk = 0;
+		int commentGoodOrBadAllCount = 0;
+		int commentGoodOrBadAllCheck = 0;
+		int a = 0;
+		int b = 0;
+		int c = 0;
+		HashMap<String, Integer> commentGoodOrBadCheck = new HashMap<String, Integer>();
 		commentGoodOrBadCheck.put("commentNum", commentNum);
 		commentGoodOrBadCheck.put("userNum", userNum);
-		
+
 		commentGoodOrBadCheck.put("commentGoodOrBadCheck", commentGoodCheck);
-		commentGoodCheckOk=commentDao.commentGoodOrBad(commentGoodOrBadCheck);
-		
+		commentGoodCheckOk = commentDao.commentGoodOrBad(commentGoodOrBadCheck);
+
 		commentGoodOrBadCheck.put("commentGoodOrBadCheck", commentBadCheck);
-		commentBadCheckOk=commentDao.commentGoodOrBad(commentGoodOrBadCheck);
-		
-		if(commentGoodOrBad==1) {
+		commentBadCheckOk = commentDao.commentGoodOrBad(commentGoodOrBadCheck);
+
+		if (commentGoodOrBad == 1) {
 			commentGoodOrBadCheck.put("commentGoodOrBadCheck", commentGoodCheck);
-		}else {
+		} else {
 			commentGoodOrBadCheck.put("commentGoodOrBadCheck", commentBadCheck);
 		}
-		
-		if(commentGoodCheckOk==0&&commentBadCheckOk==0){
+
+		if (commentGoodCheckOk == 0 && commentBadCheckOk == 0) {
 			commentDao.commentGoodOrBadWrite(commentGoodOrBadCheck);
 			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 			commentDao.commentGoodOrBadUpdate(commentGoodOrBadCheck);
 			System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-			commentGoodOrBadAllCount=commentDao.commentGoodOrBadCount(commentGoodOrBadCheck);
+			commentGoodOrBadAllCount = commentDao.commentGoodOrBadCount(commentGoodOrBadCheck);
 			System.out.println("cccccccccccccccccccccccccccccccccccccccccc");
-		}else if(commentGoodCheckOk==0) {
+		} else if (commentGoodCheckOk == 0) {
 			commentGoodOrBadCheck.put("commentGoodOrBadCheck", commentGoodCheck);
-		}else {
+		} else {
 			commentGoodOrBadCheck.put("commentGoodOrBadCheck", commentBadCheck);
 		}
-		
-		commentGoodOrBadAllCheck=commentGoodOrBadCheck.get("commentGoodOrBadCheck");
-		
+
+		commentGoodOrBadAllCheck = commentGoodOrBadCheck.get("commentGoodOrBadCheck");
+
 		commentGoodOrBadList.add(0, commentGoodOrBadAllCount);
 		commentGoodOrBadList.add(1, commentGoodOrBadAllCheck);
-		
+
 		return commentGoodOrBadList;
 	}
 
-
 	@Override
 	public int commentDelete(int commentNum, int commentGroup) {
-		HashMap<String, Integer> commentDelete=new HashMap<String, Integer>();
+		HashMap<String, Integer> commentDelete = new HashMap<String, Integer>();
 		commentDelete.put("commentNum", commentNum);
 		commentDelete.put("commentGroup", commentGroup);
-		int commentDeleteCheck=0;
-		int commentCountCheck=0;
-		if(commentGroup==0) {
+		int commentDeleteCheck = 0;
+		int commentCountCheck = 0;
+		if (commentGroup == 0) {
 			commentDelete.put("commentDeleteCheck", commentDeleteCheck);
-			System.out.println("++++++++++++++++++++++++"+1);
+			System.out.println("++++++++++++++++++++++++" + 1);
 			commentDao.commentDelete(commentDelete);
-		}else {
-			commentDeleteCheck=1;
+		} else {
+			commentDeleteCheck = 1;
 			commentDelete.put("commentDeleteCheck", commentDeleteCheck);
-			System.out.println("++++++++++++++++++++++++"+2);
+			System.out.println("++++++++++++++++++++++++" + 2);
 			commentDao.commentDelete(commentDelete);
 			commentDao.commentCountUpdate(commentDelete);
-			commentCountCheck=commentDao.commentCountCheck(commentDelete);
-			
+			commentCountCheck = commentDao.commentCountCheck(commentDelete);
+
 		}
-		System.out.println("+++++++yyyyyyyyyy+++++++++++++"+commentCountCheck);
+		System.out.println("+++++++yyyyyyyyyy+++++++++++++" + commentCountCheck);
 		return commentCountCheck;
 	}
-	
-	
-	
-	
-	
-	
+
+	HashMap<String, String> progressMap;
+
+	@Override
+	@ResponseBody
+	public HashMap<String, String> getProgress(Model model) {
+		// System.out.println("getProgress!!");
+		progressMap = new HashMap<String, String>();
+		progressMap.put("totalPage", String.valueOf(totalPageNum));
+		progressMap.put("pageNumber", String.valueOf(currPageNum));
+		model.addAttribute("totalPage", totalPageNum);
+		model.addAttribute("pageNumber", currPageNum);
+		// System.out.println(progressMap.toString());
+		return progressMap;
+	}
+
 }

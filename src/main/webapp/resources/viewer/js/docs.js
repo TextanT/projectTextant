@@ -5,7 +5,7 @@ function loadPage(page) {
 	var img = $('<img />');
 	img.load(function() {
 		var container = $('.sample-docs .p'+page);
-		alert(page);
+//		alert(page);
 		img.css({width: container.width(), height: container.height()});
 		img.appendTo($('.sample-docs .p'+page));
 		container.find('.loader').remove();
