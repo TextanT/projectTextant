@@ -6,7 +6,7 @@
 <mapper namespace="com.besideYou.textant.dao.BookInfoDao">	
 	
 	<insert id="writeBook" parameterType="bookInfo">
-		INSERT INTO BOOKINFO VALUES(BOOKINFO_SEQ.nextval,#{bookName},#{totalPage},#{userNum},#{thumbnail},#{fileLocation},#{genre},SYSDATE,#{hit},#{totalScore},#{scoreNum})
+		INSERT INTO BOOKINFO VALUES(BOOKINFO_SEQ.nextval,#{bookName},#{totalPage},#{userNum},#{thumbnail},#{fileLocation},#{genre},SYSDATE,0,0,0,#{bookDesc})
 	</insert>
 	
 </mapper>

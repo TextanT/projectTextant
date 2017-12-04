@@ -19,18 +19,22 @@
 <body>
 <form action="/textant/write.text" method="post" enctype="multipart/form-data">
 	<input type="hidden" id="line" name="line" value="3">
+	<input type="hidden" id="userNum" name="userNum" value="${userNum}">
 	<table border="2" width="200">  
 		<tr>
  			 <td>글쓴이 :</td><td>human</td>
  		</tr>
  		<tr>	 
-		 <td>제목 : </td><td><input type="txt" name="bookTitle" ></td>			 
+		 <td>제목 : </td><td><input type="text" name="bookName" ></td>			 
 		</tr>
 		<tr>
-		  <td colspan="2"> <textarea cols="50" rows="20" name="bookcontent" ></textarea></td>
+		  <td colspan="2"> <textarea cols="50" rows="20" name="bookDesc" ></textarea></td>
 	    </tr> 	    
 	    <tr>
 	      <td>첨부 : </td><td><input type="file"  onchange="gkgkgkgk(bookFile)"  name="bookFile"></td>
+	    </tr>
+	    <tr>
+	    <td>장르 : </td><td><input type="text" name="genre"></td>
 	    </tr>
 	    <tr id="setting"><td></td></tr>
 	    <tr>
@@ -41,6 +45,7 @@
 	<section id="wrapper">
 표지 이미지를 넣으세요(가급적 jpg로) <input type=file name="bookImg">
 <div id="holder"></div>	
+</section>
 </form>
 
 

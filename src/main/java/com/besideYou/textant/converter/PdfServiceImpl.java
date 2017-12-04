@@ -9,12 +9,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 
 import org.apache.pdfbox.cos.COSName;
@@ -29,21 +25,25 @@ import org.apache.pdfbox.text.PDFTextStripper;
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.besideYou.textant.dao.CommentDao;
+import com.besideYou.textant.dao.BookInfoDao;
 import com.besideYou.textant.dto.BookInfoDto;
-import com.besideYou.textant.dto.CommentDto;
 
 @Service
 public class PdfServiceImpl implements PdfServiceText {
+
+	@Autowired
+	BookInfoDao bookInfoDao;
+	
 	int totalPageNum, currPageNum;
+	BookInfoDto bookInfoDto;
 
 	@Override
 	public String check(BookInfoDto bookInfoDto) throws Exception {
+		
+		this.bookInfoDto = bookInfoDto;
 		
 		String view;
 		String type;
@@ -63,6 +63,7 @@ public class PdfServiceImpl implements PdfServiceText {
 		if (line == 1 || line == 2) {
 			view = txtWrite(bookInfoDto.getBookFile(), bookInfoDto.getBookImg(), line, bookInfoDto.getNumOfOneLine(),
 					bookInfoDto.getLineOfOnePage());
+			bookInfoDao.writeBook(bookInfoDto);
 		} else {
 			view = pdfWrite(bookInfoDto.getBookFile(), bookInfoDto.getBookImg());
 		}
@@ -199,7 +200,7 @@ public class PdfServiceImpl implements PdfServiceText {
 			mFile.transferTo(new File(destinationDir + fileName + "/orgFile/" + fileName));// ************************
 			startTime = System.currentTimeMillis();
 			System.out.println(startTime);
-
+			sourceDir = destinationDir + fileName + "/";
 			sourceFile = new File(destinationDir + fileName + "/orgFile/" + fileName);// ************************
 
 			//파일이 있는지 먼저 체크
@@ -209,6 +210,11 @@ public class PdfServiceImpl implements PdfServiceText {
 
 				document = PDDocument.load(sourceFile);
 				pdfRenderer = new PDFRenderer(document);
+				
+				totalPageNum = document.getPages().getCount();
+				
+				bookInfoDto.setTotalPage(totalPageNum);
+				bookInfoDto.setFileLocation(sourceDir.replace("/", File.separator));
 				
 				pageCounter = 0;
 				onlyFileName = sourceFile.getName().replace(".pdf", "");
@@ -308,6 +314,10 @@ public class PdfServiceImpl implements PdfServiceText {
 						+ formatName;
 				newFile = new File(thumbnailName);
 				ImageIO.write(destImg, formatName.toUpperCase(), newFile);
+				
+				bookInfoDto.setThumbnail(newFile.toString());
+				bookInfoDao.writeBook(bookInfoDto);
+				System.out.println(bookInfoDto);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
