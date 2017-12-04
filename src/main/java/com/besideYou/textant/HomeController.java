@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.besideYou.textant.converter.PdfService;
 import com.besideYou.textant.converter.PdfServiceText;
 import com.besideYou.textant.display.DisplayService;
+import com.besideYou.textant.dto.BookInfoDto;
 import com.besideYou.textant.dto.CommentDto;
 import com.besideYou.textant.dto.LoginDto;
 import com.besideYou.textant.login.LoginService;
@@ -94,6 +95,7 @@ public class HomeController {
 		return mainService.home(model, session);
 	}
 	
+	/*
 	@RequestMapping(value = "/scroll.text", method = RequestMethod.GET)
 	public String scroll() {
 		return "scroll";
@@ -137,7 +139,8 @@ public class HomeController {
 		int userNum=2;
 		return pdfServiceText.commentGoodOrBad(commentNum,commentGoodOrBad,userNum);
 	}
-
+	
+	*/
 	
 
 	@RequestMapping(value = "/write.text", method = RequestMethod.GET)
@@ -146,8 +149,8 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/write.text", method = RequestMethod.POST)
-	public String write(PdfFileDto fileDto) throws Exception {
-		view = pdfServiceText.check(fileDto);
+	public String write(BookInfoDto bookInfoDto) throws Exception {
+		view = pdfServiceText.check(bookInfoDto);
 		if (view == null) {
 			view = "redirect:main.text";
 		}

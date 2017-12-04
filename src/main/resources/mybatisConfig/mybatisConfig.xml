@@ -18,8 +18,8 @@
 	
 	<typeAliases>
 	    <typeAlias alias="comment" type="com.besideYou.textant.dto.CommentDto" /> 
-	    <typeAlias alias="file" type="com.besideYou.textant.dto.FileDto" />
-	    <typeAlias alias="login" type="com.besideYou.textant.dto.LoginDto" />  
+	    <typeAlias alias="login" type="com.besideYou.textant.dto.LoginDto" />
+	    <typeAlias alias="bookInfo" type="com.besideYou.textant.dto.BookInfoDto" />  
 	</typeAliases>
 	
 <!-- 	<mappers> -->

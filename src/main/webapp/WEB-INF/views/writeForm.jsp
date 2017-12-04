@@ -14,6 +14,36 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+</head>
+<body>
+<form action="/textant/write.text" method="post" enctype="multipart/form-data">
+	<input type="hidden" id="line" name="line" value="3">
+	<table border="2" width="200">  
+		<tr>
+ 			 <td>글쓴이 :</td><td>human</td>
+ 		</tr>
+ 		<tr>	 
+		 <td>제목 : </td><td><input type="txt" name="bookTitle" ></td>			 
+		</tr>
+		<tr>
+		  <td colspan="2"> <textarea cols="50" rows="20" name="bookcontent" ></textarea></td>
+	    </tr> 	    
+	    <tr>
+	      <td>첨부 : </td><td><input type="file"  onchange="gkgkgkgk(bookFile)"  name="bookFile"></td>
+	    </tr>
+	    <tr id="setting"><td></td></tr>
+	    <tr>
+	      <td><input type="button" onclick="fileCheck(this.form)" value="글쓰기"></td>
+	      <td><input type="reset" onclick="history.back()" value="글쓰기취소"></td>
+	    </tr>		
+	</table>
+	<section id="wrapper">
+표지 이미지를 넣으세요(가급적 jpg로) <input type=file name="bookImg">
+<div id="holder"></div>	
+</form>
+
+
 <script>
 function fileCheck(frm) {   
 
@@ -108,56 +138,25 @@ function pageText(){
 	}
 }
 
-</script>
-</head>
-<body>
-<form action="/textant/write.text" method="post" enctype="multipart/form-data">
-	<input type="hidden" id="line" name="line" value="3">
-	<table border="2" width="200">  
-		<tr>
- 			 <td>글쓴이 :</td><td>human</td>
- 		</tr>
- 		<tr>	 
-		 <td>제목 : </td><td><input type="txt" name="bookTitle" ></td>			 
-		</tr>
-		<tr>
-		  <td colspan="2"> <textarea cols="50" rows="20" name="bookcontent" ></textarea></td>
-	    </tr> 	    
-	    <tr>
-	      <td>첨부 : </td><td><input type="file"  onchange="gkgkgkgk(bookFile)"  name="bookFile"></td>
-	    </tr>
-	    <tr id="setting"><td></td></tr>
-	    <tr>
-	      <td><input type="button" onclick="fileCheck(this.form)" value="글쓰기"></td>
-	      <td><input type="reset" onclick="history.back()" value="글쓰기취소"></td>
-	    </tr>		
-	</table>
-	<section id="wrapper">
-표지 이미지를 넣으세요(가급적 jpg로) <input type=file name="bookImg">
-<div id="holder"></div>	
-</form>
+var upload = document.getElementsByName("bookImg")[0],
+holder = document.getElementById('holder');
 
+upload.onchange = function (e) {
+e.preventDefault();
 
-<script>
-	var upload = document.getElementsByName("bookImg")[0],
-	holder = document.getElementById('holder');
-
-	upload.onchange = function (e) {
-	e.preventDefault();
-
-	var file = upload.files[0],
-    reader = new FileReader();
-	reader.onload = function (event) {
-		var img = new Image();
-		img.src = event.target.result;
-		img.width = 280;
-		img.height = 412
-		holder.innerHTML = '';
-		holder.appendChild(img);
-		};
-	reader.readAsDataURL(file);
-	return false;
+var file = upload.files[0],
+reader = new FileReader();
+reader.onload = function (event) {
+	var img = new Image();
+	img.src = event.target.result;
+	img.width = 280;
+	img.height = 412
+	holder.innerHTML = '';
+	holder.appendChild(img);
 	};
+reader.readAsDataURL(file);
+return false;
+};
 </script>
 </body>
 </html>

@@ -34,8 +34,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.besideYou.textant.PdfFileDto;
 import com.besideYou.textant.dao.CommentDao;
+import com.besideYou.textant.dto.BookInfoDto;
 import com.besideYou.textant.dto.CommentDto;
 
 @Service
@@ -43,27 +43,28 @@ public class PdfServiceImpl implements PdfServiceText {
 	int totalPageNum, currPageNum;
 
 	@Override
-	public String check(PdfFileDto fileDto) throws Exception {
+	public String check(BookInfoDto bookInfoDto) throws Exception {
 		
 		String view;
 		String type;
 		String imageType;
+		int line;
 		
 		// 이미지 확장자 검사
-		if (!fileDto.getBookImg().isEmpty()) {
-			type = fileDto.getBookImg().getContentType();
+		if (!bookInfoDto.getBookImg().isEmpty()) {
+			type = bookInfoDto.getBookImg().getContentType();
 			imageType = type.substring(type.lastIndexOf("/") + 1);
 			if (!(imageType.equalsIgnoreCase("jpg") || imageType.equalsIgnoreCase("png")
 					|| imageType.equalsIgnoreCase("jpeg"))) {
-				return "500";
+				return "write/imageFail";
 			}
 		}
-		int line = fileDto.getLine();
+		line = bookInfoDto.getLine();
 		if (line == 1 || line == 2) {
-			view = txtWrite(fileDto.getBookFile(), fileDto.getBookImg(), line, fileDto.getNumOfOneLine(),
-					fileDto.getLineOfOnePage());
+			view = txtWrite(bookInfoDto.getBookFile(), bookInfoDto.getBookImg(), line, bookInfoDto.getNumOfOneLine(),
+					bookInfoDto.getLineOfOnePage());
 		} else {
-			view = pdfWrite(fileDto.getBookFile(), fileDto.getBookImg());
+			view = pdfWrite(bookInfoDto.getBookFile(), bookInfoDto.getBookImg());
 		}
 		return view;
 	}
@@ -168,8 +169,8 @@ public class PdfServiceImpl implements PdfServiceText {
 		File file;
 		String sourceDir;
 		String destinationDir;
-		String oldFileName;
 		String fileName;
+		String onlyFileName;
 		String imageDest;
 		PDDocument document;
 		PDFRenderer pdfRenderer;
@@ -178,7 +179,7 @@ public class PdfServiceImpl implements PdfServiceText {
 		BufferedOutputStream bos;
 		PDResources pdResources;
 		PDXObject xobject;
-		BufferedImage bi;
+		BufferedImage resourcesImage;
 		BufferedImage bim;
 		long startTime;
 		int pageCounter;
@@ -186,20 +187,20 @@ public class PdfServiceImpl implements PdfServiceText {
 		sourceDir = "D:/temp/"; // Pdf files are read from this folder
 		destinationDir = "D:/temp/Converted_PdfFiles_to_Image/"; // converted images from pdf document are
 		// UUID uid = UUID.randomUUID(); // saved here
-		oldFileName = /* uid.toString()+"_"+ */mFile.getOriginalFilename();
+		fileName = /* uid.toString()+"_"+ */mFile.getOriginalFilename();
 		try {
-			destinationFile = new File(destinationDir + oldFileName);
+			destinationFile = new File(destinationDir + fileName);
 			if (!destinationFile.exists()) {
 				destinationFile.mkdirs();
 				System.out.println("Folder Created -> " + destinationFile.getAbsolutePath());
 			}
 
-			new File(destinationDir + oldFileName + "/orgFile/" + oldFileName).mkdirs();
-			mFile.transferTo(new File(destinationDir + oldFileName + "/orgFile/" + oldFileName));// ************************
+			new File(destinationDir + fileName + "/orgFile/" + fileName).mkdirs();
+			mFile.transferTo(new File(destinationDir + fileName + "/orgFile/" + fileName));// ************************
 			startTime = System.currentTimeMillis();
 			System.out.println(startTime);
 
-			sourceFile = new File(destinationDir + oldFileName + "/orgFile/" + oldFileName);// ************************
+			sourceFile = new File(destinationDir + fileName + "/orgFile/" + fileName);// ************************
 
 			//파일이 있는지 먼저 체크
 			if (sourceFile.exists()) {
@@ -210,7 +211,7 @@ public class PdfServiceImpl implements PdfServiceText {
 				pdfRenderer = new PDFRenderer(document);
 				
 				pageCounter = 0;
-				fileName = sourceFile.getName().replace(".pdf", "");
+				onlyFileName = sourceFile.getName().replace(".pdf", "");
 				System.out.println("Total files to be converted -> " + document.getPages().getCount());
 
 				int pageNumber = 1;
@@ -219,7 +220,7 @@ public class PdfServiceImpl implements PdfServiceText {
 				for (PDPage page : document.getPages()) {
 					bim = pdfRenderer.renderImageWithDPI(pageCounter, 300, ImageType.RGB);
 					outputfile = new File(
-							destinationDir + oldFileName + "/" + /* fileName + "_" + */pageNumber + ".jpg");
+							destinationDir + fileName + "/" + /* fileName + "_" + */pageNumber + ".jpg");
 					ImageIO.write(bim, "jpg", outputfile);
 
 					// pdf파일을 텍스트로 변환
@@ -227,13 +228,13 @@ public class PdfServiceImpl implements PdfServiceText {
 					reader.setStartPage(pageNumber);
 					reader.setEndPage(pageNumber);
 					String pageText = reader.getText(document);
-					new File(destinationDir + oldFileName + "/" + pageNumber).mkdir();
+					new File(destinationDir + fileName + "/" + pageNumber).mkdir();
 					fos = new FileOutputStream(
-							new File(destinationDir + oldFileName + "/" + pageNumber + "/" + fileName + ".txt"));
+							new File(destinationDir + fileName + "/" + pageNumber + "/" + onlyFileName + ".txt"));
 
 					bos = new BufferedOutputStream(fos);
 					bos.write(pageText.getBytes());
-					System.out.println("TextCreated" + destinationDir + pageNumber + "/" + fileName + ".txt");
+					System.out.println("TextCreated" + destinationDir + pageNumber + "/" + onlyFileName + ".txt");
 					bos.close();
 					fos.close();
 
@@ -244,12 +245,12 @@ public class PdfServiceImpl implements PdfServiceText {
 						if (xobject instanceof PDImageXObject) {
 							// 기존의 방식
 
-							bi = ((PDImageXObject) xobject).getImage();
-							imageDest = destinationDir + oldFileName + "/" + pageNumber + "/" + fileName + "_"
+							resourcesImage = ((PDImageXObject) xobject).getImage();
+							imageDest = destinationDir + fileName + "/" + pageNumber + "/" + onlyFileName + "_"
 									+ imageCount + ".jpg";
 							System.out.println("Image created as " + imageDest);
 							file = new File(imageDest);
-							ImageIO.write(bi, "jpg", file);
+							ImageIO.write(resourcesImage, "jpg", file);
 
 							imageCount++;
 							if (imageCount % 100 == 0) {
@@ -271,7 +272,7 @@ public class PdfServiceImpl implements PdfServiceText {
 			allFileDelete(destinationFile);
 			return "500";
 		}
-		fileImg(bookImg, oldFileName, destinationDir);
+		fileImg(bookImg, fileName, destinationDir);
 		return "redirect:main.text";
 	}
 
@@ -335,7 +336,7 @@ public class PdfServiceImpl implements PdfServiceText {
 			file.delete();
 		}
 	}
-
+/*
 	@Autowired
 	CommentDao commentDao;
 	@Resource(name = "pageBlock")
@@ -526,5 +527,5 @@ public class PdfServiceImpl implements PdfServiceText {
 		// System.out.println(progressMap.toString());
 		return progressMap;
 	}
-
+*/
 }

@@ -1,18 +1,20 @@
 package com.besideYou.textant.dto;
 
 public class LoginDto {
-	int userNum;
-	String userId;
-	String pass;
-	int siteFrom;
-	int grade;
-	String email;
-	String nickName;
-	String profilePicture;
-	String realName;
-	int age;
-	int gender;
-	String comments;
+	private int userNum;
+	private String userId;
+	private String pass;
+	private int siteFrom;
+	private int grade;
+	private String email;
+	private String nickName;
+	private String profilePicture;
+	private String realName;
+	private int age;
+	private int gender;
+	private String comments;
+	
+	
 	public int getUserNum() {
 		return userNum;
 	}
