@@ -8,7 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
+
+import javax.annotation.Resource;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +19,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DisplayServiceImpl implements DisplayService {
+	@Resource(name="saveDir")
+	String destinationDir;
+	
 	@Override
 	public ResponseEntity<byte[]> display(String fileName, String pageNum, String fileType) throws IOException {
 		File file;
@@ -33,7 +37,7 @@ public class DisplayServiceImpl implements DisplayService {
 
 			
 			file = new File(
-					"d:/temp/Converted_PdfFiles_to_Image/" + fileName + "/" + /* realName+"_"+ */pageNum + ".jpg");
+					destinationDir + fileName + "/" + /* realName+"_"+ */pageNum + ".jpg");
 			System.out.println(file.getName());
 			
 			
@@ -64,7 +68,7 @@ public class DisplayServiceImpl implements DisplayService {
 			System.out.println(fileName);
 			realName = fileName.substring(0, fileName.lastIndexOf("."));
 			file = new File(
-					"d:/temp/Converted_PdfFiles_to_Image/" + fileName + "/" + pageNum + "/" + realName + ".txt");
+					destinationDir+ fileName + "/" + pageNum + "/" + realName.substring(realName.indexOf("_")+1) + ".txt");
 			System.out.println("text파일은 "+ file.getName());
 			br = new BufferedReader(new FileReader(file));
 			sb = new StringBuilder();

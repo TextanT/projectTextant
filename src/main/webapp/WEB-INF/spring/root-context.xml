@@ -50,4 +50,8 @@
 		<constructor-arg value="5"/>
 	</bean>
 	
+	<bean id="saveDir" class="java.lang.String">
+		<constructor-arg value="d:/temp/convertedBook/"></constructor-arg>
+	</bean>
+	
 </beans>

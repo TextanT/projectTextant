@@ -2,17 +2,22 @@ package com.besideYou.textant.read;
 
 import java.io.File;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 @Service
 public class ReadServiceImpl implements ReadService {
+	@Resource(name="saveDir")
+	String destinationDir;
+	
 	public String read(String fileName, Model model, String bookType) throws Exception{
 		
 	int totalPageNum = 0;
 	System.out.println(fileName);
 	try {
-		File file = new File("d:\\temp\\Converted_PdfFiles_to_Image\\"+fileName+"\\");
+		File file = new File(destinationDir+fileName+"\\");
 		File[] filefile = file.listFiles();
 		for(File lfile : filefile) {
 			String imgFile = lfile.getName();

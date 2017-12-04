@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 
 import org.apache.pdfbox.cos.COSName;
@@ -36,6 +37,9 @@ public class PdfServiceImpl implements PdfServiceText {
 
 	@Autowired
 	BookInfoDao bookInfoDao;
+	
+	@Resource(name = "saveDir")
+	String destinationDir;
 	
 	int totalPageNum, currPageNum;
 	BookInfoDto bookInfoDto;
@@ -84,8 +88,8 @@ public class PdfServiceImpl implements PdfServiceText {
 
 		uid = UUID.randomUUID();
 		oldFileName = uid.toString() + "_" + bookFile.getOriginalFilename();
-		destinationDir = "D:/temp/Converted_txt/";
-		
+//		destinationDir = "D:/temp/Converted_txt/";
+		destinationDir = this.destinationDir;
 		destinationFile = new File(destinationDir + oldFileName);
 		try {
 			if (!destinationFile.exists()) {
@@ -164,15 +168,17 @@ public class PdfServiceImpl implements PdfServiceText {
 	// pdf파일 컨버팅
 	public String pdfWrite(MultipartFile mFile, MultipartFile bookImg) {
 
-		File destinationFile = null;
+		File destinationDirFile = null;
 		File sourceFile;
 		File outputfile;
 		File file;
+		UUID uid;
 		String sourceDir;
 		String destinationDir;
 		String fileName;
 		String onlyFileName;
 		String imageDest;
+		String locatedDir;
 		PDDocument document;
 		PDFRenderer pdfRenderer;
 		PDFTextStripper reader;
@@ -185,28 +191,30 @@ public class PdfServiceImpl implements PdfServiceText {
 		long startTime;
 		int pageCounter;
 		
-		sourceDir = "D:/temp/"; // Pdf files are read from this folder
-		destinationDir = "D:/temp/Converted_PdfFiles_to_Image/"; // converted images from pdf document are
-		// UUID uid = UUID.randomUUID(); // saved here
-		fileName = /* uid.toString()+"_"+ */mFile.getOriginalFilename();
+//		destinationDir = "D:/temp/Converted_PdfFiles_to_Image/"; // converted images from pdf document are
+		destinationDir = this.destinationDir;
+		fileName = mFile.getOriginalFilename();
+		uid = UUID.randomUUID();
+		locatedDir = destinationDir + uid.toString() + "_" + fileName;
 		try {
-			destinationFile = new File(destinationDir + fileName);
-			if (!destinationFile.exists()) {
-				destinationFile.mkdirs();
-				System.out.println("Folder Created -> " + destinationFile.getAbsolutePath());
+			destinationDirFile = new File(locatedDir);
+			if (!destinationDirFile.exists()) {
+				destinationDirFile.mkdirs();
+				System.out.println("Folder Created -> " + destinationDirFile.getAbsolutePath());
 			}
 
-			new File(destinationDir + fileName + "/orgFile/" + fileName).mkdirs();
-			mFile.transferTo(new File(destinationDir + fileName + "/orgFile/" + fileName));// ************************
+			new File(locatedDir + "/orgFile/" + fileName).mkdirs();
+			mFile.transferTo(new File(locatedDir + "/orgFile/" + fileName));// ************************
+			
 			startTime = System.currentTimeMillis();
 			System.out.println(startTime);
-			sourceDir = destinationDir + fileName + "/";
-			sourceFile = new File(destinationDir + fileName + "/orgFile/" + fileName);// ************************
+			sourceDir = locatedDir + "/";
+			sourceFile = new File(locatedDir + "/orgFile/" + fileName);// ************************
 
 			//파일이 있는지 먼저 체크
 			if (sourceFile.exists()) {
 
-				System.out.println("Images copied to Folder: " + destinationFile.getName());
+				System.out.println("Images copied to Folder: " + destinationDirFile.getName());
 
 				document = PDDocument.load(sourceFile);
 				pdfRenderer = new PDFRenderer(document);
@@ -214,7 +222,7 @@ public class PdfServiceImpl implements PdfServiceText {
 				totalPageNum = document.getPages().getCount();
 				
 				bookInfoDto.setTotalPage(totalPageNum);
-				bookInfoDto.setFileLocation(sourceDir.replace("/", File.separator));
+				bookInfoDto.setFileLocation((uid.toString() + "_" + fileName));
 				
 				pageCounter = 0;
 				onlyFileName = sourceFile.getName().replace(".pdf", "");
@@ -226,7 +234,7 @@ public class PdfServiceImpl implements PdfServiceText {
 				for (PDPage page : document.getPages()) {
 					bim = pdfRenderer.renderImageWithDPI(pageCounter, 300, ImageType.RGB);
 					outputfile = new File(
-							destinationDir + fileName + "/" + /* fileName + "_" + */pageNumber + ".jpg");
+							locatedDir + "/" + /* fileName + "_" + */pageNumber + ".jpg");
 					ImageIO.write(bim, "jpg", outputfile);
 
 					// pdf파일을 텍스트로 변환
@@ -234,9 +242,9 @@ public class PdfServiceImpl implements PdfServiceText {
 					reader.setStartPage(pageNumber);
 					reader.setEndPage(pageNumber);
 					String pageText = reader.getText(document);
-					new File(destinationDir + fileName + "/" + pageNumber).mkdir();
+					new File(locatedDir + "/" + pageNumber).mkdir();
 					fos = new FileOutputStream(
-							new File(destinationDir + fileName + "/" + pageNumber + "/" + onlyFileName + ".txt"));
+							new File(locatedDir + "/" + pageNumber + "/" + onlyFileName + ".txt"));
 
 					bos = new BufferedOutputStream(fos);
 					bos.write(pageText.getBytes());
@@ -252,7 +260,7 @@ public class PdfServiceImpl implements PdfServiceText {
 							// 기존의 방식
 
 							resourcesImage = ((PDImageXObject) xobject).getImage();
-							imageDest = destinationDir + fileName + "/" + pageNumber + "/" + onlyFileName + "_"
+							imageDest = locatedDir + "/" + pageNumber + "/" + onlyFileName + "_"
 									+ imageCount + ".jpg";
 							System.out.println("Image created as " + imageDest);
 							file = new File(imageDest);
@@ -271,14 +279,14 @@ public class PdfServiceImpl implements PdfServiceText {
 				}
 				document.close();
 				System.out.println("걸린시간 : " + (System.currentTimeMillis() - startTime));
-				System.out.println("Converted Images are saved at -> " + destinationFile.getAbsolutePath());
+				System.out.println("Converted Images are saved at -> " + destinationDirFile.getAbsolutePath());
 			}
 
 		} catch (Exception e) {
-			allFileDelete(destinationFile);
+			allFileDelete(destinationDirFile);
 			return "500";
 		}
-		fileImg(bookImg, fileName, destinationDir);
+		fileImg(bookImg, fileName, destinationDir + uid.toString() + "_");
 		return "redirect:main.text";
 	}
 

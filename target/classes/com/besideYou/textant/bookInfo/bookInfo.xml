@@ -9,6 +9,10 @@
 		INSERT INTO BOOKINFO VALUES(BOOKINFO_SEQ.nextval,#{bookName},#{totalPage},#{userNum},#{thumbnail},#{fileLocation},#{genre},SYSDATE,0,0,0,#{bookDesc})
 	</insert>
 	
+	<select id="getNewBooks" resultType="String">
+		SELECT fileLocation from bookInfo order by writeDate desc
+	</select>
+	
 </mapper>
 	
 	
