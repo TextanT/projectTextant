@@ -14,7 +14,26 @@
 		set commentCount=commentCount+1
 		where commentNum=#{commentTop}
 	</update>
-	
+	<select id="getCommentArticleList"  parameterType="HashMap" resultType="comment">
+		<if test="commentDelete==0">
+			SELECT *
+			FROM (SELECT ROWNUM RM, human.* FROM 
+			(SELECT C.*,L.nickName
+			FROM  comments C,login L
+			WHERE C.bookArticleNum= #{bookArticleNum} and C.depth=0 and C.userNum=L.userNum
+			ORDER BY commentNUM desc) human)
+			WHERE RM BETWEEN #{startRow} AND #{endRow}
+		</if>
+		<if test="commentDelete==1">
+			SELECT *
+			FROM (SELECT ROWNUM RM, human.* FROM 
+			(SELECT C.*,L.nickName
+			FROM  comments C,login L
+			WHERE C.bookArticleNum= #{bookArticleNum} and C.depth=0 and C.userNum=L.userNum
+			ORDER BY commentNUM desc) human)
+			WHERE RM BETWEEN #{startRow} AND #{endRow} and userNum=#{userNum}
+		</if>
+	</select>
 <!-- 	<select id="pageCountBloack" parameterType="HashMap" resultType="int"> -->
 <!-- 		SELECT min(pagegroup) -->
 <!-- 		FROM (SELECT ROWNUM RM, human.* FROM  -->
@@ -31,6 +50,12 @@
 		(SELECT * FROM  comments 
         WHERE pagegroup BETWEEN #{pageCountBlock} and #{page} and commentgroup=0 and bookarticlenum=#{bookArticleNum}
 		ORDER BY pagegroup desc,commentNUM desc) human)  
+	</select>
+	
+	<select id="getCommentTotalCount" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM comments
+        WHERE depth=0 and bookArticleNum=#{bookArticleNum}
 	</select>
 	
 	<select id="commentGoodOrBad" parameterType="HashMap" resultType="int">
@@ -122,6 +147,11 @@
 		INSERT INTO reportComment values(reportComment_seq.nextval,#{commentNum},#{userNum},sysdate)
 	</insert>
 	
+	<select id="getbookTotalPage" parameterType="int" resultType="int">
+		select totalPage
+		FROM bookInfo
+		where bookArticleNum=#{bookArticleNum}
+	</select>
 </mapper>	
 	
 

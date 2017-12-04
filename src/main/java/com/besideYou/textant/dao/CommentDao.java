@@ -21,6 +21,9 @@ public interface CommentDao {
 	public void commentGoodOrBadDelete(HashMap<String,Integer> commentDelete);
 	public String reportCommentCheck(HashMap<String,Integer> reportCommentCheck);
 	public void reportCommentWrite(HashMap<String,Integer> reportCommentCheck);
+	public int getCommentTotalCount(int bookArticleNum);
+	public int getbookTotalPage(int bookArticleNum);
+	public List<CommentDto> getCommentArticleList(HashMap<String, String> CommentArticleList);
 	
 	
 }
