@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.besideYou.textant.comment.CommentService;
 import com.besideYou.textant.converter.PdfService;
 import com.besideYou.textant.converter.PdfServiceText;
 import com.besideYou.textant.display.DisplayService;
@@ -49,6 +50,9 @@ public class HomeController {
 
 	@Autowired
 	ReadService readService;
+	
+	@Autowired
+	CommentService commentService;
 
 	String view;
 
@@ -95,23 +99,42 @@ public class HomeController {
 		return mainService.home(model, session);
 	}
 	
-	/*
-	@RequestMapping(value = "/scroll.text", method = RequestMethod.GET)
+
+	@RequestMapping(value="/scroll.text", method = RequestMethod.GET)
 	public String scroll() {
+		
 		return "scroll";
 	}
-
+	@RequestMapping(value="/commentView.text", method = RequestMethod.GET)
+	public String commentView(Model model) {
+		
+		return "commentView";
+	}
+	
+	@RequestMapping(value="/commentTotalCount.text")
+	@ResponseBody
+	public List<Integer> commentTotalCount(int bookArticleNum,int page){
+		return commentService.commentTotalCount(bookArticleNum);
+	}
+	
 	@RequestMapping(value="/commentCount.text")
 	@ResponseBody
 	public List<Integer> commentCount(int page,int bookArticleNum){
-		return pdfServiceText.commentCount(page,bookArticleNum);
+		return commentService.commentCount(page,bookArticleNum);
 	}
 	
 	@RequestMapping(value="/commentRead.text")
 	@ResponseBody
 	public List<CommentDto> commentRead(HttpSession session,int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum,int commentNum,int commentDelete){
 		int userNum=1;
-		return pdfServiceText.scrollView(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete,userNum);
+		return commentService.scrollView(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete,userNum);
+	}
+	
+	@RequestMapping(value="/commentTotalRead.text")
+	@ResponseBody
+	public List<CommentDto> commentTotalRead(HttpSession session,int page,int commentTotalCount,int bookArticleNum,int commentNum,int commentDelete){
+		int userNum=1;
+		return commentService.commentTotalRead(page,commentTotalCount,userNum,bookArticleNum,commentNum,commentDelete);
 	}
 	
 	@RequestMapping(value="/commentDelete.text")
@@ -119,28 +142,37 @@ public class HomeController {
 	public int commentDelete(int commentNum,int commentGroup,HttpSession session){
 		int userNum=1;
 		
-		return pdfServiceText.commentDelete(commentNum,commentGroup);
+		return commentService.commentDelete(commentNum,commentGroup);
 	}
 	
-	@RequestMapping(value="/scroll.text", method = RequestMethod.POST)
-	public String scrollWrite(CommentDto commentDto,int page,int commentTo,int commentTop,HttpSession session) {
+	@RequestMapping(value="/scrollv.text", method = RequestMethod.POST)
+	public String scrollWrite(CommentDto commentDto,int page,int commentTo,int commentTop,HttpSession session,int commentCheck) {
 		commentDto.setPageGroup(page);
 		commentDto.setUserNum(1);
-		pdfServiceText.scroll(commentDto,commentTo,commentTop);
-		
-		
-		return "scroll";
+		commentService.scroll(commentDto,commentTo,commentTop);
+		System.out.println("ooooooooooooooooooooo"+commentCheck);
+		if(commentCheck!=1) {
+			return "scroll";	
+		}else {
+			return "commentView";
+		}
 	}
 
 	@RequestMapping(value="/commentGoodOrBad.text")
 	@ResponseBody
 	public List<Integer> commentGoodOrBad(HttpSession session, int commentNum,int commentGoodOrBad){
 //		String userNum = (String)session.getAttribute("userNum");
-		int userNum=2;
-		return pdfServiceText.commentGoodOrBad(commentNum,commentGoodOrBad,userNum);
+		int userNum=1;
+		return commentService.commentGoodOrBad(commentNum,commentGoodOrBad,userNum);
 	}
 	
-	*/
+	@RequestMapping(value="/reportComment.text")
+	@ResponseBody
+	public int reportComment(HttpSession session, int commentNum){
+//		String userNum = (String)session.getAttribute("userNum");
+		int userNum=1;
+		return commentService.reportComment(commentNum,userNum);
+	}
 	
 
 	@RequestMapping(value = "/write.text", method = RequestMethod.GET)

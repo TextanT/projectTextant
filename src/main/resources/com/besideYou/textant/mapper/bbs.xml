@@ -4,11 +4,7 @@
               "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
 <mapper namespace="com.besideYou.textant.dao.CommentDao">	
-
-
-	
-	
-	<insert id="scroll" parameterType="comment">
+<insert id="scroll" parameterType="comment">
 		INSERT INTO comments values(comments_seq.nextval,#{conet}
 					,#{pageGroup},#{depth},#{bookArticleNum},0,#{commentGroup},#{userNum},sysdate,0,0)
 	</insert>
@@ -18,7 +14,26 @@
 		set commentCount=commentCount+1
 		where commentNum=#{commentTop}
 	</update>
-	
+	<select id="getCommentArticleList"  parameterType="HashMap" resultType="comment">
+		<if test="commentDelete==0">
+			SELECT *
+			FROM (SELECT ROWNUM RM, human.* FROM 
+			(SELECT C.*,L.nickName
+			FROM  comments C,login L
+			WHERE C.bookArticleNum= #{bookArticleNum} and C.depth=0 and C.userNum=L.userNum
+			ORDER BY commentNUM desc) human)
+			WHERE RM BETWEEN #{startRow} AND #{endRow}
+		</if>
+		<if test="commentDelete==1">
+			SELECT *
+			FROM (SELECT ROWNUM RM, human.* FROM 
+			(SELECT C.*,L.nickName
+			FROM  comments C,login L
+			WHERE C.bookArticleNum= #{bookArticleNum} and C.depth=0 and C.userNum=L.userNum
+			ORDER BY commentNUM desc) human)
+			WHERE RM BETWEEN #{startRow} AND #{endRow} and userNum=#{userNum}
+		</if>
+	</select>
 <!-- 	<select id="pageCountBloack" parameterType="HashMap" resultType="int"> -->
 <!-- 		SELECT min(pagegroup) -->
 <!-- 		FROM (SELECT ROWNUM RM, human.* FROM  -->
@@ -35,6 +50,12 @@
 		(SELECT * FROM  comments 
         WHERE pagegroup BETWEEN #{pageCountBlock} and #{page} and commentgroup=0 and bookarticlenum=#{bookArticleNum}
 		ORDER BY pagegroup desc,commentNUM desc) human)  
+	</select>
+	
+	<select id="getCommentTotalCount" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM comments
+        WHERE depth=0 and bookArticleNum=#{bookArticleNum}
 	</select>
 	
 	<select id="commentGoodOrBad" parameterType="HashMap" resultType="int">
@@ -113,6 +134,23 @@
 		select commentCount
 		FROM comments
 		where commentNum=#{commentGroup}
+	</select>
+	
+	<select id="reportCommentCheck" parameterType="HashMap" resultType="String">
+		select reportCommentNum
+		FROM reportComment
+		where commentNum=#{commentNum}
+		and userNum=#{userNum}
+	</select>
+	
+	<insert id="reportCommentWrite" parameterType="HashMap">
+		INSERT INTO reportComment values(reportComment_seq.nextval,#{commentNum},#{userNum},sysdate)
+	</insert>
+	
+	<select id="getbookTotalPage" parameterType="int" resultType="int">
+		select totalPage
+		FROM bookInfo
+		where bookArticleNum=#{bookArticleNum}
 	</select>
 </mapper>	
 	

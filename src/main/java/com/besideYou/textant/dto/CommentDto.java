@@ -15,7 +15,8 @@ public class CommentDto {
 	private String nickName;
 	private int pageStart;
 	private int pageStop;
-	
+	private int totalCount;
+	private String pageCode;
 	
 	
 	
@@ -187,11 +188,40 @@ public class CommentDto {
 	
 
 
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+
+
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+
+
+	
+
+	public String getPageCode() {
+		return pageCode;
+	}
+
+
+
+
+	public void setPageCode(String pageCode) {
+		this.pageCode = pageCode;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "CommentDto [commentNum=" + commentNum + ", conet=" + conet + ", pageGroup=" + pageGroup + ", depth="
 				+ depth + ", bookArticleNum=" + bookArticleNum + ", commentCount=" + commentCount + ", commentGroup="
 				+ commentGroup + ", userNum=" + userNum + ", writeDate=" + writeDate + ", commentGood=" + commentGood
-				+ ", commentBad=" + commentBad + ", nickName=" + nickName + "]";
+				+ ", commentBad=" + commentBad + ", nickName=" + nickName + ", pageStart=" + pageStart + ", pageStop="
+				+ pageStop + ", totalCount=" + totalCount + "]";
 	}
 }

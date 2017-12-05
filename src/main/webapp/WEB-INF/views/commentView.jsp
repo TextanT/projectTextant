@@ -13,7 +13,6 @@ input[type="checkbox"]{
 .reportComment{
     display: none;
 }
-
 </style>
 <script>
 $.ajaxSetup({
@@ -29,27 +28,19 @@ var commentBad=2;
 $(document).ready(function(){
 	var html = "";
 	$.ajax({	
-		url:"/textant/commentCount.text",
+		url:"/textant/commentTotalCount.text",
 //			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
 		data:{				
 			page:$("#page").val(),
 			bookArticleNum:$("#bookArticleNum").val()
 		},
-		beforeSend : function(){
-//				alert("시작전");
-		},
-		complete: function(){
-//				alert("완료후");
-		},
 		success:function(data){
-			
-			html+="<div id='commentCount' name='commentCount'>"+"page: "+data[1]+"~"+data[2]+"  현재페이지:"+data[2]+"   전체답글: "+data[0]+"</div>"
-			$(".bbb").append(html);
-				$("#pageListCount").val(data[0]);
-				$("#pageCountBlock").val(data[1]);
-				$("#pageCut").val(data[3]);
-				$("#pageSize").val(data[5]);
-				comentRead(data);
+			html+="<div id='commentCount' name='commentCount'>전체답글: "+data[0]+"</div>"
+			$(".commentCount").append(html);
+			$("#pageSize").val(data[1]);
+			$("#bookTotalPage").val(data[2]);
+				
+				commentRead(data[0]);
 		}					
 	}); 
 	
@@ -62,18 +53,16 @@ $(document).ready(function(){
 	});
 	
 // 	$('body').keypress(function(e){
-// 		alert("시작전");
 // 		commentNumBer = 0;
 // 		if(e.keyCode!=13) return;
-// 		if(!$('input[class="conetText"]').focus()){
-// 			alert("시작전1");
+// 		if($('input[class="conetText"]').focus()){
 // 			commentNumBer = 0;
 // 			$("#commentTo").val(commentNumBer);
 // 			commentNumBer = $(".conetText").val();
 // 			$("#conet").val(commentNumBer);
 // 		}
-// 		if(!$('input[class="conetToText"]').focus()){
-// 			alert("시작전2");
+// 		if($('input[class="conetToText"]').focus()){
+			
 // 			commentNumBer = 1;
 // 			$("#commentTo").val(commentNumBer);
 // 			commentNumBer = $(".conetToText").val();
@@ -83,45 +72,26 @@ $(document).ready(function(){
 // 		}
 // 		$('form:eq(0)').submit();
 // 		});
-
+	
 });
-function comentRead(read){
+function commentRead(commentTotalCount){
 			var html = "";
 	$.ajax({	
-		url:"/textant/commentRead.text",
-//			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
-		error : function(xhr){
-			 $("#scrollView").attr("type", "hidden");
-		},
+		url:"/textant/commentTotalRead.text",
+			
 		data:{				
+			commentTotalCount:commentTotalCount,
 			page:$("#page").val(),
-			nextPage:$("#nextPage").val(),
-			pageListCount:read[0],
-			pageCountBlock:read[1],
-			pageCut:read[3],
-			bookArticleNum:read[4],
+			bookArticleNum:$("#bookArticleNum").val(),
 			commentNum:0,
 			commentDelete:0
 		},
-		beforeSend : function(){
-			
-			
-		},
 		complete: function(){
+			commentTotalDelete($("#page").val(),commentTotalCount,$("#bookArticleNum").val(),0,1)
 			
-			commentDelete($("#page").val(),$("#nextPage").val(),read[0],read[1],read[3],read[4],0,1)
-			
-			var num=$("#nextPage").val()
-			 num++;
-			 var nextPageNum = $("#nextPage").val(); 
-			 var pageCutNum = $("#pageCut").val();
-			 if(nextPageNum==pageCutNum){
-				 $("#scrollView").attr("type", "hidden");
-			 }
-			 $("#nextPage").val(num);
 		},
 		success:function(data){
-			
+				$("#commentTotalCount").val(commentTotalCount);
 			 $.each(data, function(index,item) {
 				 var commentNum=item.commentNum;
 				 var commentCount=item.commentCount;
@@ -137,75 +107,54 @@ function comentRead(read){
 			 +"<input id='commentGroup"+commentNum+"' type='hidden' name='commentGroup' value='0'>"
 			 +"<div class='fon"+commentNum+"'></div><hr></div>"
 			 });
-		 	
-			 $(".aaa").append(html);
-			 
-			 
-			 
+			 html+=data[0].pageCode
+			 $(".commentList").append(html);
 		}					
 	});
 	
+};
+
+function getCommentRead(pageNum){
+	var html = "";
+$.ajax({	
+url:"/textant/commentTotalRead.text",
 	
-};
+data:{				
+	commentTotalCount:$("#commentTotalCount").val(),
+	page:pageNum,
+	bookArticleNum:$("#bookArticleNum").val(),
+	commentNum:0,
+	commentDelete:0
+},
+complete: function(){
+	
+	commentTotalDelete(pageNum,$("#commentTotalCount").val(),$("#bookArticleNum").val(),0,1)
+	
+},
+success:function(data){
+	 $.each(data, function(index,item) {
+		 var commentNum=item.commentNum;
+		 var commentCount=item.commentCount;
+		 var commentGroup=item.commentGroup;
+	 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
+	 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
+	 +"<div>답글: "+item.conet+"</div>"			 
+	 +"<input type='checkbox' id='c"+commentNum+"' class='comment"+commentNum+"' name='chk' onClick='kokoko("+commentNum+","+commentCount+")' value='"+commentNum+"'><label for='c"+commentNum+"' class='commentCount"+commentNum+"'><span></span>답글달기: "+data[index].commentCount+"</label><br/>"
+	 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
+	 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
+	 +"<input type='button' class='reportComment' id='reportComment"+commentNum+"' onclick='reportComment("+commentNum+")'><label for='reportComment"+commentNum+"'><span></span>신고하기</label>"
+	 +"<input id='nextToPage"+commentNum+"' type='hidden' name='nextToPage"+commentNum+"' value='1'>"	
+	 +"<input id='commentGroup"+commentNum+"' type='hidden' name='commentGroup' value='0'>"
+	 +"<div class='fon"+commentNum+"'></div><hr></div>"
+	 });
+	 html+=data[0].pageCode
+	 $(".commentList").html(html);
+}					
+});
 
-function commentGet(){
-			var html="";
-	$.ajax({	
-		url:"/textant/commentRead.text",
-//			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
-		data:{				
-			page:$("#page").val(),
-			nextPage:$("#nextPage").val(),
-			pageListCount:$("#pageListCount").val(),
-			pageCountBlock:$("#pageCountBlock").val(),
-			pageCut:$("#pageCut").val(),
-			bookArticleNum:$("#bookArticleNum").val(),
-			commentNum:0,
-			commentDelete:0
-		},
-		beforeSend : function(){
-//				alert("시작전");
-		},
-		complete: function(){
-			
-			commentDelete($("#page").val(),$("#nextPage").val(),$("#pageListCount").val(),$("#pageCountBlock").val(),$("#pageCut").val(),$("#bookArticleNum").val(),0,1)
-			 var num=$("#nextPage").val()
-			 num++;
-			 
-			 
-			 var nextPageNum = $("#nextPage").val(); 
-			 var pageCutNum = $("#pageCut").val();
-			 if(nextPageNum==pageCutNum){
-				 $("#scrollView").attr("type", "hidden");
-			 }
-			 $("#nextPage").val(num);
-		},
-		success:function(data){
-		
-			 $.each(data, function(index,item) {
-				 var commentNum=item.commentNum;
-				 var commentCount=item.commentCount;
-				 var commentGroup=item.commentGroup;
-			 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
-			 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
-			 +"<div>답글: "+item.conet+"</div>"				
-			 +"<input type='checkbox' id='c"+commentNum+"' class='comment"+commentNum+"' name='chk' onClick='kokoko("+commentNum+","+commentCount+")' value='"+commentNum+"'><label for='c"+commentNum+"' class='commentCount"+commentNum+"'><span></span>답글달기: "+data[index].commentCount+"</label><br/>"
-			 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
-			 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
-			 +"<input id='nextToPage"+commentNum+"' type='hidden' name='nextToPage"+commentNum+"' value='1'>"	
-			 +"<input id='commentGroup"+commentNum+"' type='hidden' name='commentGroup' value='0'>"
-			 +"<div class='fon"+commentNum+"'></div><hr></div>"
-			 });
-			 $(".aaa").append(html);
-		
-			 
-		}					
-	}); 
 };
-
 
 function kokoko(commentNum,commentCount){
-// 	console.log(commentCount);
 	var num=commentCount/$("#pageSize").val();
 	var number=Math.ceil(num);
 	 if($(".comment"+commentNum).is(":checked")){
@@ -219,23 +168,22 @@ function kokoko(commentNum,commentCount){
 					  $(".fon"+commentNum).append(html);
 				},
 				data:{		
-					page:$("#page").val(),
+					page:$("#bookTotalPage").val(),
 					nextPage:$("#nextToPage"+commentNum).val(),
 					pageListCount:commentCount,
-					pageCountBlock:$("#pageCountBlock").val(),
+					pageCountBlock:1,
 					pageCut:number,
 					bookArticleNum:$("#bookArticleNum").val(),
 					commentNum:commentNum,
 					commentDelete:0
 				},
 				beforeSend : function(){
-
+					
 				},
 				complete: function(){
-					commentDelete($("#page").val(),$("#nextToPage"+commentNum).val(),commentCount,$("#pageCountBlock").val(),number,$("#bookArticleNum").val(),commentNum,1)
+					commentDelete($("#bookTotalPage").val(),$("#nextToPage"+commentNum).val(),commentCount,1,number,$("#bookArticleNum").val(),commentNum,1)
 					var num=$("#nextToPage"+commentNum).val()
 					 num++;
-					 	
 					 var nextPageNum = $("#nextToPage"+commentNum).val();
 					 if(nextPageNum==number){
 						 $("#scrollViewTo").attr("type", "hidden");
@@ -263,6 +211,7 @@ function kokoko(commentNum,commentCount){
 					 +"<div>답글: "+item.conet+"</div>"			
 					 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
 					 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
+					 +"<input type='button' class='reportComment' id='reportComment"+commentNum+"' onclick='reportComment("+commentNum+")'><label for='reportComment"+commentNum+"'><span></span>신고하기</label>"
 					 +"<hr></div>"
 					 });
 					 $(".fon"+commentNum).append(html);
@@ -280,7 +229,6 @@ function kokoko(commentNum,commentCount){
 	 		$("#nextToPage"+commentNum).val(1);
 	 		$(".fon"+commentNum).empty();
 	 	}
-	
 }
 
 function commentToGet(commentNum,commentCount){
@@ -290,24 +238,19 @@ function commentToGet(commentNum,commentCount){
 				url:"/textant/commentRead.text",
 
 				data:{		
-					page:$("#page").val(),
+					page:$("#bookTotalPage").val(),
 					nextPage:$("#nextToPage"+commentNum).val(),
 					pageListCount:commentCount,
-					pageCountBlock:$("#pageCountBlock").val(),
+					pageCountBlock:1,
 					pageCut:number,
 					bookArticleNum:$("#bookArticleNum").val(),
 					commentNum:commentNum,
 					commentDelete:0
 				},
-				beforeSend : function(){
-
-				},
 				complete: function(){
-					commentDelete($("#page").val(),$("#nextToPage"+commentNum).val(),commentCount,$("#pageCountBlock").val(),number,$("#bookArticleNum").val(),commentNum,1)
+					commentDelete($("#bookTotalPage").val(),$("#nextToPage"+commentNum).val(),commentCount,1,number,$("#bookArticleNum").val(),commentNum,1)
 					 var num=$("#nextToPage"+commentNum).val()
 					 num++;
-					 
-					 
 					 var nextPageNum = $("#nextToPage"+commentNum).val();
 					 if(nextPageNum==number){
 						 $("#scrollViewTo").attr("type", "hidden");
@@ -326,12 +269,13 @@ function commentToGet(commentNum,commentCount){
 					 +"<div>답글: "+item.conet+"</div>"		
 					 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
 					 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
+					 +"<input type='button' class='reportComment' id='reportComment"+commentNum+"' onclick='reportComment("+commentNum+")'><label for='reportComment"+commentNum+"'><span></span>신고하기</label>"
 					 +"<hr></div>"
 					 });
 					 $(html).insertAfter($(".fon"+commentNum).children("div").last());
 // 					 $(".fon"+commentNum).children("hr").last().append(html);
-					
 // 					 $(".fon"+commentNum).append(html);
+					
 				}					
 			}); 
 		
@@ -345,12 +289,6 @@ function commentGoodOrBad(commentNum,commentGoodOrBad){
 		data:{				
 			commentNum:commentNum,
 			commentGoodOrBad:commentGoodOrBad
-		},
-		beforeSend : function(){
-//				alert("시작전");
-		},
-		complete: function(){
-//				alert("완료후");
 		},
 		success:function(data){
 			var AllCheckCount =data[0];
@@ -371,6 +309,22 @@ function commentGoodOrBad(commentNum,commentGoodOrBad){
 	}); 
 }
 
+function reportComment(commentNum){
+	$.ajax({	
+		url:"/textant/reportComment.text",
+
+		data:{		
+			commentNum:commentNum
+		},
+		success:function(data){
+			if(data==1){
+				alert("정상적으로 신고 되었습니다");
+			}else{
+				alert("이미 신고 하셨습니다");
+			}
+		}					
+	});
+}
 function commentDelete(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete){
 	 $.ajax({	
 			url:"/textant/commentRead.text",
@@ -385,11 +339,27 @@ function commentDelete(page,nextPage,pageListCount,pageCountBlock,pageCut,bookAr
 				commentNum:commentNum,
 				commentDelete:commentDelete
 			},
-			beforeSend : function(){
-
-			},
-			complete: function(){
+			success:function(data){
+			
+				$.each(data, function(index,item) {
+					 var commentNum=item.commentNum;
+				 	$("#commentDeleteButton"+commentNum).attr("type", "button");
+				 });
 				
+				
+			}					
+		});
+}
+function commentTotalDelete(page,commentTotalCount,bookArticleNum,commentNum,commentDelete){
+	 $.ajax({	
+			url:"/textant/commentTotalRead.text",
+
+			data:{		
+				page:page,
+				commentTotalCount:commentTotalCount,
+				bookArticleNum:bookArticleNum,
+				commentNum:commentNum,
+				commentDelete:commentDelete
 			},
 			success:function(data){
 			
@@ -402,7 +372,6 @@ function commentDelete(page,nextPage,pageListCount,pageCountBlock,pageCut,bookAr
 			}					
 		});
 }
-
 function commentDeleteOk(commentNum,commentGroup){
 	$.ajax({	
 		url:"/textant/commentDelete.text",
@@ -411,48 +380,16 @@ function commentDeleteOk(commentNum,commentGroup){
 			commentNum:commentNum,
 			commentGroup:commentGroup
 		},
-		beforeSend : function(){
-
-		},
-		complete: function(){
-			
-		},
 		success:function(data){
 			if(commentGroup!=0){
 				$(".commentCount"+commentGroup).html("답글: "+data);	
 			}
-			
 			$(".commentDelete"+commentNum).empty();
-			
-			
 		}					
 	});
 }
 
-function reportComment(commentNum){
-	$.ajax({	
-		url:"/textant/reportComment.text",
 
-		data:{		
-			commentNum:commentNum
-		},
-		beforeSend : function(){
-
-		},
-		complete: function(){
-			
-		},
-		success:function(data){
-			
-			if(data==1){
-				alert("정상적으로 신고 되었습니다");
-			}else{
-				alert("이미 신고 하셨습니다");
-			}
-			
-		}					
-	});
-}
 </script>
 <style>
 </style>
@@ -470,16 +407,17 @@ function reportComment(commentNum){
 	<input id='commentTo' type='hidden' name='commentTo'>
 	<input id='conet' type='hidden' name='conet'>
 	<input id='commentTop' type="hidden" name='commentTop' value='0'>
-	<input id='commentCheck' type="hidden" name='commentCheck' value='0'>
+	<input id='commentTotalCount' type="hidden" name='commentTotalCount'>
+	<input id='bookTotalPage' type="hidden" name='bookTotalPage'>
+	<input id='commentCheck' type="hidden" name='commentCheck' value='1'>
 
-	<div class="bbb"></div>
-	<div class="ccc" style="overflow-y:scroll;width:400px;height:500px;">
-		<div class="aaa">
+	<div class="commentCount"></div>
+	<div class="ccc" width:1000px; height:1000px;">
+		<div class="commentList">
 		</div>
-	<input class="scrollView" id="scrollView" type="button" onclick="commentGet()" value="더보기" style="width:380px;">
+	
 	</div>
-		<input class="conetText" name="conetText" type="text">
-		<input class="commentWrite" type="submit" value="채팅">
+
 	</form>
 </body>
 </html>
