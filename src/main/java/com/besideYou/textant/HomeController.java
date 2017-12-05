@@ -176,12 +176,12 @@ public class HomeController {
 	
 
 	@RequestMapping(value = "/write.text", method = RequestMethod.GET)
-	public String text() {
+	public String text(HttpServletRequest req, HttpSession session) {
 		return "writeForm";
 	}
-
+	
 	@RequestMapping(value = "/write.text", method = RequestMethod.POST)
-	public String write(BookInfoDto bookInfoDto) throws Exception {
+	public String write(HttpServletRequest req, HttpSession session, BookInfoDto bookInfoDto) throws Exception {
 		view = pdfServiceText.check(bookInfoDto);
 		if (view == null) {
 			view = "redirect:main.text";
