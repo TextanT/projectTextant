@@ -336,5 +336,20 @@ public class PdfServiceImpl implements PdfServiceText {
 		}
 
 	}
+	public void allFileDelete(File file) { 
+		  if (file.isDirectory()) {   
+		   if (file.listFiles().length != 0) { 
+		    File[] fileList = file.listFiles();
+		    for (int i = 0; i < fileList.length; i++) {
+		    	allFileDelete(fileList[i]);
+		     file.delete();
+		    }
+		   } else {
+		    file.delete();
+		   }
+		  } else {
+		   file.delete();
+		  }
+		 }
 
 }
