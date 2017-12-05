@@ -90,7 +90,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/first.text")
-	public String first() {
+	public String first(HttpServletRequest req, HttpSession session) {
 		return "main/first";
 	}
 	
