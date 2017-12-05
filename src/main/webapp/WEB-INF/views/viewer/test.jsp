@@ -39,13 +39,15 @@ ${fileName}
 
 	<a href="/textant/main.text" style="float: left;">뒤로</a>
 	<br/>
+<c:if test="${isText!='isText'}">
+	
 	<c:if test="${bookType=='txt'}">
 	<p class="convertToJpg convert" onclick="onclick1()">jpg로</p>
 	</c:if>
 	<c:if test="${bookType=='jpg'}">
 	<p class="convertToTxt convert" onclick="onclick2()">text로</p>
 	</c:if>
-
+</c:if>
 <div class="flipbook-viewport">
 	<div class="container">
 		<div class="flipbook">

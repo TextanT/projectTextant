@@ -67,7 +67,6 @@ public class PdfServiceImpl implements PdfServiceText {
 		if (line == 1 || line == 2) {
 			view = txtWrite(bookInfoDto.getBookFile(), bookInfoDto.getBookImg(), line, bookInfoDto.getNumOfOneLine(),
 					bookInfoDto.getLineOfOnePage());
-			bookInfoDao.writeBook(bookInfoDto);
 		} else {
 			view = pdfWrite(bookInfoDto.getBookFile(), bookInfoDto.getBookImg());
 		}
@@ -89,6 +88,9 @@ public class PdfServiceImpl implements PdfServiceText {
 		uid = UUID.randomUUID();
 		oldFileName = uid.toString() + "_" + bookFile.getOriginalFilename();
 //		destinationDir = "D:/temp/Converted_txt/";
+		
+		bookInfoDto.setFileLocation(oldFileName);
+		
 		destinationDir = this.destinationDir;
 		destinationFile = new File(destinationDir + oldFileName);
 		try {
@@ -132,8 +134,12 @@ public class PdfServiceImpl implements PdfServiceText {
 			} // Exit when line is not exist
 
 			write(page, textBuilder, oldFileName); // Write the left text
+			
+			bookInfoDto.setTotalPage(page);
+			
 			br.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 			allFileDelete(destinationFile);
 			return "500";
 		}
@@ -142,7 +148,7 @@ public class PdfServiceImpl implements PdfServiceText {
 	}
 
 	
-	public static int write(int page, StringBuilder sb, String oldFileName) throws Exception {
+	public int write(int page, StringBuilder sb, String oldFileName) throws Exception {
 		BufferedWriter bw;
 		String withoutLastEnter;
 		
@@ -152,8 +158,9 @@ public class PdfServiceImpl implements PdfServiceText {
 		if (sb.toString().equals("")) {
 			return page;
 		}
+		new File(destinationDir + oldFileName + "/" + page + "/").mkdirs();
 		bw = new BufferedWriter(new OutputStreamWriter(
-				new FileOutputStream(new File("D:/temp/Converted_txt/" + oldFileName + "/" + page + ".txt")),
+				new FileOutputStream(new File(destinationDir + oldFileName + "/" + page + "/" + oldFileName.substring(oldFileName.indexOf("_")+1))),
 				"euc-kr"));
 		withoutLastEnter = sb.toString().substring(0, sb.toString().lastIndexOf("\r\n"));
 		bw.write(withoutLastEnter);
