@@ -40,7 +40,10 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:/spring/main-context.xml</param-value>
+			<param-value>
+			classpath:/spring/main-context.xml
+			classpath:/spring/manager-context.xml
+			</param-value>
 		</init-param>
 		
 		<load-on-startup>1</load-on-startup>
