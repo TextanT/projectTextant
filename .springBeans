@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/main/resources/spring/root-context.xml</config>
 		<config>src/main/resources/spring/main-context.xml</config>
+		<config>src/main/webapp/WEB-INF/1comment-servlet.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

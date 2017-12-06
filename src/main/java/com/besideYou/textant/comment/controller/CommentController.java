@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.besideYou.textant.comment.dto.CommentDto;
 import com.besideYou.textant.comment.service.CommentService;
-import com.besideYou.textant.main.dto.CommentDto1;
 
 @Controller
 public class CommentController {
@@ -23,18 +22,6 @@ public class CommentController {
 	CommentService commentService;
 
 	String view;
-
-	@ResponseBody
-	@RequestMapping(value="/json.comment", method = RequestMethod.GET)
-	public HashMap<String, String> json(){
-		HashMap<String, String> hashMap;
-		hashMap = new HashMap();
-		hashMap.put("first", "1");
-		hashMap.put("second", "2");
-		hashMap.put("third", "3");
-		return hashMap; 
-	}
-	
 
 	@RequestMapping(value="/scroll.comment", method = RequestMethod.GET)
 	public String scroll() {
@@ -53,11 +40,6 @@ public class CommentController {
 		return commentService.commentTotalCount(bookArticleNum);
 	}
 	
-//	@RequestMapping(value="/commentCount.text", produces={"application/xml", "application/json"})
-//	@ResponseBody
-//	public List<Integer> commentCount(int page,int bookArticleNum){
-//		return commentService.commentCount(page,bookArticleNum);
-//	}
 	@ResponseBody
 	@RequestMapping(value="/commentCount.comment" )
 	public List<Integer> commentCount(int page,int bookArticleNum){

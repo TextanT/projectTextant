@@ -1,15 +1,12 @@
 package com.besideYou.textant.main.converter;
 
-import java.util.HashMap;
+import org.springframework.web.multipart.MultipartFile;
 
-import org.springframework.ui.Model;
+import com.besideYou.textant.main.dto.BookInfoDto;
 
-public interface PdfService extends Runnable{
-	void main();
+public interface PdfService {
+	public String txtWrite(MultipartFile BookFile,MultipartFile bookImg,int line,int getNumOfOneLine,int getLineOfOnePage);
+	public String pdfWrite(MultipartFile mFile,MultipartFile bookImg);
+	public String check(BookInfoDto bookInfoDto)throws Exception;
 
-	void setOldFileName(String oldFileName);
-	
-	void setModel(Model model);
-
-	HashMap<String,String> getProgress(Model model);
 }

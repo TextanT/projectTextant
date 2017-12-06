@@ -27,7 +27,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Service
-public class PdfImage implements PdfService {
+public class PdfImage implements TempPdfService1 {
 	private String oldFileName;
 	private PdfImage() {};
 	private Model model;

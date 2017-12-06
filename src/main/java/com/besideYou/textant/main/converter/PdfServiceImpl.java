@@ -33,7 +33,7 @@ import com.besideYou.textant.main.dao.BookInfoDao;
 import com.besideYou.textant.main.dto.BookInfoDto;
 
 @Service
-public class PdfServiceImpl implements PdfServiceText {
+public class PdfServiceImpl implements PdfService {
 
 	@Autowired
 	BookInfoDao bookInfoDao;

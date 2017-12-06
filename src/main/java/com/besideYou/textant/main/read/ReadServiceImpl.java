@@ -1,7 +1,5 @@
 package com.besideYou.textant.main.read;
 
-import java.io.File;
-
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,6 @@
 package com.besideYou.textant.main.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,14 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.besideYou.textant.comment.service.CommentService;
+import com.besideYou.textant.main.converter.TempPdfService1;
 import com.besideYou.textant.main.converter.PdfService;
-import com.besideYou.textant.main.converter.PdfServiceText;
 import com.besideYou.textant.main.display.DisplayService;
 import com.besideYou.textant.main.dto.BookInfoDto;
-import com.besideYou.textant.main.dto.CommentDto1;
 import com.besideYou.textant.main.dto.LoginDto;
 import com.besideYou.textant.main.login.LoginService;
 import com.besideYou.textant.main.main.MainService;
@@ -40,10 +34,10 @@ public class MainController {
 	LoginService loginService;
 
 	@Autowired
-	PdfService pdfService;
+	TempPdfService1 pdfService;
 
 	@Autowired
-	PdfServiceText pdfServiceText;
+	PdfService pdfServiceText;
 
 	@Autowired
 	DisplayService displayService;
@@ -53,9 +47,6 @@ public class MainController {
 
 	@Autowired
 	ReadService readService;
-//	
-//	@Autowired
-//	CommentService commentService;
 
 	String view;
 
@@ -112,104 +103,6 @@ public class MainController {
 		return mainService.home(model, session);
 	}
 	
-	/*
-	@ResponseBody
-	@RequestMapping(value="/json.text", method = RequestMethod.GET)
-	public HashMap<String, String> json(){
-		HashMap<String, String> hashMap;
-		hashMap = new HashMap();
-		hashMap.put("first", "1");
-		hashMap.put("second", "2");
-		hashMap.put("third", "3");
-		return hashMap; 
-	}
-	
-
-	@RequestMapping(value="/scroll.text", method = RequestMethod.GET)
-	public String scroll() {
-		
-		return "scroll";
-	}
-	@RequestMapping(value="/commentView.text", method = RequestMethod.GET)
-	public String commentView(Model model) {
-		
-		return "commentView";
-	}
-	
-	@RequestMapping(value="/commentTotalCount.text")
-	@ResponseBody
-	public List<Integer> commentTotalCount(int bookArticleNum,int page){
-		return commentService.commentTotalCount(bookArticleNum);
-	}
-	
-//	@RequestMapping(value="/commentCount.text", produces={"application/xml", "application/json"})
-//	@ResponseBody
-//	public List<Integer> commentCount(int page,int bookArticleNum){
-//		return commentService.commentCount(page,bookArticleNum);
-//	}
-//	@ResponseBody
-	@RequestMapping(value="/commentCount.text" )
-	public ResponseEntity<HashMap<String,String>> commentCount(int page,int bookArticleNum){
-		System.out.println("커맨트");
-		HashMap<String,String> ha = new HashMap<String, String>();
-		ha.put("1", "123");
-		ha.put("2", "123");
-		ha.put("3", "123");
-		return new ResponseEntity<HashMap<String,String>>(ha,HttpStatus.ACCEPTED);
-	}
-	
-	@RequestMapping(value="/commentRead.text")
-	@ResponseBody
-	public List<CommentDto> commentRead(HttpSession session,int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum,int commentNum,int commentDelete){
-		int userNum=1;
-		return commentService.scrollView(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete,userNum);
-	}
-	
-	@RequestMapping(value="/commentTotalRead.text")
-	@ResponseBody
-	public List<CommentDto> commentTotalRead(HttpSession session,int page,int commentTotalCount,int bookArticleNum,int commentNum,int commentDelete){
-		int userNum=1;
-		return commentService.commentTotalRead(page,commentTotalCount,userNum,bookArticleNum,commentNum,commentDelete);
-	}
-	
-	@RequestMapping(value="/commentDelete.text")
-	@ResponseBody
-	public int commentDelete(int commentNum,int commentGroup,HttpSession session){
-		int userNum=1;
-		
-		return commentService.commentDelete(commentNum,commentGroup);
-	}
-	
-	@RequestMapping(value="/scrollv.text", method = RequestMethod.POST)
-	public String scrollWrite(CommentDto commentDto,int page,int commentTo,int commentTop,HttpSession session,int commentCheck) {
-		commentDto.setPageGroup(page);
-		commentDto.setUserNum(1);
-		commentService.scroll(commentDto,commentTo,commentTop);
-		System.out.println("ooooooooooooooooooooo"+commentCheck);
-		if(commentCheck!=1) {
-			return "scroll";	
-		}else {
-			return "commentView";
-		}
-	}
-
-	@RequestMapping(value="/commentGoodOrBad.text")
-	@ResponseBody
-	public List<Integer> commentGoodOrBad(HttpSession session, int commentNum,int commentGoodOrBad){
-//		String userNum = (String)session.getAttribute("userNum");
-		int userNum=1;
-		return commentService.commentGoodOrBad(commentNum,commentGoodOrBad,userNum);
-	}
-	
-	@RequestMapping(value="/reportComment.text")
-	@ResponseBody
-	public int reportComment(HttpSession session, int commentNum){
-//		String userNum = (String)session.getAttribute("userNum");
-		int userNum=1;
-		return commentService.reportComment(commentNum,userNum);
-	}
-	*/
-
 	@RequestMapping(value = "/write.text", method = RequestMethod.GET)
 	public String text(HttpServletRequest req, HttpSession session) {
 		return "writeForm";
