@@ -11,8 +11,8 @@ public class ManagerController {
 //	@Autowired
 //	SignService signService;
 	
-	@RequestMapping(value = "/test.text")
+	@RequestMapping(value = "/managerMain.text")
 	public String test(String fileName, Model model, String bookType) throws Exception {
-		return "viewer/test";
+		return "manager/managing";
 	}
 }
