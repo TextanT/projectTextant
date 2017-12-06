@@ -1,2 +1,15 @@
+#ignore list
 
 *.class
+
+*.log
+
+.classpath
+
+.project
+
+.springBeans
+
+/target
+
+.metadata
