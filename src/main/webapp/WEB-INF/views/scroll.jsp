@@ -19,7 +19,7 @@ input[type="checkbox"]{
 $.ajaxSetup({
 	type : "POST",
 	async : true,
-	dataType : "json",
+	dataType : "text",
 // 	error : function(xhr){
 // 		alert("error html = " + xhr.statusText);
 // 	}
@@ -29,29 +29,31 @@ var commentBad=2;
 $(document).ready(function(){
 	var html = "";
 	$.ajax({	
-		url:"/textant/commentCount.text",
-//			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
-		data:{				
+		url:"/textant/commentCount.comment",
+//		data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
+	data:{	
+// 		page:1,
+// 		bookArticleNum:1
 			page:$("#page").val(),
 			bookArticleNum:$("#bookArticleNum").val()
-		},
-		beforeSend : function(){
-//				alert("시작전");
-		},
-		complete: function(){
-//				alert("완료후");
-		},
-		success:function(data){
-			
-			html+="<div id='commentCount' name='commentCount'>"+"page: "+data[1]+"~"+data[2]+"  현재페이지:"+data[2]+"   전체답글: "+data[0]+"</div>"
-			$(".bbb").append(html);
-				$("#pageListCount").val(data[0]);
-				$("#pageCountBlock").val(data[1]);
-				$("#pageCut").val(data[3]);
-				$("#pageSize").val(data[5]);
-				comentRead(data);
-		}					
-	}); 
+	},
+	beforeSend : function(){
+// 			alert("시작전");
+	},
+	complete: function(){
+//			alert("완료후");
+	},
+	success:function(data){
+		alert(data);
+		html+="<div id='commentCount' name='commentCount'>"+"page: "+data[1]+"~"+data[2]+"  현재페이지:"+data[2]+"   전체답글: "+data[0]+"</div>"
+		$(".bbb").append(html);
+			$("#pageListCount").val(data[0]);
+			$("#pageCountBlock").val(data[1]);
+			$("#pageCut").val(data[3]);
+			$("#pageSize").val(data[5]);
+	 		comentRead(data);
+	}					
+	});
 	
 	var commentNumBer="";
 	$(".commentWrite").on("mousedown", function() {
@@ -85,10 +87,11 @@ $(document).ready(function(){
 // 		});
 
 });
+
 function comentRead(read){
 			var html = "";
 	$.ajax({	
-		url:"/textant/commentRead.text",
+		url:"/textant/commentRead.comment",
 //			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
 		error : function(xhr){
 			 $("#scrollView").attr("type", "hidden");
@@ -151,7 +154,7 @@ function comentRead(read){
 function commentGet(){
 			var html="";
 	$.ajax({	
-		url:"/textant/commentRead.text",
+		url:"/textant/commentRead.comment",
 //			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
 		data:{				
 			page:$("#page").val(),
@@ -210,7 +213,7 @@ function kokoko(commentNum,commentCount){
 	var number=Math.ceil(num);
 	 if($(".comment"+commentNum).is(":checked")){
 		 $.ajax({	
-				url:"/textant/commentRead.text",
+				url:"/textant/commentRead.comment",
 				error : function(xhr){
 					alert("읽어들일 코맨트 업엉ㅋ");
 					html="<div>답글을 남겨주세요.</div>"
@@ -287,7 +290,7 @@ function commentToGet(commentNum,commentCount){
 	var num=commentCount/$("#pageSize").val();
 	var number=Math.ceil(num);
 		 $.ajax({	
-				url:"/textant/commentRead.text",
+				url:"/textant/commentRead.comment",
 
 				data:{		
 					page:$("#page").val(),
@@ -340,7 +343,7 @@ function commentToGet(commentNum,commentCount){
 function commentGoodOrBad(commentNum,commentGoodOrBad){
 	
 	$.ajax({	
-		url:"/textant/commentGoodOrBad.text",
+		url:"/textant/commentGoodOrBad.comment",
 //			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
 		data:{				
 			commentNum:commentNum,
@@ -373,7 +376,7 @@ function commentGoodOrBad(commentNum,commentGoodOrBad){
 
 function commentDelete(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete){
 	 $.ajax({	
-			url:"/textant/commentRead.text",
+			url:"/textant/commentRead.comment",
 
 			data:{		
 				page:page,
@@ -405,7 +408,7 @@ function commentDelete(page,nextPage,pageListCount,pageCountBlock,pageCut,bookAr
 
 function commentDeleteOk(commentNum,commentGroup){
 	$.ajax({	
-		url:"/textant/commentDelete.text",
+		url:"/textant/commentDelete.comment",
 
 		data:{		
 			commentNum:commentNum,
@@ -431,7 +434,7 @@ function commentDeleteOk(commentNum,commentGroup){
 
 function reportComment(commentNum){
 	$.ajax({	
-		url:"/textant/reportComment.text",
+		url:"/textant/reportComment.comment",
 
 		data:{		
 			commentNum:commentNum
@@ -459,7 +462,8 @@ function reportComment(commentNum){
 <title>Insert title here</title>
 </head>
 <body>	
-	<form action="/textant/scrollv.text" method="post">
+<button onclick="a()">버튼</button>
+	<form action="/textant/scrollv.comment" method="post">
 	<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="1">
 	<input id="page" type="hidden" name="page" value="1">
 	<input id="nextPage" type="hidden" name="nextPage" value="1">

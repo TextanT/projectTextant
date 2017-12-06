@@ -17,9 +17,9 @@
 	</settings>
 	
 	<typeAliases>
-	    <typeAlias alias="comment" type="com.besideYou.textant.dto.CommentDto" /> 
-	    <typeAlias alias="login" type="com.besideYou.textant.dto.LoginDto" />
-	    <typeAlias alias="bookInfo" type="com.besideYou.textant.dto.BookInfoDto" />  
+	    <typeAlias alias="comment" type="com.besideYou.textant.comment.dto.CommentDto" /> 
+	    <typeAlias alias="login" type="com.besideYou.textant.main.dto.LoginDto" />
+	    <typeAlias alias="bookInfo" type="com.besideYou.textant.main.dto.BookInfoDto" />  
 	</typeAliases>
 	
 <!-- 	<mappers> -->

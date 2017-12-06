@@ -4,33 +4,18 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.besideYou</groupId>
 	<artifactId>textant</artifactId>
-	<name>projectTextant</name>
+	<name>projectTextantV2</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<java-version>1.6</java-version>
-		<org.springframework-version>4.3.13.RELEASE</org.springframework-version>
-		<org.aspectj-version>1.6.10</org.aspectj-version>
+		<java-version>1.8</java-version>
+		<org.springframework-version>4.3.11.RELEASE</org.springframework-version>
+		<org.aspectj-version>1.8.13</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
 	
-	<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.8.11</version>
-		</dependency>
-	
-	<!-- 		JSON -->
-				<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>2.9.1</version>
-</dependency>
-	
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-jdbc</artifactId>
@@ -64,21 +49,7 @@
 		    <artifactId>imgscalr-lib</artifactId>
 		    <version>4.2</version>
 		</dependency>
-	<dependency>
 
-<!-- https://mvnrepository.com/artifact/org.im4java/im4java -->
-
-
-<groupId>org.codehaus.jackson</groupId>
-	<artifactId>jackson-mapper-asl</artifactId>
-<version>1.9.13</version>
-</dependency>
-
-	<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.9.1</version>
-		</dependency>
 	<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 <dependency>
     <groupId>commons-fileupload</groupId>
@@ -93,6 +64,24 @@
 			<artifactId>pdfbox</artifactId>
 			<version>2.0.8</version>
 		</dependency>
+		
+	<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
+	
+	<!-- 		JSON -->
+<!-- 				https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+<dependency> 
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.9.2</version>
+</dependency>
+	
+	
+	
 	
 		<!-- Spring -->
 		<dependency>

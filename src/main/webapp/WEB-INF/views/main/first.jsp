@@ -512,6 +512,7 @@ body {
 			form.submit();
 
 		}
+		
 	</script>
 </body>
 </html>
