@@ -43,6 +43,7 @@ public class MainServiceImpl implements MainService {
 		*/
 		
 		model.addAttribute("fileList", fileNames);
+		model.addAttribute("nickname", session.getAttribute("nickname"));
 		model.addAttribute("id", session.getAttribute("id"));
 		
 		return "main";

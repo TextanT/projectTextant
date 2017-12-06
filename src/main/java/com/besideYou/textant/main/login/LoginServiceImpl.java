@@ -23,10 +23,12 @@ public class LoginServiceImpl implements LoginService {
 		String view;
 		String id;
 		String pass;
+		String nickname;
 		int userNum;
 		
 		id = loginDto.getUserId();
 		pass = loginDto.getPass();
+		nickname = loginDto.getNickName();
 		
 		dbPass = loginDao.loginCheck(id);
 		
@@ -35,10 +37,14 @@ public class LoginServiceImpl implements LoginService {
 		if (dbPass != null) {
 			if (dbPass.equals(pass)) {
 				session.setAttribute("id", id);
-				userNum = loginDao.getUserNum(loginDto);
-				session.setAttribute("userNum", userNum);
 				
-				System.out.println(userNum);
+				
+				loginDto = loginDao.getUserNum(loginDto);
+				session.setAttribute("userNum", loginDto.getUserNum());
+				session.setAttribute("nickname", loginDto.getNickName());
+//				session.setAttribute("id", loginDto.getUserId());
+//				System.out.println(userNum);
+				System.out.println(nickname);
 				
 				view = "redirect:main.text";
 				

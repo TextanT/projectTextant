@@ -28,6 +28,8 @@
 	rel="stylesheet">
 <link href="/textant/resources/css/modal2.css" type="text/css"
 	rel="stylesheet">
+<link href="/textant/resources/css/bookover.css" type="text/css"
+	rel="stylesheet">
 <title>Document</title>
 <style>
 </style>
@@ -45,7 +47,7 @@
 			<c:if test="${id!=null}">
 				<c:out
 					value="
-			<a href='#' class='menu_title'><span class='menu1' >${id}</span></a>
+			<a href='#' class='menu_title'><span class='menu1' >${nickname}</span></a>
 			
 			<a href='mypage.text' class='menu_title'><span class='menu2'>내정보</span></a> 
 
@@ -80,9 +82,9 @@
 			<button type="submit" class="aass" id="sasd"></button>
 
 			<div id="idDiv" class="idDivc">
-				<span class="id_sp int_id"> <input type="text"
-					class="int" value maxlength="20" autocomplete="off"
-					placeholder="아이디" name="userId">
+				<span class="id_sp int_id"> <input type="text" class="int"
+					value maxlength="20" autocomplete="off" placeholder="아이디"
+					name="userId">
 				</span>
 			</div>
 
@@ -182,11 +184,13 @@
 				<a href='' class='sub_header_menu1'>내서재</a>
 			</div>
 			<div class="sub_sub2">
-				<a href='/textant/write.text' class='sub_header_menu2'
-					id="sub_menu2">창작카페</a>
+				<a href='' class='sub_header_menu2' id="sub_menu2">창작카페</a>
 			</div>
 			<div class="sub_sub3">
 				<a href='' class='sub_header_menu3' id="sub_menu3">장르별</a>
+			</div>
+			<div class="sub_sub3">
+				<a href='' class='sub_header_menu3' id="sub_menu3">책쓰기</a>
 			</div>
 		</div>
 	</div>
@@ -196,7 +200,7 @@
 				<ul>
 					<li><a href="#">카페</a></li>
 					<li><a href="#">베스트</a></li>
-					<li><a href="#">작품쓰기</a></li>
+					<li><a href="/textant/write.text">작품쓰기</a></li>
 
 				</ul>
 			</div>
@@ -268,67 +272,206 @@
 	<div class="book_list_box">
 		<div class="book_list1">
 			<a href="#"><img src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size" onmouseover="bookli1over()"
+				onmouseout="bookli1out()">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap1" id="book_cap1">
+					<h5>너의 췌장을 먹고싶어</h5>
+					<p>기시미이치로</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
 		<div class="book_list2">
 			<a href="#"><img src="/textant/resources/book_img/자존감수업.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap2" id="book_cap2">
+					<h5>자존감수업</h5>
+					<p>윤홍균</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
+
 		<div class="book_list3">
 			<a href="#"><img src="/textant/resources/book_img/신경끄기의 기술.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap3" id="book_cap3">
+					<h5>신경끄기의기술</h5>
+					<p>마크맨슨</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
+
+
 		<div class="book_list4">
 			<a href="#"><img src="/textant/resources/book_img/세도나메서드.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap4" id="book_cap4">
+					<h5>세도나메서드</h5>
+					<p>헤일도스킨</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
 		<div class="book_list5">
 			<a href="#"><img src="/textant/resources/book_img/언어의온도.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap5" id="book_cap5">
+					<h5>언어의온도</h5>
+					<p>이기주</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
 		<div class="book_list6">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap6" id="book_cap6">
+					<h5>남아있는나날</h5>
+					<p>이기주</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
 		<div class="book_list7">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap7" id="book_cap7">
+					<h5>남아있는나날</h5>
+					<p>이기주</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
 		<div class="book_list8">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap8" id="book_cap8">
+					<h5>남아있는나날</h5>
+					<p>이기주</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
 		<div class="book_list9">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap9" id="book_cap9">
+					<h5>남아있는나날</h5>
+					<p>이기주</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
 		<div class="book_list10">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap10" id="book_cap10">
+					<h5>남아있는나날</h5>
+					<p>이기주</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
 		<div class="book_list11">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap11" id="book_cap11">
+					<h5>남아있는나날</h5>
+					<p>이기주</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
 		<div class="book_list12">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap12" id="book_cap12">
+					<h5>남아있는나날</h5>
+					<p>이기주</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
 		<div class="book_list13">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap13" id="book_cap13">
+					<h5>남아있는나날</h5>
+					<p>이기주</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
 		<div class="book_list14">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap14" id="book_cap14">
+					<h5>남아있는나날</h5>
+					<p>이기주</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
 		<div class="book_list15">
 			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8;" class="book_img_size"> </a>
+				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
+				class="book_img_size">
+				<div style="width: 176.66px; height: 259px; position: relative;"
+					class="book_cap15" id="book_cap15">
+					<h5>남아있는나날</h5>
+					<p>이기주</p>
+					<br>
+					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
+						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
+				</div> </a>
 		</div>
 
-<!-- 		<div class="book_list4"></div> -->
-<!-- 		<div class="book_list5"></div> -->
+		<!-- 		<div class="book_list4"></div> -->
+		<!-- 		<div class="book_list5"></div> -->
 	</div>
 
 
@@ -412,7 +555,8 @@
 
 	<footer>
 	<div>
-		<img height="50px"src="/textant/resources/icon_img/footer_logo.png" class="footer_img">
+		<img height="50px" src="/textant/resources/icon_img/footer_logo.png"
+			class="footer_img">
 	</div>
 	<address>
 		Tel. 010-1234-1234<br> Fax. 051)555-555<br> E-Mail.
@@ -593,6 +737,115 @@
 				return false;
 			};
 		};
+	</script>
+	<script type="text/javascript">
+		var overindex = 2;
+		var outindex = 1;
+		//book1 over	
+		$('.book_list1').mouseenter(function() {
+			document.getElementById('book_cap1').style.zIndex = overindex;
+		});
+		$('.book_list1').mouseleave(function() {
+			document.getElementById('book_cap1').style.zIndex = outindex;
+		});
+		//book2 over
+		$('.book_list2').mouseenter(function() {
+			document.getElementById('book_cap2').style.zIndex = overindex;
+		});
+		$('.book_list2').mouseleave(function() {
+			document.getElementById('book_cap2').style.zIndex = outindex;
+		});
+		//book3 over
+		$('.book_list3').mouseenter(function() {
+			document.getElementById('book_cap3').style.zIndex = overindex;
+		});
+		$('.book_list3').mouseleave(function() {
+			document.getElementById('book_cap3').style.zIndex = outindex;
+		});
+		//book4 over
+		$('.book_list4').mouseenter(function() {
+			document.getElementById('book_cap4').style.zIndex = overindex;
+		});
+		$('.book_list4').mouseleave(function() {
+			document.getElementById('book_cap4').style.zIndex = outindex;
+		});
+		//book5 over
+		$('.book_list5').mouseenter(function() {
+			document.getElementById('book_cap5').style.zIndex = overindex;
+		});
+		$('.book_list5').mouseleave(function() {
+			document.getElementById('book_cap5').style.zIndex = outindex;
+		});
+		//book6 over
+		$('.book_list6').mouseenter(function() {
+			document.getElementById('book_cap6').style.zIndex = overindex;
+		});
+		$('.book_list6').mouseleave(function() {
+			document.getElementById('book_cap6').style.zIndex = outindex;
+		});
+		//book7 over
+		$('.book_list7').mouseenter(function() {
+			document.getElementById('book_cap7').style.zIndex = overindex;
+		});
+		$('.book_list7').mouseleave(function() {
+			document.getElementById('book_cap7').style.zIndex = outindex;
+		});
+		//book8 over
+		$('.book_list8').mouseenter(function() {
+			document.getElementById('book_cap8').style.zIndex = overindex;
+		});
+		$('.book_list8').mouseleave(function() {
+			document.getElementById('book_cap8').style.zIndex = outindex;
+		});
+		//book9 over
+		$('.book_list9').mouseenter(function() {
+			document.getElementById('book_cap9').style.zIndex = overindex;
+		});
+		$('.book_list9').mouseleave(function() {
+			document.getElementById('book_cap9').style.zIndex = outindex;
+		});
+		//book10 over
+		$('.book_list10').mouseenter(function() {
+			document.getElementById('book_cap10').style.zIndex = overindex;
+		});
+		$('.book_list10').mouseleave(function() {
+			document.getElementById('book_cap10').style.zIndex = outindex;
+		});
+		//book11 over
+		$('.book_list11').mouseenter(function() {
+			document.getElementById('book_cap11').style.zIndex = overindex;
+		});
+		$('.book_list11').mouseleave(function() {
+			document.getElementById('book_cap11').style.zIndex = outindex;
+		});
+		//book12 over
+		$('.book_list12').mouseenter(function() {
+			document.getElementById('book_cap12').style.zIndex = overindex;
+		});
+		$('.book_list12').mouseleave(function() {
+			document.getElementById('book_cap12').style.zIndex = outindex;
+		});
+		//book13 over
+		$('.book_list13').mouseenter(function() {
+			document.getElementById('book_cap13').style.zIndex = overindex;
+		});
+		$('.book_list13').mouseleave(function() {
+			document.getElementById('book_cap13').style.zIndex = outindex;
+		});
+		//book14 over
+		$('.book_list14').mouseenter(function() {
+			document.getElementById('book_cap14').style.zIndex = overindex;
+		});
+		$('.book_list14').mouseleave(function() {
+			document.getElementById('book_cap14').style.zIndex = outindex;
+		});
+		//book15 over
+		$('.book_list15').mouseenter(function() {
+			document.getElementById('book_cap15').style.zIndex = overindex;
+		});
+		$('.book_list15').mouseleave(function() {
+			document.getElementById('book_cap15').style.zIndex = outindex;
+		});
 	</script>
 </body>
 

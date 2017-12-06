@@ -12,6 +12,6 @@ public interface LoginServiceDao {
 
 	public String joinchek(String inputId);
 	
-	public int getUserNum(LoginDto loginDto);
+	public LoginDto getUserNum(LoginDto loginDto);
 
 }

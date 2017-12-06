@@ -17,8 +17,8 @@
 		SELECT USERID FROM LOGIN WHERE USERID=#{id} AND SITEFROM=0
 	</select>
 	
-	<select id="getUserNum" parameterType="login" resultType="Integer">
-		SELECT USERNUM FROM LOGIN WHERE USERID=#{userId} AND SITEFROM = #{siteFrom}
+	<select id="getUserNum" parameterType="login" resultType="login">
+		SELECT USERNUM,NICKNAME FROM LOGIN WHERE USERID=#{userId} AND SITEFROM = #{siteFrom}
 	</select>
 	
 </mapper>
