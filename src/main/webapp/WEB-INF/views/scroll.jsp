@@ -157,7 +157,7 @@ function comentRead(read){
 		},
 		complete: function(){
 			
-			commentDelete($("#page").val(),$("#nextPage").val(),read[0],read[1],read[3],read[4],0,1)
+			commentDelete($("#page").val(),$("#nextPage").val(),read.pageListCount,read.pageCountBlock,read.pageCut,read.bookArticleNum,0,1)
 			
 			var num=$("#nextPage").val();
 			 num++;

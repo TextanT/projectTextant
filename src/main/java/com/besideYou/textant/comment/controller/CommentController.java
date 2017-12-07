@@ -52,7 +52,8 @@ public class CommentController {
 	@ResponseBody
 	public List<CommentDto> commentRead(HttpSession session, int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum,int commentNum,int commentDelete){
 		System.out.println("commentRead 사용핬어영");
-		int userNum=1;
+		int userNum=(int)session.getAttribute("userNum");
+		System.out.println(userNum);
 		return commentService.scrollView(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete,userNum);
 	}
 	
@@ -60,14 +61,14 @@ public class CommentController {
 	@ResponseBody
 	public List<CommentDto> commentTotalRead(HttpSession session,int page,int commentTotalCount,int bookArticleNum,int commentNum,int commentDelete,int commentSearchCheak, int commentSearchList,String commentSearch){
 		
-		int userNum=1;
+		int userNum=(int)session.getAttribute("userNum");;
 		return commentService.commentTotalRead(page,commentTotalCount,userNum,bookArticleNum,commentNum,commentDelete,commentSearchCheak,commentSearchList,commentSearch);
 	}
 	
 	@RequestMapping(value="/commentDelete.comment")
 	@ResponseBody
 	public int commentDelete(int commentNum,int commentGroup,HttpSession session){
-		int userNum=1;
+		int userNum=(int)session.getAttribute("userNum");;
 		
 		return commentService.commentDelete(commentNum,commentGroup);
 	}
@@ -85,7 +86,7 @@ public class CommentController {
 	@ResponseBody
 	public HashMap<String, Integer> commentGoodOrBad(HttpSession session, int commentNum,int commentGoodOrBad){
 //		String userNum = (String)session.getAttribute("userNum");
-		int userNum=1;
+		int userNum=(int)session.getAttribute("userNum");;
 		return commentService.commentGoodOrBad(commentNum,commentGoodOrBad,userNum);
 	}
 	
@@ -93,7 +94,7 @@ public class CommentController {
 	@ResponseBody
 	public int reportComment(HttpSession session, int commentNum){
 //		String userNum = (String)session.getAttribute("userNum");
-		int userNum=1;
+		int userNum=(int)session.getAttribute("userNum");;
 		return commentService.reportComment(commentNum,userNum);
 	}
 	
