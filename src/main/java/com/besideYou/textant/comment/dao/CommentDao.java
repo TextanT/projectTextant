@@ -3,11 +3,8 @@ package com.besideYou.textant.comment.dao;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import com.besideYou.textant.comment.dto.CommentDto;
 
-@Repository
 public interface CommentDao {
 	public void scroll(CommentDto commentDto);
 	public void scrollComment(int commentTop);
@@ -27,6 +24,7 @@ public interface CommentDao {
 	public int getCommentTotalCount(int bookArticleNum);
 	public int getbookTotalPage(int bookArticleNum);
 	public List<CommentDto> getCommentArticleList(HashMap<String, String> CommentArticleList);
-	
+	public int getCommentSearchCount(HashMap<String, String> CommentArticleList);
+	public int scrollCommentTopCount(int commentTop);
 	
 }
