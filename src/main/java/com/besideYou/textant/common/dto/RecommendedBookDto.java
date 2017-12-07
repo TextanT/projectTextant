@@ -1,17 +1,17 @@
 package com.besideYou.textant.common.dto;
 
 public class RecommendedBookDto {
-	int recomendedNum;
+	int recommendNum;
 	int bookArticleNum;
 	int userNum;
 	String recommendComment;
 	String writeDate;
 	
-	public int getRecomendedNum() {
-		return recomendedNum;
+	public int getRecommendNum() {
+		return recommendNum;
 	}
-	public void setRecomendedNum(int recomendedNum) {
-		this.recomendedNum = recomendedNum;
+	public void setRecommendedNum(int recommendNum) {
+		this.recommendNum = recommendNum;
 	}
 	public int getBookArticleNum() {
 		return bookArticleNum;
@@ -39,7 +39,7 @@ public class RecommendedBookDto {
 	}
 	@Override
 	public String toString() {
-		return "RecommendedBookDto [recomendedNum=" + recomendedNum + ", bookArticleNum=" + bookArticleNum
+		return "RecommendedBookDto [recommendNum=" + recommendNum + ", bookArticleNum=" + bookArticleNum
 				+ ", userNum=" + userNum + ", recommendComment=" + recommendComment + ", writeDate=" + writeDate + "]";
 	}
 	

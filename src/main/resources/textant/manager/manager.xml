@@ -27,16 +27,57 @@
 		where rum between #{startPage} and #{endPage}
 	</select>
 	<select id="getBadCommentList" resultType="comment">
-		SELECT * from comments order by writeDate desc
+	select outTable.* 
+		from (
+		select rownum rum, inTable.* 
+			  from (
+			  	select * 
+			  	from comments 
+			  	where commentBad > 10 
+			  	order by writeDate desc
+			  	) inTable  
+			  order by rum
+			  ) outTable 
+		where rum between #{startPage} and #{endPage}
 	</select>
 	<select id="getReportBookList" resultType="reportBook">
-		SELECT * from reportBook order by writeDate desc
+	select outTable.* 
+		from (
+		select rownum rum, inTable.* 
+			  from (
+			  	select * 
+			  	from reportBook
+			  	order by writeDate desc
+			  	) inTable  
+			  order by rum
+			  ) outTable 
+		where rum between #{startPage} and #{endPage}
 	</select>
 	<select id="getNoticeList" resultType="notice">
-		SELECT * from notice order by writeDate desc
+	select outTable.* 
+		from (
+		select rownum rum, inTable.* 
+			  from (
+			  	select * 
+			  	from notice
+			  	order by writeDate desc
+			  	) inTable  
+			  order by rum
+			  ) outTable 
+		where rum between #{startPage} and #{endPage}
 	</select>
 	<select id="getRecommendedBookList" resultType="recommendedBook">
-		SELECT * from recommendedBook order by writeDate desc
+	select outTable.* 
+		from (
+		select rownum rum, inTable.* 
+			  from (
+			  	select * 
+			  	from recommendedBook
+			  	order by writeDate desc
+			  	) inTable  
+			  order by rum
+			  ) outTable 
+		where rum between #{startPage} and #{endPage}
 	</select>
 </mapper>
 	

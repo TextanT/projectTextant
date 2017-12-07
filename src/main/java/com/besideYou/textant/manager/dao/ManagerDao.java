@@ -12,9 +12,9 @@ import com.besideYou.textant.common.dto.ReportCommentDto;
 public interface ManagerDao {
 	
 	List<ReportCommentDto> getReportCommentList(HashMap<String,String> hashMap);
-	List<CommentDto> getBadCommentList();
-	List<ReportBookDto> getReportBookList();
-	List<NoticeDto> getNoticeList();
-	List<RecommendedBookDto> getRecommendedBookList();
+	List<CommentDto> getBadCommentList(HashMap<String,String> hashMap);
+	List<ReportBookDto> getReportBookList(HashMap<String,String> hashMap);
+	List<NoticeDto> getNoticeList(HashMap<String,String> hashMap);
+	List<RecommendedBookDto> getRecommendedBookList(HashMap<String,String> hashMap);
 	
 }

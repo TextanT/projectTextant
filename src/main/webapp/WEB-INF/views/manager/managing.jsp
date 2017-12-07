@@ -17,6 +17,7 @@
 
 .managing {
 	border: 1px solid black;
+	background-color: white;
 }
 </style>
 </head>
@@ -129,40 +130,21 @@
 			<div style="text-align: right;">관리하기</div>
 			<div class="managing" id="reportComment"
 				style="height: 200px; overflow-y: scroll;">
-				<table style="margin-left: auto; margin-right: auto;">
-					<tr>
-						<td>신고 댓글</td>
+				<table style="margin-left: auto; margin-right: auto;text-align: center;">
+				<tr>
+					<th style="width:50px">번호</th>
+					<th style="width:70px">댓글번호</th>
+					<th>신고내용</th>
+					<th>작성날짜</th>
 					</tr>
+					<c:forEach var="reportComment" items="${getFirstReportCommentList}">
 					<tr>
-						<td>첫번째</td>
+					<td style="width:50px"><c:out value="${reportComment.reportCommentNum}"/></td>
+					<td style="width:70px"><c:out value="${reportComment.commentNum}"/></td>
+					<td><c:out value="${reportComment.repoCommCont}"/></td>
+					<td><c:out value="${reportComment.writeDate}"/></td>
 					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</div>
@@ -171,40 +153,23 @@
 			<div style="text-align: right;">관리하기</div>
 			<div class="managing" id="reportComment"
 				style="height: 200px; overflow-y: scroll;">
-				<table style="margin-left: auto; margin-right: auto;">
-					<tr>
-						<td>신고 책</td>
+				<table style="margin-left: auto; margin-right: auto;text-align: center;">
+				<tr>
+					<th style="width:50px">번호</th>
+					<th>유저번호</th>
+					<th>내용</th>
+					<th style="width:70px">싫어요수</th>
+					<th>작성날짜</th>
 					</tr>
+					<c:forEach var="badComment" items="${getFirstBadCommentList}">
 					<tr>
-						<td>첫번째</td>
+					<td style="width:50px"><c:out value="${badComment.commentNum}"/></td>
+					<td><c:out value="${badComment.userNum}"/></td>
+					<td><c:out value="${badComment.conet}"/></td>
+					<td style="width:70px"><c:out value="${badComment.commentBad}"/></td>
+					<td><c:out value="${badComment.writeDate}"/></td>
 					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</div>
@@ -216,40 +181,21 @@
 			<div style="text-align: right;">관리하기</div>
 			<div class="managing" id="reportComment"
 				style="height: 200px; overflow-y: scroll;">
-				<table style="margin-left: auto; margin-right: auto;">
-					<tr>
-						<td>신고 책</td>
+				<table style="margin-left: auto; margin-right: auto;text-align: center;">
+				<tr>
+				<th style="width:50px">번호</th>
+					<th style="width:50px">책번호</th>
+					<th style="width:350px">책 신고 내용</th>
+					<th style="width:350px">작성날짜</th>
 					</tr>
+					<c:forEach var="reportBook" items="${getFirstReportBookList}">
 					<tr>
-						<td>첫번째</td>
+					<td style="width:50px"><c:out value="${reportBook.reportBookNum}"/></td>
+					<td style="width:50px"><c:out value="${reportBook.bookArticleNum}"/></td>
+					<td style="width:350px"><c:out value="${reportBook.repoBookCont}"/></td>
+					<td style="width:350px"><c:out value="${reportBook.writeDate}"/></td>
 					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</div>
@@ -261,40 +207,25 @@
 			<div style="text-align: right;">관리하기</div>
 			<div class="managing" id="reportComment"
 				style="height: 200px; overflow-y: scroll;">
-				<table style="margin-left: auto; margin-right: auto;">
-					<tr>
-						<td>신고 책</td>
+				<table style="margin-left: auto; margin-right: auto;text-align: center;">
+				<tr>
+					<th style="width: 50px">번호</th>
+					<th style="width: 200px">제목</th>
+					<th style="width: 100px">유저번호</th>
+					<th style="width: 50px">조회수</th>
+					<th style="width: 50px">타입</th>
+					<th style="width: 350px">작성날짜</th>
 					</tr>
+					<c:forEach var="notice" items="${getFirstNoticeList}">
 					<tr>
-						<td>첫번째</td>
+					<td style="width: 50px"><c:out value="${notice.articleNum}"/></td>
+					<td style="width: 200px"><c:out value="${notice.title}"/></td>
+					<td style="width: 100px"><c:out value="${notice.userNum}"/></td>
+					<td style="width: 50px"><c:out value="${notice.hit}"/></td>
+					<td style="width: 50px"><c:out value="${notice.type}"/></td>
+					<td style="width: 350px"><c:out value="${notice.writeDate}"/></td>
 					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</div>
@@ -305,40 +236,23 @@
 			<div style="text-align: right;">관리하기</div>
 			<div class="managing" id="reportComment"
 				style="height: 200px; overflow-y: scroll;">
-				<table style="margin-left: auto; margin-right: auto;">
-					<tr>
-						<td>신고 책</td>
+				<table style="margin-left: auto; margin-right: auto;text-align: center;">
+				<tr>
+					<th style="width: 50px">번호</th>
+					<th style="width: 50px">책번호</th>
+					<th style="width: 80px">유저번호</th>
+					<th style="width: 350px">추천코멘트</th>
+					<th style="width: 350px">작성날짜</th>
 					</tr>
+				<c:forEach var="recommendedBook" items="${getFirstRecommendedBookList}">
 					<tr>
-						<td>첫번째</td>
+					<td style="width: 50px"><c:out value="${recommendedBook.recommendNum}"/></td>
+					<td style="width: 50px"><c:out value="${recommendedBook.bookArticleNum}"/></td>
+					<td style="width: 80px"><c:out value="${recommendedBook.userNum}"/></td>
+					<td style="width: 350px"><c:out value="${recommendedBook.recommendComment}"/></td>
+					<td style="width: 350px"><c:out value="${recommendedBook.writeDate}"/></td>
 					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
+					</c:forEach>
 				</table>
 			</div>
 		</div>

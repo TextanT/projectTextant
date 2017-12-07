@@ -22,11 +22,12 @@ public class ManagerServiceImplement implements ManagerService{
 		oneTen.put("startPage", "1");
 		oneTen.put("endPage", "10");
 		
-		System.out.println(managerDao.getRecommendedBookList());
-		System.out.println(managerDao.getReportBookList());
 		System.out.println(managerDao.getReportCommentList(oneTen));
-		System.out.println(managerDao.getBadCommentList());
-		System.out.println(managerDao.getNoticeList());
+		model.addAttribute("getFirstRecommendedBookList",managerDao.getRecommendedBookList(oneTen));
+		model.addAttribute("getFirstReportBookList",managerDao.getReportBookList(oneTen));
+		model.addAttribute("getFirstReportCommentList",managerDao.getReportCommentList(oneTen));
+		model.addAttribute("getFirstBadCommentList",managerDao.getBadCommentList(oneTen));
+		model.addAttribute("getFirstNoticeList",managerDao.getNoticeList(oneTen));
 	}
 
 }

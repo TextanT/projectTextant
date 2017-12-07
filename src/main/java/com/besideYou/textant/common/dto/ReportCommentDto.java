@@ -6,7 +6,14 @@ public class ReportCommentDto {
 	int commentNum;
 	int userNum;
 	String writeDate;
+	String repoCommCont;
 	
+	public String getRepoCommCont() {
+		return repoCommCont;
+	}
+	public void setRepoCommCont(String repoCommCont) {
+		this.repoCommCont = repoCommCont;
+	}
 	public int getReportCommentNum() {
 		return reportCommentNum;
 	}
@@ -34,7 +41,7 @@ public class ReportCommentDto {
 	@Override
 	public String toString() {
 		return "ReportCommentDto [reportCommentNum=" + reportCommentNum + ", commentNum=" + commentNum + ", userNum="
-				+ userNum + ", writeDate=" + writeDate + "]";
+				+ userNum + ", writeDate=" + writeDate + ", repoCommCont=" + repoCommCont + "]";
 	}
 	
 }

@@ -5,6 +5,13 @@ public class ReportBookDto {
 	int bookArticleNum;
 	int userNum;
 	String writeDate;
+	String repoBookCont;
+	public String getRepoBookCont() {
+		return repoBookCont;
+	}
+	public void setRepoBookCont(String repoBookCont) {
+		this.repoBookCont = repoBookCont;
+	}
 	public int getReportBookNum() {
 		return reportBookNum;
 	}
@@ -32,7 +39,7 @@ public class ReportBookDto {
 	@Override
 	public String toString() {
 		return "ReportBookDto [reportBookNum=" + reportBookNum + ", bookArticleNum=" + bookArticleNum + ", userNum="
-				+ userNum + ", writeDate=" + writeDate + "]";
+				+ userNum + ", writeDate=" + writeDate + ", repoBookCont=" + repoBookCont + "]";
 	}
 		
 	
