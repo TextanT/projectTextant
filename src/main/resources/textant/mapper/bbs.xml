@@ -26,6 +26,7 @@
 				(SELECT C.*,L.nickName
 				FROM  comments C,login L
 				WHERE C.bookArticleNum= #{bookArticleNum} and C.depth=0 and C.userNum=L.userNum
+				and L.USERNUM = C.USERNUM
 				ORDER BY commentNUM desc) human)
 				WHERE RM BETWEEN #{startRow}
 				AND #{endRow}
@@ -36,6 +37,7 @@
 					(SELECT C.*,L.nickName
 					FROM comments C,login L
 					WHERE C.conet LIKE '%'||#{commentSearch}||'%'
+					and L.USERNUM = C.USERNUM
 					and bookArticleNum=#{bookArticleNum}
 					and Depth=0 
 					ORDER by commentnum desc) human)
@@ -48,6 +50,7 @@
 				(SELECT C.*,L.nickName
 				FROM comments C,login L
 				WHERE L.nickName LIKE '%'||#{commentSearch}||'%' 
+				and L.USERNUM = C.USERNUM
 				and C.userNum=L.userNum
 				and bookArticleNum=#{bookArticleNum}
 				and Depth=0

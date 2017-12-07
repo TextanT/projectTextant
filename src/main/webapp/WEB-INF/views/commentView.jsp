@@ -204,6 +204,8 @@ success:function(data){
 	 });
 	 html+=data[0].pageCode
 	 $(".commentList").html(html);
+	 $("#commentCount").html("전체답글: "+data[0].totalCount);
+	 
 }					
 });
 

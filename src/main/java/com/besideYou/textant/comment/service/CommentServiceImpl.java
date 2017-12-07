@@ -268,6 +268,7 @@ public class CommentServiceImpl implements CommentService{
 				pageCode=pagingMap.get("pageCode");
 				pageCode=pageCode.replaceFirst("getCommentRead", "getCommentSearchRead");
 				commentList.get(0).setPageCode(pageCode);
+				commentList.get(0).setTotalCount(totalCount);
 				}
 				}else {
 					commentList=null;
