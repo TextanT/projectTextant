@@ -47,6 +47,15 @@ $(document).ready(function(){
 		getCommentSearchRead(1)
 	});
 	
+	var commentEnter="";
+ 	$('.commentSearchText').keydown(function(event){
+ 		  if(event.keyCode == 13){
+ 			 commentEnter = 0;
+ 			commentEnter = $(".commentSearchText").val();
+ 			$("#commentSearch").val(commentEnter);
+ 	 		$(".commentSearchButton").trigger('click');
+ 		  }
+ 		});
 
 	
 });
