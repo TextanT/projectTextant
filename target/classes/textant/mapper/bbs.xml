@@ -14,25 +14,50 @@
 		set commentCount=commentCount+1
 		where commentNum=#{commentTop}
 	</update>
+	<select id="scrollCommentTopCount" parameterType="int" resultType="int">
+		select commentCount
+		from comments
+		where commentNum=#{commentTop}
+	</select>
 	<select id="getCommentArticleList"  parameterType="HashMap" resultType="comment">
-		<if test="commentDelete==0">
+		<if test="commentSearchListCheak==0">
 			SELECT *
-			FROM (SELECT ROWNUM RM, human.* FROM 
-			(SELECT C.*,L.nickName
-			FROM  comments C,login L
-			WHERE C.bookArticleNum= #{bookArticleNum} and C.depth=0 and C.userNum=L.userNum
-			ORDER BY commentNUM desc) human)
-			WHERE RM BETWEEN #{startRow} AND #{endRow}
+				FROM (SELECT ROWNUM RM, human.* FROM 
+				(SELECT C.*,L.nickName
+				FROM  comments C,login L
+				WHERE C.bookArticleNum= #{bookArticleNum} and C.depth=0 and C.userNum=L.userNum
+				ORDER BY commentNUM desc) human)
+				WHERE RM BETWEEN #{startRow}
+				AND #{endRow}
+		</if>
+		<if test="commentSearchListCheak==1">
+			SELECT * FROM
+					(SELECT ROWNUM RM,human.*from
+					(SELECT C.*,L.nickName
+					FROM comments C,login L
+					WHERE C.conet LIKE '%'||#{commentSearch}||'%'
+					and bookArticleNum=#{bookArticleNum}
+					and Depth=0 
+					ORDER by commentnum desc) human)
+					WHERE RM BETWEEN #{startRow}
+					AND #{endRow}
+		</if>
+		<if test="commentSearchListCheak==2">
+				SELECT * FROM
+				(SELECT ROWNUM RM,human.*from
+				(SELECT C.*,L.nickName
+				FROM comments C,login L
+				WHERE L.nickName LIKE '%'||#{commentSearch}||'%' 
+				and C.userNum=L.userNum
+				and bookArticleNum=#{bookArticleNum}
+				and Depth=0
+				ORDER by commentnum desc) human)
+				WHERE RM BETWEEN #{startRow}
+				 AND #{endRow}
 		</if>
 		<if test="commentDelete==1">
-			SELECT *
-			FROM (SELECT ROWNUM RM, human.* FROM 
-			(SELECT C.*,L.nickName
-			FROM  comments C,login L
-			WHERE C.bookArticleNum= #{bookArticleNum} and C.depth=0 and C.userNum=L.userNum
-			ORDER BY commentNUM desc) human)
-			WHERE RM BETWEEN #{startRow} AND #{endRow} and userNum=#{userNum}
-		</if>
+				 and userNum=#{userNum}
+			</if>
 	</select>
 <!-- 	<select id="pageCountBloack" parameterType="HashMap" resultType="int"> -->
 <!-- 		SELECT min(pagegroup) -->
@@ -45,11 +70,9 @@
 <!-- 	</select> -->
 	
 	<select id="commentListCount" parameterType="HashMap" resultType="int">
-		SELECT COUNT(*)
-		FROM (SELECT ROWNUM RM, human.* FROM 
-		(SELECT * FROM  comments 
-        WHERE pagegroup BETWEEN #{pageCountBlock} and #{page} and commentgroup=0 and bookarticlenum=#{bookArticleNum}
-		ORDER BY pagegroup desc,commentNUM desc) human)  
+			 SELECT count(*) 
+			  FROM  comments 
+       		  WHERE pagegroup BETWEEN #{pageCountBlock} and #{page} and commentgroup=0 and bookarticlenum=#{bookArticleNum}
 	</select>
 	
 	<select id="getCommentTotalCount" parameterType="int" resultType="int">
@@ -89,7 +112,6 @@
 	</update>
 	
 	<select id="commentList" parameterType="HashMap" resultType="comment">
-		<if test="commentDelete==0">
 			SELECT *
 			FROM (SELECT ROWNUM RM, human.* FROM 
 			(SELECT C.*,L.nickName
@@ -97,30 +119,17 @@
 			WHERE C.pagegroup BETWEEN #{pageCountBlock} and #{page} and C.commentgroup=#{commentNum} and C.bookarticlenum=1 and C.userNum=L.userNum
 			ORDER BY C.pagegroup desc,C.commentNUM desc) human)  
 			WHERE RM BETWEEN  #{pageStart} AND #{pageStop}
-		</if>
-		
 		<if test="commentDelete==1">
-			SELECT *
-			FROM (SELECT ROWNUM RM, human.* FROM 
-			(SELECT C.*,L.nickName
-			FROM  comments C,login L 
-			WHERE C.pagegroup BETWEEN #{pageCountBlock} and #{page}  and C.commentgroup=#{commentNum} and C.bookarticlenum=1 and C.userNum=L.userNum
-			ORDER BY C.pagegroup desc,C.commentNUM desc) human)  
-			WHERE RM BETWEEN  #{pageStart} AND #{pageStop} and userNum= #{userNum}
+			and userNum= #{userNum}
 		</if>
 	</select>
 	
 	<delete id="commentDelete" parameterType="HashMap">
-		<if test="commentDeleteCheck==0">
 			DELETE 
 			FROM comments 
 			WHERE commentNum=#{commentNum}
-		</if>
-		
-		<if test="commentDeleteCheck==1">
-			DELETE 
-			FROM comments 
-			WHERE commentNum=#{commentNum} or commentgroup=#{commentgroup}
+		<if test="commentDeleteCheck==0">
+			 or commentgroup=#{commentNum}
 		</if>  
 	</delete>
 	
@@ -151,6 +160,26 @@
 		select totalPage
 		FROM bookInfo
 		where bookArticleNum=#{bookArticleNum}
+	</select>
+	
+	<select id="getCommentSearchCount" parameterType="HashMap" resultType="int">
+		<if test="commentSearchListCheak==1">
+			SELECT COUNT(*)
+			FROM comments
+			WHERE conet LIKE '%'||#{commentSearch}||'%' 
+			and bookArticleNum=#{bookArticleNum}
+			and Depth=0
+			ORDER by commentnum desc
+		</if>
+		<if test="commentSearchListCheak==2">
+			SELECT COUNT(*)
+			FROM comments C,login L
+			WHERE L.nickName LIKE '%'||#{commentSearch}||'%' 
+			and C.userNum=L.userNum
+			and C.bookArticleNum=#{bookArticleNum}
+			and C.Depth=0
+			ORDER by commentnum desc
+		</if>
 	</select>
 </mapper>	
 	

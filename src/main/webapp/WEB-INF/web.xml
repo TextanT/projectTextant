@@ -49,7 +49,7 @@
   <servlet-name>comment</servlet-name>
   <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
   <init-param>
-			<param-name>commentConfigLocation</param-name>
+			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:/spring/comment-context.xml</param-value>
 		</init-param>
   </servlet>

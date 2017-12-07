@@ -23,7 +23,6 @@ import com.besideYou.textant.main.converter.PdfService;
 import com.besideYou.textant.main.converter.PdfServiceText;
 import com.besideYou.textant.main.display.DisplayService;
 import com.besideYou.textant.main.dto.BookInfoDto;
-import com.besideYou.textant.main.dto.CommentDto1;
 import com.besideYou.textant.main.dto.LoginDto;
 import com.besideYou.textant.main.login.LoginService;
 import com.besideYou.textant.main.main.MainService;

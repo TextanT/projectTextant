@@ -13,7 +13,7 @@ public class Page {
 	private StringBuffer sb;
 
 	public synchronized HashMap<String, String> paging(int pageNum, int totalCount, int pageSize, int pageBlock) {
-		HashMap<String, String> pagingMap = new HashMap();
+		HashMap<String, String> pagingMap = new HashMap<>();
 		int totalPage = (int) Math.ceil((double) totalCount / pageSize);
 		startRow = (pageNum - 1) * pageSize + 1;
 		endRow = pageNum * pageSize;

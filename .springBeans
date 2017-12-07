@@ -11,6 +11,7 @@
 		<config>src/main/resources/spring/main-context.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/resources/spring/comment-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
