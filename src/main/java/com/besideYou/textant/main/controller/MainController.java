@@ -1,6 +1,9 @@
 package com.besideYou.textant.main.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.besideYou.textant.main.converter.TempPdfService1;
 import com.besideYou.textant.main.converter.PdfService;
+import com.besideYou.textant.main.converter.TempPdfService1;
 import com.besideYou.textant.main.display.DisplayService;
 import com.besideYou.textant.main.dto.BookInfoDto;
 import com.besideYou.textant.main.dto.LoginDto;
@@ -102,7 +105,29 @@ public class MainController {
 	public String home(Model model, HttpSession session) {
 		return mainService.home(model, session);
 	}
-	
+	@RequestMapping(value="/genre.text", method = RequestMethod.GET)
+	public String genre(Model model, BookInfoDto bookInfoDto) {
+		/*List a;
+		a = new ArrayList();
+//		for(int i =1; i<=15; i++) {
+//			a.add(i);
+//		}
+*/	
+		
+		HashMap<String,List> a = new HashMap();
+//		a.put("title", "너의 최장");
+//		a.put("content", "을 물란다");
+		List b;
+		b = new ArrayList();
+		for(int i =1; i<=15; i++) {
+//			a.put("page", String.valueOf(i));
+			
+			b.add(i);
+		}
+		model.addAttribute("testList",b);
+		return "main/serchpage";
+	}
+
 	@RequestMapping(value = "/write.text", method = RequestMethod.GET)
 	public String text(HttpServletRequest req, HttpSession session) {
 		return "writeForm";
