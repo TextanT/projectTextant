@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mybatis map 선언 표시 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.besideYou.textant.manager.dao.ManagerDao">	
+	
+<!-- 	select out.*  -->
+<!-- 		from (select rownum rum, in.*  -->
+<!-- 			  from (select * from comments) in  -->
+<!-- 			  where articleNum = #{articleNum}  -->
+<!-- 			  order by rum) out  -->
+<!-- 		where rum between 1 and #{commentRow} -->
+	
+<!-- 		SELECT * from reportComment order by writeDate desc -->
+	<select id="getReportCommentList" parameterType="HashMap" resultType="reportComment">
+		select outTable.* 
+		from (
+		select rownum rum, inTable.* 
+			  from (
+			  	select * 
+			  	from reportComment 
+			  	order by writeDate desc
+			  	) inTable  
+			  order by rum
+			  ) outTable 
+		where rum between #{startPage} and #{endPage}
+	</select>
+	<select id="getBadCommentList" resultType="comment">
+		SELECT * from comments order by writeDate desc
+	</select>
+	<select id="getReportBookList" resultType="reportBook">
+		SELECT * from reportBook order by writeDate desc
+	</select>
+	<select id="getNoticeList" resultType="notice">
+		SELECT * from notice order by writeDate desc
+	</select>
+	<select id="getRecommendedBookList" resultType="recommendedBook">
+		SELECT * from recommendedBook order by writeDate desc
+	</select>
+</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

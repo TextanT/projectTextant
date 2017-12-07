@@ -19,7 +19,11 @@
 	<typeAliases>
 	    <typeAlias alias="comment" type="com.besideYou.textant.comment.dto.CommentDto" /> 
 	    <typeAlias alias="login" type="com.besideYou.textant.main.dto.LoginDto" />
-	    <typeAlias alias="bookInfo" type="com.besideYou.textant.main.dto.BookInfoDto" />  
+	    <typeAlias alias="bookInfo" type="com.besideYou.textant.main.dto.BookInfoDto" />
+	    <typeAlias alias="notice" type="com.besideYou.textant.common.dto.NoticeDto" />
+	    <typeAlias alias="recommendedBook" type="com.besideYou.textant.common.dto.RecommendedBookDto" />
+	    <typeAlias alias="reportBook" type="com.besideYou.textant.common.dto.ReportBookDto" />
+	    <typeAlias alias="reportComment" type="com.besideYou.textant.common.dto.ReportCommentDto" />  
 	</typeAliases>
 	
 <!-- 	<mappers> -->
