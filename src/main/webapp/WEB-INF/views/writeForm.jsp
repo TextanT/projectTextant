@@ -8,7 +8,7 @@
 
 <link href="/textant/resources/css/header.css" rel="stylesheet"
 	type="text/css">
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 <!-- Add jQuery library -->
 <script type="text/javascript"
 	src="/textant/resources/fancybox-2.1.7/lib/jquery-1.10.2.min.js"></script>
@@ -57,6 +57,7 @@
 <body>
 	<form action="/textant/write.text" method="post"
 		enctype="multipart/form-data" id="writeForm">
+		<input type="hidden" id="userNum" name="userNum" value="${userNum}">
 		<input type="hidden" id="line" name="line" value="3">
 		<div class="header">
 			<div class="header_logo" style="padding-top: 20px;">
@@ -157,13 +158,16 @@
 
 			<div class="nov_titleDiv">
 				<label class="nov_title">작품명 <input type="text"
-					class="title_text" placeholder="작품명을 입력해주세요" name="bookTitle"></label>
+					class="title_text" placeholder="작품명을 입력해주세요" name="bookName"></label>
 			</div>
-			
-			<input type="text" name="genre" style="display: block;" class="genre_text">		
-				
+
+			<input type="text" name="genre" style="display: none;"
+				id="genre_text" class="genre_tt">
+<%-- 				<p>${userNum}</p> --%>
+
 			<div class="genDiv">
-				<label class="genre">장르 <select name='fruits' id="genre_sel">
+				<label class="genre">장르 <select name='fruits' id="genre_sel"
+					onchange="selectchange(this.form)">
 						<option value='' selected>-- 장르 선택 --</option>
 						<option value='action'>액션</option>
 						<option value='fantasy'>판타지</option>
@@ -190,52 +194,52 @@
 			</div>
 			<div class="book_coverDiv">
 				<div class="book_cover">책표지</div>
-				TEXTANT제공<input type="radio" name="corch" value="textantcor" onclick="textantcover()" checked>
-				외부이미지사용<input type="radio" name="corch" value="usercor" onclick="usercover()">
-				
-				<br>
-				<br>
-				
-				<div class="samplecover1">
-					<a class="fancybox" data-fancybox-group="gallery"
-						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
-						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
-						style="height: 150px;"></a>
-				</div>
-				<div class="samplecover1">
-					<a class="fancybox" data-fancybox-group="gallery"
-						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
-						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
-						style="height: 150px;"></a>
-				</div>
-				<div class="samplecover1">
-					<a class="fancybox" data-fancybox-group="gallery"
-						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
-						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
-						style="height: 150px;"></a>
-				</div>
-				<div class="samplecover1">
-					<a class="fancybox" data-fancybox-group="gallery"
-						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
-						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
-						style="height: 150px;"></a>
-				</div>
-				
-				<div class="userimgDiv" style="display: none;">
-				<a class="cover_btn" id="cover_mit" style="float: left;"
-					onclick="document.all.bookcover.click(); bookimgch();">외부파일선택</a>
-				<!-- 					<input type="file" style="display: none;" name="bookcover" id="bookcover" -->
-				<!-- 					onchange="bookcover()"> -->
-				<input type=file name="bookImg" id="bookcover"
-					style="display: none;" onchange="bookimgch()"> <input
-					type="text" id="bookcor" name="bookcor"
-					style="border: 0; width: 400px; left:222px; margin-top:120px;  position: absolute;
-					background: none; " readonly>
+				TEXTANT제공<input type="radio" name="corch" value="textantcor"
+					onclick="textantcover()" checked> 외부이미지사용<input
+					type="radio" name="corch" value="usercor" onclick="usercover()">
 
-				<div class="selectcover"></div>
-				<div id="holder"></div>
+				<br> <br>
+
+				<div class="samplecover1">
+					<a class="fancybox" data-fancybox-group="gallery"
+						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
+						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
+						style="height: 150px;"></a>
 				</div>
-				
+				<div class="samplecover1">
+					<a class="fancybox" data-fancybox-group="gallery"
+						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
+						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
+						style="height: 150px;"></a>
+				</div>
+				<div class="samplecover1">
+					<a class="fancybox" data-fancybox-group="gallery"
+						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
+						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
+						style="height: 150px;"></a>
+				</div>
+				<div class="samplecover1">
+					<a class="fancybox" data-fancybox-group="gallery"
+						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
+						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
+						style="height: 150px;"></a>
+				</div>
+
+				<div class="userimgDiv" style="display: none;">
+					<a class="cover_btn" id="cover_mit" style="float: left;"
+						onclick="document.all.bookcover.click(); bookimgch();">외부파일선택</a>
+					<!-- 					<input type="file" style="display: none;" name="bookcover" id="bookcover" -->
+					<!-- 					onchange="bookcover()"> -->
+					<input type=file name="bookImg" id="bookcover"
+						style="display: none;" onchange="bookimgch()"> <input
+						type="text" id="bookcor" name="bookcor"
+						style="border: 0; width: 400px; left: 222px; margin-top: 120px; position: absolute; background: none;"
+						readonly>
+
+					<div class="selectcover"></div>
+					<div id="holder"></div>
+				</div>
+
 			</div>
 
 			<div class="book_fileDiv">
@@ -246,8 +250,9 @@
 
 					<input type="text" name='file2' id='file2'
 						style="width: 300px; border: 0;" readonly> <input
-						type="radio" name="ch" value="PDF" checked id="pdfc" onclick="pdfselect()">PDF파일 <input
-						type="radio" name="ch" value="TXT" id="txtc" onclick="textselect()">TXT파일
+						type="radio" name="ch" value="PDF" checked id="pdfc"
+						onclick="pdfselect()">PDF파일 <input type="radio" name="ch"
+						value="TXT" id="txtc" onclick="textselect()">TXT파일
 				</div>
 			</div>
 
@@ -264,37 +269,36 @@
 
 	</form>
 	<footer>
-	<div>
-		<img height="50px" src="/textant/resources/icon_img/footer_logo.png"
-			class="footer_img">
-	</div>
-	<address>
-		Tel. 010-1234-1234<br> Fax. 051)555-555<br> E-Mail.
-		cwj1102@naver.com<br> 주소. 부산광역시 남구 신선로 365 부경대학교<br> <br>
-		<br> <a href="#" class="foo_a">회사소개</a> <a href="#" class="foo_a">광고문의</a>
-		<a href="#" class="foo_a">제휴문의</a> <a href="#" class="foo_a">인재채용</a>
-		<a href="#" class="foo_a">서비스약관</a> <a href="#" class="foo_a">고객센터</a>
-		<a href="#" class="foo_a">Q&A게시판</a>
-	</address>
+		<div>
+			<img height="50px" src="/textant/resources/icon_img/footer_logo.png"
+				class="footer_img">
+		</div>
+		<address>
+			Tel. 010-1234-1234<br> Fax. 051)555-555<br> E-Mail.
+			cwj1102@naver.com<br> 주소. 부산광역시 남구 신선로 365 부경대학교<br> <br>
+			<br> <a href="#" class="foo_a">회사소개</a> <a href="#"
+				class="foo_a">광고문의</a> <a href="#" class="foo_a">제휴문의</a> <a
+				href="#" class="foo_a">인재채용</a> <a href="#" class="foo_a">서비스약관</a>
+			<a href="#" class="foo_a">고객센터</a> <a href="#" class="foo_a">Q&A게시판</a>
+		</address>
 	</footer>
 
 
 
 	<script type="text/javascript">
-	
 		function textselect() {
 			$('.book_propDiv').css("display", "block");
 		}
-		function pdfselect(){
-			$('.book_propDiv').css("display", "none");	
+		function pdfselect() {
+			$('.book_propDiv').css("display", "none");
 		}
-		function textantcover(){
-			$('.userimgDiv').css("display", "none");	
-			$('.samplecover1').css("display", "block");	
+		function textantcover() {
+			$('.userimgDiv').css("display", "none");
+			$('.samplecover1').css("display", "block");
 		}
-		function usercover(){
-			$('.userimgDiv').css("display", "block");	
-			$('.samplecover1').css("display", "none");	
+		function usercover() {
+			$('.userimgDiv').css("display", "block");
+			$('.samplecover1').css("display", "none");
 		}
 	</script>
 
@@ -338,6 +342,9 @@
 			} else {
 				alert("다음 파일만 업로드가 가능합니다.\n\n 파일:" + (extArray.join("  "))
 						+ "\n\n 업로드할 파일을 " + " 다시 선택하여 주세요.");
+			}
+			if(genre_tt.text==""){
+				alert("장르를 입력해주세요");
 			}
 
 			document.getElementById("writeForm").submit();
@@ -448,12 +455,11 @@
 		})
 	</script>
 	<script type="text/javascript">
-	document.getElementById("genre_sel").change(function(){
+		function selectchange(frm) {
 		
-		$('.genre_text').val()==document.getElementById("genre_sel").val();
-		
-	})
-	
+			frm.genre.value = frm.fruits.options[frm.fruits.selectedIndex].value;
+
+		}
 	</script>
 
 </body>

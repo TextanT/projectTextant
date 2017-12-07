@@ -187,7 +187,7 @@
 				<a href='' class='sub_header_menu2' id="sub_menu2">창작카페</a>
 			</div>
 			<div class="sub_sub3">
-				<a href='' class='sub_header_menu3' id="sub_menu3">장르별</a>
+				<a href='genre.text' class='sub_header_menu3' id="sub_menu3">장르별</a>
 			</div>
 			<div class="sub_sub3">
 				<a href='' class='sub_header_menu3' id="sub_menu3">책쓰기</a>
