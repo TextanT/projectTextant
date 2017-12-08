@@ -18,9 +18,8 @@
 	type="text/javascript"></script>
 <title>Insert title here</title>
 <style>
-a{
-text-decoration: none;
-
+a {
+	text-decoration: none;
 }
 </style>
 </head>
@@ -134,22 +133,22 @@ text-decoration: none;
 				<div class="serchoption13" id="serchoptionid">시</div>
 				<div class="serchoption14" id="serchoptionid">수필</div>
 				<div class="serchoption15" id="serchoptionid">유머</div>
-				<br> <br> <br> <br> <input type="radio" name="1"
-					class="radio1" onclick="radio1()"> <input type="radio"
-					name="1" class="radio2" onclick="radio2()"> <input
-					type="radio" name="1" class="radio3" onclick="radio3()"> <input
-					type="radio" name="1" class="radio4" onclick="radio4()"> <input
-					type="radio" name="1" class="radio5" onclick="radio5()"> <input
-					type="radio" name="1" class="radio6" onclick="radio6()"> <input
-					type="radio" name="1" class="radio7" onclick="radio7()"> <input
-					type="radio" name="1" class="radio8" onclick="radio8()"> <input
-					type="radio" name="1" class="radio9" onclick="radio9()"> <input
-					type="radio" name="1" class="radio10" onclick="radio10()">
-				<input type="radio" name="1" class="radio11" onclick="radio11()">
-				<input type="radio" name="1" class="radio12" onclick="radio12()">
-				<input type="radio" name="1" class="radio13" onclick="radio13()">
-				<input type="radio" name="1" class="radio14" onclick="radio14()">
-				<input type="radio" name="1" class="radio15" onclick="radio15()">
+				<input type="radio" name="1" class="radio1" onclick="radio1()" value='histroy'> 
+    			<input type="radio" name="1" class="radio2" onclick="radio2()" value='sports'> 
+    			<input type="radio" name="1" class="radio3" onclick="radio3()" value='SF'> 
+    			<input type="radio" name="1" class="radio4" onclick="radio4()" value='Reasoning'>
+    			<input type="radio" name="1" class="radio5" onclick="radio5()" value='horror'> 
+    			<input type="radio" name="1" class="radio6" onclick="radio6()" value='game'> 
+    			<input type="radio" name="1" class="radio7" onclick="radio7()" value='fantasy'>
+    			<input type="radio" name="1" class="radio8" onclick="radio8()" value='arts'> 
+    			<input type="radio" name="1" class="radio9" onclick="radio9()" value='mystery'> 
+    			<input type="radio" name="1" class="radio10" onclick="radio10()" value='romance'>
+    			<input type="radio" name="1" class="radio11" onclick="radio11()" value='war'> 
+    			<input type="radio" name="1" class="radio12" onclick="radio12()" value='growth'> 
+    			<input type="radio" name="1" class="radio13" onclick="radio13()" value='verse'>
+    			<input type="radio" name="1" class="radio14" onclick="radio14()" value='essay'> 
+    			<input type="radio" name="1" class="radio15" onclick="radio15()" value='humor'> 
+    			<input type="text" class="genre" name="genre">
 			</div>
 		</div>
 		<div class="serchbookDiv">
@@ -158,12 +157,13 @@ text-decoration: none;
 					<a href="#"><img
 						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
 						style="border: 1px solid #D8D8D8; position: absolute; z-index: 2; height: 242px;"
-						class="book_img_size" onmouseover="bookli1over()"
-						onmouseout="bookli1out()">
-						<div style="width: 166.45px; height: 244px; position: relative;
-						text-align: center; color: white;"
+						class="book_img_size">
+						<div
+							style="width: 166.45px; height: 244px; position: relative; text-align: center; color: white;"
 							class="book_cap${lists}" id="book_cap${lists}">
-							<h5><c:out value="${lists}"></c:out></h5>
+							<h5>
+								<c:out value="${lists}"></c:out>
+							</h5>
 							<p>기시미이치로</p>
 							<br>
 							<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
