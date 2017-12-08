@@ -1,5 +1,7 @@
 package com.besideYou.textant.genre.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,30 +9,51 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.besideYou.textant.genre.dao.GenreDao;
+import com.besideYou.textant.genre.genrepage.GenrePage;
 import com.besideYou.textant.main.dto.BookInfoDto;
 
 @Service
-public class GenreServiceImpl implements GenreService{
-	
+public class GenreServiceImpl implements GenreService {
+
 	@Autowired
 	GenreDao genreDao;
-	
+
+	@Autowired
+	GenrePage genrePage;
+
 	@Override
-	public List<String> genreserch(String genre) {
+	public HashMap<Object, Object> genreserch(Model model,String genre ,int pageNum) {
 		
-		List<String> gen;
+		List<String> gen = new ArrayList();
+		HashMap<String, String> genreMap =new HashMap<>();
+		HashMap<Object, Object> goodMap = null;
+		int genreCount=0;
+
+		genreCount=genreDao.getGenreCount(genre);
+
+
+		System.out.println("genreService.genreser : "+genreCount);
 		
-		gen = genreDao.genreserch(genre);
+		genreMap = genrePage.paging(pageNum, genreCount, 15, 5);
+		
+		genreMap.put("genre", genre);
+		
+//		System.out.println("/-/-/-/-/-/-/-/-/"+genreMap.put("genre", genre));
+		
+//		System.out.println("genre--"+genre);
 		
 		
-		System.out.println("genreService.genreser : "+genre);
-		System.out.println("genreService.genreser : "+gen);
 		
+//		System.out.println("genre--"+model);
 		
-		
-		
-		return gen;
+		gen=genreDao.genreserch(genreMap);
+		goodMap = new HashMap<>();
+		System.out.println(gen);
+		goodMap.put("fileLocationList", gen);
+		goodMap.put("pageCode",genreMap.get("pageCode"));
+		System.out.println(gen);
+//		System.out.println("이미지 경로----"+genreDao.genreserch(genreMap));
+		return goodMap;
 	}
-	
 
 }

@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- mybatis map 선언 표시 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-              "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.besideYou.textant.genre.dao.GenreDao">	
+<mapper namespace="com.besideYou.textant.genre.dao.GenreDao">
+
+	<select id="genreserch" parameterType="HashMap" resultType="String">
+		SELECT FILELOCATION FROM
+		(SELECT ROWNUM RM,human.FILELOCATION
+		FROM
+		(SELECT FILELOCATION
+		FROM BOOKINFO
+		WHERE GENRE = #{genre}
+		ORDER by bookArticleNum desc) human)
+		WHERE RM BETWEEN #{startRow} AND #{endRow}
+	</select>
 	
-	<select id="genreserch" parameterType="String" resultType="String">
-		SELECT FILELOCATION FROM BOOKINFO WHERE GENRE = #{genre}
+	<select id="getGenreCount" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM BOOKINFO
+        WHERE GENRE = #{genre}
 	</select>
 	
 	
+
 </mapper>
 	
 	

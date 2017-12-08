@@ -2,8 +2,9 @@ $('.serchoption1').click(function() {
 	$('.radio1').prop('checked', true);
 	$('.radio1').attr('value', 1);
 	$('.genre').val('history');
-
-	genresub();
+	var pagNum="";
+	pagNum=$("#pageNum").val();
+	genresub(pagNum);
 
 	if ($('.radio1').val() == 1) {
 

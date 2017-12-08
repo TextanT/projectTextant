@@ -23,18 +23,18 @@ public class GenreController {
 	
 	@RequestMapping(value="/genre.genre", method = RequestMethod.GET)
 	@ResponseBody
-	public List<String> genre(Model model, BookInfoDto bookInfoDto, String genre) {
+	public HashMap<Object, Object> genre(Model model, BookInfoDto bookInfoDto, String genre,int pageNum) {
 	
 		
 //		HashMap<String,List> a = new HashMap();
 
-		List b;
+		List b; 
 		b = new ArrayList();
 		for(int i =1; i<=15; i++) {
 			
 			b.add(i);
 		}
-		genreService.genreserch(genre);
+//		genreService.genreserch(genre);
 		
 		
 		
@@ -42,22 +42,24 @@ public class GenreController {
 		
 		model.addAttribute("testList",b);
 		
-		return genreService.genreserch(genre);
+		
+		
+		return genreService.genreserch(model,genre,pageNum);
 	}
 	
 	
 	@RequestMapping(value="/serchpage.genre")
 	public String serchpage(Model model) {
 		
-		List b;
-		b = new ArrayList();
-		for(int i =1; i<=15; i++) {
-			
-			b.add(i);
-		}
-		
-		model.addAttribute("testList",b);
-		
+//		List b;
+//		b = new ArrayList();
+//		for(int i =1; i<=15; i++) {
+//			
+//			b.add(i);
+//		}
+//		
+//		model.addAttribute("testList",b);
+//		
 		return "/WEB-INF/views/main/searchpage.jsp";
 	}
 	
