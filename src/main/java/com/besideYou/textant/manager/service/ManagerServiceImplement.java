@@ -2,15 +2,18 @@ package com.besideYou.textant.manager.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.besideYou.textant.common.dto.RecommendedBookDto;
+import com.besideYou.textant.common.dto.ReportBookDto;
 import com.besideYou.textant.manager.dao.ManagerDao;
-import com.besideYou.textant.manager.dto.ManagingDto;
+import com.besideYou.textant.manager.dto.ManagingBookDto;
 import com.besideYou.textant.manager.page.ManagerPage;
 
 @Service
@@ -22,7 +25,7 @@ public class ManagerServiceImplement implements ManagerService{
 	@Autowired
 	ManagerPage managerPage;
 	
-	
+
 	int pageBlock = 5;
 	int pageSize = 10;
 	
@@ -43,18 +46,18 @@ public class ManagerServiceImplement implements ManagerService{
 	}
 	
 	@Override
-	public void managerRecommendBook(Model model, int pageNum) {
+	public void managerRecommendBook(Model model, int pageNum, HttpServletRequest req) {
 		int totalCount = 0;
 //		pageNum = 1;
 		ArrayList<RecommendedBookDto> recommendBookList = null;
 		HashMap<String, String> pagingMap = null;
 		HashMap<String, String> paramMap = null; 
-		ArrayList<ManagingDto> managingList = null;  
-		ManagingDto managingDto = null;
+		ArrayList<ManagingBookDto> managingList = null;  
+		ManagingBookDto managingDto = null;
 		try {
 			totalCount = managerDao.getTotalRecommendBookCount();
 
-			pagingMap = managerPage.paging(pageNum, totalCount, pageSize, pageBlock);
+			pagingMap = managerPage.paging(pageNum, totalCount, pageSize, pageBlock, req);
 
 			int startRow = managerPage.getStartRow();
 			int endRow = managerPage.getEndRow();
@@ -71,7 +74,7 @@ public class ManagerServiceImplement implements ManagerService{
 		managingList = new ArrayList<>();
 		
 		for(RecommendedBookDto ml : recommendBookList) {
-			managingDto = new ManagingDto();
+			managingDto = new ManagingBookDto();
 			managingDto.setNum(ml.getRecommendNum());
 			managingDto.setBookName(managerDao.getBookName(ml.getBookArticleNum()));
 			managingDto.setUserName(managerDao.getUserName(ml.getUserNum()));
@@ -90,4 +93,71 @@ public class ManagerServiceImplement implements ManagerService{
 //		model.addAttribute("managerRecommendBookList", managerDao.getRecommendedBookList(pagingMap));
 	}
 
+	@Override
+	public void managerReportBook(Model model, int pageNum, HttpServletRequest req) {
+		int totalCount = 0;
+//		pageNum = 1;
+		ArrayList<ReportBookDto> reportBookList = null;
+		HashMap<String, String> pagingMap = null;
+		HashMap<String, String> paramMap = null; 
+		ArrayList<ManagingBookDto> managingList = null;  
+		ManagingBookDto managingDto = null;
+		try {
+			totalCount = managerDao.getTotalReportBookCount();
+
+			pagingMap = managerPage.paging(pageNum, totalCount, pageSize, pageBlock, req);
+
+			int startRow = managerPage.getStartRow();
+			int endRow = managerPage.getEndRow();
+			paramMap = new HashMap<>();
+			paramMap.put("startPage", String.valueOf(startRow));
+			paramMap.put("endPage", String.valueOf(endRow));
+
+			reportBookList = (ArrayList<ReportBookDto>) managerDao.getReportBookList(paramMap);
+			System.out.println(reportBookList);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
+		managingList = new ArrayList<>();
+		
+		for(ReportBookDto ml : reportBookList) {
+			managingDto = new ManagingBookDto();
+			managingDto.setNum(ml.getReportBookNum());
+			managingDto.setBookName(managerDao.getBookName(ml.getBookArticleNum()));
+			managingDto.setUserName(managerDao.getUserName(ml.getUserNum()));
+			managingDto.setComment(ml.getRepoBookCont());
+			managingDto.setWriteDate(ml.getWriteDate());
+			System.out.println(ml);
+			managingList.add(managingDto);
+		}
+		
+		model.addAttribute("totalCount", totalCount);
+		System.out.println(pagingMap.get("pageCode"));
+		model.addAttribute("managingList", managingList);
+		model.addAttribute("pageCode", pagingMap.get("pageCode"));		
+	}
+
+	@Override
+	public void managingRecommendContent(int num, Model model) {
+		RecommendedBookDto recommendedBookDto;
+		ManagingBookDto managingDto;
+		
+		recommendedBookDto = managerDao.getRecommendedBookOne(num);
+		
+		managingDto = new ManagingBookDto();
+		managingDto.setNum(recommendedBookDto.getRecommendNum());
+		managingDto.setBookName(managerDao.getBookName(recommendedBookDto.getBookArticleNum()));
+		managingDto.setUserName(managerDao.getUserName(recommendedBookDto.getUserNum()));
+		managingDto.setComment(recommendedBookDto.getRecommendComment());
+		managingDto.setWriteDate(recommendedBookDto.getWriteDate());
+		model.addAttribute("managingList", managingDto);
+	}
+	
+	@Override
+	public void recommendWrite(RecommendedBookDto recommendedBookDto, HttpSession session) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

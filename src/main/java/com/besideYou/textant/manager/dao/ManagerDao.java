@@ -18,7 +18,10 @@ public interface ManagerDao {
 	List<RecommendedBookDto> getRecommendedBookList(HashMap<String,String> hashMap);
 	
 	int getTotalRecommendBookCount();
+	int getTotalReportBookCount();
 	String getUserName(int userNum);
 	String getBookName(int bookArticleNum);
+	
+	RecommendedBookDto getRecommendedBookOne(int num);
 	
 }

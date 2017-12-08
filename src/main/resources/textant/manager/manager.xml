@@ -84,12 +84,20 @@
 	SELECT COUNT(*) FROM recommendedBook
 	</select>
 	
+	<select id="getTotalReportBookCount" resultType="Integer">
+	SELECT COUNT(*) FROM reportBook
+	</select>
+	
 	<select id="getUserName" parameterType="Integer" resultType="String">
 	SELECT USERID FROM LOGIN WHERE USERNUM = #{userNum}
 	</select>
 	
 	<select id="getBookName" parameterType="Integer" resultType="String">
 	SELECT BOOKNAME FROM BOOKINFO WHERE BOOKARTICLENUM = #{bookArticleNum}
+	</select>
+	
+	<select id="getRecommendedBookOne" parameterType="Integer" resultType="recommendedBook">
+	SELECT * FROM recommendedBook WHERE recommendNum = #{num}
 	</select>
 </mapper>
 	

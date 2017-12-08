@@ -3,12 +3,19 @@ package com.besideYou.textant.manager.dto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ManagingDto {
+public class ManagingBookDto {
 	int num;
 	String bookName;
 	String userName;
 	String writeDate;
 	String comment;
+	String reportComment;
+	public String getReportComment() {
+		return reportComment;
+	}
+	public void setReportComment(String reportComment) {
+		this.reportComment = reportComment;
+	}
 	public int getNum() {
 		return num;
 	}
@@ -41,8 +48,8 @@ public class ManagingDto {
 	}
 	@Override
 	public String toString() {
-		return "managingDto [num=" + num + ", bookName=" + bookName + ", userName=" + userName + ", writeDate="
-				+ writeDate + ", comment=" + comment + "]";
+		return "ManagingBookDto [num=" + num + ", bookName=" + bookName + ", userName=" + userName + ", writeDate="
+				+ writeDate + ", comment=" + comment + ", reportComment=" + reportComment + "]";
 	}
 	
 	
