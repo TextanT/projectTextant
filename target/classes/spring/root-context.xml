@@ -40,6 +40,7 @@
 <mybatis-spring:scan base-package="com.besideYou.textant.main.dao"/>
 <mybatis-spring:scan base-package="com.besideYou.textant.comment.dao"/>
 <mybatis-spring:scan base-package="com.besideYou.textant.manager.dao"/>	
+<mybatis-spring:scan base-package="com.besideYou.textant.myStudy.dao"/>	
 <!-- 서블릿에서 스캔한 빈과 중복되어서 에러발생 -->
 <!-- 	<mybatis-spring:scan base-package="com.pknu.bbs"/>	 -->
 	

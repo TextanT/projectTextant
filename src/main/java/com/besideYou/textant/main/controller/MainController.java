@@ -103,6 +103,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/main.text", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
+		System.out.println(session.getAttribute("id"));
 		return mainService.home(model, session);
 	}
 	@RequestMapping(value="/genre.text", method = RequestMethod.GET)

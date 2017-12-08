@@ -43,6 +43,7 @@
 			<param-value>
 			classpath:/spring/main-context.xml
 			classpath:/spring/manager-context.xml
+			classpath:/spring/myStudy-context.xml
 			</param-value>
 		</init-param>
 		

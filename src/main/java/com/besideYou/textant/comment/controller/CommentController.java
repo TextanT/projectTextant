@@ -61,14 +61,14 @@ public class CommentController {
 	@ResponseBody
 	public List<CommentDto> commentTotalRead(HttpSession session,int page,int commentTotalCount,int bookArticleNum,int commentNum,int commentDelete,int commentSearchCheak, int commentSearchList,String commentSearch){
 		
-		int userNum=(int)session.getAttribute("userNum");;
+		int userNum=(int)session.getAttribute("userNum");
 		return commentService.commentTotalRead(page,commentTotalCount,userNum,bookArticleNum,commentNum,commentDelete,commentSearchCheak,commentSearchList,commentSearch);
 	}
 	
 	@RequestMapping(value="/commentDelete.comment")
 	@ResponseBody
 	public int commentDelete(int commentNum,int commentGroup,HttpSession session){
-		int userNum=(int)session.getAttribute("userNum");;
+		int userNum=(int)session.getAttribute("userNum");
 		
 		return commentService.commentDelete(commentNum,commentGroup);
 	}
@@ -77,7 +77,7 @@ public class CommentController {
 	@ResponseBody
 	public HashMap<String, Integer> scrollWrite(CommentDto commentDto,int page,int commentTo,int commentTop,HttpSession session,int commentCheck) {
 		commentDto.setPageGroup(page);
-		commentDto.setUserNum(1);
+		commentDto.setUserNum((int)session.getAttribute("userNum"));
 		
 		return commentService.scroll(commentDto,commentTo,commentTop);
 	}

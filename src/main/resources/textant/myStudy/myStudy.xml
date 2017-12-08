@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mybatis map 선언 표시 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.besideYou.textant.myStudy.dao.MyStudyDao">	
+	<select id="getMyComment" parameterType="HashMap" resultType="comment">
+			SELECT *
+			FROM (SELECT ROWNUM RM, human.* FROM 
+					(SELECT C.*,L.nickName
+					 FROM  comments C,login L 
+			         WHERE C.userNum=#{userNum} and C.userNum=L.userNum
+			         ORDER BY C.commentNUM desc) human)  
+			WHERE RM BETWEEN  #{startRow} AND #{endRow}
+	</select>
+	<select id="getMyBookWrite" parameterType="HashMap" resultType="bookInfo">
+			SELECT *
+			FROM (SELECT ROWNUM RM, human.* FROM 
+					(SELECT *
+					 FROM bookInfo
+			         WHERE userNum=#{userNum}
+			         ORDER BY bookArticleNum desc) human)  
+			WHERE RM BETWEEN  #{pageStart} AND #{pageStop}
+	</select>
+	<select id="getMyBookRead" parameterType="HashMap" resultType="readBook">
+			SELECT *
+			FROM (SELECT ROWNUM RM, human.* FROM 
+					(SELECT R.*,B.fileLocation,B.bookName
+					 FROM readBook R, bookInfo B
+			         WHERE R.userNum=#{userNum} and R.userNum=B.userNum
+			         ORDER BY R.readBookNum desc) human)    
+			WHERE RM BETWEEN  #{startRow} AND #{endRow}
+	</select>
+	<select id="getMyWish" parameterType="HashMap" resultType="bookWish">
+			SELECT *
+			FROM (SELECT ROWNUM RM, human.* FROM 
+					(SELECT W.*,B.fileLocation,B.bookName
+					 FROM bookWish W, bookInfo B
+			         WHERE W.userNum=#{userNum} and R.userNum=B.userNum
+			         ORDER BY W.wishNum desc) human)   
+			WHERE RM BETWEEN  #{startRow} AND #{endRow}
+	</select>
+	<select id="getMyBookmark" parameterType="HashMap" resultType="bookMark">
+			SELECT *
+			FROM (SELECT ROWNUM RM, human.* FROM 
+					(SELECT M.*,B.fileLocation,B.bookName
+					 FROM bookMark, bookInfo B
+			         WHERE M.userNum=#{userNum} and R.userNum=B.userNum
+			         ORDER BY M.bookMarkNum desc) human)   
+			WHERE RM BETWEEN  #{startRow} AND #{endRow}
+	</select>
+	<select id="getMyCommentCount" parameterType="int" resultType="int">
+		SELECT count(*) 
+		from comments
+		where userNum=#{userNum}
+	</select>
+	<select id="getMyBookWriteCount" parameterType="int" resultType="int">
+		SELECT count(*) 
+		from bookInfo
+		where userNum=#{userNum}
+	</select>
+	<select id="getMyBookReadCount" parameterType="int" resultType="int">
+		SELECT count(*) 
+		from readBook
+		where userNum=#{userNum}
+	</select>
+	<select id="getMyWishCount" parameterType="int" resultType="int">
+		SELECT count(*) 
+		from bookWish
+		where userNum=#{userNum}
+	</select>
+	<select id="getMyBookMarkCount" parameterType="int" resultType="int">
+		SELECT count(*) 
+		from bookMark
+		where userNum=#{userNum}
+	</select>
+</mapper>	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
