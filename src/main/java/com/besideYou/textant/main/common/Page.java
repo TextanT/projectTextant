@@ -64,5 +64,16 @@ public class Page {
 		pagingMap.put("pageCode", sb.toString());
 		return pagingMap;
 	}
+	public int getStartRow() {
+		return startRow;
+	}
+
+	public int getEndRow() {
+		return endRow;
+	}
+
+	public StringBuffer getSb() {
+		return sb;
+	}
 
 }

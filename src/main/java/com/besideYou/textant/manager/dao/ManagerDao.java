@@ -17,4 +17,8 @@ public interface ManagerDao {
 	List<NoticeDto> getNoticeList(HashMap<String,String> hashMap);
 	List<RecommendedBookDto> getRecommendedBookList(HashMap<String,String> hashMap);
 	
+	int getTotalRecommendBookCount();
+	String getUserName(int userNum);
+	String getBookName(int bookArticleNum);
+	
 }
