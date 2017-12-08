@@ -98,6 +98,9 @@ function commentWrite() {
 	});
 	
 }
+
+
+//현재 보고 있는 '책의 페이지''+ 전후 5p'에 달려있는 전체 댓글 갯수 정보 
 function commentListWrite() {
 	var html = "";
 	$.ajax({
@@ -552,6 +555,9 @@ function reportComment(commentNum){
 	<input id='commentCheck' type="hidden" name='commentCheck' value='0'>
 
 	<div class="bbb"></div>
+	<!-- 덧글을 보여주는 책의 페이지 / 현재페이지 / 전체답글 갯수 -->
+	
+	
 	<div class="ccc" style="overflow-y:scroll;width:400px;height:500px;">
 		<div class="aaa">
 		</div>

@@ -90,24 +90,30 @@ public class CommentServiceImpl implements CommentService{
 	public HashMap<String, Integer> commentCount(int page,int bookArticleNum) {
 		HashMap<String, Integer> pagePoint = new HashMap<>();
 		HashMap<String,Integer>  pageBlockMin = new HashMap<>();
+		
 		int pageListCount;
 		int pageCut;
+		
 		pageBlockMin.put("page", page);
 		pageBlockMin.put("pageBlock", pageBlock);
+		
 		int pageCountBlock =0;
+		
 		if(pageBlock>=page) {
 			pageCountBlock=1;
 		}else {
 			int pageCountCut=pageBlock;
 			pageCountCut--;
-			pageCountBlock=page-pageCountCut;
-			
+			pageCountBlock=page-pageCountCut;			
 		}
+		
 		pageBlockMin.put("pageCountBlock",pageCountBlock);
 		pageBlockMin.put("bookArticleNum",bookArticleNum);
 		System.out.println(pageBlockMin);
+		
 		pageListCount=commentDao.commentListCount(pageBlockMin);
 		pageCut=(int)Math.ceil((double)pageListCount/pageSize);
+		
 		pagePoint.put("pageListCount",pageListCount);
 		pagePoint.put("pageCountBlock",pageCountBlock);
 		pagePoint.put("page",page);
@@ -115,6 +121,7 @@ public class CommentServiceImpl implements CommentService{
 		pagePoint.put("bookArticleNum",bookArticleNum);
 		pagePoint.put("pageSize",pageSize);
 		System.out.println(pagePoint);
+		
 		return pagePoint;
 	}
 
@@ -207,13 +214,17 @@ public class CommentServiceImpl implements CommentService{
 	@Override
 	public HashMap<String, Integer> commentTotalCount(int bookArticleNum) {
 		HashMap<String, Integer> commentTotalCountList=new HashMap<>();
+		
 		int totalCount=0;
 		int bookTotalPage=0;
+		
 			bookTotalPage=commentDao.getbookTotalPage(bookArticleNum);
 			totalCount=commentDao.getCommentTotalCount(bookArticleNum);
+			
 			commentTotalCountList.put("totalCount",totalCount);
 			commentTotalCountList.put("pageSize",pageSize);
 			commentTotalCountList.put("bookTotalPage",bookTotalPage);
+			
 		return commentTotalCountList;
 	}
 

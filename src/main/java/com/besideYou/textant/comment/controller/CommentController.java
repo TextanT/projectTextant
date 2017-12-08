@@ -22,7 +22,12 @@ public class CommentController {
 	CommentService commentService;
 
 	String view;
-
+	
+	@RequestMapping(value="/vierwer.comment", method = RequestMethod.GET)
+	public String mainView() {
+		
+		return "/WEB-INF/views/viewer.jsp";
+	}
 
 	@RequestMapping(value="/scroll.comment", method = RequestMethod.GET)
 	public String scroll() {
