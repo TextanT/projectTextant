@@ -1,0 +1,441 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>${"현재 책 제목"}</title>
+
+<style>
+*{margin:0; padding:0;}
+
+
+nav{width:170px; height:100%; background:#66f; position:fixed; top:0; right:0; z-index:101;}
+nav img{width:25px; height:25px;}
+#nav-pop{position: absolute; bottom:25px;}
+#nav-pop ul li{float:right;}
+#nav-config{position: absolute; bottom:0px; right:0px;}
+
+.open1{display:block; width:80px; height:50px; line-height:50px; background:#69F; position:absolute; top:30px; left:0px;}
+.open2{display:block; width:80px; height:50px; line-height:50px; background:#69F; position:absolute; top:80px; left:0px;}
+.close1{display:block; width:30px; height:30px; line-height:30px; font-size:13px; font-weight:bold; background:#fff; color:#69F; border-radius:15px; text-align:center; text-decoration:none; position:absolute; top:15px; right:15px;}
+.close2{display:block; width:30px; height:30px; line-height:30px; font-size:13px; font-weight:bold; background:#999; color:#69F; border-radius:15px; text-align:center; text-decoration:none; position:absolute; top:15px; left:15px;}
+
+.comment{width:35%; height:95%; background:#69F;}
+
+.RightWrap{position:fixed; top:0; right:-500px; z-index:100;}
+.LeftWrap{position:fixed; top:0; left:-500px; z-index:100;}
+
+
+#comment{margin:80px 30px 50px 30px;}
+#coShow{margin-top:30px;}
+
+#comment table{width:100%; border:1px white dashed; }
+
+</style>
+
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.1.7.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="js/modernizr.2.5.3.min.js"></script>
+<script type="text/javascript" src="js/hash.js"></script>
+
+</head>
+
+<body>
+<!-- BOOK VIEWER -->
+<div id="canvas" style="float:left">
+	<div id="book-zoom">
+		<div class="sample-docs">
+			<!--<div ignore="1" class="tabs"><div class="left">  </div> <div class="right"> </div></div>-->
+			<div class="hard"></div>
+			<div class="hard"></div>
+			<div class="hard p29"></div>
+			<div class="hard p30"></div>
+		</div>
+	</div>
+	<div id="viewer-bottom">
+		<div id="slider-bar" class="turnjs-slider">
+			<div id="slider"></div>
+		</div>
+
+		<div id="page-counter" class=" ">
+			<div id=""> 
+			 <p>ㅣ◀  ◀    현재페이지 / 총페이지   ▶  ▶ㅣ</p>
+			</div>
+		</div>
+	</div><!--viewer-bottom-->
+</div> <!--canvas-->
+
+
+<!-- NAVIGATION-->
+<nav>
+	<div id="look-comment">
+		답글 보기
+		<a href="#" class="open1">왼쪽</a>
+		<a href="#" class="open2">오른쪽</a>
+	</div>
+	
+	<div id="nav-pop">
+	<!--input 으로 바꾸기-->
+		<ul>
+			<li>북마크 보기 <img src="img/if_office-01_809597.png" alt="북마크보기"></li>
+			<li>북마크 하기 <img src="img/if_bookmark-outline_326548.png" alt=""></li>
+			<li>책장에 추가 <img src="img/if_book_sans_add_103401.png" alt=""></li>
+			<li>별점주기 <img src="img/if_star_103714.png" alt=""></li>
+			<li>신고하기 <img src="img/if_office-01_809597.png" alt=""></li>
+			<li>전자책으로 보기 <img src="img/if_office-01_809597.png" alt=""></li>
+
+		</ul>
+	</div>
+	<div id="nav-config">
+		<img src="img/if_settings_103345.png" alt="">
+	</div>
+
+
+</nav>
+
+<div class="RightWrap comment">
+
+	<div>답글보기 영역</div>
+	<a href="#" class="close1">X</a>
+
+	<div id="comment">
+
+		<div id="coWrite">
+			<table>
+				<tr><td>"아이디"님</td></tr>
+				<tr>
+				   <td><input> </input></td>
+				   <td><button>답글쓰기 </button></td>
+				</tr>
+			</table>
+		</div>
+
+		<div id="coShow">
+			<table>
+				<tr>
+					<td> 아이디 </td>
+					<td> 날짜</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+					답글내역
+					</td>
+				</tr>
+				<tr><td>------</td><td></td></tr>
+				<tr>
+					<td> 아이디 </td>
+					<td> 날짜</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+					답글내역
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center" height="40px"> 페이지넘버 1 2 3 </td>
+				</tr>
+			</table>
+			</div> <!--#coShow  -->
+		</div> <!--//#comment -->
+	</div> <!--//.RightWrap -->
+
+
+
+
+
+	<div class="LeftWrap comment">
+
+	<div>답글보기 영역</div>
+		<a href="#" class="close2">X</a>
+
+		<div >
+			<p>이쪽은 왼쪽 영역의 댓글창입니다 </p>
+		
+		</div> <!--//#comment -->
+	</div> <!--//.RightWrap -->
+		
+
+
+<script type="text/javascript">
+
+function loadApp() {
+
+	var flipbook = $('.sample-docs');
+
+	// Check if the CSS was already loaded
+	
+	if (flipbook.width()==0 || flipbook.height()==0) {
+		setTimeout(loadApp, 10);
+		return;
+	}
+
+	// Mousewheel
+
+	$('#book-zoom').mousewheel(function(event, delta, deltaX, deltaY) {
+
+		var data = $(this).data(),
+			step = 30,
+			flipbook = $('.sample-docs'),
+			actualPos = $('#slider').slider('value')*step;
+
+		if (typeof(data.scrollX)==='undefined') {
+			data.scrollX = actualPos;
+			data.scrollPage = flipbook.turn('page');
+		}
+
+		data.scrollX = Math.min($( "#slider" ).slider('option', 'max')*step,
+			Math.max(0, data.scrollX + deltaX));
+
+		var actualView = Math.round(data.scrollX/step),
+			page = Math.min(flipbook.turn('pages'), Math.max(1, actualView*2 - 2));
+
+		if ($.inArray(data.scrollPage, flipbook.turn('view', page))==-1) {
+			data.scrollPage = page;
+			flipbook.turn('page', page);
+		}
+
+		if (data.scrollTimer)
+			clearInterval(data.scrollTimer);
+		
+		data.scrollTimer = setTimeout(function(){
+			data.scrollX = undefined;
+			data.scrollPage = undefined;
+			data.scrollTimer = undefined;
+		}, 1000);
+
+	});
+
+	// Slider
+
+	$( "#slider" ).slider({
+		min: 1,
+		max: 100,
+
+		start: function(event, ui) {
+			if (!window._thumbPreview) {
+				_thumbPreview = $('<div />');//현재페이지 프리뷰 제거 , {'class': 'thumbnail'}).html('<div></div>');
+				setPreview(ui.value);
+				_thumbPreview.appendTo($(ui.handle));
+			} else
+				setPreview(ui.value);
+
+			moveBar(false);
+		},
+
+		slide: function(event, ui) {
+			setPreview(ui.value);
+		},
+
+		stop: function() {
+			if (window._thumbPreview)
+				_thumbPreview.removeClass('show');
+			
+			$('.sample-docs').turn('page', Math.max(1, $(this).slider('value')*2 - 2));
+		}
+	});
+
+
+	// URIs
+	
+	Hash.on('^page\/([0-9]*)$', {
+		yep: function(path, parts) {
+			var page = parts[1];
+
+			if (page!==undefined) {
+				if ($('.sample-docs').turn('is'))
+					$('.sample-docs').turn('page', page);
+			}
+
+		},
+		nop: function(path) {
+
+			if ($('.sample-docs').turn('is'))
+				$('.sample-docs').turn('page', 1);
+		}
+	});
+
+	// Arrows
+
+	$(document).keydown(function(e){
+
+		var previous = 37, next = 39;
+
+		switch (e.keyCode) {
+			case previous:
+
+				$('.sample-docs').turn('previous');
+
+			break;
+			case next:
+				
+				$('.sample-docs').turn('next');
+
+			break;
+		}
+
+	});
+
+	// Create the flipbook
+
+	flipbook.turn({
+		elevation: 50,
+		acceleration: false,
+		gradients: true,
+		autoCenter: true,
+		duration: 1000,
+		pages: 30,
+		when: {
+
+		turning: function(e, page, view) {
+			
+			var book = $(this),
+			currentPage = book.turn('page'),
+			pages = book.turn('pages');
+				
+			if (currentPage>3 && currentPage<pages-3) {
+				if (page==1) {
+					book.turn('page', 2).turn('stop').turn('page', page);
+					e.preventDefault();
+					return;
+				} else if (page==pages) {
+					book.turn('page', pages-1).turn('stop').turn('page', page);
+					e.preventDefault();
+					return;
+				}
+			} else if (page>3 && page<pages-3) {
+				if (currentPage==1) {
+					book.turn('page', 2).turn('stop').turn('page', page);
+					e.preventDefault();
+					return;
+				} else if (currentPage==pages) {
+					book.turn('page', pages-1).turn('stop').turn('page', page);
+					e.preventDefault();
+					return;
+				}
+			}
+
+			Hash.go('page/'+page).update();
+
+			if (page==1 || page==pages)
+				$('.sample-docs .tabs').hide();
+
+				event.stopImmediatePropagation();
+			
+
+		},
+
+		turned: function(e, page, view) {
+
+			var book = $(this);
+
+			$('#slider').slider('value', getViewNumber(book, page));
+
+			if (page!=1 && page!=book.turn('pages'))
+				$('.sample-docs .tabs').fadeIn(500);
+			else
+				$('.sample-docs .tabs').hide();
+
+			book.turn('center');
+			updateTabs();
+
+		},
+
+		start: function(e, pageObj) {
+	
+			moveBar(true);
+
+		},
+
+		end: function(e, pageObj) {
+		
+			var book = $(this);
+
+			setTimeout(function() {
+				$('#slider').slider('value', getViewNumber(book));
+			}, 1);
+
+			moveBar(false);
+
+		},
+
+		missing: function (e, pages) {
+
+			for (var i = 0; i < pages.length; i++)
+				addPage(pages[i], $(this));
+
+		}
+	}
+	}). turn('page', 2);
+
+
+	$('#slider').slider('option', 'max', numberOfViews(flipbook));
+
+	flipbook.addClass('animated');
+
+
+	// Show canvas
+
+	$('#canvas').css({visibility: 'visible'});
+
+	
+
+	
+}
+
+// Hide canvas
+
+$('#canvas').css({visibility: 'hidden'});
+
+yepnope({
+	test: Modernizr.csstransforms,
+	yep: ['js/turn.min.js', 'css/jquery.ui.css'],
+	nope: ['js/turn.html4.min.js', 'css/jquery.ui.html4.css'],
+	both: ['css/docs.css', 'js/docs.js'],
+	complete: loadApp
+});
+//*******************
+
+//*******************오른쪽 슬라이드 
+$(function(){
+
+	$(".open1").click(function(){
+
+		$(".RightWrap").animate({right:170},500,"swing") 
+		event.stopImmediatePropagation();
+	});
+
+	$(".close1").click(function(){
+		$(".RightWrap").animate({right:-500},500,"swing")
+		event.stopImmediatePropagation();
+	});
+
+	event.stopImmediatePropagation();
+
+}); //실행문끝
+
+//*******************왼쪽 슬라이드 
+$(function(){
+
+	$(".open2").click(function(){
+
+		$(".LeftWrap").animate({left:0},500,"swing") 
+		event.stopImmediatePropagation();
+	});
+
+	$(".close2").click(function(){
+		$(".LeftWrap").animate({left:-500},500,"swing")
+		event.stopImmediatePropagation();
+	});
+
+	event.stopImmediatePropagation();
+
+}); //실행문끝
+
+</script>
+
+
+
+</body>
+</html>
