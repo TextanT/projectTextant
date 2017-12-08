@@ -6,5 +6,5 @@ import com.besideYou.textant.main.dto.BookInfoDto;
 
 public interface GenreDao {
 
-	List<BookInfoDto> genreserch(String genre);
+	List<String> genreserch(String genre);
 }

@@ -1,5 +1,7 @@
 package com.besideYou.textant.genre.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -14,19 +16,20 @@ public class GenreServiceImpl implements GenreService{
 	GenreDao genreDao;
 	
 	@Override
-	public String genreserch(Model model, BookInfoDto bookInfoDto) {
+	public List<String> genreserch(String genre) {
 		
-		String genreser;
-		String genre = null;
+		List<String> gen;
 		
-//		genreDao.genreserch(genre);
+		gen = genreDao.genreserch(genre);
 		
 		
-		genreser = bookInfoDto.getThumbnail();
+		System.out.println("genreService.genreser : "+genre);
+		System.out.println("genreService.genreser : "+gen);
 		
-		System.out.println("genreService.genreser : "+genreser);
 		
-		return null;
+		
+		
+		return gen;
 	}
 	
 

@@ -7,8 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.besideYou.textant.genre.service.GenreService;
 import com.besideYou.textant.main.dto.BookInfoDto;
@@ -19,46 +21,45 @@ public class GenreController {
 	@Autowired
 	GenreService genreService;
 	
-	@RequestMapping(value="/genre.text", method = RequestMethod.GET)
-	public String genre(Model model, BookInfoDto bookInfoDto) {
+	@RequestMapping(value="/genre.genre", method = RequestMethod.GET)
+	@ResponseBody
+	public List<String> genre(Model model, BookInfoDto bookInfoDto, String genre) {
+	
+		
+//		HashMap<String,List> a = new HashMap();
+
+		List b;
+		b = new ArrayList();
+		for(int i =1; i<=15; i++) {
+			
+			b.add(i);
+		}
+		genreService.genreserch(genre);
 		
 		
-		/*List a;
-		a = new ArrayList();
-//		for(int i =1; i<=15; i++) {
-//			a.add(i);
-//		}
-*/	
-		genreService.genreserch(model, bookInfoDto);
 		
-		HashMap<String,List> a = new HashMap();
+		System.out.println("장르"+genre);
 		
+		model.addAttribute("testList",b);
 		
-		
-//		a.put("title", "너의 최장");
-//		a.put("content", "을 물란다");
-		
-		
+		return genreService.genreserch(genre);
+	}
+	
+	
+	@RequestMapping(value="/serchpage.genre")
+	public String serchpage(Model model) {
 		
 		List b;
 		b = new ArrayList();
 		for(int i =1; i<=15; i++) {
-//			a.put("page", String.valueOf(i));
 			
 			b.add(i);
 		}
-		List bookAdreese;
-		bookAdreese = new ArrayList();
-		
-		bookAdreese.add(bookInfoDto.getThumbnail());
-		
-		System.out.println(bookAdreese);
-//		bookAdreese = bookInfoDto.getThumbnail();
 		
 		model.addAttribute("testList",b);
 		
-		model.addAttribute("bookadreese",bookAdreese);
-		
-		return "main/serchpage";
+		return "/WEB-INF/views/main/searchpage.jsp";
 	}
+	
+	
 }

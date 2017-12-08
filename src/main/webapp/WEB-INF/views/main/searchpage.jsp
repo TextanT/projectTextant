@@ -68,7 +68,7 @@ a {
 				<ul>
 					<li><a href="#">카페</a></li>
 					<li><a href="#">베스트</a></li>
-					<li><a href="#">작품쓰기</a></li>
+					<li><a href="/textant/write.text">작품쓰기</a></li>
 
 				</ul>
 			</div>
@@ -133,7 +133,8 @@ a {
 				<div class="serchoption13" id="serchoptionid">시</div>
 				<div class="serchoption14" id="serchoptionid">수필</div>
 				<div class="serchoption15" id="serchoptionid">유머</div>
-				<input type="radio" name="1" class="radio1" onclick="radio1()" value='histroy'> 
+				<div class="serchoption16" id="serchoptionid">액션</div>
+				<input type="radio" name="1" class="radio1" onclick="radio1()" value='history'> 
     			<input type="radio" name="1" class="radio2" onclick="radio2()" value='sports'> 
     			<input type="radio" name="1" class="radio3" onclick="radio3()" value='SF'> 
     			<input type="radio" name="1" class="radio4" onclick="radio4()" value='Reasoning'>
@@ -148,29 +149,32 @@ a {
     			<input type="radio" name="1" class="radio13" onclick="radio13()" value='verse'>
     			<input type="radio" name="1" class="radio14" onclick="radio14()" value='essay'> 
     			<input type="radio" name="1" class="radio15" onclick="radio15()" value='humor'> 
-    			<input type="text" class="genre" name="genre">
+    			
+    			<input type="text" class="genre" id="genre" name="genre" hidden>
+    			
+    			<input type="button" class="genget" id="genget" onclick="genresub()" hidden >
 			</div>
 		</div>
 		<div class="serchbookDiv">
-			<c:forEach var="lists" items="${testList}">
-				<div class="genre1_book_list${lists}">
-					<a href="#"><img
-						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
-						style="border: 1px solid #D8D8D8; position: absolute; z-index: 2; height: 242px;"
-						class="book_img_size">
-						<div
-							style="width: 166.45px; height: 244px; position: relative; text-align: center; color: white;"
-							class="book_cap${lists}" id="book_cap${lists}">
-							<h5>
-								<c:out value="${lists}"></c:out>
-							</h5>
-							<p>기시미이치로</p>
-							<br>
-							<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-								이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-						</div> </a>
-				</div>
-			</c:forEach>
+<%-- 			<c:forEach var="lists" items="${testList}"> --%>
+<%-- 				<div class="genre1_book_list${lists}"> --%>
+<!-- 					<a href="#"><img -->
+<!-- 						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg" -->
+<!-- 						style="border: 1px solid #D8D8D8; position: absolute; z-index: 2; height: 242px;" -->
+<!-- 						class="book_img_size"> -->
+<!-- 						<div -->
+<!-- 							style="width: 166.45px; height: 244px; position: relative; text-align: center; color: white;" -->
+<%-- 							class="book_cap${lists}" id="book_cap${lists}"> --%>
+<!-- 							<h5> -->
+<%-- 								<c:out value="${lists}"></c:out> --%>
+<!-- 							</h5> -->
+<!-- 							<p>기시미이치로</p> -->
+<!-- 							<br> -->
+<!-- 							<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다. -->
+<!-- 								이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p> -->
+<!-- 						</div> </a> -->
+<!-- 				</div> -->
+<%-- 			</c:forEach> --%>
 		</div>
 	</div>
 
@@ -194,6 +198,41 @@ a {
 	</footer>
 	<script type="text/javascript" src="/textant/resources/js/serch.js">
 		
+	</script>
+	
+	<script type="text/javascript">
+	function genresub(){
+		
+		alert($("#genre").val());
+		let html = "";
+			$.ajax({
+				type : "GET",
+				async : true,
+				dataType : "json",
+				error : function(xhr) {
+					alert("error html = " + xhr.statusText);
+				},
+				url : "/textant/genre.genre",
+				data : {
+					genre : $("#genre").val(),
+				},success:function(data){
+					alert(data.length);
+					$(".serchbookDiv").empty();
+					let num = data.length;
+					 $.each(data, function(index,item) {
+// 						 alert(data[index].length);
+						html='<div class="genre1_book_list'+(index+1)+'"><a href="#"><img src="displayFile.text?fileName='+data[index]+'/OriginImg&pageNum=1&fileType=jpg" style="border: 1px solid #D8D8D8; position: absolute; z-index: 2; height: 242px;" class="book_img_size"><div style="width: 166.45px; height: 244px; position: relative; text-align: center; color: white;" class="book_cap${lists}" id="book_cap${lists}"><h5><c:out value="${lists}"></c:out> </h5><p>기시미이치로</p><br><p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p></div> </a></div>'
+						$(".serchbookDiv").append(html);
+// 						 var genre=item.commentNum;
+// 						alert(data[index]);
+						
+						
+					 });
+					
+				}
+			});
+		}
+	
 	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {

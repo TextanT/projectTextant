@@ -43,7 +43,6 @@
 			<param-value>
 			classpath:/spring/main-context.xml
 			classpath:/spring/manager-context.xml
-			classpath:/spring/genre-context.xml
 			</param-value>
 		</init-param>
 		
@@ -58,6 +57,16 @@
 		</init-param>
 		<load-on-startup>2</load-on-startup>
   </servlet>
+  <servlet>
+  	<servlet-name>genre</servlet-name>
+  <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  <init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+			classpath:/spring/genre-context.xml</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+  </servlet>
   	
 	<servlet-mapping>
     <servlet-name>appServlet</servlet-name>
@@ -68,7 +77,10 @@
     <servlet-name>comment</servlet-name>
     <url-pattern>*.comment</url-pattern>
   </servlet-mapping>
-  
+  <servlet-mapping>
+    <servlet-name>genre</servlet-name>
+    <url-pattern>*.genre</url-pattern>
+  </servlet-mapping>
   <error-page>
 		<error-code>404</error-code>
 		<location>/404</location>

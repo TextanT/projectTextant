@@ -176,7 +176,7 @@
 						<option value='horror'>공포</option>
 						<option value='Reasoning'>추리</option>
 						<option value='game'>게임</option>
-						<option value='histroy'>역사</option>
+						<option value='history'>역사</option>
 						<option value='arts'>무협</option>
 						<option value='mystery'>미스테리</option>
 						<option value='romance'>로맨스</option>

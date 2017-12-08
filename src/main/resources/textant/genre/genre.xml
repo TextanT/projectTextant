@@ -5,8 +5,8 @@
 
 <mapper namespace="com.besideYou.textant.genre.dao.GenreDao">	
 	
-	<select id="genreserch" parameterType="String" resultType="bookInfo">
-		SELECT GENRE,BOOKNAME FROM BOOKINFO WHERE GENRE = #{genre};
+	<select id="genreserch" parameterType="String" resultType="String">
+		SELECT FILELOCATION FROM BOOKINFO WHERE GENRE = #{genre}
 	</select>
 	
 	
