@@ -12,9 +12,11 @@ public interface BookInfoDao {
 	
 	public void writeBook(BookInfoDto bookInfoDto);
 
-	public List<String> getNewBooks();
+	public List<BookInfoDto> getNewBooks();
 	
 	public int getTotalPages(String fileLocation);
+	
+//	public List<String> getbookname();
 //	public String joinchek(String inputId);
 	
 //	public int getUserNum(LoginDto loginDto);

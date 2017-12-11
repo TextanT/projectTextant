@@ -258,15 +258,15 @@
 				<div class="swiper-slide">
 					<div class="img-wrapper">
 						<div class="swiper-size"
-							style="height: 320px; width: 250px; overflow: hidden;">
-							<a href="/textant/read.text?fileName=${files}"><img
-								src="displayFile.text?fileName=${files}/OriginImg&pageNum=1&fileType=jpg"
-								style="display: block; height: 100%; width: auto;"
+							style="height: 320px; width: 220px; overflow: hidden;">
+							<a href="/textant/read.text?fileName=${files.fileLocation}"><img
+								src="displayFile.text?fileName=${files.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
+								style="display: block; height: 100%; width: auto; border: 1px solid #e8e8e8;"
 								class="bookimg" /></a>
 						</div>
-						<a href="/textant/read.text?fileName=${files}"> <span
-							class="bookname" style="text-align: center;">${files}</span><br />
-							<span class="bookname">기시미 이치로작가</span>
+						<a href="/textant/read.text?fileName=${files.fileLocation}"> <span
+							class="bookname" style="text-align: center;">${files.bookName}</span><br />
+							<span class="bookname">${files.userNum}</span>
 						</a>
 
 					</div>

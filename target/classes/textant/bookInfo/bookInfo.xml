@@ -9,12 +9,15 @@
 		INSERT INTO BOOKINFO VALUES(BOOKINFO_SEQ.nextval,#{bookName},#{totalPage},#{userNum},#{thumbnail},#{fileLocation},#{genre},SYSDATE,0,0,0,#{bookDesc},0)
 	</insert>
 	
-	<select id="getNewBooks" resultType="String">
-		SELECT fileLocation from bookInfo order by writeDate desc
+	<select id="getNewBooks" resultType="bookInfo">
+		SELECT * from bookInfo order by writeDate desc
 	</select>
 	<select id="getTotalPages" parameterType="String" resultType="int">
 		SELECT totalpage from bookInfo where fileLocation = #{fileLocation}
 	</select>
+<!-- 	<select id="getbookname" > -->
+<!-- 		SELECT BOOKNAME FROM BOOKINFO ORDER BY writeDate desc -->
+<!-- 	</select> -->
 </mapper>
 	
 	

@@ -1,5 +1,3 @@
-
-
 .data_box {
 	display: block;
 	margin-left: auto;
@@ -10,11 +8,68 @@
 	/* 	border: 1px solid #D8D8D8; */
 	border-left: none;
 	border-top: none;
-	width: 1012px;
+	width: 60%;
 	height: 160px;
 	/* 	background: white; */
 	margin-top: 20px;
 	width: 1012px;
+}
+
+@media screen and (max-width:1920px) {
+	.data_box {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		/* 	margin-top: 10%; */
+		/* 	padding-top: 1%; */
+		padding-bottom: 1%;
+		/* 	border: 1px solid #D8D8D8; */
+		border-left: none;
+		border-top: none;
+		width: 70%;
+		height: 160px;
+		/* 	background: white; */
+		margin-top: 20px;
+		width: 1012px;
+	}
+}
+
+@media screen and (max-width:1440px) {
+	.data_box {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		/* 	margin-top: 10%; */
+		/* 	padding-top: 1%; */
+		padding-bottom: 1%;
+		/* 	border: 1px solid #D8D8D8; */
+		border-left: none;
+		border-top: none;
+		width: 80%;
+		height: 160px;
+		/* 	background: white; */
+		margin-top: 20px;
+		width: 1012px;
+	}
+}
+
+@media screen and (max-width:1024px) {
+	.data_box {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		/* 	margin-top: 10%; */
+		/* 	padding-top: 1%; */
+		padding-bottom: 1%;
+		/* 	border: 1px solid #D8D8D8; */
+		border-left: none;
+		border-top: none;
+		width: 100%;
+		height: 160px;
+		/* 	background: white; */
+		margin-top: 20px;
+		width: 1012px;
+	}
 }
 
 ul.tabs {

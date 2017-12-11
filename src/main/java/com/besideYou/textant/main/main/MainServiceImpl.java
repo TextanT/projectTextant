@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.besideYou.textant.main.dao.BookInfoDao;
+import com.besideYou.textant.main.dto.BookInfoDto;
 
 @Service
 public class MainServiceImpl implements MainService {
@@ -26,11 +27,15 @@ public class MainServiceImpl implements MainService {
 		File file;
 		File[] files;
 		
-		List<String> fileNames;
+		List<BookInfoDto> fileNames;
 		//1.추천리스트를 받을것
 		//2.최신순, 별점순, 조회순리스트를 받을것
 		
 		fileNames = bookInfoDao.getNewBooks();
+		
+//		List<String> bookname;
+//		
+//		bookname = bookInfoDao.getbookname();
 		
 		/*file = new File(destinationDir);
 		files = file.listFiles();
@@ -44,6 +49,7 @@ public class MainServiceImpl implements MainService {
 		
 		model.addAttribute("");
 		model.addAttribute("fileList", fileNames);
+		
 		model.addAttribute("nickname", session.getAttribute("nickname"));
 		model.addAttribute("id", session.getAttribute("id"));
 		
