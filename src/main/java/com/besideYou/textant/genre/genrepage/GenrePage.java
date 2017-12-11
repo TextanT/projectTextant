@@ -29,9 +29,9 @@ public class GenrePage {
 
 		sb = new StringBuffer();
 		if(startPage < pageBlock) {
-			sb.append("<img src='images/hot.png' width='30' height='9'>");			
+			sb.append("<img src='/textant/resources/icon_img/exit3.jpg' width='30' height='9'>");			
 		} else {
-			sb.append("<img src='images/hot.png' width='30' height='9'");
+			sb.append("<img src='/textant/resources/icon_img/exit3.jpg' width='30' height='9'");
 			sb.append(" onclick='genresub(");
 			sb.append(startPage - pageBlock);
 			sb.append(")' style='cursor:pointer'> ");
@@ -54,12 +54,12 @@ public class GenrePage {
 		
 		sb.append("&nbsp;&nbsp;|");		
 		if(endPage < totalPage) {
-			sb.append("<img src='images/hot.png' width='30' height='9'");
+			sb.append("<img src='/textant/resources/icon_img/exit3.jpg' width='30' height='9'");
 			sb.append(" onclick='genresub(");
 			sb.append(startPage + pageBlock);
 			sb.append(")' style='cursor:pointer'> ");						
 		} else {
-			sb.append("<img src='images/hot.png' width='30' height='9'>");			
+			sb.append("<img src='/textant/resources/icon_img/exit3.jpg' width='30' height='9'>");			
 		}	
 		
 		pagingMap.put("pageCode", sb.toString());

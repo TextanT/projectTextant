@@ -190,7 +190,7 @@
 
 			<div class="intro_titleDiv">
 				<div class="intro">작품소개</div>
-				<textarea type="" class="introduce_text" name="bookcontent"></textarea>
+				<textarea type="" class="introduce_text" name="bookDesc"></textarea>
 			</div>
 			<div class="book_coverDiv">
 				<div class="book_cover">책표지</div>

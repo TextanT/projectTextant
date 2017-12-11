@@ -53,6 +53,7 @@ public class GenreServiceImpl implements GenreService {
 		goodMap.put("pageCode",genreMap.get("pageCode"));
 		System.out.println(gen);
 //		System.out.println("이미지 경로----"+genreDao.genreserch(genreMap));
+		
 		return goodMap;
 	}
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,6 +26,39 @@ body {
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-position: center center;
+}
+
+@media screen and (max-width:1920px) {
+	body {
+		background-image: url(/textant/resources/background_img/fritsPage2.jpg);
+		background-position: center center;
+		background-size: cover;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-position: center center;
+	}
+}
+
+@media screen and (max-width:1440px) {
+	body {
+		background-image: url(/textant/resources/background_img/fritsPage2.jpg);
+		background-position: center center;
+		background-size: cover;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-position: center center;
+	}
+}
+
+@media screen and (max-width:1024px) {
+	body {
+		background-image: url(/textant/resources/background_img/fritsPage2.jpg);
+		background-position: center center;
+		background-size: cover;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-position: center center;
+	}
 }
 
 .box1 {
@@ -264,9 +297,9 @@ body {
 </head>
 
 <body>
-<c:if test="${id!=null}">
-	<c:redirect url="/main.text"></c:redirect>
-</c:if>
+	<c:if test="${id!=null}">
+		<c:redirect url="/main.text"></c:redirect>
+	</c:if>
 	<div class="ex">
 		<span>Textant에서 책을 읽으며 여러 사람과 소통해보세요.</span>
 	</div>
@@ -301,8 +334,8 @@ body {
 			<div id="status"></div>
 
 			<div id="mailDiv" class="mailDivc">
-				<span class="mail_sp int_pass"> <input type="email" id="email"
-					class="int" value maxlength="20" autocomplete="off"
+				<span class="mail_sp int_pass"> <input type="email"
+					id="email" class="int" value maxlength="20" autocomplete="off"
 					placeholder="E-mail" name="email">
 				</span>
 			</div>
@@ -330,12 +363,12 @@ body {
 			<div class="exit_div">
 				<a href="#" class="js_close" id="exit">돌아가기</a>
 			</div>
-			
+
 		</form>
 		<div class="exit2_div">
-				<img src="/textant/resources/icon_img/exit3.jpg" class="js_close"
+			<img src="/textant/resources/icon_img/exit3.jpg" class="js_close"
 				style="cursor: pointer;">
-			</div>
+		</div>
 
 	</div>
 
@@ -516,7 +549,6 @@ body {
 			form.submit();
 
 		}
-		
 	</script>
 </body>
 </html>

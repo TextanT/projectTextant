@@ -222,8 +222,8 @@ a {
 					genre : $("#genre").val(),
 					pageNum : page
 				},success:function(data){
-					alert(data);
-					alert(data.fileLocationList);
+// 					alert(data);
+// 					alert(data.fileLocationList);
 // 					alert(data.length);
 					$(".serchbookDiv").empty();
 					let num = data.length;
@@ -232,7 +232,7 @@ a {
 // 						 alert(data[index].length);
 // 						
 						
-						html='<div class="genre1_book_list'+(index+1)+'"><a href="#"><img src="displayFile.text?fileName='+item+'/OriginImg&pageNum=1&fileType=jpg" style="border: 1px solid #D8D8D8; position: absolute; z-index: 2; height: 242px;" class="book_img_size"><div style="width: 166.45px; height: 244px; position: relative; text-align: center; color: white;" class="book_cap'+(index+1)+'" id="book_cap'+(index+1)+'"><h5><c:out value="${lists}"></c:out> </h5><p>기시미이치로</p><br><p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p></div> </a></div>'
+						html='<div class="genre1_book_list'+(index+1)+'"><a href="#"><img src="displayFile.text?fileName='+item+'/OriginImg&pageNum=1&fileType=jpg" style="border: 1px solid #D8D8D8; position: absolute; z-index: 2; height: 242px;" class="book_img_size" id="bookimg'+(index+1)+'"><div style="width: 166.45px; height: 244px; position: relative; text-align: center; color: white;" class="book_cap'+(index+1)+'" id="book_cap'+(index+1)+'"><h5><c:out value="${lists}"></c:out> </h5><p>기시미이치로</p><br><p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p></div> </a></div>'
 						$(".serchbookDiv").append(html);
 // 						 var genre=item.commentNum;
 // 						alert(data[index]);
@@ -243,7 +243,7 @@ a {
 					 var overindex = 2;
 						var outindex = 1;
 						//book1 over	
-						$('.genre1_book_list1').mouseenter(function() {
+						$('#bookimg1').mouseenter(function() {
 							document.getElementById('book_cap1').style.zIndex = overindex;
 						});
 						$('.genre1_book_list1').mouseleave(function() {
