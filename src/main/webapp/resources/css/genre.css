@@ -176,6 +176,16 @@
         float: left;
         margin-top: 5px;
     }
+    .serchoption16 {
+        width: 80px;
+        height: 35px;
+        border: 1px solid #e8e8e8;
+        text-align: center;
+        line-height: 33px;
+        cursor: pointer;
+        float: left;
+        margin-top: 5px;
+    }
     
     .serchoption1:hover {
         color: #819FF7;
@@ -248,6 +258,11 @@
     }
     
     .serchoption15:hover {
+        color: #819FF7;
+        border: 1px solid #819FF7;
+    }
+    
+    .serchoption16:hover {
         color: #819FF7;
         border: 1px solid #819FF7;
     }
@@ -325,92 +340,92 @@
     }
     
     .genre1_book_list1 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     
     .genre1_book_list2 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     
     .genre1_book_list3 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     
     .genre1_book_list4 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     
     .genre1_book_list5 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     
     .genre1_book_list6 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     
     .genre1_book_list7 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     
     .genre1_book_list8 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     
     .genre1_book_list9 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     
     .genre1_book_list10 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     
     .genre1_book_list11 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     
     .genre1_book_list12 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     
     .genre1_book_list13 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     
     .genre1_book_list14 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     
     .genre1_book_list15 {
-        padding-left: 2%;
-        padding-bottom: 2%;
+        margin-left: 2%;
+        margin-bottom: 2%;
         float: left;
     }
     

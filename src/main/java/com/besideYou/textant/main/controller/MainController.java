@@ -51,6 +51,8 @@ public class MainController {
 
 	@Autowired
 	ReadService readService;
+	
+	
 
 	String view;
 
@@ -107,28 +109,7 @@ public class MainController {
 		System.out.println(session.getAttribute("id"));
 		return mainService.home(model, session);
 	}
-	@RequestMapping(value="/genre.text", method = RequestMethod.GET)
-	public String genre(Model model, BookInfoDto bookInfoDto) {
-		/*List a;
-		a = new ArrayList();
-//		for(int i =1; i<=15; i++) {
-//			a.add(i);
-//		}
-*/	
-		
-		HashMap<String,List> a = new HashMap();
-//		a.put("title", "너의 최장");
-//		a.put("content", "을 물란다");
-		List b;
-		b = new ArrayList();
-		for(int i =1; i<=15; i++) {
-//			a.put("page", String.valueOf(i));
-			
-			b.add(i);
-		}
-		model.addAttribute("testList",b);
-		return "main/serchpage";
-	}
+	
 
 	@RequestMapping(value = "/write.text", method = RequestMethod.GET)
 	public String text(HttpServletRequest req, HttpSession session) {

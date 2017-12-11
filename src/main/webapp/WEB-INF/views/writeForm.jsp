@@ -176,7 +176,7 @@
 						<option value='horror'>공포</option>
 						<option value='Reasoning'>추리</option>
 						<option value='game'>게임</option>
-						<option value='histroy'>역사</option>
+						<option value='history'>역사</option>
 						<option value='arts'>무협</option>
 						<option value='mystery'>미스테리</option>
 						<option value='romance'>로맨스</option>
@@ -190,7 +190,7 @@
 
 			<div class="intro_titleDiv">
 				<div class="intro">작품소개</div>
-				<textarea type="" class="introduce_text" name="bookcontent"></textarea>
+				<textarea type="" class="introduce_text" name="bookDesc"></textarea>
 			</div>
 			<div class="book_coverDiv">
 				<div class="book_cover">책표지</div>
