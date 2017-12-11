@@ -13,12 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.besideYou.textant.comment.dto.CommentDto;
 import com.besideYou.textant.comment.service.CommentService;
 import com.besideYou.textant.main.dto.BookInfoDto;
 import com.besideYou.textant.manager.service.ManagerService;
 
+@SessionAttributes("userNum")
 @Controller
 public class CommentController {
 
@@ -65,14 +67,14 @@ public class CommentController {
 	@ResponseBody
 	public List<CommentDto> commentTotalRead(HttpSession session,int page,int commentTotalCount,int bookArticleNum,int commentNum,int commentDelete,int commentSearchCheak, int commentSearchList,String commentSearch){
 		
-		int userNum=(int)session.getAttribute("userNum");;
+		int userNum=(int)session.getAttribute("userNum");
 		return commentService.commentTotalRead(page,commentTotalCount,userNum,bookArticleNum,commentNum,commentDelete,commentSearchCheak,commentSearchList,commentSearch);
 	}
 	
 	@RequestMapping(value="/commentDelete.comment")
 	@ResponseBody
 	public int commentDelete(int commentNum,int commentGroup,HttpSession session){
-		int userNum=(int)session.getAttribute("userNum");;
+		int userNum=(int)session.getAttribute("userNum");
 		
 		return commentService.commentDelete(commentNum,commentGroup);
 	}
@@ -81,7 +83,7 @@ public class CommentController {
 	@ResponseBody
 	public HashMap<String, Integer> scrollWrite(CommentDto commentDto,int page,int commentTo,int commentTop,HttpSession session,int commentCheck) {
 		commentDto.setPageGroup(page);
-		commentDto.setUserNum(1);
+		commentDto.setUserNum((int)session.getAttribute("userNum"));
 		
 		return commentService.scroll(commentDto,commentTo,commentTop);
 	}

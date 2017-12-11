@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.besideYou.textant.main.converter.PdfService;
 import com.besideYou.textant.main.converter.TempPdfService1;
@@ -26,7 +27,7 @@ import com.besideYou.textant.main.login.LoginService;
 import com.besideYou.textant.main.main.MainService;
 import com.besideYou.textant.main.read.ReadService;
 import com.besideYou.textant.main.sign.SignService;
-
+@SessionAttributes("userNum")
 @Controller
 public class MainController {
 
@@ -103,6 +104,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/main.text", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
+		System.out.println(session.getAttribute("id"));
 		return mainService.home(model, session);
 	}
 	@RequestMapping(value="/genre.text", method = RequestMethod.GET)
