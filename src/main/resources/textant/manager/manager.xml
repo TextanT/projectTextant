@@ -99,6 +99,13 @@
 	<select id="getRecommendedBookOne" parameterType="Integer" resultType="recommendedBook">
 	SELECT * FROM recommendedBook WHERE recommendNum = #{num}
 	</select>
+	
+	<insert id="writeRecommendbook" parameterType="recommendedBook">
+	INSERT INTO RECOMMENDEDBOOK VALUES(RECOMMENDEDBOOK_SEQ.NEXTVAL,#{bookArticleNum},#{userNum},#{recommendComment},sysdate)
+	</insert>
+	<delete id="deleteRecommendBook" parameterType="Integer">
+	DELETE FROM RECOMMENDEDBOOK WHERE RECOMMENDNUM = #{recommendNum}
+	</delete>
 </mapper>
 	
 	

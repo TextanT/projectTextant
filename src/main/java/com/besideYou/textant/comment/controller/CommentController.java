@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.besideYou.textant.comment.dto.CommentDto;
 import com.besideYou.textant.comment.service.CommentService;
+import com.besideYou.textant.main.dto.BookInfoDto;
+import com.besideYou.textant.manager.service.ManagerService;
 
 @Controller
 public class CommentController {
@@ -96,6 +100,12 @@ public class CommentController {
 //		String userNum = (String)session.getAttribute("userNum");
 		int userNum=(int)session.getAttribute("userNum");;
 		return commentService.reportComment(commentNum,userNum);
+	}
+	
+	@RequestMapping(value="/getBookNum.comment")
+	@ResponseBody
+	public List<BookInfoDto> getBookNum(String bookSearch) {
+		return commentService.getBookNum(bookSearch);
 	}
 	
 }

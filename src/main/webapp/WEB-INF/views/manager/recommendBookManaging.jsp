@@ -146,7 +146,7 @@ background-color: #EFEEEE;
 			<h3 style="text-align: center">추천 책 관리</h3>
 		</div>
 		<div style="margin-left: 80px; margin-right: 80px;margin-bottom:50px; width: auto;">
-			<div style="text-align: right;"><a href="/textant/recommendBookWrite.text">추천책 쓰기</a></div>
+			<div style="text-align: right;"><a href="/textant/recommendBookWrite.text?userNum=${userNum}">추천책 쓰기</a></div>
 			<div class="managing" id="recommendBook"
 				>
 				<table class="table" style="margin-left: auto; margin-right: auto;text-align: center;">

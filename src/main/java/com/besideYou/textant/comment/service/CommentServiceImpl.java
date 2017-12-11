@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.besideYou.textant.comment.common.Page;
 import com.besideYou.textant.comment.dao.CommentDao;
 import com.besideYou.textant.comment.dto.CommentDto;
+import com.besideYou.textant.main.dto.BookInfoDto;
 @Service
 public class CommentServiceImpl implements CommentService{
 
@@ -277,5 +278,10 @@ public class CommentServiceImpl implements CommentService{
 			
 	   	
 		return commentList;
+	}
+	@Override
+	public List<BookInfoDto> getBookNum(String bookSearch) {
+		System.out.println(commentDao.getBookNum(bookSearch));
+		return commentDao.getBookNum(bookSearch);
 	}
 }

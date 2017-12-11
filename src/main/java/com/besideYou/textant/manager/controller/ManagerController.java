@@ -1,14 +1,19 @@
 package com.besideYou.textant.manager.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.besideYou.textant.common.dto.RecommendedBookDto;
 import com.besideYou.textant.manager.service.ManagerService;
@@ -70,11 +75,25 @@ public class ManagerController {
 		managerService.managingRecommendContent(num, model);
 		return "manager/recommendContent";
 	}
-	@RequestMapping(value="/recommendBookWrite.text")
-	public String recommendBookWrite(RecommendedBookDto recommendedBookDto, HttpSession session) {
-		managerService.recommendWrite(recommendedBookDto, session);
+	@RequestMapping(value="/recommendBookWrite.text", method=RequestMethod.GET)
+	public String recommendBookWrite(int userNum, Model model) {
+		managerService.getUserName(userNum, model);
 		return "manager/recommendWrite";
 	}
-	
+	@RequestMapping(value="/recommendBookWrite.text", method=RequestMethod.POST)
+	public String recommendBookWriteForm(RecommendedBookDto recommendedBookDto, HttpSession session) {
+		managerService.recommendWrite(recommendedBookDto, session);
+		return "redirect:recommendBookManaging.text?pageNum=1";
+	}
+	@RequestMapping(value="/recommendBookDelete.text")
+	public String recommendBookDelete(int recommendNum) {
+		managerService.deleteRecommendBook(recommendNum);
+		return "redirect:recommendBookManaging.text?pageNum=1";
+	}
+	@RequestMapping(value="/recommendBookUpdate.text", method=RequestMethod.GET)
+	public String recommendBookUpdate(int recommendNum,Model model) {
+		managerService.updateRecommendBook(recommendNum,model);
+		return "manager/recommendUpdate";
+	}
 	
 }

@@ -30,8 +30,10 @@
 	rel="stylesheet">
 <link href="/textant/resources/css/bookover.css" type="text/css"
 	rel="stylesheet">
+<script src="/textant/resources/Swiper-master/dist/js/swiper.min.js"></script>
 <title>Document</title>
 <style>
+
 </style>
 </head>
 
@@ -254,11 +256,20 @@
 		<div class="swiper-wrapper">
 			<c:forEach var="files" items="${fileList}">
 				<div class="swiper-slide">
-					<a href="/textant/read.text?fileName=${files}"><img
-						src="displayFile.text?fileName=${files}/OriginImg&pageNum=1&fileType=jpg"
-						height="300px" style="display: block;" class="bookimg" /> <span
-						class="bookname">${files}</span></br> <span class="bookname">기시미
-							이치로작가</span> </a>
+					<div class="img-wrapper">
+						<div class="swiper-size"
+							style="height: 320px; width: 250px; overflow: hidden;">
+							<a href="/textant/read.text?fileName=${files}"><img
+								src="displayFile.text?fileName=${files}/OriginImg&pageNum=1&fileType=jpg"
+								style="display: block; height: 100%; width: auto;"
+								class="bookimg" /></a>
+						</div>
+						<a href="/textant/read.text?fileName=${files}"> <span
+							class="bookname" style="text-align: center;">${files}</span><br />
+							<span class="bookname">기시미 이치로작가</span>
+						</a>
+
+					</div>
 				</div>
 			</c:forEach>
 		</div>
@@ -573,7 +584,7 @@
 			src="/textant/resources/icon_img/top.jpg"></a>
 	</div>
 
-	<script src="/textant/resources/Swiper-master/dist/js/swiper.min.js"></script>
+
 
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js"
 		type="text/javascript"></script>

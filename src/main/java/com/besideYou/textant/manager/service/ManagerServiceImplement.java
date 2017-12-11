@@ -2,6 +2,7 @@ package com.besideYou.textant.manager.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,7 +29,14 @@ public class ManagerServiceImplement implements ManagerService{
 
 	int pageBlock = 5;
 	int pageSize = 10;
+	@Override
+	public void getUserName(int userNum, Model model) {
+		model.addAttribute("userId", managerDao.getUserName(userNum));
+		System.out.println("userId : "+managerDao.getUserName(userNum));
+	}
 	
+	
+
 	@Override
 	public void managerMain(Model model) {
 		HashMap<String,String> oneTen;
@@ -144,7 +152,6 @@ public class ManagerServiceImplement implements ManagerService{
 		ManagingBookDto managingDto;
 		
 		recommendedBookDto = managerDao.getRecommendedBookOne(num);
-		
 		managingDto = new ManagingBookDto();
 		managingDto.setNum(recommendedBookDto.getRecommendNum());
 		managingDto.setBookName(managerDao.getBookName(recommendedBookDto.getBookArticleNum()));
@@ -156,8 +163,34 @@ public class ManagerServiceImplement implements ManagerService{
 	
 	@Override
 	public void recommendWrite(RecommendedBookDto recommendedBookDto, HttpSession session) {
-		// TODO Auto-generated method stub
+		System.out.println(recommendedBookDto);
+		managerDao.writeRecommendbook(recommendedBookDto);
+	}
+
+
+
+	@Override
+	public void deleteRecommendBook(int recommendNum) {
+		managerDao.deleteRecommendBook(recommendNum);
+	}
+
+
+
+	@Override
+	public void updateRecommendBook(int recommendNum, Model model) {
+		RecommendedBookDto recommendedBookDto;
+		ManagingBookDto managingDto;
+		
+		recommendedBookDto = managerDao.getRecommendedBookOne(recommendNum);
+		managingDto = new ManagingBookDto();
+		managingDto.setNum(recommendedBookDto.getRecommendNum());
+		managingDto.setBookName(managerDao.getBookName(recommendedBookDto.getBookArticleNum()));
+		managingDto.setUserName(managerDao.getUserName(recommendedBookDto.getUserNum()));
+		managingDto.setComment(recommendedBookDto.getRecommendComment());
+		managingDto.setWriteDate(recommendedBookDto.getWriteDate());
+		model.addAttribute("managingList", managingDto);
 		
 	}
+	
 	
 }

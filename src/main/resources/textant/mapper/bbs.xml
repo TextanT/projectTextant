@@ -184,6 +184,13 @@
 			ORDER by commentnum desc
 		</if>
 	</select>
+	<select id="getBookNum" parameterType="String" resultType="bookInfo">
+	SELECT * FROM BOOKINFO WHERE bookName like '%'||#{bookName}||'%'
+	</select>
+	
+	<select id="getUserName" parameterType="Integer" resultType="String">
+	SELECT USERID FROM LOGIN WHERE USERNUM = #{userNum}
+	</select>
 </mapper>	
 	
 

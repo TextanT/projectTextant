@@ -1,6 +1,7 @@
 package com.besideYou.textant.manager.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,5 +16,9 @@ public interface ManagerService {
 	void managerReportBook(Model model, int pageNum, HttpServletRequest req);
 	void managingRecommendContent(int num, Model model);
 	void recommendWrite(RecommendedBookDto recommendedBookDto, HttpSession session);
+	void getUserName(int userNum, Model model);
+	void deleteRecommendBook(int recommendNum);
+	public void updateRecommendBook(int recommendNum, Model model);
+	
 	
 }

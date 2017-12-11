@@ -170,11 +170,11 @@ background-color: #EFEEEE;
 				<tr>
 	      <c:if test="${userNum !=null}">
 	    	  <td colspan="4">	    	
-	    	  <c:if test="${id ==article.id}">
-	    	  <input type="button" value="수정하기" onclick="document.location.href='/bbs/update.bbs?articleNum=${article.articleNum}&pageNum=${pageNum}&fileStatus=${article.fileStatus}'">
-	    	  <input type="button" value="삭제하기" onclick="document.location.href='/bbs/delete.bbs?articleNum=${article.articleNum}&pageNum=${pageNum}&fileStatus=${article.fileStatus}'">
+	    	  <c:if test="${id == managingList.userName}">
+	    	  <input type="button" value="수정하기" onclick="document.location.href='recommendBookUpdate.text?recommendNum=${managingList.num}'">
+	    	  <input type="button" value="삭제하기" onclick="delete_event()">
 	    	  </c:if>
-	    	  <c:if test="${userNum !=managingList.num}">
+	    	  <c:if test="${id != managingList.userName}">
 	    	  <input type="button" value="수정하기" disabled="disabled">
 	    	  <input type="button" value="삭제하기" disabled="disabled">
 	    	  </c:if>
@@ -241,7 +241,13 @@ background-color: #EFEEEE;
 					$('.menu_box1').css("display", "none");
 				})
 			})
-			
+			function delete_event(){
+				if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+					document.location.href='recommendBookDelete.text?recommendNum=${managingList.num}';
+				}else{   //취소
+    				return;
+				}
+			}
 		</script>
 
 </body>

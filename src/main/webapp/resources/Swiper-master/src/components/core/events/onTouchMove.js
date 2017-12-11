@@ -133,10 +133,10 @@ export default function (event) {
   }
   if ((diff > 0 && data.currentTranslate > swiper.minTranslate())) {
     disableParentSwiper = false;
-    if (params.resistance) data.currentTranslate = (swiper.minTranslate() - 1) + ((-swiper.minTranslate() + data.startTranslate + diff) ** resistanceRatio);
+    if (params.resistance) data.currentTranslate = (swiper.minTranslate() - 1) + ((-swiper.minTranslate() + data.startTranslate + diff) * resistanceRatio);
   } else if (diff < 0 && data.currentTranslate < swiper.maxTranslate()) {
     disableParentSwiper = false;
-    if (params.resistance) data.currentTranslate = (swiper.maxTranslate() + 1) - ((swiper.maxTranslate() - data.startTranslate - diff) ** resistanceRatio);
+    if (params.resistance) data.currentTranslate = (swiper.maxTranslate() + 1) - ((swiper.maxTranslate() - data.startTranslate - diff) * resistanceRatio);
   }
 
   if (disableParentSwiper) {

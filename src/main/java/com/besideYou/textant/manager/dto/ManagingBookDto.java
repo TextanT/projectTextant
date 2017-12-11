@@ -6,8 +6,15 @@ import org.springframework.stereotype.Component;
 public class ManagingBookDto {
 	int num;
 	String bookName;
+	int userNum;
 	String userName;
 	String writeDate;
+	public int getUserNum() {
+		return userNum;
+	}
+	public void setUserNum(int userNum) {
+		this.userNum = userNum;
+	}
 	String comment;
 	String reportComment;
 	public String getReportComment() {

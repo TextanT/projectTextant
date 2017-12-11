@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.besideYou.textant.comment.dto.CommentDto;
+import com.besideYou.textant.main.dto.BookInfoDto;
 
 public interface CommentDao {
 	public void scroll(CommentDto commentDto);
@@ -26,5 +27,9 @@ public interface CommentDao {
 	public List<CommentDto> getCommentArticleList(HashMap<String, String> CommentArticleList);
 	public int getCommentSearchCount(HashMap<String, String> CommentArticleList);
 	public int scrollCommentTopCount(int commentTop);
+	
+	
+	List<BookInfoDto> getBookNum(String bookSearch);
+	String getUserName(int userNum);
 	
 }

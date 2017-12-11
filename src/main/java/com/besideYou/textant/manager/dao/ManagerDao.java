@@ -23,5 +23,8 @@ public interface ManagerDao {
 	String getBookName(int bookArticleNum);
 	
 	RecommendedBookDto getRecommendedBookOne(int num);
+	void writeRecommendbook(RecommendedBookDto recommendedBookDto);
+	void deleteRecommendBook(int recommendNum);
+	
 	
 }

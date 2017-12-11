@@ -164,8 +164,9 @@ body {
 						style="margin-left: auto; margin-right: auto; text-align: center;">
 						<tr>
 							<td>작성자</td>
-							<td colspan="3"><c:out value="${userId}" /></td>
+							<td colspan="3"><c:out value="${managingList.userName}" /></td>
 						</tr>
+						<tr><td>책이름</td><td colspan="3">${managingList.bookName}</td></tr>
 						<tr>
 
 							<td>책번호</td>
@@ -183,7 +184,7 @@ body {
 						<tr>
 							<td colspan="4" style="text-align: left;"><textarea
 									name="recommendComment" class="form-control" rows="10"
-									style="background-color: white;"></textarea></td>
+									style="background-color: white;"><c:out value="${managingList.comment}"/></textarea></td>
 						</tr>
 						<tr>
 							<td colspan="4"><input type="submit" value="작성"> <input
