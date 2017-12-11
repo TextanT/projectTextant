@@ -191,6 +191,30 @@ public class ManagerServiceImplement implements ManagerService{
 		model.addAttribute("managingList", managingDto);
 		
 	}
+
+
+
+	@Override
+	public void managingBookContent(int num, Model model) {
+		ReportBookDto reportBookDto;
+		ManagingBookDto managingDto;
+		
+		reportBookDto = managerDao.getManagingBookOne(num);
+		managingDto = new ManagingBookDto();
+		managingDto.setNum(reportBookDto.getReportBookNum());
+		managingDto.setBookName(managerDao.getBookName(reportBookDto.getBookArticleNum()));
+		managingDto.setUserName(managerDao.getUserName(reportBookDto.getUserNum()));
+		managingDto.setComment(reportBookDto.getRepoBookCont());
+		managingDto.setWriteDate(reportBookDto.getWriteDate());
+		model.addAttribute("managingList", managingDto);
+	}
+
+
+
+	@Override
+	public void deleteReportBook(int reportBookNum) {
+		managerDao.deleteReportBook(reportBookNum);
+	}
 	
 	
 }

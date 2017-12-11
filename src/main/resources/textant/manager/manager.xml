@@ -106,6 +106,13 @@
 	<delete id="deleteRecommendBook" parameterType="Integer">
 	DELETE FROM RECOMMENDEDBOOK WHERE RECOMMENDNUM = #{recommendNum}
 	</delete>
+	
+	<select id="getManagingBookOne" parameterType="Integer" resultType="reportBook">
+	SELECT * FROM reportBook WHERE reportBookNum = #{num}
+	</select>
+	<delete id="deleteReportBook" parameterType="Integer">
+	DELETE FROM reportBook WHERE reportBookNum = #{reportBookNum}
+	</delete>
 </mapper>
 	
 	

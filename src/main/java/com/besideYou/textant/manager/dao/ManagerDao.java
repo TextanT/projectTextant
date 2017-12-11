@@ -25,6 +25,8 @@ public interface ManagerDao {
 	RecommendedBookDto getRecommendedBookOne(int num);
 	void writeRecommendbook(RecommendedBookDto recommendedBookDto);
 	void deleteRecommendBook(int recommendNum);
+	ReportBookDto getManagingBookOne(int num);
+	void deleteReportBook(int reportBookNum);
 	
 	
 }

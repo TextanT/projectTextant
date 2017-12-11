@@ -19,6 +19,8 @@ public interface ManagerService {
 	void getUserName(int userNum, Model model);
 	void deleteRecommendBook(int recommendNum);
 	public void updateRecommendBook(int recommendNum, Model model);
+	void managingBookContent(int num, Model model);
+	void deleteReportBook(int reportBookNum);
 	
 	
 }

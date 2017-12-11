@@ -146,7 +146,6 @@ background-color: #EFEEEE;
 			<h3 style="text-align: center">이상 책 관리</h3>
 		</div>
 		<div style="margin-left: 80px; margin-right: 80px;margin-bottom:50px; width: auto;">
-			<div style="text-align: right;"><a href="/textant/recommendBookManaging.text">관리하기</a></div>
 			<div class="managing" id="recommendBook"
 				>
 				<table class="table" style="margin-left: auto; margin-right: auto;text-align: center;">
@@ -156,15 +155,17 @@ background-color: #EFEEEE;
 					<td>유저이름</td>
 					<td>신고내용</td>
 					<td>작성날짜</td>
+					<td></td>
 					</tr>
 				<c:forEach var="managingList" items="${managingList}">
 				
-					<tr style="cursor: pointer;" onClick="window.open('/textant/managingBookContent.text?num=${managingList.num}&type=recommend','_self');">
+					<tr style="cursor: pointer;" onClick="window.open('/textant/managingBookContent.text?num=${managingList.num}','_self');">
 					<td><c:out value="${managingList.num}"/></td>
 					<td><c:out value="${managingList.bookName}"/></td>
 					<td><c:out value="${managingList.userName}"/></td>
 					<td><c:out value="${managingList.comment}"/></td>
 					<td><c:out value="${managingList.writeDate.substring(0,10)}"/></td>
+					<td><input type="button" onclick="document.location.href='managingBookDelete.text?recommendNum=${managingList.num}'"></td>
 					</tr>
 					</c:forEach>
 					<tr>	  

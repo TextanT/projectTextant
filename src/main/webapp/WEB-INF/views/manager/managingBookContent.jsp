@@ -143,38 +143,47 @@ background-color: #EFEEEE;
 	<br />
 	<div id="managingDistrict">
 		<div style="margin-top: 50px;">
-			<h3 style="text-align: center">추천 책 관리</h3>
+			<h3 style="text-align: center">이상 책 관리</h3>
 		</div>
 		<div style="margin-left: 80px; margin-right: 80px;margin-bottom:50px; width: auto;">
-			<div style="text-align: right;"><a href="/textant/recommendBookWrite.text?userNum=${userNum}">추천책 쓰기</a></div>
+			
 			<div class="managing" id="recommendBook"
 				>
-				<table class="table" style="margin-left: auto; margin-right: auto;text-align: center;">
+				<table class="table table-bordered" style="margin-left: auto; margin-right: auto;text-align: center;">
 				<tr>
-					<td>번호</td>
-					<td>책이름</td>
-					<td>유저이름</td>
-					<td>추천코멘트</td>
-					<td>작성날짜</td>
-					</tr>
-				<c:forEach var="managingList" items="${managingList}">
-				
-					<tr style="cursor: pointer;" onClick="window.open('/textant/managingRecommendContent.text?num=${managingList.num}','_self');">
-					<td><c:out value="${managingList.num}"/></td>
-					<td><c:out value="${managingList.bookName}"/></td>
-					<td><c:out value="${managingList.userName}"/></td>
-					<td><c:out value="${managingList.comment}"/></td>
-					<td><c:out value="${managingList.writeDate.substring(0,10)}"/></td>
-					</tr>
-					</c:forEach>
-					<tr>	  
-      <td colspan="5" align="center" height="40">	 
-	  ${pageCode}
-	  </td>
-  </tr>
+					<td>번호</td><td><c:out value="${managingList.num}"/></td>
+					<td>유저이름</td><td><c:out value="${managingList.userName}"/></td>
+				</tr>
+				<tr>
+					<td>책이름</td><td colspan="3"><c:out value="${managingList.bookName}"/></td>
+				</tr>
+				<tr>
+					<td>작성날짜</td><td colspan="3"><c:out value="${managingList.writeDate.substring(0,10)}"/></td>
+				</tr>
+				<tr>
+					<td colspan="4">신고내용</td>
+				</tr>
+				<tr>
+					<td colspan="4" style="text-align: left;">
+					<textarea readonly="readonly" class="form-control" rows="10" style="background-color: white;"><c:out value="${managingList.comment}"/></textarea></td>
+				</tr>
+				<tr>
+	      <c:if test="${userNum !=null}">
+	    	  <td colspan="4">	    	
+	    	  <input type="button" value="삭제하기" onclick="delete_event()">
+	    	  <input type="button" value="목록으로" onclick="history.back()">
+	    	  </td>
+	      </c:if>
+	      		    	
+	      <c:if test="${userNum ==null}">
+	    	  <td colspan="4">
+	    	  <input type="button" value="삭제하기" disabled="disabled">
+	    	  <input type="button" value="목록으로" onclick="history.back()">
+	    	  </td>   
+	      </c:if>      	 	      	 
+	     </tr>
 				</table>
 			</div>
-		<div style="text-align: right;"><a href="/textant/managerMain.text">관리자 메인</a></div>
 		</div>
 	</div>
 
@@ -224,7 +233,13 @@ background-color: #EFEEEE;
 					$('.menu_box1').css("display", "none");
 				})
 			})
-			
+			function delete_event(){
+				if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+					document.location.href='reportBookDelete.text?reportBookNum=${managingList.num}';
+				}else{   //취소
+    				return;
+				}
+			}
 		</script>
 
 </body>

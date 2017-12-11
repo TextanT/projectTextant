@@ -95,5 +95,15 @@ public class ManagerController {
 		managerService.updateRecommendBook(recommendNum,model);
 		return "manager/recommendUpdate";
 	}
+	@RequestMapping(value="/managingBookContent.text")
+	public String managingBookContent(int num, Model model) {
+		managerService.managingBookContent(num, model);
+		return "manager/managingBookContent";
+	}
+	@RequestMapping(value="/reportBookDelete.text")
+	public String reportBookDelete(int reportBookNum) {
+		managerService.deleteReportBook(reportBookNum);
+		return "redirect:bookManaging.text?pageNum=1";
+	}
 	
 }
