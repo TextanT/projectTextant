@@ -1,20 +1,17 @@
 package com.besideYou.textant.manager.controller;
 
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.besideYou.textant.common.dto.NoticeDto;
 import com.besideYou.textant.common.dto.RecommendedBookDto;
 import com.besideYou.textant.manager.service.ManagerService;
 
@@ -33,7 +30,7 @@ public class ManagerController {
 	HashMap<String,String> pagingMap;
 	
 	@RequestMapping(value = "/managerMain.text")
-	public String managerMain(String fileName, Model model, String bookType) throws Exception {
+	public String managerMain(HttpServletRequest req, HttpSession session, String fileName, Model model, String bookType) throws Exception {
 		managerService.managerMain(model);
 		return "manager/managing";
 	}
@@ -53,13 +50,8 @@ public class ManagerController {
 		managerService.managerReportBook(model, pageNum, req);
 		return "manager/bookManaging";
 	}
-	@RequestMapping(value = "/noticeManaging.text")
-	public String noticeManaging() {
-		return "manager/noticeManaging";
-	}
 	@RequestMapping(value = "/recommendBookManaging.text")
 	public String recommendBookManaging(int pageNum, Model model, HttpServletRequest req) {
-		System.out.println();
 		managerService.managerRecommendBook(model, pageNum, req);
 		return "manager/recommendBookManaging";
 	}
@@ -105,5 +97,34 @@ public class ManagerController {
 		managerService.deleteReportBook(reportBookNum);
 		return "redirect:bookManaging.text?pageNum=1";
 	}
-	
+	@RequestMapping(value="/noticeManaging.text")
+	public String noticeManaging(int pageNum, Model model, HttpServletRequest req) {
+		managerService.managerNotice(model, pageNum, req);
+		return "manager/noticeManaging";
+	}
+	@RequestMapping(value="/noticeContent.text")
+	public String noticeContent(int num, Model model) {
+		managerService.noticeContent(num, model);
+		return "manager/noticeContent";
+	}
+	@RequestMapping(value="/noticeWrite.text", method=RequestMethod.GET)
+	public String noticeWrite(int userNum, Model model) {
+		managerService.getUserName(userNum, model);
+		return "manager/noticeWrite";
+	}
+	@RequestMapping(value="/noticeWrite.text", method=RequestMethod.POST)
+	public String noticeWriteForm(NoticeDto noticeDto, HttpSession session) {
+		managerService.noticeWrite(noticeDto, session);
+		return "redirect:noticeManaging.text?pageNum=1";
+	}
+	@RequestMapping(value="/noticeDelete.text")
+	public String noticeDelete(int articleNum) {
+		managerService.deleteNotice(articleNum);
+		return "redirect:noticeManaging.text?pageNum=1";
+	}
+	@RequestMapping(value="/noticeUpdate.text", method=RequestMethod.GET)
+	public String noticeUpdate(int articleNum,Model model) {
+		managerService.updateNotice(articleNum,model);
+		return "manager/noticeUpdate";
+	}
 }

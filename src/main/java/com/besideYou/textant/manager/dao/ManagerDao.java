@@ -28,5 +28,9 @@ public interface ManagerDao {
 	ReportBookDto getManagingBookOne(int num);
 	void deleteReportBook(int reportBookNum);
 	
-	
+	int getUserGrade(int userNum);
+	int getTotalNoticeCount();
+	NoticeDto getNoticeOne(int num);
+	void writeNotice(NoticeDto noticeDto);
+	void deleteNotice(int articleNum);
 }

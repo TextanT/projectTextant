@@ -9,14 +9,28 @@ public class ManagingBookDto {
 	int userNum;
 	String userName;
 	String writeDate;
+	String comment;
+	String reportComment;
+	int type;
+	int hit;
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 	public int getUserNum() {
 		return userNum;
 	}
 	public void setUserNum(int userNum) {
 		this.userNum = userNum;
 	}
-	String comment;
-	String reportComment;
 	public String getReportComment() {
 		return reportComment;
 	}
@@ -55,8 +69,9 @@ public class ManagingBookDto {
 	}
 	@Override
 	public String toString() {
-		return "ManagingBookDto [num=" + num + ", bookName=" + bookName + ", userName=" + userName + ", writeDate="
-				+ writeDate + ", comment=" + comment + ", reportComment=" + reportComment + "]";
+		return "ManagingBookDto [num=" + num + ", bookName=" + bookName + ", userNum=" + userNum + ", userName="
+				+ userName + ", writeDate=" + writeDate + ", type=" + type + ", hit=" + hit + ", comment=" + comment
+				+ ", reportComment=" + reportComment + "]";
 	}
 	
 	

@@ -40,10 +40,10 @@ body{
 body{
 background-color: #EFEEEE;
 }
-.managing table tr:hover{
-background-color: gray;
-font: white;
-}
+/* .managing table tr:hover{ */
+/* background-color: gray; */
+/* font: white; */
+/* } */
 </style>
 </head>
 <body>
@@ -142,146 +142,46 @@ font: white;
 	</div>
 	<br />
 	<div id="managingDistrict">
-		<div
-			style="margin-top: 10px; margin-left: 80px; width: 40%; float: left;">
-			<h3 style="text-align: center">신고 댓글</h3>
-		</div>
-		<div
-			style="margin-top: 10px; margin-right: 80px; width: 40%; float: right;">
-			<h3 style="text-align: center">싫어요 댓글</h3>
-		</div>
-		<div class="clear"></div>
-		<div style="margin-left: 80px; width: 40%; float: left;'">
-			<div style="text-align: right;"><a href="/textant/reportCommentManaging.text">관리하기</a></div>
-			<div class="managing" id="reportComment"
-				style="height: 200px; overflow-y: scroll;">
-				<table class="table" style="margin-left: auto; margin-right: auto;text-align: center;">
-				<tr>
-					<td>번호</td>
-					<td>댓글번호</td>
-					<td>신고내용</td>
-					<td>작성날짜</td>
-					</tr>
-					<c:forEach var="reportComment" items="${getFirstReportCommentList}">
-					<tr>
-					<td><c:out value="${reportComment.reportCommentNum}"/></td>
-					<td><c:out value="${reportComment.commentNum}"/></td>
-					<td><c:out value="${reportComment.repoCommCont}"/></td>
-					<td><c:out value="${reportComment.writeDate.substring(0,10)}"/></td>
-					</tr>
-					</c:forEach>
-				</table>
-			</div>
-		</div>
-
-		<div style="margin-right: 80px; width: 40%; float: right;'">
-			<div style="text-align: right;"><a href="/textant/badCommentManaging.text">관리하기</a></div>
-			<div class="managing" id="badComment"
-				style="height: 200px; overflow-y: scroll;">
-				<table class="table" style="margin-left: auto; margin-right: auto;text-align: center;">
-				<tr>
-					<td>번호</td>
-					<td>유저번호</td>
-					<td>내용</td>
-					<td>싫어요수</td>
-					<td>작성날짜</td>
-					</tr>
-					<c:forEach var="badComment" items="${getFirstBadCommentList}">
-					<tr>
-					<td><c:out value="${badComment.commentNum}"/></td>
-					<td><c:out value="${badComment.userNum}"/></td>
-					<td><c:out value="${badComment.conet}"/></td>
-					<td><c:out value="${badComment.commentBad}"/></td>
-					<td><c:out value="${badComment.writeDate.substring(0,10)}"/></td>
-					</tr>
-					</c:forEach>
-				</table>
-			</div>
-		</div>
-		<div class="clear"></div>
-		<div style="margin-top: 50px;">
-			<h3 style="text-align: center">이상 책 관리</h3>
-		</div>
-		<div style="margin-left: 80px; margin-right: 80px; width: auto;">
-			<div style="text-align: right;"><a href="/textant/bookManaging.text?pageNum=1">관리하기</a></div>
-			<div class="managing" id="reportBook"
-				style="height: 200px; overflow-y: scroll;">
-				<table class="table"style="margin-left: auto; margin-right: auto;text-align: center;">
-				<tr>
-					<td>번호</td>
-					<td>책번호</td>
-					<td>책 신고 내용</td>
-					<td>작성날짜</td>
-					</tr>
-					<c:forEach var="reportBook" items="${getFirstReportBookList}">
-					<tr>
-					<td><c:out value="${reportBook.reportBookNum}"/></td>
-					<td><c:out value="${reportBook.bookArticleNum}"/></td>
-					<td><c:out value="${reportBook.repoBookCont}"/></td>
-					<td><c:out value="${reportBook.writeDate}"/></td>
-					</tr>
-					</c:forEach>
-				</table>
-			</div>
-		</div>
-
 		<div style="margin-top: 50px;">
 			<h3 style="text-align: center">공지사항 관리</h3>
 		</div>
-		<div style="margin-left: 80px; margin-right: 80px; width: auto;">
-			<div style="text-align: right;"><a href="/textant/noticeManaging.text?pageNum=1">관리하기</a></div>
-			<div class="managing" id="notice"
-				style="height: 200px; overflow-y: scroll;">
-				<table class="table"style="margin-left: auto; margin-right: auto;text-align: center;">
-				<tr>
-					<td>번호</td>
-					<td>제목</td>
-					<td>유저번호</td>
-					<td>조회수</td>
-					<td>타입</td>
-					<td>작성날짜</td>
-					</tr>
-					<c:forEach var="notice" items="${getFirstNoticeList}">
-					<tr>
-					<td><c:out value="${notice.articleNum}"/></td>
-					<td><c:out value="${notice.title}"/></td>
-					<td><c:out value="${notice.userNum}"/></td>
-					<td><c:out value="${notice.hit}"/></td>
-					<td><c:out value="${notice.type}"/></td>
-					<td><c:out value="${notice.writeDate}"/></td>
-					</tr>
-					</c:forEach>
-				</table>
-			</div>
-		</div>
-		<div style="margin-top: 50px;">
-			<h3 style="text-align: center">추천 책 관리</h3>
-		</div>
 		<div style="margin-left: 80px; margin-right: 80px;margin-bottom:50px; width: auto;">
-			<div style="text-align: right;"><a href="/textant/recommendBookManaging.text?pageNum=1">관리하기</a></div>
+			<div style="text-align: right;"><a href="/textant/noticeWrite.text?userNum=${userNum}">공지사항 쓰기</a></div>
 			<div class="managing" id="recommendBook"
-				style="height: 200px; overflow-y: scroll;">
+				>
 				<table class="table" style="margin-left: auto; margin-right: auto;text-align: center;">
 				<tr>
 					<td>번호</td>
-					<td>책번호</td>
-					<td>유저번호</td>
-					<td>추천코멘트</td>
+					<td>제목</td>
 					<td>작성날짜</td>
+					<td>작성자</td>
+					<td>조회수</td>
+					<td>타입</td>
+<%-- 					<td><c:out value="${managingList.comment}"/></td> --%>
 					</tr>
-				<c:forEach var="recommendedBook" items="${getFirstRecommendedBookList}">
-					<tr>
-					<td><c:out value="${recommendedBook.recommendNum}"/></td>
-					<td><c:out value="${recommendedBook.bookArticleNum}"/></td>
-					<td><c:out value="${recommendedBook.userNum}"/></td>
-					<td><c:out value="${recommendedBook.recommendComment}"/></td>
-					<td><c:out value="${recommendedBook.writeDate}"/></td>
+				<c:forEach var="managingList" items="${managingList}">
+				
+					<tr style="cursor: pointer;" onClick="window.open('/textant/noticeContent.text?num=${managingList.num}','_self');">
+					<td><c:out value="${managingList.num}"/></td>
+					<td><c:out value="${managingList.bookName}"/></td>
+					<td><c:out value="${managingList.writeDate.substring(0,10)}"/></td>
+					<td><c:out value="${managingList.userName}"/></td>
+					<td><c:out value="${managingList.hit}"/></td>
+					<td><c:out value="${managingList.type}"/></td>
+<%-- 					<td><c:out value="${managingList.comment}"/></td> --%>
 					</tr>
 					</c:forEach>
+					<tr>	  
+      <td colspan="5" align="center" height="40">	 
+	  ${pageCode}
+	  </td>
+  </tr>
 				</table>
 			</div>
+		<div style="text-align: right;"><a href="/textant/managerMain.text">관리자 메인</a></div>
 		</div>
-</div>
+	</div>
+
 		<footer>
 		<div>
 			<img height="50px" src="/textant/resources/icon_img/footer_logo.png"
@@ -328,6 +228,7 @@ font: white;
 					$('.menu_box1').css("display", "none");
 				})
 			})
+			
 		</script>
 
 </body>

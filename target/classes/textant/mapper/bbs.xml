@@ -191,6 +191,7 @@
 	<select id="getUserName" parameterType="Integer" resultType="String">
 	SELECT USERID FROM LOGIN WHERE USERNUM = #{userNum}
 	</select>
+	
 </mapper>	
 	
 

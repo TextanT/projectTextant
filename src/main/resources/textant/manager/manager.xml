@@ -113,6 +113,23 @@
 	<delete id="deleteReportBook" parameterType="Integer">
 	DELETE FROM reportBook WHERE reportBookNum = #{reportBookNum}
 	</delete>
+	
+	<select id="getUserGrade" parameterType="Integer" resultType="Integer">
+	SELECT grade FROM LOGIN WHERE USERNUM = #{userNum}
+	</select>
+	<select id="getTotalNoticeCount" resultType="Integer">
+	SELECT COUNT(*) FROM notice
+	</select>
+	<select id="getNoticeOne" parameterType="Integer" resultType="notice">
+	SELECT * FROM notice WHERE articleNum = #{num}
+	</select>
+	<insert id="writeNotice" parameterType="notice">
+	INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL,#{title},sysdate,#{userNum},0,#{type},#{contents})
+	</insert>
+	<delete id="deleteNotice" parameterType="Integer">
+	DELETE FROM notice WHERE articleNum = #{articleNum}
+	</delete>
+	
 </mapper>
 	
 	

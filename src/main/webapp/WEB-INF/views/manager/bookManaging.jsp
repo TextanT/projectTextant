@@ -134,7 +134,6 @@ background-color: #EFEEEE;
 					<li><a href="#">시</a></li>
 					<li><a href="#">수필</a></li>
 					<li><a href="#">유머</a></li>
-
 				</ul>
 			</div>
 
@@ -155,17 +154,15 @@ background-color: #EFEEEE;
 					<td>유저이름</td>
 					<td>신고내용</td>
 					<td>작성날짜</td>
-					<td></td>
 					</tr>
+<!-- <tr>				 -->
 				<c:forEach var="managingList" items="${managingList}">
-				
 					<tr style="cursor: pointer;" onClick="window.open('/textant/managingBookContent.text?num=${managingList.num}','_self');">
-					<td><c:out value="${managingList.num}"/></td>
-					<td><c:out value="${managingList.bookName}"/></td>
-					<td><c:out value="${managingList.userName}"/></td>
-					<td><c:out value="${managingList.comment}"/></td>
-					<td><c:out value="${managingList.writeDate.substring(0,10)}"/></td>
-					<td><input type="button" onclick="document.location.href='managingBookDelete.text?recommendNum=${managingList.num}'"></td>
+					<td class="clickOk"><c:out value="${managingList.num}"/></td>
+					<td class="clickOk"><c:out value="${managingList.bookName}"/></td>
+					<td class="clickOk"><c:out value="${managingList.userName}"/></td>
+					<td class="clickOk"><c:out value="${managingList.comment}"/></td>
+					<td class="clickOk"><c:out value="${managingList.writeDate.substring(0,10)}"/></td>
 					</tr>
 					</c:forEach>
 					<tr>	  
@@ -175,6 +172,7 @@ background-color: #EFEEEE;
   </tr>
 				</table>
 			</div>
+		<div style="text-align: right;"><a href="/textant/managerMain.text">관리자 메인</a></div>
 		</div>
 	</div>
 
@@ -225,6 +223,15 @@ background-color: #EFEEEE;
 				})
 			})
 			
+			function delete_event(firm){
+				if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+					alert(event);
+					preventDefault;
+ 					document.location.href='managingBookDelete.text';
+				}else{   //취소
+    				return;
+				}
+			}
 		</script>
 
 </body>
