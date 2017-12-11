@@ -32,7 +32,9 @@ public interface MyStudyDao {
 	int getMyBookMarkCount(int userNum);
 
 	void commentDelete(CommentDto commentDto);
-
+	
+	void commentReplyDeleteUpdate(CommentDto commentDto);
+	
 	void bookWriteDelete(BookInfoDto bookInfoDto);
 
 	void wishDelete(BookWishDto bookWishDto);
@@ -40,5 +42,7 @@ public interface MyStudyDao {
 	void bookWriteDelete(ReadBookDto readBookDto);
 
 	void bookMarkDelete(BookMarkDto bookMarkDto);
+
+	
 
 }

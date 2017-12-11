@@ -103,6 +103,12 @@
 		and userNum=#{userNum}
 	</delete>
 	
+	<update id="commentReplyDeleteUpdate" parameterType="comment">
+		update comments
+		set commentCount=commentCount-1
+		where commentNum=#{commentGroup}
+	</update>
+	
 	<delete id="bookWriteDelete" parameterType="bookInfo">
 		DELETE
 		FROM BOOKINFO

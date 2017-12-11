@@ -134,7 +134,13 @@ public class MyStudyServiceImpl implements MyStudyService {
 
 	@Override
 	public void commentDelete(CommentDto commentDto) {
-		myStudyDao.commentDelete(commentDto);
+		if(commentDto.getPageGroup()!=0) {
+			myStudyDao.commentDelete(commentDto);
+			myStudyDao.commentReplyDeleteUpdate(commentDto);
+		}else {
+			myStudyDao.commentDelete(commentDto);
+		}
+		
 		
 	}
 
