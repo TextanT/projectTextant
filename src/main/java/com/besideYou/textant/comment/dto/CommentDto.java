@@ -17,12 +17,21 @@ public class CommentDto {
 	private int pageStop;
 	private int totalCount;
 	private String pageCode;
+	private String bookName;
+	private String fileLocation;
 	
 	
 	
+
+
+
+
 	public int getCommentNum() {
 		return commentNum;
 	}
+
+
+
 
 
 
@@ -34,9 +43,15 @@ public class CommentDto {
 
 
 
+
+
+
 	public String getConet() {
 		return conet;
 	}
+
+
+
 
 
 
@@ -48,9 +63,15 @@ public class CommentDto {
 
 
 
+
+
+
 	public int getPageGroup() {
 		return pageGroup;
 	}
+
+
+
 
 
 
@@ -62,9 +83,15 @@ public class CommentDto {
 
 
 
+
+
+
 	public int getDepth() {
 		return depth;
 	}
+
+
+
 
 
 
@@ -76,9 +103,15 @@ public class CommentDto {
 
 
 
+
+
+
 	public int getBookArticleNum() {
 		return bookArticleNum;
 	}
+
+
+
 
 
 
@@ -90,9 +123,15 @@ public class CommentDto {
 
 
 
+
+
+
 	public int getCommentCount() {
 		return commentCount;
 	}
+
+
+
 
 
 
@@ -104,9 +143,15 @@ public class CommentDto {
 
 
 
+
+
+
 	public int getCommentGroup() {
 		return commentGroup;
 	}
+
+
+
 
 
 
@@ -118,9 +163,15 @@ public class CommentDto {
 
 
 
+
+
+
 	public int getUserNum() {
 		return userNum;
 	}
+
+
+
 
 
 
@@ -132,9 +183,15 @@ public class CommentDto {
 
 
 
+
+
+
 	public String getWriteDate() {
 		return writeDate;
 	}
+
+
+
 
 
 
@@ -146,9 +203,15 @@ public class CommentDto {
 
 
 
+
+
+
 	public int getCommentGood() {
 		return commentGood;
 	}
+
+
+
 
 
 
@@ -160,9 +223,15 @@ public class CommentDto {
 
 
 
+
+
+
 	public int getCommentBad() {
 		return commentBad;
 	}
+
+
+
 
 
 
@@ -174,9 +243,15 @@ public class CommentDto {
 
 
 
+
+
+
 	public String getNickName() {
 		return nickName;
 	}
+
+
+
 
 
 
@@ -185,7 +260,50 @@ public class CommentDto {
 		this.nickName = nickName;
 	}
 
-	
+
+
+
+
+
+
+	public int getPageStart() {
+		return pageStart;
+	}
+
+
+
+
+
+
+
+	public void setPageStart(int pageStart) {
+		this.pageStart = pageStart;
+	}
+
+
+
+
+
+
+
+	public int getPageStop() {
+		return pageStop;
+	}
+
+
+
+
+
+
+
+	public void setPageStop(int pageStop) {
+		this.pageStop = pageStop;
+	}
+
+
+
+
+
 
 
 	public int getTotalCount() {
@@ -195,16 +313,25 @@ public class CommentDto {
 
 
 
+
+
+
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 	}
 
 
-	
+
+
+
+
 
 	public String getPageCode() {
 		return pageCode;
 	}
+
+
+
 
 
 
@@ -216,12 +343,56 @@ public class CommentDto {
 
 
 
+
+
+
+	public String getBookName() {
+		return bookName;
+	}
+
+
+
+
+
+
+
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+
+
+
+
+
+
+
+	public String getFileLocation() {
+		return fileLocation;
+	}
+
+
+
+
+
+
+
+	public void setFileLocation(String fileLocation) {
+		this.fileLocation = fileLocation;
+	}
+
+
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "CommentDto [commentNum=" + commentNum + ", conet=" + conet + ", pageGroup=" + pageGroup + ", depth="
 				+ depth + ", bookArticleNum=" + bookArticleNum + ", commentCount=" + commentCount + ", commentGroup="
 				+ commentGroup + ", userNum=" + userNum + ", writeDate=" + writeDate + ", commentGood=" + commentGood
 				+ ", commentBad=" + commentBad + ", nickName=" + nickName + ", pageStart=" + pageStart + ", pageStop="
-				+ pageStop + ", totalCount=" + totalCount + "]";
+				+ pageStop + ", totalCount=" + totalCount + ", pageCode=" + pageCode + ", bookName=" + bookName
+				+ ", fileLocation=" + fileLocation + "]";
 	}
 }

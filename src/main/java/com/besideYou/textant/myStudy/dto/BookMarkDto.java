@@ -6,6 +6,9 @@ public class BookMarkDto {
 	private int userNum;
 	private int page;
 	private String writeData;
+	private String bookName;
+	private String fileLocation;
+	
 	public int getBookMarkNum() {
 		return bookMarkNum;
 	}
@@ -36,10 +39,24 @@ public class BookMarkDto {
 	public void setWriteData(String writeData) {
 		this.writeData = writeData;
 	}
+	
+	public String getBookName() {
+		return bookName;
+	}
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+	public String getFileLocation() {
+		return fileLocation;
+	}
+	public void setFileLocation(String fileLocation) {
+		this.fileLocation = fileLocation;
+	}
 	@Override
 	public String toString() {
 		return "BookMarkDto [bookMarkNum=" + bookMarkNum + ", bookArticleNum=" + bookArticleNum + ", userNum=" + userNum
-				+ ", page=" + page + ", writeData=" + writeData + "]";
+				+ ", page=" + page + ", writeData=" + writeData + ", bookName=" + bookName + ", fileLocation="
+				+ fileLocation + "]";
 	}
 	
 	

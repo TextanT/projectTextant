@@ -32,19 +32,21 @@ public class LoginServiceImpl implements LoginService {
 		
 		dbPass = loginDao.loginCheck(id);
 		
-		System.out.println(dbPass);
+		System.out.println("dbPass:"+dbPass);
 		
 		if (dbPass != null) {
 			if (dbPass.equals(pass)) {
+				
 				session.setAttribute("id", id);
 				
 				
 				loginDto = loginDao.getUserNum(loginDto);
 				session.setAttribute("userNum", loginDto.getUserNum());
+				System.out.println("userNum:session:"+session.getAttribute("userNum"));
 				session.setAttribute("nickname", loginDto.getNickName());
 //				session.setAttribute("id", loginDto.getUserId());
 //				System.out.println(userNum);
-				System.out.println(nickname);
+				System.out.println("nickName"+nickname);
 				
 				view = "redirect:main.text";
 				

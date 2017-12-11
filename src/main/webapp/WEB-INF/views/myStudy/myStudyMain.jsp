@@ -21,9 +21,8 @@
 </style>
 </head>
 <body>
-<img ismap>
-<small class="human" data-src="/2017/12/08/s_d5f158a7-c5e2-43f3-ba4b-09a4f6520e88_Penguins.jpg">X</small>
 	<div class="header">
+		<input type="hidden" id="pageNum" name="pageNum" value="1">
 		<div class="header_logo" style="padding-top: 20px;">
 		<div style="float:left;">
 			<a href="/textant/main.text" class="logo_a" style="height:55px;"> <img
@@ -128,86 +127,34 @@
 		</div>
 		<div class="clear"></div>
 		<div style="margin-left: 80px; width: 40%; float: left;'">
-			<div style="text-align: right;">더 보기</div>
+			<div style="text-align: right;"><a href="/textant/myCommentView?pageNum=1"/>더 보기</div>
 			<div class="managing" id="reportComment"
 				style="height: 200px; overflow-y: scroll;">
-				<table style="margin-left: auto; margin-right: auto;">
-					<tr>
-						<td>나의 덧글</td>
-					</tr>
-					<tr>
-						<td>첫번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-				</table>
+				<div class="swiper-wrapper">
+			<c:forEach var="bookWrite" items="${bookWriteList}">
+				<div class="swiper-slide">
+					<a href="/textant/read.text?fileName=${bookWrite.fileLocation}">
+					<img src="displayFile.text?fileName=${bookWrite.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${bookWrite.fileLocation}</span></br> <span class="bookname">${bookWrite.fileLocation}</span> </a>
+				</div>
+			</c:forEach>
+		</div>
 			</div>
 		</div>
 
 		<div style="margin-right: 80px; width: 40%; float: right;'">
-			<div style="text-align: right;">더 보기</div>
+			<div style="text-align: right;"><a href="/textant/myBookWriteView?pageNum=1"/>더 보기</div>
 			<div class="managing" id="reportComment"
 				style="height: 200px; overflow-y: scroll;">
-				<table style="margin-left: auto; margin-right: auto;">
-					<tr>
-						<td>신고 책</td>
-					</tr>
-					<tr>
-						<td>첫번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-				</table>
+			<c:forEach var="bookWrite" items="${bookWriteList}">
+				<div class="swiper-slide">
+					<a href="/textant/read.text?fileName=${bookWrite.fileLocation}">
+					<img src="displayFile.text?fileName=${bookWrite.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${bookWrite.fileLocation}</span></br> <span class="bookname">${bookWrite.fileLocation}</span> </a>
+				</div>
+			</c:forEach>
 			</div>
 		</div>
 		<div class="clear"></div>
@@ -215,44 +162,17 @@
 			<h3 style="text-align: center">내가 읽은 책</h3>
 		</div>
 		<div style="margin-left: 80px; margin-right: 80px; width: auto;">
-			<div style="text-align: right;">더 보기</div>
+			<div style="text-align: right;"><a href="/textant/myBookReadView?pageNum=1"/>더 보기</div>
 			<div class="managing" id="reportComment"
 				style="height: 200px; overflow-y: scroll;">
-				<table style="margin-left: auto; margin-right: auto;">
-					<tr>
-						<td>신고 책</td>
-					</tr>
-					<tr>
-						<td>첫번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-				</table>
+			<c:forEach var="bookRead" items="${bookReadList}">
+				<div class="swiper-slide">
+					<a href="/textant/read.text?fileName=${bookRead.fileLocation}">
+					<img src="displayFile.text?fileName=${bookRead.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${bookRead.fileLocation}</span></br> <span class="bookname">${bookRead.fileLocation}</span> </a>
+				</div>
+			</c:forEach>
 			</div>
 		</div>
 
@@ -260,88 +180,34 @@
 			<h3 style="text-align: center">내가 찜한책</h3>
 		</div>
 		<div style="margin-left: 80px; margin-right: 80px; width: auto;">
-			<div style="text-align: right;">더 보기</div>
+			<div style="text-align: right;"><a href="/textant/myWishView?pageNum=1"/>더 보기</div>
 			<div class="managing" id="reportComment"
 				style="height: 200px; overflow-y: scroll;">
-				<table style="margin-left: auto; margin-right: auto;">
-					<tr>
-						<td>신고 책</td>
-					</tr>
-					<tr>
-						<td>첫번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-				</table>
+			<c:forEach var="wish" items="${wishList}">
+				<div class="swiper-slide">
+					<a href="/textant/read.text?fileName=${wish.fileLocation}">
+					<img src="displayFile.text?fileName=${wish.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${wish.fileLocation}</span></br> <span class="bookname">${wish.fileLocation}</span> </a>
+				</div>
+			</c:forEach>
 			</div>
 		</div>
 		<div style="margin-top: 50px;">
 			<h3 style="text-align: center">북마크</h3>
 		</div>
 		<div style="margin-left: 80px; margin-right: 80px;margin-bottom:50px; width: auto;">
-			<div style="text-align: right;">더 보기</div>
+			<div style="text-align: right;"><a href="/textant/myBookMarkView?pageNum=1"/>더 보기</div>
 			<div class="managing" id="reportComment"
 				style="height: 200px; overflow-y: scroll;">
-				<table style="margin-left: auto; margin-right: auto;">
-					<tr>
-						<td>신고 책</td>
-					</tr>
-					<tr>
-						<td>첫번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-					<tr>
-						<td>두번째</td>
-					</tr>
-				</table>
+			<c:forEach var="bookMark" items="${bookMarkList}">
+				<div class="swiper-slide">
+					<a href="/textant/read.text?fileName=${bookMark.fileLocation}">
+					<img src="displayFile.text?fileName=${bookMark.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
+						height="300px" style="display: block;" class="bookimg" /> <span
+						class="bookname">${bookMark.fileLocation}</span></br> <span class="bookname">${bookMark.fileLocation}</span> </a>
+				</div>
+			</c:forEach>
 			</div>
 		</div>
 

@@ -6,6 +6,8 @@ public class ReadBookDto {
 	private int userNum;
 	private int page;
 	private String writeDate;
+	private String bookName;
+	private String fileLocation;
 	public int getReadBookNum() {
 		return readBookNum;
 	}
@@ -36,10 +38,24 @@ public class ReadBookDto {
 	public void setWriteDate(String writeDate) {
 		this.writeDate = writeDate;
 	}
+	
+	public String getBookName() {
+		return bookName;
+	}
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+	public String getFileLocation() {
+		return fileLocation;
+	}
+	public void setFileLocation(String fileLocation) {
+		this.fileLocation = fileLocation;
+	}
 	@Override
 	public String toString() {
 		return "ReadBookDto [readBookNum=" + readBookNum + ", bookArticleNum=" + bookArticleNum + ", userNum=" + userNum
-				+ ", page=" + page + ", writeDate=" + writeDate + "]";
+				+ ", page=" + page + ", writeDate=" + writeDate + ", bookName=" + bookName + ", fileLocation="
+				+ fileLocation + "]";
 	}
 	
 	
