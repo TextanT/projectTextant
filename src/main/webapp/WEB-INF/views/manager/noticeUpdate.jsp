@@ -158,7 +158,8 @@ body {
 		<div
 			style="margin-left: 80px; margin-right: 80px; margin-bottom: 50px; width: auto;">
 			<form action="/textant/noticeUpdate.text" method="post">
-				<input type="hidden" value="${managingList.userNum}" name="userNum">
+				<input type="hidden" value="${managingList.num}" name="articleNum">
+				<input type="hidden" value="${userNum}" name="userNum">
 				<div class="managing" id="recommendBook">
 					<table class="table table-bordered"
 						style="margin-left: auto; margin-right: auto; text-align: center;">

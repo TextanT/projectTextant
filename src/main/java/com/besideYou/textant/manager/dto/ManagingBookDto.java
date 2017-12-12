@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 public class ManagingBookDto {
 	int num;
 	String bookName;
+	int bookNum;
+	
 	int userNum;
 	String userName;
 	String writeDate;
@@ -13,6 +15,14 @@ public class ManagingBookDto {
 	String reportComment;
 	int type;
 	int hit;
+	
+	
+	public int getBookNum() {
+		return bookNum;
+	}
+	public void setBookNum(int bookNum) {
+		this.bookNum = bookNum;
+	}
 	public int getHit() {
 		return hit;
 	}
@@ -69,9 +79,9 @@ public class ManagingBookDto {
 	}
 	@Override
 	public String toString() {
-		return "ManagingBookDto [num=" + num + ", bookName=" + bookName + ", userNum=" + userNum + ", userName="
-				+ userName + ", writeDate=" + writeDate + ", type=" + type + ", hit=" + hit + ", comment=" + comment
-				+ ", reportComment=" + reportComment + "]";
+		return "ManagingBookDto [num=" + num + ", bookName=" + bookName + ", bookNum=" + bookNum + ", userNum="
+				+ userNum + ", userName=" + userName + ", writeDate=" + writeDate + ", comment=" + comment
+				+ ", reportComment=" + reportComment + ", type=" + type + ", hit=" + hit + "]";
 	}
 	
 	

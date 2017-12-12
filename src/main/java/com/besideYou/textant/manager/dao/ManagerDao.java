@@ -33,4 +33,6 @@ public interface ManagerDao {
 	NoticeDto getNoticeOne(int num);
 	void writeNotice(NoticeDto noticeDto);
 	void deleteNotice(int articleNum);
+	void updateNotice(NoticeDto noticeDto);
+	void updateRecommendBook(RecommendedBookDto recommendedBookDto);
 }

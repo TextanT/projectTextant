@@ -10,7 +10,7 @@ public class RecommendedBookDto {
 	public int getRecommendNum() {
 		return recommendNum;
 	}
-	public void setRecommendedNum(int recommendNum) {
+	public void setRecommendNum(int recommendNum) {
 		this.recommendNum = recommendNum;
 	}
 	public int getBookArticleNum() {

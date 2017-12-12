@@ -84,8 +84,13 @@ public class ManagerController {
 	}
 	@RequestMapping(value="/recommendBookUpdate.text", method=RequestMethod.GET)
 	public String recommendBookUpdate(int recommendNum,Model model) {
-		managerService.updateRecommendBook(recommendNum,model);
+		managerService.managingRecommendContent(recommendNum,model);
 		return "manager/recommendUpdate";
+	}
+	@RequestMapping(value="/recommendBookUpdate.text", method=RequestMethod.POST)
+	public String recommendBookUpdateForm(RecommendedBookDto recommendedBookDto, HttpSession session) {
+		managerService.updateRecommendBook(recommendedBookDto, session);
+		return "redirect:recommendBookManaging.text?pageNum=1";
 	}
 	@RequestMapping(value="/managingBookContent.text")
 	public String managingBookContent(int num, Model model) {
@@ -124,7 +129,13 @@ public class ManagerController {
 	}
 	@RequestMapping(value="/noticeUpdate.text", method=RequestMethod.GET)
 	public String noticeUpdate(int articleNum,Model model) {
-		managerService.updateNotice(articleNum,model);
+		managerService.noticeContent(articleNum,model);
 		return "manager/noticeUpdate";
+	}
+	
+	@RequestMapping(value="/noticeUpdate.text", method=RequestMethod.POST)
+	public String noticeUpdateForm(NoticeDto noticeDto, HttpSession session) {
+		managerService.updateNotice(noticeDto, session);
+		return "redirect:noticeManaging.text?pageNum=1";
 	}
 }

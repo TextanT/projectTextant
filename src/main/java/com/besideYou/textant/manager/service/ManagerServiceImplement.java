@@ -155,6 +155,7 @@ public class ManagerServiceImplement implements ManagerService{
 		managingDto = new ManagingBookDto();
 		managingDto.setNum(recommendedBookDto.getRecommendNum());
 		managingDto.setBookName(managerDao.getBookName(recommendedBookDto.getBookArticleNum()));
+		managingDto.setBookNum(recommendedBookDto.getBookArticleNum());
 		managingDto.setUserName(managerDao.getUserName(recommendedBookDto.getUserNum()));
 		managingDto.setComment(recommendedBookDto.getRecommendComment());
 		managingDto.setWriteDate(recommendedBookDto.getWriteDate());
@@ -177,8 +178,10 @@ public class ManagerServiceImplement implements ManagerService{
 
 
 	@Override
-	public void updateRecommendBook(int recommendNum, Model model) {
-		RecommendedBookDto recommendedBookDto;
+	public void updateRecommendBook(RecommendedBookDto recommendedBookDto, HttpSession session) {
+		managerDao.updateRecommendBook(recommendedBookDto);	
+		
+		/*RecommendedBookDto recommendedBookDto;
 		ManagingBookDto managingDto;
 		
 		recommendedBookDto = managerDao.getRecommendedBookOne(recommendNum);
@@ -188,7 +191,7 @@ public class ManagerServiceImplement implements ManagerService{
 		managingDto.setUserName(managerDao.getUserName(recommendedBookDto.getUserNum()));
 		managingDto.setComment(recommendedBookDto.getRecommendComment());
 		managingDto.setWriteDate(recommendedBookDto.getWriteDate());
-		model.addAttribute("managingList", managingDto);
+		model.addAttribute("managingList", managingDto);*/
 		
 	}
 
@@ -305,24 +308,8 @@ public class ManagerServiceImplement implements ManagerService{
 
 
 	@Override
-	public void updateNotice(int articleNum, Model model) {
-		NoticeDto noticeDto;
-		ManagingBookDto managingDto;
-		
-		noticeDto = managerDao.getNoticeOne(articleNum);
-		
-		
-		
-		managingDto = new ManagingBookDto();
-		managingDto.setNum(noticeDto.getArticleNum());
-		managingDto.setBookName(noticeDto.getTitle());
-		managingDto.setUserName(managerDao.getUserName(noticeDto.getUserNum()));
-		managingDto.setHit(noticeDto.getHit());
-		managingDto.setComment(noticeDto.getContents());
-		managingDto.setWriteDate(noticeDto.getWriteDate());
-		managingDto.setType(noticeDto.getType());
-		
-		model.addAttribute("managingList", managingDto);		
+	public void updateNotice(NoticeDto noticeDto, HttpSession session) {
+		managerDao.updateNotice(noticeDto);		
 	}
 	
 	

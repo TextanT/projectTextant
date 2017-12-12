@@ -130,6 +130,17 @@
 	DELETE FROM notice WHERE articleNum = #{articleNum}
 	</delete>
 	
+	<update id="updateNotice" parameterType="notice">
+    UPDATE NOTICE 
+    SET TITLE=#{title}, USERNUM=#{userNum}, TYPE=#{type}, CONTENTS=#{contents}, WRITEDATE = sysdate
+    WHERE ARTICLENUM=#{articleNum}
+	</update>
+	<update id="updateRecommendBook" parameterType="recommendedBook">
+	UPDATE RECOMMENDEDBOOK 
+	SET BOOKARTICLENUM=#{bookArticleNum}, USERNUM=#{userNum}, RECOMMENDCOMMENT=#{recommendComment}, WRITEDATE = sysdate
+	WHERE RECOMMENDNUM = #{recommendNum}
+	</update>
+	
 </mapper>
 	
 	

@@ -157,46 +157,15 @@ body {
 		</div>
 		<div
 			style="margin-left: 80px; margin-right: 80px; margin-bottom: 50px; width: auto;">
-			<form action="/textant/recommendBookWrite.text" method="post">
+			<form action="/textant/recommendBookUpdate.text" method="post">
+				<input type="hidden" value="${managingList.num}" name="recommendNum">
 				<input type="hidden" value="${userNum}" name="userNum">
+				<c:out value="${managingList.num}"/>
+				<c:out value="${recommendNum}"/>
 				<div class="managing" id="recommendBook">
 					<table class="table table-bordered"
 						style="margin-left: auto; margin-right: auto; text-align: center;">
-						<tr>
-						<td>번호</td>
-						<td><c:out value="${managingList.num}" /></td>
-						<td>유저이름</td>
-						<td><c:out value="${managingList.userName}" /></td>
-					</tr>
-					<tr>
-						<td>조회수</td>
-						<td><c:out value="${managingList.hit}" /></td>
-						<td>타입</td>
-						<td><c:out value="${managingList.type}" /></td>
-					</tr>
-					<tr>
-						<td>작성날짜</td>
-						<td colspan="3"><c:out
-								value="${managingList.writeDate.substring(0,10)}" /></td>
-					</tr>
-
-					<tr>
-						<td>제목</td>
-						<td colspan="3"><b><c:out
-									value="${managingList.bookName}" /></b></td>
-					</tr>
-					<tr>
-						<td colspan="4">내용</td>
-					</tr>
-					<tr>
-						<td colspan="4" style="text-align: left;"><textarea
-								readonly="readonly" class="form-control" rows="10"
-								style="background-color: white;"><c:out value="${managingList.comment}"/></textarea></td>
-					</tr>
-						
-						
-						
-						<tr>
+						<tr> 
 							<td>작성자</td>
 							<td colspan="3"><c:out value="${managingList.userName}" /></td>
 						</tr>
@@ -204,14 +173,20 @@ body {
 						<tr>
 
 							<td>책번호</td>
-							<td colspan="1"><input name="bookArticleNum" type="text" /></td>
+							<td colspan="1"><input name="bookArticleNum" value="${managingList.bookNum}"type="text" /></td>
 							<td>책찾기</td>
 							<td><input type="text" name="bookSearch"
 								id="bookSearchInput"> <input type="button"
 								onclick="bookSearchDo()" value="찾기"></td>
 						</tr>
+						
 						<tr><td colspan="4">책 리스트</td></tr>
 						<tr><td colspan="4"><div class="bookList"></div></td></tr>
+						<tr>
+						<td>작성날짜</td>
+						<td colspan="3"><c:out
+								value="${managingList.writeDate}" /></td>
+					</tr>
 						<tr>
 							<td colspan="4">추천코멘트</td>
 						</tr>

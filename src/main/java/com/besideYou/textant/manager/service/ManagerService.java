@@ -19,14 +19,14 @@ public interface ManagerService {
 	void recommendWrite(RecommendedBookDto recommendedBookDto, HttpSession session);
 	void getUserName(int userNum, Model model);
 	void deleteRecommendBook(int recommendNum);
-	public void updateRecommendBook(int recommendNum, Model model);
+	public void updateRecommendBook(RecommendedBookDto recommendedBookDto, HttpSession session);
 	void managingBookContent(int num, Model model);
 	void deleteReportBook(int reportBookNum);
 	void managerNotice(Model model, int pageNum, HttpServletRequest req);
 	void noticeContent(int num, Model model);
 	void noticeWrite(NoticeDto noticeDto, HttpSession session);
 	void deleteNotice(int articleNum);
-	void updateNotice(int articleNum, Model model);
+	void updateNotice(NoticeDto noticeDto, HttpSession session);
 	
 	
 }
