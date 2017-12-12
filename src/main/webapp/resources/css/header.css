@@ -270,7 +270,7 @@ li {
 
 .list_box1 {
 	float: left;
-	padding-left: 37px;
+	padding-left: 32px;
 	margin-left: 28.4%;
 	padding-right: 35px;
 	text-align: center;
@@ -280,7 +280,7 @@ li {
 @media screen and (max-width:2048px) {
 	.list_box1 {
 		float: left;
-		padding-left: 37px;
+		padding-left: 32px;
 		margin-left: 30.7%;
 		padding-right: 35px;
 		text-align: center;
@@ -291,7 +291,7 @@ li {
 @media screen and (max-width:1920px) {
 	.list_box1 {
 		float: left;
-		padding-left: 37px;
+		padding-left: 32px;
 		margin-left: 26.3%;
 		padding-right: 35px;
 		text-align: center;
@@ -302,7 +302,7 @@ li {
 @media screen and (max-width:1680px) {
 	.list_box1 {
 		float: left;
-		padding-left: 37px;
+		padding-left: 32px;
 		margin-left: 27.9%;
 		padding-right: 35px;
 		text-align: center;
@@ -313,7 +313,7 @@ li {
 @media screen and (max-width:1600px) {
 	.list_box1 {
 		float: left;
-		padding-left: 37px;
+		padding-left: 32px;
 		margin-left: 28.3%;
 		padding-right: 35px;
 		text-align: center;
@@ -324,7 +324,7 @@ li {
 @media screen and (max-width:1440px) {
 	.list_box1 {
 		float: left;
-		padding-left: 37px;
+		padding-left: 32px;
 		margin-left: 19.8%;
 		padding-right: 35px;
 		text-align: center;
@@ -335,7 +335,7 @@ li {
 @media screen and (max-width:1366px) {
 	.list_box1 {
 		float: left;
-		padding-left: 37px;
+		padding-left: 32px;
 		margin-left: 20.9%;
 		padding-right: 35px;
 		text-align: center;
@@ -346,7 +346,7 @@ li {
 @media screen and (max-width:1280px) {
 	.list_box1 {
 		float: left;
-		padding-left: 37px;
+		padding-left: 32px;
 		margin-left: 21.9%;
 		padding-right: 35px;
 		text-align: center;
@@ -357,7 +357,7 @@ li {
 @media screen and (max-width:1024px) {
 	.list_box1 {
 		float: left;
-		padding-left: 37px;
+		padding-left: 32px;
 		margin-left: 21%;
 		padding-right: 35px;
 		text-align: center;

@@ -55,7 +55,7 @@
 
 </head>
 <body>
-	<form action="/textant/write.text" method="post"
+	<form action="/textant/writeAmateur.text" method="post"
 		enctype="multipart/form-data" id="writeForm">
 		<input type="hidden" id="userNum" name="userNum" value="${userNum}">
 		<input type="hidden" id="line" name="line" value="3">

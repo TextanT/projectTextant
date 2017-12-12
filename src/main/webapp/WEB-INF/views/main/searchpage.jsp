@@ -44,6 +44,19 @@ a {
 			 "
 					escapeXml="false" />
 			</c:if>
+			<c:if test="${id==null}">
+				<c:out
+					value="
+			<a href='#' class='menu_title'><span class='menu1' id='menu1'>로그인</span></a>
+			
+			<a href='#' class='menu_title'><span class='menu2'id='menu2'>회원가입</span></a> 
+
+			<a href='find.text' class='menu_title'><span class='menu3'id='menu3'>ID/PW찾기</span></a> 
+			
+			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
+			 "
+					escapeXml="false" />
+			</c:if>
 
 		</div>
 	</div>
@@ -71,7 +84,7 @@ a {
 				<ul>
 					<li><a href="#">카페</a></li>
 					<li><a href="#">베스트</a></li>
-					<li><a href="/textant/write.text">작품쓰기</a></li>
+					<li><a href="/textant/writeAmateur.text">작품쓰기</a></li>
 
 				</ul>
 			</div>

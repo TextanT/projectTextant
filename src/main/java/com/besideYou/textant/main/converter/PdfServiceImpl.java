@@ -331,7 +331,13 @@ public class PdfServiceImpl implements PdfService {
 				ImageIO.write(destImg, formatName.toUpperCase(), newFile);
 				
 				bookInfoDto.setThumbnail(newFile.toString());
-				bookInfoDao.writeBook(bookInfoDto);
+//				int userGrade = bookInfoDao.getUserGrade(bookInfoDto.getUserNum());
+				
+//				if(userGrade>=4) {
+					bookInfoDao.writeBook(bookInfoDto);
+//				} else {
+					bookInfoDao.writeAmateurBook(bookInfoDto);					
+//				}
 				System.out.println(bookInfoDto);
 			} catch (Exception e) {
 				e.printStackTrace();

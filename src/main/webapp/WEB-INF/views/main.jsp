@@ -67,7 +67,7 @@
 			
 			<a href='#' class='menu_title'><span class='menu2'id='menu2'>회원가입</span></a> 
 
-			<a href='#' class='menu_title'><span class='menu3'id='menu3'>meme</span></a> 
+			<a href='find.text' class='menu_title'><span class='menu3'id='menu3'>ID/PW찾기</span></a> 
 			
 			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
 			 "
@@ -100,6 +100,9 @@
 			</div>
 			<div class="login_div">
 				<a href="#" class="login_btn" id="login_mit">로그인</a>
+			</div>
+			<div class="find_div">
+				<a href="find.text" id="find">아이디/비밀번호 찾기</a>
 			</div>
 			<div class="exit_div">
 				<a href="#" class="js_close" id="exit">돌아가기</a>
@@ -202,7 +205,7 @@
 				<ul>
 					<li><a href="#">카페</a></li>
 					<li><a href="#">베스트</a></li>
-					<li><a href="/textant/write.text">작품쓰기</a></li>
+					<li><a href="/textant/writeAmateur.text">작품쓰기</a></li>
 
 				</ul>
 			</div>
@@ -248,7 +251,7 @@
 		<div class="swiper-button-prev"></div>
 
 	</div>
-	<div class="book_list_box">
+	<div class="book_list_box" style="overflow: hidden;">
 		<div class="book_list1">
 			<a href="#"><img src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
 				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"

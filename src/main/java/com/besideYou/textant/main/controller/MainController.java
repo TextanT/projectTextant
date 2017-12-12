@@ -98,6 +98,11 @@ public class MainController {
 	public String guest() {
 		return "redirect:main.text";
 	}
+	@RequestMapping(value = "/find.text", method = RequestMethod.GET)
+	public String findform(HttpServletRequest req, HttpSession session) {
+		
+		return "main/findForm";
+	}
 
 	@RequestMapping(value = "/first.text")
 	public String first(HttpServletRequest req, HttpSession session) {
@@ -118,6 +123,21 @@ public class MainController {
 	
 	@RequestMapping(value = "/write.text", method = RequestMethod.POST)
 	public String write(HttpServletRequest req, HttpSession session, BookInfoDto bookInfoDto) throws Exception {
+		bookInfoDto.setBookType("0");
+		view = pdfServiceText.check(bookInfoDto);
+		if (view == null) {
+			view = "redirect:main.text";
+		}
+		return view;
+	}
+	@RequestMapping(value = "/writeAmateur.text", method = RequestMethod.GET)
+	public String textAmateur(HttpServletRequest req, HttpSession session) {
+		return "writeAmateurForm";
+	}
+	
+	@RequestMapping(value = "/writeAmateur.text", method = RequestMethod.POST)
+	public String writeAmateur(HttpServletRequest req, HttpSession session, BookInfoDto bookInfoDto) throws Exception {
+		bookInfoDto.setBookType("1");
 		view = pdfServiceText.check(bookInfoDto);
 		if (view == null) {
 			view = "redirect:main.text";

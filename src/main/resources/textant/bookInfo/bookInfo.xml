@@ -6,7 +6,7 @@
 <mapper namespace="com.besideYou.textant.main.dao.BookInfoDao">	
 	
 	<insert id="writeBook" parameterType="bookInfo">
-		INSERT INTO BOOKINFO VALUES(BOOKINFO_SEQ.nextval,#{bookName},#{totalPage},#{userNum},#{thumbnail},#{fileLocation},#{genre},SYSDATE,0,0,0,#{bookDesc},0)
+		INSERT INTO BOOKINFO VALUES(BOOKINFO_SEQ.nextval,#{bookName},#{totalPage},#{userNum},#{thumbnail},#{fileLocation},#{genre},SYSDATE,0,0,0,#{bookDesc},#{bookType})
 	</insert>
 	
 	<select id="getNewBooks" resultType="bookInfo">
@@ -15,9 +15,12 @@
 	<select id="getTotalPages" parameterType="String" resultType="int">
 		SELECT totalpage from bookInfo where fileLocation = #{fileLocation}
 	</select>
-<!-- 	<select id="getbookname" > -->
-<!-- 		SELECT BOOKNAME FROM BOOKINFO ORDER BY writeDate desc -->
+<!-- 	<select id="getUserNickname" parameterType="String"> -->
+<!-- 		SELECT NICKNAME FROM BOOKINFO ORDER BY writeDate desc -->
 <!-- 	</select> -->
+<!-- <select id="getUserGrade" parameterType="Integer" resultType="Integer"> -->
+<!-- SELECT GRADE FROM LOGIN WHERE USERNUM=#{userNum} -->
+<!-- </select> -->
 </mapper>
 	
 	
