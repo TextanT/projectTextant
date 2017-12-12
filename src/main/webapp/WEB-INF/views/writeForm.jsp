@@ -93,7 +93,11 @@
 						id="sub_menu2" style="color: highlight">창작카페</a>
 				</div>
 				<div class="sub_sub3">
-					<a href='' class='sub_header_menu3' id="sub_menu3">장르별</a>
+					<a href='serchpage.genre' class='sub_header_menu3' id="sub_menu3">장르별검색</a>
+				</div>
+				<div class="sub_sub3">
+					<a href='/textant/write.text' class='sub_header_menu3'
+						id="sub_menu3">책쓰기</a>
 				</div>
 			</div>
 		</div>
@@ -109,41 +113,9 @@
 				</div>
 				<div class="list_box2">
 					<ul>
-						<li><a href="#">역사</a></li>
-						<li><a href="#">스포츠</a></li>
-						<li><a href="#">SF</a></li>
-
-					</ul>
-				</div>
-				<div class="list_box3">
-					<ul>
-						<li><a href="#">추리</a></li>
-						<li><a href="#">공포</a></li>
-						<li><a href="#">게임</a></li>
-
-					</ul>
-				</div>
-				<div class="list_box4">
-					<ul>
-						<li><a href="#">판타지</a></li>
-						<li><a href="#">무협</a></li>
-						<li><a href="#">미스테리</a></li>
-
-					</ul>
-				</div>
-				<div class="list_box5">
-					<ul>
-						<li><a href="#">로맨스</a></li>
-						<li><a href="#">전쟁</a></li>
-						<li><a href="#">성장</a></li>
-
-					</ul>
-				</div>
-				<div class="list_box6">
-					<ul>
-						<li><a href="#">시</a></li>
-						<li><a href="#">수필</a></li>
-						<li><a href="#">유머</a></li>
+						<li><a href="#">창작도서</a></li>
+						<li><a href="#">일반도서</a></li>
+						<li style="cursor: default;">&nbsp</li>
 
 					</ul>
 				</div>
@@ -163,7 +135,7 @@
 
 			<input type="text" name="genre" style="display: none;"
 				id="genre_text" class="genre_tt">
-<%-- 				<p>${userNum}</p> --%>
+			<%-- 				<p>${userNum}</p> --%>
 
 			<div class="genDiv">
 				<label class="genre">장르 <select name='fruits' id="genre_sel"
@@ -343,7 +315,7 @@
 				alert("다음 파일만 업로드가 가능합니다.\n\n 파일:" + (extArray.join("  "))
 						+ "\n\n 업로드할 파일을 " + " 다시 선택하여 주세요.");
 			}
-			if(genre_tt.text==""){
+			if (genre_tt.text == "") {
 				alert("장르를 입력해주세요");
 			}
 
@@ -456,7 +428,7 @@
 	</script>
 	<script type="text/javascript">
 		function selectchange(frm) {
-		
+
 			frm.genre.value = frm.fruits.options[frm.fruits.selectedIndex].value;
 
 		}
