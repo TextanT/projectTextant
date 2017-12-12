@@ -153,51 +153,51 @@ body {
 	<br />
 	<div id="managingDistrict">
 		<div style="margin-top: 50px;">
-			<h3 style="text-align: center">추천 책 관리</h3>
+			<h3 style="text-align: center">신고 댓글 관리</h3>
 		</div>
 		<div
 			style="margin-left: 80px; margin-right: 80px; margin-bottom: 50px; width: auto;">
-			<form action="/textant/recommendBookWrite.text" method="post">
-				<input type="hidden" value="${userNum}" name="userNum">
-				<div class="managing" id="recommendBook">
-					<table class="table table-bordered"
-						style="margin-left: auto; margin-right: auto; text-align: center;">
-						<tr>
-							<td>작성자</td>
-							<td colspan="3"><c:out value="${userId}" /></td>
-						</tr>
-						<tr>
 
-							<td>책번호</td>
-							<td colspan="1"><input name="bookArticleNum" type="text" /></td>
-							<td>책찾기</td>
-							<td><input type="text" name="bookSearch"
-								id="bookSearchInput"> <input type="button"
-								onclick="bookSearchDo()" value="찾기"></td>
-						</tr>
-						<tr>
-							<td colspan="4">책 리스트</td>
-						</tr>
-						<tr>
-							<td colspan="4"><div class="bookList"></div></td>
-						</tr>
-						<tr>
-							<td colspan="4">추천코멘트</td>
-						</tr>
-						<tr>
-							<td colspan="4" style="text-align: left;"><textarea
-									name="recommendComment" class="form-control" rows="10"
-									style="background-color: white;"></textarea></td>
-						</tr>
-						<tr>
-							<td colspan="4"><input type="submit" value="작성"> <input
-								type="reset" value="취소"> <input type="button"
-								value="뒤로가기" onclick="history.back()"></td>
-						</tr>
-					</table>
+			<div class="managing" id="recommendBook">
+				<table class="table table-bordered"
+					style="margin-left: auto; margin-right: auto; text-align: center;">
+					<tr>
+						<td>번호</td>
+						<td><c:out value="${managingList.num}" /></td>
+						<td>유저이름</td>
+						<td><c:out value="${managingList.userName}" /></td>
+					</tr>
+					<tr>
+						<td>작성날짜</td>
+						<td colspan="3"><c:out value="${managingList.writeDate}" /></td>
+					</tr>
+					<tr>
+						<td>신고내용</td>
+						<td colspan="3" style="text-align: left;"><textarea
+								readonly="readonly" class="form-control" rows="3"
+								style="resize: none; background-color: white;"><c:out value="${managingList.reportComment}"/></textarea></td>
+					</tr>
+					<tr>
+						<td>댓글 내용</td>
+						<td colspan="3" style="text-align: left;"><textarea
+								readonly="readonly" class="form-control" rows="10"
+								style="resize: none; background-color: white;"><c:out value="${managingList.comment}"/></textarea></td>
+					</tr>
+					<tr>
+						<c:if test="${userNum !=null}">
+							<td colspan="4"><input type="button" value="삭제하기"
+								onclick="delete_event()"> <input type="button"
+								value="목록으로" onclick="history.back()"></td>
+						</c:if>
 
-				</div>
-			</form>
+						<c:if test="${userNum ==null}">
+							<td colspan="4"><input type="button" value="삭제하기"
+								disabled="disabled"> <input type="button" value="목록으로"
+								onclick="history.back()"></td>
+						</c:if>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 
@@ -247,57 +247,12 @@ body {
 				$('.menu_box1').css("display", "none");
 			})
 		})
-
-		$.ajaxSetup({
-			type : "POST",
-			async : true,
-			dataType : "json",
-			error : function(xhr) {
-				//         alert("error html = " + xhr.statusText);
+		function delete_event() {
+			if (confirm("정말 삭제하시겠습니까??") == true) { //확인
+				document.location.href = 'reportCommentDelete.text?reportCommentNum=${managingList.num}';
+			} else { //취소
+				return;
 			}
-		});
-
-		function bookSearchDo() {
-			$.ajax({
-				url : "/textant/getBookNum.comment",
-				data : {
-					bookSearch : $("#bookSearchInput").val()
-				},
-				success : function(data) {
-					$("#bookSearchInput").val("");
-					if (data != null) {
-						alert(data)
-						$(".bookList").empty();
-						$(".bookList").append("<table class='table'>");
-						$(".bookList table").append(
-								"<tr><td>" + "책번호" + "</td><td>" + "책이름"
-										+ "</td><td>" + "원본이름" + "</td><td>"
-										+ "장르" + "</td><td>" + "유저번호"
-										+ "</td><td>" + "설명" + "</td>");
-						$.each(data, function(index, item) {
-							$(".bookList table").append(
-									"<tr><td>" + item.bookArticleNum
-											+ "</td><td>" + item.bookName
-											+ "</td><td>"
-											+ item.fileLocation.substring(37)
-											+ "</td><td>" + item.genre
-											+ "</td><td>" + item.userNum
-											+ "</td><td>" + item.bookDesc
-											+ "</td>");
-							// 						 console.log(data);
-							// 						$(".proBar").attr("max", data.totalPage);
-							// 						$(".proBar").attr("value", data.pageNumber);
-							// 						if (data.pageNumber == data.totalPage) {
-							// 							// 	                	alert("끝");
-							// 							window.location.replace("/textant/main.text");
-							// 						}
-							$(".bookList table").append("</tr>");
-						});
-						$(".bookList").append("</table>");
-
-					}
-				}
-			});
 		}
 	</script>
 

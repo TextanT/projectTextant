@@ -53,7 +53,8 @@ font: white;
 			<a href="/textant/main.text" class="logo_a" style="height:55px;"> <img
 				src="/textant/resources/icon_img/logo_mini.png" class="logo">
 			</a>
-			</div><div style="float:left;"><span style="margin-top: auto; margin-bottom: auto;font-size: 33px; color: white;"> &nbsp | 관리자 메뉴</span></div>
+			</div>
+			<div style="float:left;"><a href="/textant/managerMain.text" style="text-decoration: none;"><span style="margin-top: auto; margin-bottom: auto;font-size: 33px; color: white;"> &nbsp | 관리자 메뉴</span></a></div>
 		</div>
 		<div class="menu_box">
 			<c:if test="${id!=null}">
@@ -148,11 +149,11 @@ font: white;
 		</div>
 		<div
 			style="margin-top: 10px; margin-right: 80px; width: 40%; float: right;">
-			<h3 style="text-align: center">싫어요 댓글</h3>
+			<h3 style="text-align: center">댓글 전체 관리(싫어요순)</h3>
 		</div>
 		<div class="clear"></div>
 		<div style="margin-left: 80px; width: 40%; float: left;'">
-			<div style="text-align: right;"><a href="/textant/reportCommentManaging.text">관리하기</a></div>
+			<div style="text-align: right;"><a href="/textant/reportCommentManaging.text?pageNum=1">관리하기</a></div>
 			<div class="managing" id="reportComment"
 				style="height: 200px; overflow-y: scroll;">
 				<table class="table" style="margin-left: auto; margin-right: auto;text-align: center;">
@@ -175,7 +176,7 @@ font: white;
 		</div>
 
 		<div style="margin-right: 80px; width: 40%; float: right;'">
-			<div style="text-align: right;"><a href="/textant/badCommentManaging.text">관리하기</a></div>
+			<div style="text-align: right;"><a href="/textant/commentManaging.text?pageNum=1">관리하기</a></div>
 			<div class="managing" id="badComment"
 				style="height: 200px; overflow-y: scroll;">
 				<table class="table" style="margin-left: auto; margin-right: auto;text-align: center;">

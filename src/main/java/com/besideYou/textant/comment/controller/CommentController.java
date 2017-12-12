@@ -109,5 +109,10 @@ public class CommentController {
 	public List<BookInfoDto> getBookNum(String bookSearch) {
 		return commentService.getBookNum(bookSearch);
 	}
+	@RequestMapping(value="/getBookName.comment")
+	@ResponseBody
+	public List<BookInfoDto> getBookName(String bookSearch) {
+		return commentService.getBookName(bookSearch);
+	}
 	
 }

@@ -1,5 +1,6 @@
 package com.besideYou.textant.manager.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,4 +36,10 @@ public interface ManagerDao {
 	void deleteNotice(int articleNum);
 	void updateNotice(NoticeDto noticeDto);
 	void updateRecommendBook(RecommendedBookDto recommendedBookDto);
+	ReportCommentDto getReportCommentOne(int num);
+	String getComments(int commentNum);
+	void deleteReportComment(int reportCommentNum);
+	int getTotalBadCommentsCount();
+	ArrayList<CommentDto> searchComment(HashMap<String, String> paramMap);
+	int getTotalCommentsCount(HashMap<String, String> totalMap);
 }

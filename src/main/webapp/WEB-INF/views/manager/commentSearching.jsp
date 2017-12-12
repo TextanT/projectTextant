@@ -153,25 +153,88 @@ body {
 	<br />
 	<div id="managingDistrict">
 		<div style="margin-top: 50px;">
-			<h3 style="text-align: center">추천 책 관리</h3>
+			<h3 style="text-align: center">댓글 관리</h3>
 		</div>
 		<div
 			style="margin-left: 80px; margin-right: 80px; margin-bottom: 50px; width: auto;">
-			<form action="/textant/recommendBookWrite.text" method="post">
-				<input type="hidden" value="${userNum}" name="userNum">
-				<div class="managing" id="recommendBook">
-					<table class="table table-bordered"
-						style="margin-left: auto; margin-right: auto; text-align: center;">
+
+			<div style="float: right;">
+				<form action="/textant/commentSearch.text" method="get">
+						<input type="hidden" value="1" name="pageNum">
+					<table>
 						<tr>
-							<td>작성자</td>
-							<td colspan="3"><c:out value="${userId}" /></td>
+							<td colspan="4" style="text-align: center;"><span>댓글 검색</span></td>
 						</tr>
 						<tr>
+							<td>
+<!-- 							<input type="text" name="searchType" -->
+<!-- 								style="display: none;" id="searchType_text" class="searchType_tt"> -->
+							</td>
+							<td>
+								<div class="genDiv">
+									<label class="searchType"> <select name='searchType'
+										id="searchType_sel" onchange="selectchange(this.form)">
+											<option value='' selected>-- 선택 --</option>
+											<option value='bad'>싫어요수</option>
+											<option value='contents'>내용</option>
+											<option value='userName'>사용자</option>
+											<option value='bookNum'>책번호</option>
+									</select>
+									</label>
+								</div>
+							</td>
+							<td><input type="text" name="commentContents"></td>
+							<td><input type="submit" value="검색"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div class="managing" id="recommendBook" style="clear: both;">
+
+				<table class="table"
+					style="margin-left: auto; margin-right: auto; text-align: center;">
+					<tr>
+						<td>번호</td>
+						<td>댓글내용</td>
+						<td>유저번호</td>
+						<td>책번호</td>
+						<td>작성날짜</td>
+						<td>싫어요 수</td>
+					</tr>
+					<c:forEach var="commentsList" items="${commentsList}">
+
+						<tr style="cursor: pointer;"
+							onClick="window.open('/textant/managingReportCommentContent.text?num=${commentsList.commentNum}','_self');">
+							<td><c:out value="${commentsList.commentNum}" /></td>
+							<td><c:out value="${commentsList.conet}" /></td>
+							<td><c:out value="${commentsList.userNum}" /></td>
+							<td><c:out value="${commentsList.bookArticleNum}" /></td>
+							<td><c:out value="${commentsList.writeDate.substring(0,10)}" /></td>
+							<td><c:out value="${commentsList.commentBad}" /></td>
+						</tr>
+					</c:forEach>
+					<tr>
+						<td colspan="6" align="center" height="40">${pageCode}</td>
+					</tr>
+				</table>
+			</div>
+			<div style="text-align: right;">
+				<a href="/textant/managerMain.text">관리자 메인</a>
+			</div>
+			<div style="width: 700px"> 
+			<table class="table">
+			<tr>
 
 							<td>책번호</td>
-							<td colspan="1"><input name="bookArticleNum" type="text" /></td>
-							<td>책찾기</td>
-							<td><input type="text" name="bookSearch"
+							<td colspan="1">
+							<input name="bookArticleNum" id="bookSearchInputNum"
+							type="text" />
+							<input type="button"
+								onclick="bookSearchDoNum()" value="찾기">
+							</td>
+							<td>책이름</td>
+							<td>
+							<input type="text" name="bookSearch"
 								id="bookSearchInput"> <input type="button"
 								onclick="bookSearchDo()" value="찾기"></td>
 						</tr>
@@ -181,23 +244,8 @@ body {
 						<tr>
 							<td colspan="4"><div class="bookList"></div></td>
 						</tr>
-						<tr>
-							<td colspan="4">추천코멘트</td>
-						</tr>
-						<tr>
-							<td colspan="4" style="text-align: left;"><textarea
-									name="recommendComment" class="form-control" rows="10"
-									style="background-color: white;"></textarea></td>
-						</tr>
-						<tr>
-							<td colspan="4"><input type="submit" value="작성"> <input
-								type="reset" value="취소"> <input type="button"
-								value="뒤로가기" onclick="history.back()"></td>
-						</tr>
-					</table>
-
-				</div>
-			</form>
+			</table>
+			</div>
 		</div>
 	</div>
 
@@ -248,6 +296,10 @@ body {
 			})
 		})
 
+// 		function selectchange(frm) {
+// 			frm.searchType.value = frm.searchTypeGo.options[frm.searchTypeGo.selectedIndex].value;
+// 		}
+		
 		$.ajaxSetup({
 			type : "POST",
 			async : true,
@@ -266,7 +318,48 @@ body {
 				success : function(data) {
 					$("#bookSearchInput").val("");
 					if (data != null) {
-						alert(data)
+						$(".bookList").empty();
+						$(".bookList").append("<table class='table'>");
+						$(".bookList table").append(
+								"<tr><td>" + "책번호" + "</td><td>" + "책이름"
+										+ "</td><td>" + "원본이름" + "</td><td>"
+										+ "장르" + "</td><td>" + "유저번호"
+										+ "</td><td>" + "설명" + "</td>");
+						$.each(data, function(index, item) {
+							$(".bookList table").append(
+									"<tr><td>" + item.bookArticleNum
+											+ "</td><td>" + item.bookName
+											+ "</td><td>"
+											+ item.fileLocation.substring(37)
+											+ "</td><td>" + item.genre
+											+ "</td><td>" + item.userNum
+											+ "</td><td>" + item.bookDesc
+											+ "</td>");
+							// 						 console.log(data);
+							// 						$(".proBar").attr("max", data.totalPage);
+							// 						$(".proBar").attr("value", data.pageNumber);
+							// 						if (data.pageNumber == data.totalPage) {
+							// 							// 	                	alert("끝");
+							// 							window.location.replace("/textant/main.text");
+							// 						}
+							$(".bookList table").append("</tr>");
+						});
+						$(".bookList").append("</table>");
+
+					}
+				}
+			});
+		}
+		
+		function bookSearchDoNum() {
+			$.ajax({
+				url : "/textant/getBookName.comment",
+				data : {
+					bookSearch : $("#bookSearchInputNum").val()
+				},
+				success : function(data) {
+					$("#bookSearchInputNum").val("");
+					if (data != null) {
 						$(".bookList").empty();
 						$(".bookList").append("<table class='table'>");
 						$(".bookList table").append(

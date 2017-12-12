@@ -27,6 +27,11 @@ public interface ManagerService {
 	void noticeWrite(NoticeDto noticeDto, HttpSession session);
 	void deleteNotice(int articleNum);
 	void updateNotice(NoticeDto noticeDto, HttpSession session);
+	void managerReportComment(Model model, int pageNum, HttpServletRequest req);
+	void reportCommentContent(int num, Model model);
+	void deleteReportComment(int reportCommentNum);
+	void managerComment(Model model, int pageNum, HttpServletRequest req);
+	void searchComment(Model model, int pageNum, HttpServletRequest req, String searchType, String commentContents);
 	
 	
 }

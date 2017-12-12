@@ -141,6 +141,63 @@
 	WHERE RECOMMENDNUM = #{recommendNum}
 	</update>
 	
+	<select id="getReportCommentOne" parameterType="Integer" resultType="reportComment">
+	SELECT * FROM REPORTCOMMENT WHERE REPORTCOMMENTNUM = #{num}
+	</select>
+	
+	<select id="getComments" parameterType="Integer" resultType="String">
+	SELECT CONET FROM COMMENTS WHERE COMMENTNUM = #{commentNum}
+	</select>
+	
+	<delete id="deleteReportComment" parameterType="Integer">
+	DELETE FROM REPORTCOMMENT WHERE REPORTCOMMENTNUM = #{reportCommentNum}
+	</delete>
+	
+	<select id="getTotalBadCommentsCount" resultType="Integer">
+	SELECT COUNT(*) FROM COMMENTS WHERE COMMENTBAD > 10  
+	</select>
+	
+	
+	
+	<select id="searchComment"  parameterType="HashMap" resultType="comment">
+	select outTable.* 
+		from (
+		select rownum rum, inTable.* 
+			  from (
+	SELECT * FROM COMMENTS WHERE 
+		<if test='searchType=="bad"'>
+			COMMENTBAD >= #{commentContents} order by commentBad desc
+		</if>
+		<if test='searchType=="contents"'>
+			CONET LIKE '%'||#{commentContents}||'%' order by writeDate desc
+		</if>
+		<if test='searchType=="userName"'>
+			USERNUM LIKE '%'||#{commentContents}||'%' order by writeDate desc
+		</if>
+		<if test='searchType=="bookNum"'>
+			BOOKARTICLENUM = #{commentContents} order by writeDate desc
+			</if>
+			) inTable  
+			  order by rum
+			  ) outTable 
+		where rum between #{startPage} and #{endPage}
+	</select>
+	
+	<select id="getTotalCommentsCount"  parameterType="HashMap" resultType="Integer">
+	SELECT COUNT(*) FROM COMMENTS WHERE 
+		<if test='searchType=="bad"'>
+			COMMENTBAD >= #{commentContents}
+		</if>
+		<if test='searchType=="contents"'>
+			CONET LIKE '%'||#{commentContents}||'%'
+		</if>
+		<if test='searchType=="userName"'>
+			USERNUM LIKE '%'||#{commentContents}||'%'
+		</if>
+		<if test='searchType=="bookNum"'>
+			BOOKARTICLENUM = #{commentContents}
+			</if>
+	</select>
 </mapper>
 	
 	

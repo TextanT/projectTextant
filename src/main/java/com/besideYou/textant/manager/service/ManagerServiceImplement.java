@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.besideYou.textant.comment.dto.CommentDto;
 import com.besideYou.textant.common.dto.NoticeDto;
 import com.besideYou.textant.common.dto.RecommendedBookDto;
 import com.besideYou.textant.common.dto.ReportBookDto;
+import com.besideYou.textant.common.dto.ReportCommentDto;
 import com.besideYou.textant.manager.dao.ManagerDao;
 import com.besideYou.textant.manager.dto.ManagingBookDto;
 import com.besideYou.textant.manager.page.ManagerPage;
@@ -310,6 +312,149 @@ public class ManagerServiceImplement implements ManagerService{
 	@Override
 	public void updateNotice(NoticeDto noticeDto, HttpSession session) {
 		managerDao.updateNotice(noticeDto);		
+	}
+
+
+
+	@Override
+	public void managerReportComment(Model model, int pageNum, HttpServletRequest req) {
+		int totalCount = 0;
+//		pageNum = 1;
+		ArrayList<ReportCommentDto> reportCommentList = null;
+		HashMap<String, String> pagingMap = null;
+		HashMap<String, String> paramMap = null; 
+		ArrayList<ManagingBookDto> managingList = null;  
+		ManagingBookDto managingDto = null;
+		try {
+			totalCount = managerDao.getTotalReportBookCount();
+
+			pagingMap = managerPage.paging(pageNum, totalCount, pageSize, pageBlock, req);
+
+			int startRow = managerPage.getStartRow();
+			int endRow = managerPage.getEndRow();
+			paramMap = new HashMap<>();
+			paramMap.put("startPage", String.valueOf(startRow));
+			paramMap.put("endPage", String.valueOf(endRow));
+
+			reportCommentList = (ArrayList<ReportCommentDto>) managerDao.getReportCommentList(paramMap);
+			System.out.println(reportCommentList);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
+		managingList = new ArrayList<>();
+		
+		for(ReportCommentDto ml : reportCommentList) {
+			managingDto = new ManagingBookDto();
+			managingDto.setNum(ml.getReportCommentNum());
+			managingDto.setUserName(managerDao.getUserName(ml.getUserNum()));
+			managingDto.setComment(ml.getRepoCommCont());
+			managingDto.setWriteDate(ml.getWriteDate());
+			System.out.println(ml);
+			managingList.add(managingDto);
+		}
+		
+		model.addAttribute("totalCount", totalCount);
+		System.out.println(pagingMap.get("pageCode"));
+		model.addAttribute("managingList", managingList);
+		model.addAttribute("pageCode", pagingMap.get("pageCode"));
+	}
+
+
+
+	@Override
+	public void reportCommentContent(int num, Model model) {
+		ReportCommentDto reportCommentDto;
+		ManagingBookDto managingDto;
+		
+		reportCommentDto = managerDao.getReportCommentOne(num);
+		
+		managingDto = new ManagingBookDto();
+		managingDto.setNum(reportCommentDto.getReportCommentNum());
+		managingDto.setUserName(managerDao.getUserName(reportCommentDto.getUserNum()));
+		managingDto.setReportComment(reportCommentDto.getRepoCommCont());
+		managingDto.setWriteDate(reportCommentDto.getWriteDate());
+		managingDto.setComment(managerDao.getComments(reportCommentDto.getCommentNum()));
+		
+		model.addAttribute("managingList", managingDto);		
+	}
+
+
+
+	@Override
+	public void deleteReportComment(int reportCommentNum) {
+		managerDao.deleteReportComment(reportCommentNum);
+	}
+
+
+
+	@Override
+	public void managerComment(Model model, int pageNum, HttpServletRequest req) {
+		int totalCount = 0;
+//		pageNum = 1;
+		ArrayList<CommentDto> commentsList = null;
+		HashMap<String, String> pagingMap = null;
+		HashMap<String, String> paramMap = null; 
+		  
+		try {
+			totalCount = managerDao.getTotalBadCommentsCount();
+
+			pagingMap = managerPage.paging(pageNum, totalCount, pageSize, pageBlock, req);
+
+			int startRow = managerPage.getStartRow();
+			int endRow = managerPage.getEndRow();
+			paramMap = new HashMap<>();
+			paramMap.put("startPage", String.valueOf(startRow));
+			paramMap.put("endPage", String.valueOf(endRow));
+
+			
+			commentsList = (ArrayList<CommentDto>) managerDao.getBadCommentList(paramMap);
+			System.out.println(commentsList);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("commentsList", commentsList);
+		model.addAttribute("pageCode", pagingMap.get("pageCode"));
+	}
+
+	@Override
+	public void searchComment(Model model, int pageNum, HttpServletRequest req, String searchType,
+			String commentContents) {
+		int totalCount = 0;
+//		pageNum = 1;
+		ArrayList<CommentDto> commentsList = null;
+		HashMap<String, String> pagingMap = null;
+		HashMap<String, String> paramMap = null; 
+		HashMap<String, String> totalMap = null; 
+		
+		try {
+			totalMap = new HashMap<>();
+			totalMap.put("searchType", searchType);
+			totalMap.put("commentContents", commentContents);
+			totalCount = managerDao.getTotalCommentsCount(totalMap);
+
+			pagingMap = managerPage.paging(pageNum, totalCount, pageSize, pageBlock, req, searchType, commentContents);
+
+			int startRow = managerPage.getStartRow();
+			int endRow = managerPage.getEndRow();
+			paramMap = new HashMap<>();
+			paramMap.put("startPage", String.valueOf(startRow));
+			paramMap.put("endPage", String.valueOf(endRow));
+			paramMap.put("searchType", searchType);
+			paramMap.put("commentContents", commentContents);
+			
+			commentsList = (ArrayList<CommentDto>) managerDao.searchComment(paramMap);
+			System.out.println(commentsList);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		System.out.println(pagingMap.get("pageCode"));
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("commentsList", commentsList);
+		model.addAttribute("pageCode", pagingMap.get("pageCode"));		
+		
 	}
 	
 	

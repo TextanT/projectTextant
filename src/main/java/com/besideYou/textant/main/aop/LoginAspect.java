@@ -22,10 +22,7 @@ public class LoginAspect {
 	
 	@Pointcut("execution(* com.besideYou.textant.main.controller.MainController.first(..))")
 	public void first(){}
-	
-//	@Pointcut("execution(* com.pknu.bbs.bbs.controller.BBSController.content(..))")
-//	public void content(){}
-	
+
 	@Around("write() || text()")
 	public Object writeFormAdvice(ProceedingJoinPoint pjp)throws Throwable{	
 		HttpSession session= null;
@@ -33,7 +30,7 @@ public class LoginAspect {
 		
 		HttpServletRequest req = null;
 		
-		for(Object obj : pjp.getArgs()/*Object형배열*/){
+		for(Object obj : pjp.getArgs()){
 			if(obj instanceof HttpSession){
 				session =(HttpSession)obj;
 			}
@@ -50,13 +47,9 @@ public class LoginAspect {
 		}
 		
 		if(session.getAttribute("id")==null){
-//			컨트롤러가 String을 리턴하므로 가능함
 			return "main/noLogin";
-//			return "redirect:/loginForm.bbs";
-//			res.sendRedirect("/bbs/loginForm.bbs");
 		}
 		Object result=pjp.proceed();
-//		포인트컷 메소드가 실행되고 난 이후에 코드
 		return result;
 	}
 	@Around("first()")
@@ -65,7 +58,7 @@ public class LoginAspect {
 		HttpServletResponse res= null;
 		HttpServletRequest req = null;
 		
-		for(Object obj : pjp.getArgs()/*Object형배열*/){
+		for(Object obj : pjp.getArgs()){
 			if(obj instanceof HttpSession){
 				session =(HttpSession)obj;
 			}
@@ -82,13 +75,9 @@ public class LoginAspect {
 		}
 		
 		if(session.getAttribute("id")!=null){
-//			컨트롤러가 String을 리턴하므로 가능함
 			return "redirect:main.text";
-//			return "redirect:/loginForm.bbs";
-//			res.sendRedirect("/bbs/loginForm.bbs");
 		}
 		Object result=pjp.proceed();
-//		포인트컷 메소드가 실행되고 난 이후에 코드
 		return result;
 	}
 

@@ -60,9 +60,9 @@ body {
 				</a>
 			</div>
 			<div style="float: left;">
-				<span
+				<a href="/textant/managerMain.text" style="text-decoration: none;"><span
 					style="margin-top: auto; margin-bottom: auto; font-size: 33px; color: white;">
-					&nbsp | 관리자 메뉴</span>
+						&nbsp | 관리자 메뉴</span></a>
 			</div>
 		</div>
 		<div class="menu_box">
@@ -169,11 +169,13 @@ body {
 						</tr>
 						<tr>
 							<td>제목</td>
-							<td colspan="3"><input name="title" type="text" value="${managingList.bookName}" /></td>
+							<td colspan="3"><input name="title" type="text"
+								value="${managingList.bookName}" /></td>
 						</tr>
 						<tr>
 							<td>타입</td>
-							<td colspan="3"><input name="type" type="number" value="${managingList.type}"/></td>
+							<td colspan="3"><input name="type" type="number"
+								value="${managingList.type}" /></td>
 						</tr>
 						<tr>
 							<td colspan="4">공지내용</td>
@@ -252,21 +254,32 @@ body {
 		});
 
 		function bookSearchDo() {
-			$
-					.ajax({
-						url : "/textant/getBookNum.comment",
-						data : {
-							bookSearch : $("#bookSearchInput").val()
-						},
-						success : function(data) {
-							$("#bookSearchInput").val("");
-							if(data!=null){
-							alert(data)
-							$(".bookList").empty();
-							$(".bookList").append("<table class='table'>");
-							$(".bookList table").append("<tr><td>"+"책번호"+"</td><td>"+"책이름"+"</td><td>"+"원본이름"+"</td><td>"+"장르"+"</td><td>"+"유저번호"+"</td><td>"+"설명"+"</td>");
-							$.each(data, function(index,item) {
-								$(".bookList table").append("<tr><td>"+item.bookArticleNum+"</td><td>"+item.bookName+"</td><td>"+item.fileLocation.substring(37)+"</td><td>"+item.genre+"</td><td>"+item.userNum+"</td><td>"+item.bookDesc+"</td>");
+			$.ajax({
+				url : "/textant/getBookNum.comment",
+				data : {
+					bookSearch : $("#bookSearchInput").val()
+				},
+				success : function(data) {
+					$("#bookSearchInput").val("");
+					if (data != null) {
+						alert(data)
+						$(".bookList").empty();
+						$(".bookList").append("<table class='table'>");
+						$(".bookList table").append(
+								"<tr><td>" + "책번호" + "</td><td>" + "책이름"
+										+ "</td><td>" + "원본이름" + "</td><td>"
+										+ "장르" + "</td><td>" + "유저번호"
+										+ "</td><td>" + "설명" + "</td>");
+						$.each(data, function(index, item) {
+							$(".bookList table").append(
+									"<tr><td>" + item.bookArticleNum
+											+ "</td><td>" + item.bookName
+											+ "</td><td>"
+											+ item.fileLocation.substring(37)
+											+ "</td><td>" + item.genre
+											+ "</td><td>" + item.userNum
+											+ "</td><td>" + item.bookDesc
+											+ "</td>");
 							// 						 console.log(data);
 							// 						$(".proBar").attr("max", data.totalPage);
 							// 						$(".proBar").attr("value", data.pageNumber);
@@ -274,13 +287,13 @@ body {
 							// 							// 	                	alert("끝");
 							// 							window.location.replace("/textant/main.text");
 							// 						}
-								$(".bookList table").append("</tr>");
-							});
-							$(".bookList").append("</table>");
-								
-							}
-						}
-					});
+							$(".bookList table").append("</tr>");
+						});
+						$(".bookList").append("</table>");
+
+					}
+				}
+			});
 		}
 	</script>
 

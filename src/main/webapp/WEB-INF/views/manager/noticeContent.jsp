@@ -60,9 +60,9 @@ body {
 				</a>
 			</div>
 			<div style="float: left;">
-				<span
+				<a href="/textant/managerMain.text" style="text-decoration: none;"><span
 					style="margin-top: auto; margin-bottom: auto; font-size: 33px; color: white;">
-					&nbsp | 관리자 메뉴</span>
+						&nbsp | 관리자 메뉴</span></a>
 			</div>
 		</div>
 		<div class="menu_box">

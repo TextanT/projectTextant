@@ -31,5 +31,6 @@ public interface CommentDao {
 	
 	List<BookInfoDto> getBookNum(String bookSearch);
 	String getUserName(int userNum);
+	List<BookInfoDto> getBookName(String bookSearch);
 	
 }

@@ -192,6 +192,9 @@
 	SELECT USERID FROM LOGIN WHERE USERNUM = #{userNum}
 	</select>
 	
+	<select id="getBookName" parameterType="String" resultType="bookInfo">
+	SELECT * FROM BOOKINFO WHERE bookArticleNum = #{bookNum}
+	</select>
 </mapper>	
 	
 

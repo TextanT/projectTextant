@@ -284,4 +284,9 @@ public class CommentServiceImpl implements CommentService{
 		System.out.println(commentDao.getBookNum(bookSearch));
 		return commentDao.getBookNum(bookSearch);
 	}
+	@Override
+	public List<BookInfoDto> getBookName(String bookSearch) {
+		System.out.println(commentDao.getBookName(bookSearch));
+		return commentDao.getBookName(bookSearch);
+	}
 }

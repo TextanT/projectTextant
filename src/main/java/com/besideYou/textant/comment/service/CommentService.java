@@ -15,4 +15,5 @@ public interface CommentService {
 	public int commentDelete(int commentNum,int commentGroup);
 	public int reportComment(int commentNum,int userNum);
 	List<BookInfoDto> getBookNum(String bookSearch);
+	public List<BookInfoDto> getBookName(String bookSearch);
 }
