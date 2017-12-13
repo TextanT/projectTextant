@@ -259,12 +259,12 @@
 					<div class="img-wrapper">
 						<div class="swiper-size"
 							style="height: 320px; width: 250px; overflow: hidden;">
-							<a href="/textant/read.text?fileName=${files}"><img
+							<a href="/textant/read.text?fileName=${files}&bookType=txt"><img
 								src="displayFile.text?fileName=${files}/OriginImg&pageNum=1&fileType=jpg"
 								style="display: block; height: 100%; width: auto;"
 								class="bookimg" /></a>
 						</div>
-						<a href="/textant/read.text?fileName=${files}"> <span
+						<a href="/textant/read.text?fileName=${files}&bookType=txt"> <span
 							class="bookname" style="text-align: center;">${files}</span><br />
 							<span class="bookname">기시미 이치로작가</span>
 						</a>

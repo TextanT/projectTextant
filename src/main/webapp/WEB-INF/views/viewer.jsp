@@ -238,6 +238,13 @@ nav a{text-decoration:none;}
 
 <script type="text/javascript">
 
+
+
+
+
+
+
+
 function loadApp() {
 
 	var flipbook = $('.sample-docs');
@@ -407,7 +414,7 @@ function loadApp() {
 		gradients: true,
 		autoCenter: true,
 		duration: 1000,
-		pages: 10,
+		pages: "${totalPageNum+1}",
 		when: {
 
 		turning: function(e, page, view) {
