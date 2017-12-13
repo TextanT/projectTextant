@@ -50,4 +50,6 @@ public interface ManagerDao {
 	ArrayList<BookInfoDto> getAllBooks(HashMap<String, String> paramMap);
 	BookInfoDto getBookOne(int num);
 	void deleteBookInfo(int bookArticleNum);
+	int getTotalBookCount(HashMap<String, String> totalMap);
+	ArrayList<BookInfoDto> searchAllBook(HashMap<String, String> paramMap);
 }

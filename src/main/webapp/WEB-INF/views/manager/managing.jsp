@@ -174,14 +174,14 @@ body {
 				<ul class="nav nav-sidebar nav-stacked">
 					<li><a href="/textant/reportCommentManaging.text?pageNum=1">댓글
 							신고 관리하기</a></li>
-					<li><a href="/textant/commentManaging.text?pageNum=1">전체
-							댓글 관리하기</a></li>
 					<li><a href="/textant/bookManaging.text?pageNum=1">책 신고
 							관리하기</a></li>
 					<li><a href="/textant/noticeManaging.text?pageNum=1">공지사항
 							관리하기</a></li>
 					<li><a href="/textant/recommendBookManaging.text?pageNum=1">추천
 							책 관리하기</a></li>
+					<li><a href="/textant/commentManaging.text?pageNum=1">전체
+							댓글 관리하기</a></li>
 					<li><a href="/textant/allBookManaging.text?pageNum=1">전체
 							책 관리하기</a></li>
 				</ul>

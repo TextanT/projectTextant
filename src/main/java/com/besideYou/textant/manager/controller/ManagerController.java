@@ -162,6 +162,7 @@ public class ManagerController {
 		managerService.searchComment(model, pageNum, req, searchType, commentContents);
 		return "manager/commentSearching";
 	}
+	
 	@RequestMapping(value="/commentContent.text")
 	public String commentContent(int num, Model model, HttpSession session, HttpServletRequest req) {
 		managerService.commentContent(num, model, req);
@@ -173,7 +174,6 @@ public class ManagerController {
 		managerService.deleteComment(commentNum);
 		return "redirect:"+referer.replaceAll("%26", "&");
 	}
-	
 	
 	@RequestMapping(value = "/allBookManaging.text")
 	public String allBookManaging(int pageNum, Model model, HttpServletRequest req, HttpSession session) {
@@ -191,5 +191,16 @@ public class ManagerController {
 	public String bookInfoDelete(int bookArticleNum, HttpSession session, HttpServletRequest req, String referer) {
 		managerService.deleteBookInfo(bookArticleNum);
 		return "redirect:"+referer.replaceAll("%26", "&");
+	}
+	
+	@RequestMapping(value = "/allBookSearch.text")
+	public String allBookSearch(int pageNum, String searchType, String commentContents, Model model, HttpServletRequest req, HttpSession session) {
+		System.out.println("searchType" + searchType);
+		if(searchType.equals("")) {
+			System.out.println("공백이다!");
+			return "redirect:/allBookManaging.text?pageNum=1";
+		}
+		managerService.searchAllBook(model, pageNum, req, searchType, commentContents);
+		return "manager/allBookSearching";
 	}
 }

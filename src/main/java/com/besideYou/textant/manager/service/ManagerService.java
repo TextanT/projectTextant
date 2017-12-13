@@ -37,6 +37,7 @@ public interface ManagerService {
 	void managerAllBook(Model model, int pageNum, HttpServletRequest req);
 	void allBookContent(int num, Model model, HttpServletRequest req);
 	void deleteBookInfo(int bookArticleNum);
+	void searchAllBook(Model model, int pageNum, HttpServletRequest req, String searchType, String commentContents);
 	
 	
 }

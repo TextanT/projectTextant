@@ -236,4 +236,50 @@
 	<delete id="deleteBookInfo" parameterType="Integer">
 	DELETE FROM BOOKINFO WHERE BOOKARTICLENUM = #{bookArticleNum}
 	</delete>
+	
+	<select id="getTotalBookCount"  parameterType="HashMap" resultType="Integer">
+	SELECT COUNT(*) FROM BOOKINFO WHERE 
+		<if test='searchType=="title"'>
+			BOOKNAME LIKE '%'||#{commentContents}||'%'
+		</if>
+		<if test='searchType=="contents"'>
+			BOOKDESC LIKE '%'||#{commentContents}||'%'
+		</if>
+		<if test='searchType=="userName"'>
+			USERNUM LIKE '%'||#{commentContents}||'%'
+		</if>
+		<if test='searchType=="bookNum"'>
+			BOOKARTICLENUM = #{commentContents}
+			</if>
+		<if test='searchType=="genre"'>
+			GENRE = #{commentContents}
+			</if>
+	</select>
+	
+	<select id="searchAllBook"  parameterType="HashMap" resultType="bookInfo">
+	select outTable.* 
+		from (
+		select rownum rum, inTable.* 
+			  from (
+	SELECT * FROM BOOKINFO WHERE 
+		<if test='searchType=="title"'>
+			BOOKNAME LIKE '%'||#{commentContents}||'%'
+		</if>
+		<if test='searchType=="contents"'>
+			BOOKDESC LIKE '%'||#{commentContents}||'%'
+		</if>
+		<if test='searchType=="userName"'>
+			USERNUM LIKE '%'||#{commentContents}||'%'
+		</if>
+		<if test='searchType=="bookNum"'>
+			BOOKARTICLENUM = #{commentContents}
+			</if>
+		<if test='searchType=="genre"'>
+			GENRE = #{commentContents}
+			</if>
+			) inTable  
+			  order by rum
+			  ) outTable 
+		where rum between #{startPage} and #{endPage}
+	</select>
 </mapper>

@@ -4,6 +4,7 @@
 <!DOCTYPE>
 <html>
 <head>
+<META HTTP-EQUIV="refresh" CONTENT="60">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -153,13 +154,13 @@ body {
 	<br />
 	<div id="managingDistrict">
 		<div style="margin-top: 50px;">
-			<h3 style="text-align: center">전체 책 관리</h3>
+			<h3 style="text-align: center">책 검색</h3>
 		</div>
 		<div
 			style="margin-left: 80px; margin-right: 80px; margin-bottom: 50px; width: auto;">
 
 			<div style="float: right;">
-				<form action="/textant/allBookSearch.text" method="get">
+				<form action="/textant/commentSearch.text" method="get">
 						<input type="hidden" value="1" name="pageNum">
 					<table>
 						<tr>
@@ -179,7 +180,7 @@ body {
 											<option value='contents'>내용</option>
 											<option value='userName'>사용자번호</option>
 											<option value='bookNum'>책번호</option>
-											<option value='genre'>책번호</option>
+											<option value='genre'>장르</option>
 									</select>
 									</label>
 								</div>
@@ -226,12 +227,7 @@ body {
 			<div style="text-align: right;">
 				<a href="/textant/managerMain.text">관리자 메인</a>
 			</div>
-			<div style="width: 700px"> 
-			<table class="table">
-			</table>
-			</div>
-		</div>
-	</div>
+			
 
 	<footer>
 		<div>
@@ -293,89 +289,6 @@ body {
 			}
 		});
 
-		function bookSearchDo() {
-			$.ajax({
-				url : "/textant/getBookNum.comment",
-				data : {
-					bookSearch : $("#bookSearchInput").val()
-				},
-				success : function(data) {
-					$("#bookSearchInput").val("");
-					if (data != null) {
-						$(".bookList").empty();
-						$(".bookList").append("<table class='table'>");
-						$(".bookList table").append(
-								"<tr><td>" + "책번호" + "</td><td>" + "책이름"
-										+ "</td><td>" + "원본이름" + "</td><td>"
-										+ "장르" + "</td><td>" + "유저번호"
-										+ "</td><td>" + "설명" + "</td>");
-						$.each(data, function(index, item) {
-							$(".bookList table").append(
-									"<tr><td>" + item.bookArticleNum
-											+ "</td><td>" + item.bookName
-											+ "</td><td>"
-											+ item.fileLocation.substring(37)
-											+ "</td><td>" + item.genre
-											+ "</td><td>" + item.userNum
-											+ "</td><td>" + item.bookDesc
-											+ "</td>");
-							// 						 console.log(data);
-							// 						$(".proBar").attr("max", data.totalPage);
-							// 						$(".proBar").attr("value", data.pageNumber);
-							// 						if (data.pageNumber == data.totalPage) {
-							// 							// 	                	alert("끝");
-							// 							window.location.replace("/textant/main.text");
-							// 						}
-							$(".bookList table").append("</tr>");
-						});
-						$(".bookList").append("</table>");
-
-					}
-				}
-			});
-		}
-		
-		function bookSearchDoNum() {
-			$.ajax({
-				url : "/textant/getBookName.comment",
-				data : {
-					bookSearch : $("#bookSearchInputNum").val()
-				},
-				success : function(data) {
-					$("#bookSearchInputNum").val("");
-					if (data != null) {
-						$(".bookList").empty();
-						$(".bookList").append("<table class='table'>");
-						$(".bookList table").append(
-								"<tr><td>" + "책번호" + "</td><td>" + "책이름"
-										+ "</td><td>" + "원본이름" + "</td><td>"
-										+ "장르" + "</td><td>" + "유저번호"
-										+ "</td><td>" + "설명" + "</td>");
-						$.each(data, function(index, item) {
-							$(".bookList table").append(
-									"<tr><td>" + item.bookArticleNum
-											+ "</td><td>" + item.bookName
-											+ "</td><td>"
-											+ item.fileLocation.substring(37)
-											+ "</td><td>" + item.genre
-											+ "</td><td>" + item.userNum
-											+ "</td><td>" + item.bookDesc
-											+ "</td>");
-							// 						 console.log(data);
-							// 						$(".proBar").attr("max", data.totalPage);
-							// 						$(".proBar").attr("value", data.pageNumber);
-							// 						if (data.pageNumber == data.totalPage) {
-							// 							// 	                	alert("끝");
-							// 							window.location.replace("/textant/main.text");
-							// 						}
-							$(".bookList table").append("</tr>");
-						});
-						$(".bookList").append("</table>");
-
-					}
-				}
-			});
-		}
 	</script>
 
 </body>
