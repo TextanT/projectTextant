@@ -160,9 +160,9 @@ body {
 				<br>
 				<ul class="nav nav-sidebar nav-stacked">
 					<li class="active"><a href="#">관리자 메인<span class="sr-only">(current)</span></a></li>
-					<li><a href="#reportComment">신고 댓글</a></li>
+					<li><a href="#reportComment">신고된 댓글</a></li>
 					<li><a href="#badComment">싫어요 댓글</a></li>
-					<li><a href="#reportBook">신고 책</a></li>
+					<li><a href="#reportBook">신고된 책</a></li>
 					<li><a href="#notice">공지사항</a></li>
 					<li><a href="#recommendBook">추천 책</a></li>
 				</ul>
@@ -209,7 +209,7 @@ body {
 				</div>
 
 				<a name="reportComment"></a>
-				<h2 class="sub-header" name="reportComment">신고 댓글</h2>
+				<h2 class="sub-header" name="reportComment">신고된 댓글</h2>
 				<div class="table-responsive">
 					<div style="float: right;">
 						<a href="/textant/reportCommentManaging.text?pageNum=1">관리하기</a>
@@ -265,7 +265,7 @@ body {
 						</tbody>
 					</table>
 					<a name="reportBook"></a>
-					<h2 class="sub-header" name="reportBook">이상 책 관리</h2>
+					<h2 class="sub-header" name="reportBook">신고된 책</h2>
 					<div style="text-align: right;">
 						<a href="/textant/bookManaging.text?pageNum=1">관리하기</a>
 					</div>
@@ -290,7 +290,7 @@ body {
 						</tbody>
 					</table>
 					<a name="notice"></a>
-					<h2 class="sub-header" name="notice">공지사항 관리</h2>
+					<h2 class="sub-header" name="notice">공지사항</h2>
 					<div style="text-align: right;">
 						<a href="/textant/noticeManaging.text?pageNum=1">관리하기</a>
 					</div>
@@ -319,7 +319,7 @@ body {
 						</tbody>
 					</table>
 					<a name="recommendBook"></a>
-					<h2 class="sub-header" name="recommendBook">추천 책 관리</h2>
+					<h2 class="sub-header" name="recommendBook">추천 책</h2>
 					<div style="text-align: right;">
 						<a href="/textant/recommendBookManaging.text?pageNum=1">관리하기</a>
 					</div>
