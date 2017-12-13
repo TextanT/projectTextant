@@ -27,7 +27,6 @@ import com.besideYou.textant.main.login.LoginService;
 import com.besideYou.textant.main.main.MainService;
 import com.besideYou.textant.main.read.ReadService;
 import com.besideYou.textant.main.sign.SignService;
-@SessionAttributes("userNum")
 @Controller
 public class MainController {
 

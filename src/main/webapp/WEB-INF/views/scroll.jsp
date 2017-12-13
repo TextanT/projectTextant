@@ -324,7 +324,7 @@ function commentReply(commentNum,commentCount){
 						 var commentNum=item.commentNum;
 						 var commentCount=item.commentCount;
 						 var commentGroup=item.commentGroup;
-					 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
+					 html+="<div  class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
 					 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
 					 +"<div>답글: "+item.conet+"</div>"			
 					 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
@@ -539,7 +539,7 @@ function reportComment(commentNum){
 <title>Insert title here</title>
 </head>
 <body>	
-	<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="1">
+	<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="35">
 	<input id="page" type="hidden" name="page" value="1">
 	<input id="nextPage" type="hidden" name="nextPage" value="1">
 	<input id='pageListCount' type='hidden' name='pageListCount'>

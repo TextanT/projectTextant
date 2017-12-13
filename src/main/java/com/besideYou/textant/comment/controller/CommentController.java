@@ -20,7 +20,6 @@ import com.besideYou.textant.comment.service.CommentService;
 import com.besideYou.textant.main.dto.BookInfoDto;
 import com.besideYou.textant.manager.service.ManagerService;
 
-@SessionAttributes("userNum")
 @Controller
 public class CommentController {
 

@@ -119,7 +119,7 @@
 			FROM (SELECT ROWNUM RM, human.* FROM 
 			(SELECT C.*,L.nickName
 			FROM  comments C,login L 
-			WHERE C.pagegroup BETWEEN #{pageCountBlock} and #{page} and C.commentgroup=#{commentNum} and C.bookarticlenum=1 and C.userNum=L.userNum
+			WHERE C.pagegroup BETWEEN #{pageCountBlock} and #{page} and C.commentgroup=#{commentNum} and C.bookarticlenum=#{bookArticleNum} and C.userNum=L.userNum
 			ORDER BY C.pagegroup desc,C.commentNUM desc) human)  
 			WHERE RM BETWEEN  #{pageStart} AND #{pageStop}
 		<if test="commentDelete==1">
