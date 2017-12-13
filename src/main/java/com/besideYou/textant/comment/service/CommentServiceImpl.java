@@ -31,18 +31,25 @@ public class CommentServiceImpl implements CommentService{
 		int scrollCommentTopCount;
 		if(commentTo!=0) {
 			commentScrollReset=new HashMap<>();
+			
 			commentDto.setDepth(1);
 			commentDto.setCommentGroup(commentTop);
+			
 			commentDao.scroll(commentDto);
 			commentDao.scrollComment(commentTop);
+			
 			scrollCommentTopCount=commentDao.scrollCommentTopCount(commentTop);
+			
 			commentScrollReset.put("scrollCommentTopCount", scrollCommentTopCount);
 			commentScrollReset.put("ScrollResetDivision", 1);
 		}else {
 			commentScrollReset=new HashMap<>();
+			
 			commentDto.setDepth(0);
 			commentDto.setCommentGroup(0);
+			
 			commentDao.scroll(commentDto);
+			
 			commentScrollReset.put("ScrollResetDivision", 0);
 		}
 		return commentScrollReset;
@@ -197,11 +204,11 @@ public class CommentServiceImpl implements CommentService{
 
 	@Override
 	public int reportComment(int commentNum, int userNum) {
-		HashMap<String, Integer> reportCommentCheck=new HashMap<String, Integer>();
+		HashMap<String, Integer> reportCommentCheck=new HashMap<String, Integer>();		
 		reportCommentCheck.put("commentNum", commentNum);
-		reportCommentCheck.put("userNum", userNum);
-		String reportCommentCheckOk=null;
-		int reportCommentCheckAllOk=0;
+		reportCommentCheck.put("userNum", userNum);		
+		String reportCommentCheckOk=null;		
+		int reportCommentCheckAllOk=0;		
 		reportCommentCheckOk=commentDao.reportCommentCheck(reportCommentCheck);
 		if(reportCommentCheckOk==null) {
 			reportCommentCheckAllOk=1;

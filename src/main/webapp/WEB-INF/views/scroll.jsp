@@ -25,7 +25,6 @@ $.ajaxSetup({
 });
 var commentGood=1;
 var commentBad=2;
-
 $(document).ready(function(){
 	
 	commentListWrite();
@@ -55,7 +54,6 @@ function commentWrite() {
 	var scrollResetDivision="";
 	$.ajax({	
 		url:"/textant/commentWrite.comment",
-
 		data:{		
 			page:$("#page").val(),
 			commentTo:$("#commentTo").val(),
@@ -98,9 +96,6 @@ function commentWrite() {
 	});
 	
 }
-
-
-//현재 보고 있는 '책의 페이지''+ 전후 5p'에 달려있는 전체 댓글 갯수 정보 
 function commentListWrite() {
 	var html = "";
 	$.ajax({
@@ -114,9 +109,7 @@ function commentListWrite() {
 			page:$("#page").val(),
 			bookArticleNum:$("#bookArticleNum").val()
 		},
-
 		success:function(data){
-
  			html+="<div id='commentCount' name='commentCount'>"+"page: "+data.pageCountBlock+"~"+data.page+"  현재페이지:"+data.page+"   전체답글: "+data.pageListCount+"</div>"
 			
  			$(".bbb").append(html);
@@ -128,15 +121,12 @@ function commentListWrite() {
  		}					
  	}); 
 	
-
  	
  	
  	
-
 	
 }
 function comentRead(read){
-
 			var html = "";
 	$.ajax({	
 		url:"/textant/commentRead.comment",
@@ -174,7 +164,6 @@ function comentRead(read){
 			 $("#nextPage").val(num);
 		},
 		success:function(data){
-
 			 $.each(data, function(index,item) {
 				 var commentNum=item.commentNum;
 				 var commentCount=item.commentCount;
@@ -200,7 +189,6 @@ function comentRead(read){
 	
 	
 };
-
 function commentGet(){
 	
 			var html="";
@@ -256,8 +244,6 @@ function commentGet(){
 		}					
 	}); 
 };
-
-
 function commentReply(commentNum,commentCount){
 // 	console.log(commentCount);
 	var num=commentCount/$("#pageSize").val();
@@ -283,7 +269,6 @@ function commentReply(commentNum,commentCount){
 					commentDelete:0
 				},
 				beforeSend : function(){
-
 				},
 				complete: function(){
 					commentDelete($("#page").val(),$("#nextToPage"+commentNum).val(),commentCount,$("#pageCountBlock").val(),number,$("#bookArticleNum").val(),commentNum,1)
@@ -351,13 +336,11 @@ function commentReply(commentNum,commentCount){
 	 	}
 	
 }
-
 function commentToGet(commentNum,commentCount){
 	var num=commentCount/$("#pageSize").val();
 	var number=Math.ceil(num);
 		 $.ajax({	
 				url:"/textant/commentRead.comment",
-
 				data:{		
 					page:$("#page").val(),
 					nextPage:$("#nextToPage"+commentNum).val(),
@@ -369,7 +352,6 @@ function commentToGet(commentNum,commentCount){
 					commentDelete:0
 				},
 				beforeSend : function(){
-
 				},
 				complete: function(){
 					commentDelete($("#page").val(),$("#nextToPage"+commentNum).val(),commentCount,$("#pageCountBlock").val(),number,$("#bookArticleNum").val(),commentNum,1)
@@ -409,7 +391,6 @@ function commentToGet(commentNum,commentCount){
 			}); 
 		
 }
-
 function commentGoodOrBad(commentNum,commentGoodOrBad){
 	
 	$.ajax({	
@@ -443,11 +424,9 @@ function commentGoodOrBad(commentNum,commentGoodOrBad){
 		}					
 	}); 
 }
-
 function commentDelete(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete){
 	 $.ajax({	
 			url:"/textant/commentRead.comment",
-
 			data:{		
 				page:page,
 				nextPage:nextPage,
@@ -459,7 +438,6 @@ function commentDelete(page,nextPage,pageListCount,pageCountBlock,pageCut,bookAr
 				commentDelete:commentDelete
 			},
 			beforeSend : function(){
-
 			},
 			complete: function(){
 				
@@ -475,18 +453,15 @@ function commentDelete(page,nextPage,pageListCount,pageCountBlock,pageCut,bookAr
 			}					
 		});
 }
-
 function commentDeleteOk(commentNum,commentGroup){
 	var commentCount ="";
 	$.ajax({	
 		url:"/textant/commentDelete.comment",
-
 		data:{		
 			commentNum:commentNum,
 			commentGroup:commentGroup
 		},
 		beforeSend : function(){
-
 		},
 		complete: function(){
 			if(commentGroup!=0){
@@ -511,16 +486,13 @@ function commentDeleteOk(commentNum,commentGroup){
 		}					
 	});
 }
-
 function reportComment(commentNum){
 	$.ajax({	
 		url:"/textant/reportComment.comment",
-
 		data:{		
 			commentNum:commentNum
 		},
 		beforeSend : function(){
-
 		},
 		complete: function(){
 			
@@ -535,7 +507,6 @@ function reportComment(commentNum){
 		}					
 	});
 }
-
 </script>
 <style>
 </style>
@@ -555,9 +526,6 @@ function reportComment(commentNum){
 	<input id='commentCheck' type="hidden" name='commentCheck' value='0'>
 
 	<div class="bbb"></div>
-	<!-- 덧글을 보여주는 책의 페이지 / 현재페이지 / 전체답글 갯수 -->
-	
-	
 	<div class="ccc" style="overflow-y:scroll;width:400px;height:500px;">
 		<div class="aaa">
 		</div>

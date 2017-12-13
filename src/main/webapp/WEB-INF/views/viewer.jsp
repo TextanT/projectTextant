@@ -6,24 +6,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>${"현재 책 제목"}</title>
+<title>${bookName}</title>
 
 <style>
 *{margin:0; padding:0; text-decoration:none;}
 .font7 {font-size:0.7em;}
 .gray {color:#eee;}
 .textEllipsis {white-space:pre-line; overflow:hidden; text-overflow:ellipsis;}
+.margin10 {margin:10px;}
+.padding10 {padding:10px 0;}
+.ellipsis100{width:270px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 
-
-<!-- BOOK VIEWER  -->
-#canvas {}
+/* BOOK VIEWER */
 #viewer-top {width:600px; margin:0 auto;}
-#slider-bar {}
 #viewer-bottom {width:400px; margin:0 auto;}
 #page-counter {margin: 20px;}
-#page-counter #thisPage {width: 50px;}
+#pageGo {width: 50px;}
 
-
+/* NAV */ 
 nav {width:170px; height:100%; background:white; 
 	position:fixed; top:0; right:0; z-index:101;
 	font-size:0.8em;}
@@ -36,90 +36,75 @@ nav a{text-decoration:none;}
 #nav-pop ul {list-style-type: none;}
 #nav-pop ul li {float:right;}
 #nav-config {position: absolute; bottom:0px; right:0px; z-index:101;}
-.margin10 {margin:10px;}
 
 .coOpen {display:block; width:50px; height:30px; line-height:30px;}
 .open1 {position:absolute; top:100px; left:0px;}
 .open2 {position:absolute; top:100px; left:50px;}
 .open3 {width:100px; position:absolute; top:130px; left:0px;}
 
-.coClose {display:block; width:30px; height:30px; line-height:30px; font-size:18px; font-weight:bold; /*background:#fff; color:#69F; border-radius:15px;*/ text-align:center; text-decoration:none;}
-.close1 {position:absolute; top:15px; right:15px;}
+
+/* COMMENT */
+.coClose {display:block; width:30px; height:30px; 
+		line-height:30px; font-size:18px; font-weight:bold; text-align:center; text-decoration:none;}
+.closeR {position:absolute; top:15px; right:15px;}
 .close2 {position:absolute; top:15px; left:15px;}
-.close3 {position:absolute; top:15px; right:15px;}
-.close4 {position:absolute; top:15px; right:15px;}
 
-.comment{width:35%; height:100%; background:#ccc; font-size:0.9em;}
-.RightWrap{position:fixed; top:5%; height:90%; right:-500px; z-index:100;}
+.comment{width:35%; height:95%; background:#ccc; font-size:0.9em;}
+.RightWrap{position:fixed; top:5%; right:-500px; z-index:100;}
 .LeftWrap{position:fixed; top:0; left:0px; display:none; z-index:100;}
+.commentL{margin-top:50px; padding:3%;}
 
-#coWrite h4 {display:bolck; width:100px; height:25px; line-height: 25px; text-align:center; background-color:yellow; margin-top:10px;}
-.openCoWrite {}
-#comment{margin:50px 30px;}
-#comment table{width:100%; border-top:1px white dashed; }
-#coShow{margin-top:30px;}
-#coShow table{width:100%;}
-#coPlace{width:100%;}
-.coWrite {display: none;}
-#coWriteBtn{}
-.coWriteBtn{line-height:80px; width: 100%; height: 80px;}
+#coWrite{margin:50px 0;}
+#coWrite a {display:bolck; width:100px; height:25px; line-height: 25px; text-align:center; 
+	background-color:yellow; margin-top:10px;}
+#coWrite table{width:100%; }
+.coWriteBtn{line-height:80px; width: 100%; height:92px;}
 .coWriteBtn_widthL{width:70%;}
+.coPlace{width:100%; height:100%;}
 .coWriteBtn_widthR{width:30%;}
+#coShow{margin-top:3%;}
+#coShow table{width:100%; border-top:1px white dashed; margin-top:20px; }
 #reCoWriteForm{display:none;}
 
-.padding10 {padding:10px 0;}
-
-
-#modalBg {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+#modalBg {position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
     background: rgba(0, 0, 0, 0.8);
-    display:none;
-	z-index: 500;
-    /*-webkit-transition: opacity 400ms ease-in;
-    -moz-transition: opacity 400ms ease-in;
-    transition: opacity 400ms ease-in;
-    pointer-events: auto;*/
-}
-.totalCom {
-	display:none;
-	z-index: 501;
+    display:none; z-index: 500;}
+.totalCom {display:none; z-index: 501;
 	background-color:white;
-	position: absolute;
-	top: 5%;
-	left: 15%;
-	width: 70%;
-	height: 80%;
-	padding: 16px;}
+	position: absolute; top: 5%; left: 15%;
+	width: 70%; height: 80%; padding: 16px;}
+.totalCom > h3 {display:inline; width:100px; }	
+#totalComCount {display:inline-block; width:100px; }	
+	
 
-.Bookmark{
-	display:none;
-	z-index: 501;
+/* BOOKMARK*/	
+.Bookmark{display:none; z-index: 501;
 	background-color:white;
-	position: absolute;
-	top: 2%;
-	left: 0%;
-	width: 40%;
-	height: 90%;
+	position: absolute; top: 2%; left: 0%;
+	width: 40%; height: 90%;
 	padding: 16px;}
 
 
 </style>
 
+<!-- <script type="text/javascript" src="/textant/resources/js/jquery-1.11.1.min.js"></script> -->
+<!-- <script type="text/javascript" src="/textant/resources/js/jquery.min.1.7.js"></script> -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 
-<script src="js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="js/jquery.min.1.7.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.8.20.custom.min.js"></script>
-<script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
-<script type="text/javascript" src="js/modernizr.2.5.3.min.js"></script>
-<script type="text/javascript" src="js/hash.js"></script>
+<script type="text/javascript" src="/textant/resources/js/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript" src="/textant/resources/js/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="/textant/resources/js/modernizr.2.5.3.min.js"></script>
+<script type="text/javascript" src="/textant/resources/js/hash.js"></script>
+
 
 </head>
 
 <body>
+<input type="hidden" value="${bookArticleNum}" id="bookArticleId">
+<input id="page" type="hidden" name="page" value="1">
+
+
 <!-- BOOK VIEWER -->
 <section id="canvas">
 	<div id="viewer-top">
@@ -129,33 +114,31 @@ nav a{text-decoration:none;}
 	</div><!--viewer-top-->
 	<div id="book-zoom">
 		<div class="sample-docs">
-			<!--<div ignore="1" class="tabs"><div class="left">  </div> <div class="right"> </div></div>-->
-			<div class="hard"></div>
-			<div class="hard"></div>
-			<div class="hard p29"></div>
-			<div class="hard p30"></div>
-			<!-- Next button -->
+			
+			<div class="hard page1">
+				<img src="displayFile.text?fileName=${fileName}/OriginImg&pageNum=1&fileType=jpg"
+						width="100%" height="100%"/>
+			</div>
+
 			<div ignore="1" class="next-button"></div>
-			<!-- Previous button -->
 			<div ignore="1" class="previous-button"></div>
 		</div>
 	</div>	
 	<div id="viewer-bottom">
-		<div id="page-counter" class=" ">
+		<div id="page-counter">
 			<div id=""> 
 			 <p>
-			 ㅣ◀  
+			 <a href="#" class="firstPage">ㅣ◀ </a>
 			 <a href="#" class="previousPage">◀</a>    
-			 <input type="number" id="pageGo" placeholder="${thisPage}"> / ${totalPage}  
+			 <input type="number" id="pageGo" placeholder="thisPage"> / ${totalPageNum+1}  
 			 <a href="#" class="pageGoEnter"><b><i>Go</i></b></a> 
 			 <a href="#" class="nextPage">▶</a>  
-			 ▶ㅣ
+			 <a href="#" class="maxPage">▶ㅣ</a>
 			 </p>
 			</div>
 		</div>
 	</div><!--viewer-bottom-->
 </section> <!--canvas-->
-
 
 <!-- NAVIGATION-->
 <nav>
@@ -167,233 +150,83 @@ nav a{text-decoration:none;}
 	</div>
 	
 	<div id="nav-pop" class="margin10">
-	<!--input 으로 바꾸기-->
 		<ul>
-			<li><a href="#" class="openBookmark">북마크 보기 <img src="img/if_office-01_809597.png" alt="북마크보기"></a></li>
+			<li><a href="#" class="openBookmark">북마크 보기 <img src="/textant/resources/img/if_office-01_809597.png" alt="북마크보기"></a></li>
 			<li>
-				<!--c:if test="${bookmark==0}"-->
-					<a href="#">북마크 하기 <img src="img/if_bookmark-outline_326548.png" alt="북마크 하기"></a>
-				<!--/c:if>
+				<c:if test="${bookmark==0}">
+					<a href="#">북마크 하기 <img src="/textant/resources/img/if_bookmark-outline_326548.png" alt="북마크 하기"></a>
+				</c:if>
 				<c:if test="${bookmark==1}">
-					<a href="#">북마크 없애기 <img src="img/if_bookmark-outline_326548.png" alt="북마크  없애기"></a>
-				</c:if-->
+					<a href="#">북마크 없애기 <img src="/textant/resources/img/if_bookmark-outline_326548.png" alt="북마크  없애기"></a>
+				</c:if>
 			</li>
 			<li>
-				<!--c:if test="${}"-->
-					<a href="#">책장에 추가 <img src="img/if_book_sans_add_103401.png" alt="책장에 추가"></a>
-				<!--/c:if>
-				<c:if test="${}">
-					<a href="#">책장에서 빼기 <img src="img/if_book_sans_add_103401.png" alt="책장에서 빼기"></a>
-				</c:if-->
+				<c:if test="${addShelf==0}">
+					<a href="#">책장에 추가 <img src="/textant/resources/img/if_book_sans_add_103401.png" alt="책장에 추가"></a>
+				</c:if>
+				<c:if test="${addShelf==1}">
+					<a href="#">책장에서 빼기 <img src="/textant/resources/img/if_book_sans_add_103401.png" alt="책장에서 빼기"></a>
+				</c:if>
 			</li>
-			<li><a href="#">별점주기 <img src="img/if_star_103714.png" alt="별점주기"></a></li>
+			<li><a href="#">별점주기 <img src="/textant/resources/img/if_star_103714.png" alt="별점주기"></a></li>
 			<li>
-				<a href="#">신고하기 <img src="img/if_office-01_809597.png" alt="신고하기"></a>
+				<a href="/reportComment.comment">신고하기 <img src="/textant/resources/img/if_office-01_809597.png" alt="신고하기"></a>
 			</li>
-			<!--전자책 / 이미지 바꿔서 보여주기
 			<c:if test="${isText != 'isText'}">
-				<c:if test="${bookType=='jpg'}"-->
-					<li><a href="#" id="goText" class="convertToTxt convert">전자책으로 보기 <img src="img/if_office-01_809597.png" alt="전자책으로 보기"></a></li>
-				<!--/c:if>
-				<c:if test="${bookType=='text'}">
-					<li><a href="#"  id="goJpg" class="convertToJpg convert">이미지로 보기 <img src="img/if_office-01_809597.png" alt="이미지로 보기"></a></li>
+				<c:if test="${bookType=='jpg'}">
+					<li><a href="#" id="goText" class="convertToTxt convert">전자책으로 보기 <img src="/textant/resources/img/if_office-01_809597.png" alt="전자책으로 보기"></a></li>
+				</c:if>
+				<c:if test="${bookType=='txt'}">
+					<li><a href="#"  id="goJpg" class="convertToJpg convert">이미지로 보기 <img src="/textant/resources/img/if_office-01_809597.png" alt="이미지로 보기"></a></li>
 				</c:if>
 
-			</c:if-->
+			</c:if>
 		</ul>
 	</div>
 	<div id="nav-config" class="margin10">
-		<a href="#" class="navPopBtn"><img src="img/if_settings_103345.png" alt=""></a>
+		<a href="#" class="navPopBtn"><img src="/textant/resources/img/if_settings_103345.png" alt=""></a>
 	</div>
 </nav>
 
+
 <div class="RightWrap comment">
 
-	<a href="#" class="coClose close1">X</a>
-
-	<div id="comment">
-
-		<div id="coWrite">
-			<div id="thisComInfo"></div>
-			"<div id='commentCount' name='commentCount'>data.pageCountBlock+"~"+data.page+"<h3>"+data.page+"p 댓글 보기</h3> 총"+data.pageListCount+"개</div>"
-			
-			<h4><a href="#" class="openCoWrite toggle"> 덧글쓰기 </a></h4>
-			<form action="/textant/" method="post"> 
-			<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="1">
-			<input id="page" type="hidden" name="page" value="1">
-			<input id="nextPage" type="hidden" name="nextPage" value="1">
-			<input id='pageListCount' type='hidden' name='pageListCount'>
-			<input id='pageCountBlock' type='hidden' name='pageCountBlock'>
-			<input id='pageCut' type='hidden' name='pageCut'>
-			<input id='pageSize' type='hidden' name='pageSize'>
-			<input id='commentTo' type='hidden' name='commentTo'>
-			<input id='conet' type='hidden' name='conet'>
-			<input id='commentTop' type="hidden" name='commentTop' value='0'>
-			<input id='commentCheck' type="hidden" name='commentCheck' value='0'>  
-			
-			
-			<table class="coWrite toggleChild">
-				<tr>
-					<!--c:if test="${id != null}"--><td>${id}님</td>
-					<!--c:if test="${id == null}"><td>게스트님</td></c:if-->
-				</tr>
-				<!--c:if test="${id != null}"-->
-					<tr>	
-						<td class="coWriteBtn_widthL">
-							<textarea rows="5" id="coPlace"></textarea>
-						</td>
-						<td class="coWriteBtn_widthR">
-							<input type="submit" value="입력" id="coWriteBtn" class="coWriteBtn">
-						</td>
-					</tr>
-					<!--
-				</c:if>
-				<c:if test="${id == null}">
-					<tr>
-						<td>
-							<textarea rows="5" cols="70" id="" placeholder="로그인 후 덧글을 입력해주세요"></textarea>
-						</td>
-						<td class="coWriteBtn_width">
-							<input type="submit"value="입력" disabled="disabled" class="coWriteBtn">
-						</td>
-				</c:if-->
-				<tr>
-					<td align="right" class="font7 gray">${현재입력byte} / 1000 byte</td>
-					<td></td>
-				</tr>
-			</table>
-		</div>
-
-		<div id="coShow">
-		<c:forEach var="thisCom" item="${}">
-			<table border="1" class="padding10">
-				<tr>
-					<td rowspan="4" width="30px">${thisCom.profilePicture}</td>
-					<td colspan="2" class="">
-						<p  class="textEllipsis ">${thisCom.conet}<br>
-						두 줄만 보여줍니다 <br>
-						세 줄만 보여줍니다세 줄만 보여줍니다세 줄만 보여줍니다세 줄만 보여줍니다세 줄만 보여줍니다</p>
-					</td>
-				</tr>
-				<tr >
-					<td class="font7" colspan="2" align="right">더보기 ▼</td>
-				</tr>
-				<tr>
-					<td class="font7" colspan="2">${id}┃${writeDate}┃ ♥ (${commentGood}) ┃  (${commentBad}) ┃ 
-					<a href="#" id="showReCo">댓글보기<a></td>
-				</tr>
-				
-				<!-- 댓글의 댓글보기-->
-				<!-- <tr>
-					<td rowspan="4">   img   </td>
-					<td colspan="2" class="textHidden">
-						<p  class="textEllipsis">${답글내역} <br>
-						두 줄만 보여줍니다 <br>
-						세 줄만 보여줍니다</p>
-					</td>
-				</tr>
-				<tr >
-					<td></td>
-					<td class="font7" colspan="2" align="right">더보기 ▼</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td class="font7" colspan="2">아이디 ┃날짜 ┃ ♥ (2) ┃ 신고(2) </td>
-				</tr>
-
-				
-				<tr> 
-					<td></td>
-					<td class="font7" colspan="2" align="right">좋아요 ┃ 신고하기 </td>
-				</tr> -->
-				<!-- 댓글의 댓글보기-->
-
-				<tr>
-					<td class="font7" colspan="2" align="right">
-						<a href="#">좋아요</a> ┃ 
-						<a href="#">싫어요</a> ┃
-						<a href="#">신고하기</a> ┃
-						<a href="#" id="reCoWrite" class="toggle2">댓글쓰기</a>
-					</td>
-				</tr>
+	<a href="#" class="coClose closeR close1">X</a>
 	
-				<form action="/textant/" method="post">
-				<tr id="reCoWriteForm" class="toggleChild2">
-					<td></td>
-					<!--c:if test="${id != null}"-->
-						<td class="reCoWriteBtn_widthL font7 gray" align="right" class="font7 gray">
-							<textarea rows="5" id="coPlace"></textarea>
-							${현재입력byte} / 1000 byte
-						</td>
-						<td class="reCoWriteBtn_widthR">
-							<input type="submit" value="입력" id="reCoWriteBtn" class="reCoWriteBtn">
-						</td>
-						<!--
-					</c:if>
-					<c:if test="${id == null}">
-						<td>
-							<textarea rows="5" cols="70" id="" placeholder="로그인 후 덧글을 입력해주세요"></textarea>
-						</td>
-						<td class="reCoWriteBtn_width">
-							<input type="submit" value="입력" disabled="disabled" class="reCoWriteBtn">
-						</td>
-					</c:if-->
-				</tr>
-				</form>
-			</c:forEach>
-				
-			</table>
-			<table>
-				<tr>
-					<td colspan="3" align="center">${pageCode}</td>
-				</tr>
-			</table>
-
-			
-			</div> <!--#coShow  -->
-		</div> <!--//#comment -->
-	</div> <!--//.RightWrap -->
+	<div class=" ">
+				<%@include file="commentPartR.jsp" %>
+	</div> <!--//#comment -->
+</div> <!--//.RightWrap -->
 
 
 
-	<div class="LeftWrap comment">
-
-		<div>답글보기 영역</div>
-		<a href="#" class="coClose close2">X</a>
-
-		<div >
-			<p>이쪽은 왼쪽 영역의 댓글창입니다 </p>
+<div class="LeftWrap comment">
+		<a href="#" class="coClose closeR close2">X</a>
 		
-		</div> <!--//#comment -->
-	</div> <!--//.LeftWrap -->
-
-
-
-	<div id="modalBg"></div>
-	<div class="totalCom">
-		<div>
-		<h3>${현재 책 이름 }</h3><span>덧글 ${totalCom} 개</span>
-		<a href="#" class="coClose close3">X</a>
-
-
-			sldj;afspiej;flskdjf;lajsd;fla fa;sldjf;asldj;afspiej;flskdjf;lajsd;fla fa;sldjf;as
-			ldj;afspiej;flskdjf;lajsd;fla fa;sldjf;as
-		</div>
-	</div> <!--totalCom-->
-
-	<div class="Bookmark">
-		<div>
-		<h3>${id}님의 북마크</h3>
-		<a href="#" class="coClose close4">X</a>
-
+		<div class="commentL">
 		
-		<ul>
-			<c:forEach val="" items="">
-				<li>북마크1 </li>
-			</c:forEach>
-		</ul>
+				<%@include file="commentPartL.jsp" %>
+		</div> <!--//#comment -->
+</div> <!--//.LeftWrap -->
+
+
+
+<div id="modalBg"></div>
+<div class="totalCom">
+	<div>
+		<h3>『 ${bookName} 』<span id="totalComCount"></span></h3>
+		<a href="#" class="coClose closeR close3">X</a>
+		
+	</div>
+</div> <!--totalCom-->
+
+<div class="Bookmark">
 		<div>
-	</div> <!--Bookmark-->
+		<h3>${id}<small>님의</small> 북마크</h3>
+		<a href="#" class="coClose closeR close4">X</a>
+		<%@include file="BookMarkInViewer.jsp" %>
+		<div>
+</div> <!--Bookmark-->
 			
 
 
@@ -505,7 +338,7 @@ function loadApp() {
 
 	$(document).keydown(function(e){
 
-		var previous = 37, next = 39;
+		var previous = 37, next = 39, enter = 13;
 
 		switch (e.keyCode) {
 			case previous:
@@ -518,9 +351,53 @@ function loadApp() {
 				$('.sample-docs').turn('next');
 
 			break;
+			case enter:
+				
+				let pageNum = $('#pageGo').val();
+				$('.sample-docs').turn('page',pageNum);
+
 		}
 
 	});
+	// Events for the next button
+
+	$('.next-button').bind($.mouseEvents.over, function() {		
+		$(this).addClass('next-button-hover');
+
+	}).bind($.mouseEvents.out, function() {		
+		$(this).removeClass('next-button-hover');
+
+	}).bind($.mouseEvents.down, function() {		
+		$(this).addClass('next-button-down');
+
+	}).bind($.mouseEvents.up, function() {		
+		$(this).removeClass('next-button-down');
+
+	}).click(function() {		
+		$('.sample-docs').turn('next');
+
+	});
+
+	// Events for the next button
+	
+	$('.previous-button').bind($.mouseEvents.over, function() {		
+		$(this).addClass('previous-button-hover');
+
+	}).bind($.mouseEvents.out, function() {		
+		$(this).removeClass('previous-button-hover');
+
+	}).bind($.mouseEvents.down, function() {		
+		$(this).addClass('previous-button-down');
+
+	}).bind($.mouseEvents.up, function() {		
+		$(this).removeClass('previous-button-down');
+
+	}).click(function() {		
+		$('.sample-docs').turn('previous');
+
+	});
+
+
 
 	// Create the flipbook
 
@@ -530,7 +407,7 @@ function loadApp() {
 		gradients: true,
 		autoCenter: true,
 		duration: 1000,
-		pages: 30,
+		pages: 10,
 		when: {
 
 		turning: function(e, page, view) {
@@ -623,16 +500,14 @@ function loadApp() {
 	// Show canvas
 
 	$('#canvas').css({visibility: 'visible'});
-
-	
-
 	
 }
-
 $(".pageGoEnter").on("click",function(){
 	let pageNum = $('#pageGo').val();
-	
 	$('.sample-docs').turn('page',pageNum);
+});
+$(".firstPage").on("click",function(){
+	$('.sample-docs').turn('page', 1);
 });
 $(".previousPage").on("click",function(){
 	$('.sample-docs').turn('previous');
@@ -640,13 +515,10 @@ $(".previousPage").on("click",function(){
 $(".nextPage").on("click",function(){
 	$('.sample-docs').turn('next');
 });
-/*
-$(".currPage").on("click",function(){
-	let currPage = $(".sample-docs").turn("page");
-	alert(currPage);
-	alert("The current page is: "+(Math.floor(currPage/2))*2);
+$(".maxPage").on("click",function(){
+	$('.sample-docs').turn('page', '${totalPageNum+1}');
 });
-*/
+
 
 
 // Hide canvas
@@ -655,9 +527,9 @@ $('#canvas').css({visibility: 'hidden'});
 
 yepnope({
 	test: Modernizr.csstransforms,
-	yep: ['js/turn.min.js', 'css/jquery.ui.css'],
-	nope: ['js/turn.html4.min.js', 'css/jquery.ui.html4.css'],
-	both: ['css/docs.css', 'js/docs.js'],
+	yep: ['/textant/resources/js/turn.min.js', '/textant/resources/css/jquery.ui.css'],
+	nope: ['/textant/resources/js/turn.html4.min.js', '/textant/resources/css/jquery.ui.html4.css'],
+	both: ['/textant/resources/css/docs1.css', '/textant/resources/js/docs.js'],
 	complete: loadApp
 });
 //*******************
@@ -669,30 +541,156 @@ yepnope({
 
 
 //*******************오른쪽 슬라이드 
-$(function(){
-
-	$(".open1").click(function(){
-
-		$(".RightWrap").animate({right:170},500,"swing") 
-		event.stopImmediatePropagation();
+$(document).ready(function(){
+		$.ajax({
+			url:"/textant/commentCount.comment",
+			type:"POST",
+			async:true,
+			dataType:"json",
+			data:{
+				page:$("#page").val(),
+				bookArticleNum:$("#bookArticleNum").val()
+			},
+			error : function(xhr){
+				alert("error html = " + xhr.statusText);
+			},
+			success: function(json){
+				
+								
+				$(".open1").click(function(){
+					$(".RightWrap").animate({right:170},500,"swing") 
+					if(".open1") event.stopImmediatePropagation();
+					
+					setTimeout(function() {
+						let currPage = $(".sample-docs").turn("page");
+						let nowPage = (Math.floor(currPage/2))*2;
+						
+						let html="<span id='nowP'>"+json.pageCountBlock+"p ~ "+nowPage+"p ┃   현재페이지 : "+nowPage+"p ┃   댓글 "+json.pageListCount+"개</span>";
+						$("#nowP").remove();
+						$("#infoOne").append(html);
+						
+						$("#pageListCount").val(json.pageListCount);
+						$("#pageCountBlock").val(json.pageCountBlock);
+						$("#pageCut").val(json.pageCut);
+						$("#pageSize").val(json.pageSize);
+						
+						
+					}, 1000);
+					
+				});
+				
+				$(".sample-docs").bind('turning',function(){
+					setTimeout(function() {
+						let currPage = $(".sample-docs").turn("page");
+						$("#pageGo").attr('placeholder',(Math.floor(currPage/2))*2);
+						
+					},500);
+				});
+				
+				commentRead(json);
+				
+			},
+		});
 	});
+
+//전체 댓글 읽어오기
+function commentRead(read){
+	let html= "";
+	$.ajax({
+		url:"/textant/commentRead.comment",
+		type:"POST",
+		async:true,
+		dataType:"json",
+		data:{
+			page:$("#page").val(),
+			nextPage:$("#nextPage").val(),
+			pageListCount:read.pageListCount,
+			pageCountBlock:read.pageCountBlock,
+			pageCut:read.pageCut,
+			bookArticleNum:read.bookArticleNum,
+			commentNum:0,
+			commentDelete:0
+		},
+		error : function(xhr){
+			alert("error html = " + xhr.statusText);
+		},
+		complete: function(){		
+			commentDelete($("#page").val(),$("#nextPage").val(),read.pageListCount,read.pageCountBlock,read.pageCut,read.bookArticleNum,0,1)
+			
+			var num=$("#nextPage").val();
+			 num++;
+			 var nextPageNum = $("#nextPage").val(); 
+			 var pageCutNum = $("#pageCut").val();
+			 
+			 if(nextPageNum==pageCutNum){
+				 $("#moreSee").attr("type", "hidden");
+			 }else{
+				 $("#moreSee").attr("type", "button");
+			 }
+			 
+			 $("#nextPage").val(num);
+
+		},
+		success: function(data){
+			 $.each(data, function(index,item) {
+				 let commentNum=item.commentNum;
+				 let commentCount=item.commentCount;
+				 let commentGroup=item.commentGroup;
+				 
+				 html +='<div class="commentDelete'+commentNum+'">'+
+				 '<table border="1" class="padding10">'+
+					'<tr>'+
+					'<td rowspan="4" width="30px">+ profilePicture+</td>'+
+					'<td colspan="2" ><i class="font7">'+item.commentNum+'</i><br><p class="ellipsis100">'+item.conet+'</p></td>'+
+				'</tr>'+
+				'<tr>'+
+					'<td class="font7" colspan="2" align="right"><a href="#" id="ellipsisView" onClick="ellipsisView">더보기 ▼</a></td>'+
+				'</tr>'+
+				'<tr>'+
+					'<td class="font7" colspan="2">'+item.nickName+'님 ┃'+item.writeDate+'┃'+' ♥ (<span class="comGoodCount'+commentNum+'">'+item.commentGood+'</span>) ┃  (☞'+item.commentBad+') ┃ '+
+					'<a href="#" id="showReCo'+commentNum+'" class="comment'+commentNum+'" name="chk" onClick="commentReply('+commentNum+','+commentCount+')">댓글보기('+data[index].commentCount+')</a></td>'+
+				'</tr>'+
+				
+				'<tr>'+
+					'<td class="font7" colspan="2" align="right">'+
+						'<input id="commentDeleteButton'+commentNum+'" type="hidden" onclick="commentDeleteOk('+commentNum+','+commentGroup+')" value="삭제"> ┃'+
+						'<a href="#" class="commentGood'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentGood+')">좋아요</a> ┃'+ 
+						'<a href="#" class="commentBad'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentBad+')">싫어요</a> ┃'+
+						'<a href="#" class="reportComment" id="reportComment'+commentNum+'" onclick="reportComment('+commentNum+')">신고하기</a> ┃'+
+						'<a href="#" id="reCoWrite'+commentNum+'" class="toggle2" onclick="commentReplyWrite('+commentNum+')">댓글쓰기</a>'+
+						'<input id="nextToPage'+commentNum+'" type="hidden" name="nextToPage'+commentNum+'" value="1">'+	
+						'<input id="commentGroup'+commentNum+'" type="hidden" name="commentGroup" value="0">'+
+					'</td>'+
+				'</tr></table></div>'
+			 });
+			$("#coShowBox").append(html);
+		}
+	});
+	
+};
+$(function(){
+// 	$(".open1").click(function(){
+// 		$(".RightWrap").animate({right:170},500,"swing") 
+// 		if(".open1") event.stopImmediatePropagation();
+// 	});
 
 	$(".close1").click(function(){
 		$(".RightWrap").animate({right:-500},500,"swing")
-		event.stopImmediatePropagation();
+		if(".close1") event.stopImmediatePropagation();
 	});
 
-	event.stopImmediatePropagation();
-
+	//event.stopImmediatePropagation();
 }); 
+
 
 //*******************왼쪽 슬라이드 
 $(function() {
 	$(".open2").click(function(){
 		$(".LeftWrap").animate({width:'toggle'},500,"swing")
 	});
-	event.stopImmediatePropagation();
+	if(".open2")event.stopImmediatePropagation();
 });
+
 //////// 토글, 스윙 부딛힘
 //$(function(){
 //	$(".close2").click(function(){
@@ -703,62 +701,93 @@ $(function() {
 //}); 
 
 
-//**********************전체 댓글
+//**********************전체 댓글 보기
 	function wrapWindowByMask(){
-		//화면의 높이와 너비를 구한다.
 		var bgHeight = $(document).height();  
 		var bgWidth = $(window).width();  
 
-		//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
 		$('#modalBg').css({'width':bgWidth,'height':bgHeight});  
 
-		//애니메이션 효과 - 일단 1초동안 까맣게 됐다가 80% 불투명도로 간다.
 		$('#modalBg').fadeIn(1000);      
 		$('#modalBg').fadeTo("slow",0.5);    
 
-		//윈도우 같은 거 띄운다.
 		$('.totalCom').show();
 	}
 
 	$(document).ready(function(){
-		//검은 막 띄우기
 		$('.open3').click(function(e){
 			e.preventDefault();
 			wrapWindowByMask();
 		});
-
-		//닫기 버튼을 눌렀을 때
+		
 		$('.totalCom .close3').click(function (e) {  
 		    //링크 기본동작은 작동하지 않도록 한다.
 		    e.preventDefault();  
 		    $('#modalBg, .totalCom').hide();  
-		});       
-
-		//검은 막을 눌렀을 때
+		});      
+		
 		$('#modalBg').click(function () {  
 		    $(this).hide();  
 		    $('.totalCom').hide();  
 		});      
 	});
+	
+	
+	$(document).ready(function(){
+		$.ajax({
+				url: "/textant/commentTotalCount.comment",
+				type: "GET",
+				dataType: "json",
+				data:{
+					page:$("#page").val(),
+					bookArticleNum:$("#bookArticleId").val()
+				},
+				success: function(json){
+					$("#totalComCount").append("<small> &nbsp;&nbsp;&nbsp;답글&nbsp;" +json.totalCount+"&nbsp;개</small>");
+				}
+		});
+	}); 
+	
+	
+	$(document).ready(function(){
+		$.ajax({
+				url: "/textant/read.text",
+				type: "GET",
+				dataType: "jsp",
+				data:{
+					page:$("#page").val(),
+					bookArticleNum:$("#bookArticleId").val()
+				},
+				success: function(html){
+					$(document).load(function(){
+						let bbb= $(".page-wrapper").attr(".page");	
+						alert(Math.floor(bbb/2)*2);
+						});
+				}
+		});
+	}); 
 
-
-
+	
 //******************* 댓글쓰기 폼 보이기
 $(function() {
 	$(".toggle").click(function(){
-		$(".toggleChild").toggle();
+		$("#coWriteForm").toggleClass("disNone");
+		
+		if($("#coShow").hasClass('height80')){
+			$("#coShow").removeClass('height80').addClass('height70');
+		}else{
+			$("#coShow").removeClass('height70').addClass('height80');
+		}
+		
 	});
-	//event.preventDefault();
-	event.stopImmediatePropagation();
+	if(".toggle") event.stopImmediatePropagation();
 });
 $(function() {
 	$(".toggle2").click(function(){
 		$(".toggleChild2").toggle();
 	});
-	//event.preventDefault();
-	event.stopImmediatePropagation();
+	if(".toggle2")event.stopImmediatePropagation();
 });
-
 
 
 //******************* nav pop-up toggle
@@ -766,7 +795,7 @@ $(function() {
 	$(".navPopBtn").click(function(){
 		$("#nav-pop").toggle();
 	});
-	event.stopImmediatePropagation();
+	if(this)event.stopImmediatePropagation();
 });
 
 
@@ -781,23 +810,24 @@ maxPage = '${totalPageNum}';
 $(document).ready(function(){
 			if(bookType=="txt"){
 				for(let i = 1; i <= maxPage; i++){
-					$(".flipbook").append('<div style="width:100%;height:100%;text-align: center;"><embed width="95%" height="100%" type="text/html" src="displayFile.text?fileName=${fileName}&pageNum='+i+'&fileType='+bookType+'"></embed></div>');
+					$(".sample-docs").append('<div style="width:100%;height:100%;text-align: center;"><embed width="95%" height="100%" type="text/html" src="displayFile.text?fileName=${fileName}&pageNum='+i+'&fileType='+bookType+'"></embed></div>');
 				}
 			}else if(bookType=="jpg"){
 				for(let i = 1; i <= maxPage; i++){
 			        
-				$(".flipbook").append('<img class="leftPage" alt="" src="displayFile.text?fileName=${fileName}&pageNum='+ i +'&fileType='+bookType+'"/>');
+				$(".sample-docs").append('<img class="leftPage" alt="" src="displayFile.text?fileName=${fileName}&pageNum='+ i +'&fileType='+bookType+'"/>');
 				}		
 			}		
 		});
 
 $('#goText').click(function(){
-	location.href="test.text?fileName=${fileName}&bookType=jpg";
+	location.href="read.text?fileName=${fileName}&bookType=txt";
 });
 
 $('#goJpg').click(function(){
-	location.href="test.text?fileName=${fileName}&bookType=txt";
+	location.href="read.text?fileName=${fileName}&bookType=jpg";
 });
+
 
 //**********************북마크 내용 보기
 	function wrapWindowByMask1(){
@@ -826,6 +856,7 @@ $('#goJpg').click(function(){
 		    $('.Bookmark').hide();  
 		});      
 	});
+
 
 
 
