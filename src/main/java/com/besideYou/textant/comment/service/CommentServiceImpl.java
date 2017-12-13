@@ -143,6 +143,7 @@ public class CommentServiceImpl implements CommentService{
 		int commentBadCheckOk=0;
 		int commentGoodOrBadAllCount=0;
 		int commentGoodOrBadAllCheck=0;
+		
 		HashMap<String, Integer> commentGoodOrBadCheck=new HashMap<String, Integer>();
 		commentGoodOrBadCheck.put("commentNum", commentNum);
 		commentGoodOrBadCheck.put("userNum", userNum);
@@ -170,6 +171,7 @@ public class CommentServiceImpl implements CommentService{
 		}
 		
 		commentGoodOrBadAllCheck=commentGoodOrBadCheck.get("commentGoodOrBadCheck");
+		
 		
 		commentGoodOrBadList.put("commentGoodOrBadAllCount", commentGoodOrBadAllCount);
 		commentGoodOrBadList.put("commentGoodOrBadAllCheck", commentGoodOrBadAllCheck);

@@ -439,6 +439,11 @@ function commentGoodOrBad(commentNum,commentGoodOrBad){
 		success:function(data){
 			var AllCheckCount =data.commentGoodOrBadAllCount;
 			var coodBadCheck=data.commentGoodOrBadAllCheck;
+			
+			/*
+			commentGoodOrBad ==1 : good
+							!=1 : bad
+			*/
 			if(AllCheckCount!=0){
 				if(coodBadCheck==1){
 					$(".commentGood"+commentNum).val("좋아요"+AllCheckCount);

@@ -144,20 +144,22 @@
 						'<td colspan="2" ><i class="font7">'+item.commentNum+'</i><br><p class="ellipsis100">'+item.conet+'</p></td>'+
 					'</tr>'+
 					'<tr>'+
-						'<td class="font7" colspan="2" align="right">더보기 ▼</td>'+
+						'<td class="font7" colspan="2" align="right"><a href="#" id="ellipsisView" onClick="ellipsisView">더보기 ▼</a></td>'+
 					'</tr>'+
 					'<tr>'+
-						'<td class="font7" colspan="2">'+item.nickName+'┃'+item.writeDate+'┃'+' ♥ ('+item.commentGood+') ┃  (☞'+item.commentBad+') ┃ '+
+						'<td class="font7" colspan="2">'+item.nickName+'님 ┃'+item.writeDate+'┃'+
+						' ♥ (<span class="comGoodCount'+commentNum+'">'+item.commentGood+'</span>) ┃  '+
+						'☞ (<span class="comBadCount'+commentNum+'">'+item.commentBad+'</span>) ┃ '+
 						'<a href="#" id="showReCo'+commentNum+'" class="comment'+commentNum+'" name="chk" onClick="commentReply('+commentNum+','+commentCount+')">댓글보기('+data[index].commentCount+')</a></td>'+
 					'</tr>'+
 					
 					'<tr>'+
 						'<td class="font7" colspan="2" align="right">'+
 							'<input id="commentDeleteButton'+commentNum+'" type="hidden" onclick="commentDeleteOk('+commentNum+','+commentGroup+')" value="삭제"> ┃'+
-							'<a href="#" class="commentGood'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentGood+')">좋아요</a> ┃'+ 
-							'<a href="#" class="commentBad'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentBad+')">싫어요</a> ┃'+
+							'<a href="#" class="commentGood'+commentNum+'" onclick="GoodBad('+commentNum+','+commentGood+')">좋아요</a> ┃'+ 
+							'<a href="#" class="commentBad'+commentNum+'" onclick="GoodBad('+commentNum+','+commentBad+')">싫어요</a> ┃'+
 							'<a href="#" class="reportComment" id="reportComment'+commentNum+'" onclick="reportComment('+commentNum+')">신고하기</a> ┃'+
-							'<a href="#" id="reCoWrite" class="toggle2">댓글쓰기</a>'+
+							'<a href="#" id="reCoWrite'+commentNum+'" class="toggle2" onclick="commentReplyWrite('+commentNum+')">댓글쓰기</a>'+
 							'<input id="nextToPage'+commentNum+'" type="hidden" name="nextToPage'+commentNum+'" value="1">'+	
 							'<input id="commentGroup'+commentNum+'" type="hidden" name="commentGroup" value="0">'+
 						'</td>'+
@@ -350,11 +352,8 @@
 						  $(".fon"+commentNum).append(html);
 	*/
 	
-	
-	
-	
-	//commentGoodOrBad('+commentNum+','+commentBad+')//싫어요
-	function commentGoodOrBad(commentNum,commentGoodOrBad){
+
+	function GoodBad(commentNum,commentGoodOrBad){ //좋아요 싫어요
 	
 	$.ajax({	
 		url:"/textant/commentGoodOrBad.comment",
@@ -363,20 +362,22 @@
 			commentGoodOrBad:commentGoodOrBad
 		},
 		success:function(data){
-			var AllCheckCount =data.commentGoodOrBadAllCount;
-			var coodBadCheck=data.commentGoodOrBadAllCheck;
-			if(AllCheckCount!=0){
-				if(coodBadCheck==1){
-					setTimeout(function() {
-						$(".comGoodCount"+commentNum).text("좋아용용ㅇ"+AllCheckCount);
-					},500);
+			var Count =data.commentGoodOrBadAllCount;
+			var check=data.commentGoodOrBadAllCheck;
+			
+			if(Count!=0){
+				if(check==1){
+						$(".comGoodCount"+commentNum).text(Count);	
 					
 				}else{
-					$(".commentBad"+commentNum).val("싫어요"+AllCheckCount);
+					setTimeout(function() {
+						$(".comBadCount"+commentNum).text(Count);						
+					},500);
+					
 				}
-			}else if(coodBadCheck==1){
+			}else if(check==1){
 				alert("이미 싫어요를 누르셨습니다.");
-			}else if(coodBadCheck==2){
+			}else if(check==2){
 				alert("이미 좋아요를 누르셨습니다.");
 			}
 			 

@@ -647,15 +647,17 @@ function commentRead(read){
 					'<td class="font7" colspan="2" align="right"><a href="#" id="ellipsisView" onClick="ellipsisView">더보기 ▼</a></td>'+
 				'</tr>'+
 				'<tr>'+
-					'<td class="font7" colspan="2">'+item.nickName+'님 ┃'+item.writeDate+'┃'+' ♥ (<span class="comGoodCount'+commentNum+'">'+item.commentGood+'</span>) ┃  (☞'+item.commentBad+') ┃ '+
+					'<td class="font7" colspan="2">'+item.nickName+'님 ┃'+item.writeDate+'┃'+
+					' ♥ (<span class="comGoodCount'+commentNum+'">'+item.commentGood+'</span>) ┃  '+
+					'☞ (<span class="comBadCount'+commentNum+'">'+item.commentBad+'</span>) ┃ '+
 					'<a href="#" id="showReCo'+commentNum+'" class="comment'+commentNum+'" name="chk" onClick="commentReply('+commentNum+','+commentCount+')">댓글보기('+data[index].commentCount+')</a></td>'+
 				'</tr>'+
 				
 				'<tr>'+
 					'<td class="font7" colspan="2" align="right">'+
 						'<input id="commentDeleteButton'+commentNum+'" type="hidden" onclick="commentDeleteOk('+commentNum+','+commentGroup+')" value="삭제"> ┃'+
-						'<a href="#" class="commentGood'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentGood+')">좋아요</a> ┃'+ 
-						'<a href="#" class="commentBad'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentBad+')">싫어요</a> ┃'+
+						'<a href="#" class="commentGood'+commentNum+'" onclick="GoodBad('+commentNum+','+commentGood+')">좋아요</a> ┃'+ 
+						'<a href="#" class="commentBad'+commentNum+'" onclick="GoodBad('+commentNum+','+commentBad+')">싫어요</a> ┃'+
 						'<a href="#" class="reportComment" id="reportComment'+commentNum+'" onclick="reportComment('+commentNum+')">신고하기</a> ┃'+
 						'<a href="#" id="reCoWrite'+commentNum+'" class="toggle2" onclick="commentReplyWrite('+commentNum+')">댓글쓰기</a>'+
 						'<input id="nextToPage'+commentNum+'" type="hidden" name="nextToPage'+commentNum+'" value="1">'+	
