@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.besideYou.textant.comment.dto.CommentDto;
 import com.besideYou.textant.comment.service.CommentService;
 import com.besideYou.textant.main.dto.BookInfoDto;
-import com.besideYou.textant.manager.service.ManagerService;
+import com.besideYou.textant.main.main.MainService;
 
 @SessionAttributes("userNum")
 @Controller
@@ -26,7 +26,7 @@ public class CommentController {
 
 	@Autowired
 	CommentService commentService;
-
+	
 	String view;
 
 
@@ -36,7 +36,7 @@ public class CommentController {
 		return "/WEB-INF/views/scroll.jsp";
 	}
 	@RequestMapping(value="/commentView.comment", method = RequestMethod.GET)
-	public String commentView(Model model) {
+	public String commentView() {
 		return "/WEB-INF/views/commentView.jsp";
 	}
 	
@@ -110,4 +110,10 @@ public class CommentController {
 		return commentService.getBookNum(bookSearch);
 	}
 	
+	@RequestMapping(value = "/getMainBookList.comment")
+	@ResponseBody
+	public HashMap<Object,Object> getMainBookList(int sortType,int pageNum){
+		
+		return commentService.getMainBookList(sortType,pageNum);
+	}
 }

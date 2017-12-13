@@ -12,6 +12,7 @@ import com.besideYou.textant.comment.common.Page;
 import com.besideYou.textant.comment.dao.CommentDao;
 import com.besideYou.textant.comment.dto.CommentDto;
 import com.besideYou.textant.main.dto.BookInfoDto;
+import com.besideYou.textant.comment.common.MainPage;
 @Service
 public class CommentServiceImpl implements CommentService{
 
@@ -25,6 +26,9 @@ public class CommentServiceImpl implements CommentService{
 	
 	@Autowired
 	private Page page;
+	
+	@Autowired
+	private MainPage mainPage;
 	
 	@Override
 	public HashMap<String, Integer> scroll(CommentDto commentDto,int commentTo,int commentTop) {
@@ -283,5 +287,35 @@ public class CommentServiceImpl implements CommentService{
 	public List<BookInfoDto> getBookNum(String bookSearch) {
 		System.out.println(commentDao.getBookNum(bookSearch));
 		return commentDao.getBookNum(bookSearch);
+	}
+	
+	@Override
+	public HashMap<Object,Object> getMainBookList(int sortType, int pageNum) {
+		HashMap<Object,Object> getMainBookList = new HashMap<>();
+		HashMap<String,String> mainPageMap = new HashMap<>();
+		List<BookInfoDto> bookList = new ArrayList();
+		int getMainBookListCount=commentDao.getMainBookListCount();
+		
+			switch (sortType) {
+			case 1:
+				mainPageMap=mainPage.paging(pageNum, getMainBookListCount, 15, 5);
+				getMainBookList.put("pageCoid", mainPageMap.get("pageCode"));
+				bookList=commentDao.getMainRecencyList(mainPageMap);
+				getMainBookList.put("getMainBookList",bookList);
+				break;
+			case 2:
+				mainPageMap=mainPage.paging(pageNum, getMainBookListCount, 15, 5);
+				getMainBookList.put("pageCoid", mainPageMap.get("pageCode"));
+				bookList=commentDao.getMainScoreList(mainPageMap);
+				getMainBookList.put("getMainBookList",bookList);
+				break;
+			case 3:
+				mainPageMap=mainPage.paging(pageNum, getMainBookListCount, 15, 5);
+				getMainBookList.put("pageCoid", mainPageMap.get("pageCode"));
+				bookList=commentDao.getMainHitList(mainPageMap);
+				getMainBookList.put("getMainBookList",bookList);
+				break;
+			}
+		return getMainBookList;
 	}
 }

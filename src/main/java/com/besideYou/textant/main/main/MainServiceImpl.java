@@ -2,7 +2,11 @@ package com.besideYou.textant.main.main;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -11,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.besideYou.textant.genre.genrepage.GenrePage;
 import com.besideYou.textant.main.dao.BookInfoDao;
 import com.besideYou.textant.main.dto.BookInfoDto;
+import com.besideYou.textant.main.mainpage.MainPage;
 
 @Service
 public class MainServiceImpl implements MainService {
@@ -20,6 +26,8 @@ public class MainServiceImpl implements MainService {
 	String destinationDir;
 	@Autowired
 	BookInfoDao bookInfoDao;
+	@Autowired
+	MainPage mainPage;
 	
 	@Override
 	public String home(Model model, HttpSession session) {
@@ -27,7 +35,7 @@ public class MainServiceImpl implements MainService {
 		File file;
 		File[] files;
 		
-		List<BookInfoDto> fileNames;
+		List<String> fileNames;
 		//1.추천리스트를 받을것
 		//2.최신순, 별점순, 조회순리스트를 받을것
 		
@@ -47,6 +55,9 @@ public class MainServiceImpl implements MainService {
 		}
 		*/
 		
+//		HashMap<Object, Object> genreMap =new HashMap<>();
+//		genreMap = mainPage.paging(1, bookInfoDao.getNewTotal(), 15, 5);
+		
 		model.addAttribute("");
 		model.addAttribute("fileList", fileNames);
 		
@@ -55,4 +66,38 @@ public class MainServiceImpl implements MainService {
 		
 		return "main";
 	}
+
+	@Override
+	public HashMap<Object,Object> getMainBookList(int sortType, int pageNum) {
+		HashMap<Object,Object> getMainBookList = new HashMap<>();
+		HashMap<String,String> mainPageMap = new HashMap<>();
+		List<BookInfoDto> bookList = new ArrayList();
+		int getMainBookListCount=bookInfoDao.getMainBookListCount();
+		
+			switch (sortType) {
+			case 1:
+				mainPageMap=mainPage.paging(pageNum, getMainBookListCount, 15, 5);
+				getMainBookList.put("pageCoid", mainPageMap.get("pageCode"));
+				bookList=bookInfoDao.getMainRecencyList(mainPageMap);
+				getMainBookList.put("getMainBookList",bookList);
+				break;
+			case 2:
+				mainPageMap=mainPage.paging(pageNum, getMainBookListCount, 15, 5);
+				getMainBookList.put("pageCoid", mainPageMap.get("pageCode"));
+				bookList=bookInfoDao.getMainScoreList(mainPageMap);
+				getMainBookList.put("getMainBookList",bookList);
+				break;
+			case 3:
+				mainPageMap=mainPage.paging(pageNum, getMainBookListCount, 15, 5);
+				getMainBookList.put("pageCoid", mainPageMap.get("pageCode"));
+				bookList=bookInfoDao.getMainHitList(mainPageMap);
+				getMainBookList.put("getMainBookList",bookList);
+				break;
+			}
+		return getMainBookList;
+	}
+
+	
+	
+	
 }

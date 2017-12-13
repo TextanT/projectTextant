@@ -61,9 +61,16 @@
 		<input type="hidden" id="line" name="line" value="3">
 		<div class="header">
 			<div class="header_logo" style="padding-top: 20px;">
-				<a href="/textant/main.text" class="logo_a"> <img
-					src="/textant/resources/icon_img/logo_mini.png" class="logo">
-				</a>
+				<div style="float: left;">
+					<a href="/textant/main.text" class="logo_a" style="height: 55px;">
+						<img src="/textant/resources/icon_img/logo_mini.png" class="logo">
+					</a>
+				</div>
+				<div style="float: left;">
+					<span
+						style="margin-top: auto; margin-bottom: auto; font-size: 33px; color: white;">
+						&nbsp | 창작하기</span>
+				</div>
 			</div>
 			<div class="menu_box">
 				<c:if test="${id!=null}">
@@ -79,9 +86,9 @@
 			 "
 						escapeXml="false" />
 				</c:if>
-			<c:if test="${id==null}">
-				<c:out
-					value="
+				<c:if test="${id==null}">
+					<c:out
+						value="
 			<a href='#' class='menu_title'><span class='menu1' id='menu1'>로그인</span></a>
 			
 			<a href='#' class='menu_title'><span class='menu2'id='menu2'>회원가입</span></a> 
@@ -90,8 +97,8 @@
 			
 			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
 			 "
-					escapeXml="false" />
-			</c:if>
+						escapeXml="false" />
+				</c:if>
 
 			</div>
 		</div>

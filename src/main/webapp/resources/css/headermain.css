@@ -103,14 +103,14 @@ body {
 .menu_box {
 	float: right;
 	padding-right: 21%;
-	margin-top: 10px;
+	margin-top: -40px;
 }
 
 @media screen and (max-width:1920px) {
 	.menu_box {
 		float: right;
 		padding-right: 16%;
-		margin-top: 10px;
+		margin-top: -40px;
 	}
 }
 
@@ -118,7 +118,7 @@ body {
 	.menu_box {
 		float: right;
 		padding-right: 11%;
-		margin-top: 10px;
+		margin-top: -40px;
 	}
 }
 
@@ -126,7 +126,7 @@ body {
 	.menu_box {
 		float: right;
 		padding-right: 5%;
-		margin-top: 10px;
+/* 		margin-top: -40px; */
 	}
 }
 
