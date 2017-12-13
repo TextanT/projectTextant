@@ -12,8 +12,14 @@
 	<select id="getNewBooks" resultType="String">
 		SELECT fileLocation from bookInfo order by writeDate desc
 	</select>
-	<select id="getTotalPages" parameterType="String" resultType="int">
+	<select id="getTotalPages" parameterType="String" resultType="Integer">
 		SELECT totalpage from bookInfo where fileLocation = #{fileLocation}
+	</select>
+	<select id="getBookName" parameterType="String" resultType="String">
+		SELECT bookName from bookInfo where fileLocation = #{fileLocation}
+	</select>
+	<select id="getBookArticleNum" parameterType="String" resultType="Integer">
+		SELECT bookArticleNum from bookInfo where fileLocation = #{fileLocation}
 	</select>
 </mapper>
 	

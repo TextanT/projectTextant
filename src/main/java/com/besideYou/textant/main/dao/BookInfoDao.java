@@ -15,8 +15,11 @@ public interface BookInfoDao {
 	public List<String> getNewBooks();
 	
 	public int getTotalPages(String fileLocation);
+	
+	public String getBookName(String fileLocation);
 //	public String joinchek(String inputId);
 	
 //	public int getUserNum(LoginDto loginDto);
+	public int getBookArticleNum(String fileLocation);
 
 }

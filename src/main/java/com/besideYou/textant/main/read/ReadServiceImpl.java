@@ -19,18 +19,22 @@ public class ReadServiceImpl implements ReadService {
 	public String read(String fileName, Model model, String bookType) throws Exception{
 		
 	int totalPageNum = 0;
+	String bookName = null;
 	System.out.println(fileName);
 	
 	totalPageNum = bookInfoDao.getTotalPages(fileName);
+	bookName = bookInfoDao.getBookName(fileName);
 	
 	if(fileName.substring(fileName.lastIndexOf(".")+1).equals("txt")) {
 		model.addAttribute("isText","isText");
 	}
 	
+	model.addAttribute("bookArticleNum", bookInfoDao.getBookArticleNum(fileName));
 	model.addAttribute("fileName", fileName);
+	model.addAttribute("bookName", bookName);
 	model.addAttribute("totalPageNum", totalPageNum);
 	model.addAttribute("bookType", bookType);
 //	return "content";
-	return "viewer/viewer";
+	return "viewer";
 	}
 }
