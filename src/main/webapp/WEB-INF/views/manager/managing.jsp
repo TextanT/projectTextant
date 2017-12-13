@@ -26,6 +26,9 @@ body {
 	border: 1px solid black;
 	background-color: white;
 }
+.main{
+background-color: #EFEEEE;
+} 
 </style>
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 <script
@@ -43,14 +46,22 @@ body {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <style>
 body {
-	background-color: #EFEEEE;
+	background-color: white;
 }
 
 .managing table tr:hover {
 	background-color: gray;
 	font: white;
 }
-</style>
+.sidebar{
+/* 	background-color: #000; */
+/* 	height: 100% */
+}
+.main{
+border-left: 1px solid #999;
+padding-left: 40px;
+}
+</style> 
 </head>
 <body>
 	<div class="header">
@@ -158,7 +169,7 @@ body {
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<br>
-				<ul class="nav nav-sidebar nav-stacked">
+				<ul class="nav nav-sidebar">
 					<li class="active"><a href="#">관리자 메인<span class="sr-only">(current)</span></a></li>
 					<li><a href="#reportComment">신고된 댓글</a></li>
 					<li><a href="#badComment">싫어요 댓글</a></li>
@@ -166,8 +177,8 @@ body {
 					<li><a href="#notice">공지사항</a></li>
 					<li><a href="#recommendBook">추천 책</a></li>
 				</ul>
-				<br>
 				<div style="padding-left: 20px;">
+				<hr style="color: black; size: 1px" >
 					<span>관리하기</span>
 				</div>
 				<br>
