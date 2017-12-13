@@ -88,6 +88,10 @@
 	SELECT COUNT(*) FROM reportBook
 	</select>
 	
+	<select id="getTotalReportCommentCount" resultType="Integer">
+	SELECT COUNT(*) FROM reportComment
+	</select>
+	
 	<select id="getUserName" parameterType="Integer" resultType="String">
 	SELECT USERID FROM LOGIN WHERE USERNUM = #{userNum}
 	</select>
@@ -145,6 +149,7 @@
 	SELECT * FROM REPORTCOMMENT WHERE REPORTCOMMENTNUM = #{num}
 	</select>
 	
+	
 	<select id="getComments" parameterType="Integer" resultType="String">
 	SELECT CONET FROM COMMENTS WHERE COMMENTNUM = #{commentNum}
 	</select>
@@ -156,7 +161,6 @@
 	<select id="getTotalBadCommentsCount" resultType="Integer">
 	SELECT COUNT(*) FROM COMMENTS WHERE COMMENTBAD > 10  
 	</select>
-	
 	
 	
 	<select id="searchComment"  parameterType="HashMap" resultType="comment">
@@ -198,20 +202,38 @@
 			BOOKARTICLENUM = #{commentContents}
 			</if>
 	</select>
+	
+	<select id="getCommentOne" parameterType="Integer" resultType="comment">
+	SELECT * FROM COMMENTS WHERE COMMENTNUM = #{num}
+	</select>
+	
+	<delete id="deleteComment" parameterType="Integer">
+	DELETE FROM COMMENTS WHERE COMMENTNUM = #{commentNum}
+	</delete>
+	
+	<select id="getAllBookCount" resultType="Integer">
+	SELECT COUNT(*) FROM bookInfo 
+	</select>
+	
+	<select id="getAllBooks" parameterType="HashMap" resultType="bookInfo">
+	select outTable.* 
+		from (
+		select rownum rum, inTable.* 
+			  from (
+			  	select * 
+			  	from bookInfo
+			  	order by writeDate desc
+			  	) inTable  
+			  order by rum
+			  ) outTable 
+		where rum between #{startPage} and #{endPage}
+	</select>
+	
+	<select id="getBookOne" parameterType="Integer" resultType="bookInfo">
+	SELECT * FROM BOOKINFO WHERE BOOKARTICLENUM = #{bookArticleNum}
+	</select>
+	
+	<delete id="deleteBookInfo" parameterType="Integer">
+	DELETE FROM BOOKINFO WHERE BOOKARTICLENUM = #{bookArticleNum}
+	</delete>
 </mapper>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	

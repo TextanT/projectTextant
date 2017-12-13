@@ -1,5 +1,6 @@
 package com.besideYou.textant.manager.controller;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -138,6 +139,7 @@ public class ManagerController {
 		managerService.reportCommentContent(num, model);
 		return "manager/reportCommentContent";
 	}
+	
 	@RequestMapping(value="/reportCommentDelete.text")
 	public String reportCommentDelete(int reportCommentNum, HttpSession session) {
 		managerService.deleteReportComment(reportCommentNum);
@@ -149,10 +151,45 @@ public class ManagerController {
 		managerService.managerComment(model, pageNum, req);
 		return "manager/commentManaging";
 	}
+	
 	@RequestMapping(value = "/commentSearch.text")
 	public String commentSearch(int pageNum, String searchType, String commentContents, Model model, HttpServletRequest req, HttpSession session) {
-		System.out.println("pageNum" + pageNum);
+		System.out.println("searchType" + searchType);
+		if(searchType.equals("")) {
+			System.out.println("공백이다!");
+			return "redirect:/commentManaging.text?pageNum=1";
+		}
 		managerService.searchComment(model, pageNum, req, searchType, commentContents);
 		return "manager/commentSearching";
+	}
+	@RequestMapping(value="/commentContent.text")
+	public String commentContent(int num, Model model, HttpSession session, HttpServletRequest req) {
+		managerService.commentContent(num, model, req);
+		return "manager/commentContent";
+	}
+	
+	@RequestMapping(value="/commentDelete.text")
+	public String commentDelete(int commentNum, HttpSession session, HttpServletRequest req, String referer) {
+		managerService.deleteComment(commentNum);
+		return "redirect:"+referer.replaceAll("%26", "&");
+	}
+	
+	
+	@RequestMapping(value = "/allBookManaging.text")
+	public String allBookManaging(int pageNum, Model model, HttpServletRequest req, HttpSession session) {
+		managerService.managerAllBook(model, pageNum, req);
+		return "manager/allBookManaging";
+	}
+	
+	@RequestMapping(value="/allBookContent.text")
+	public String allBookContent(int num, Model model, HttpSession session, HttpServletRequest req) {
+		managerService.allBookContent(num, model, req);
+		return "manager/allBookContent";
+	}
+	
+	@RequestMapping(value="/bookInfoDelete.text")
+	public String bookInfoDelete(int bookArticleNum, HttpSession session, HttpServletRequest req, String referer) {
+		managerService.deleteBookInfo(bookArticleNum);
+		return "redirect:"+referer.replaceAll("%26", "&");
 	}
 }

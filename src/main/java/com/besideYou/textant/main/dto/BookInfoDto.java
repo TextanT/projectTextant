@@ -16,9 +16,16 @@ public class BookInfoDto {
 	private int totalScore;
 	private int scoreNum;
 	private String bookDesc;
+	private int bookType;
 	
 	
 
+	public int getBookType() {
+		return bookType;
+	}
+	public void setBookType(int bookType) {
+		this.bookType = bookType;
+	}
 	private MultipartFile bookFile;
 	private MultipartFile bookImg;
 	private int line;
@@ -135,7 +142,9 @@ public class BookInfoDto {
 		return "BookInfoDto [bookArticleNum=" + bookArticleNum + ", bookName=" + bookName + ", totalPage=" + totalPage
 				+ ", userNum=" + userNum + ", thumbnail=" + thumbnail + ", fileLocation=" + fileLocation + ", genre="
 				+ genre + ", writeDate=" + writeDate + ", hit=" + hit + ", totalScore=" + totalScore + ", scoreNum="
-				+ scoreNum + ", bookDesc=" + bookDesc + "]";
+				+ scoreNum + ", bookDesc=" + bookDesc + ", bookType=" + bookType + ", bookFile=" + bookFile
+				+ ", bookImg=" + bookImg + ", line=" + line + ", numOfOneLine=" + numOfOneLine + ", lineOfOnePage="
+				+ lineOfOnePage + "]";
 	}
 	
 	

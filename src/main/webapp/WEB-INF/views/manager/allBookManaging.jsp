@@ -4,7 +4,6 @@
 <!DOCTYPE>
 <html>
 <head>
-<META HTTP-EQUIV="refresh" CONTENT="60">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -154,17 +153,17 @@ body {
 	<br />
 	<div id="managingDistrict">
 		<div style="margin-top: 50px;">
-			<h3 style="text-align: center">댓글 관리</h3>
+			<h3 style="text-align: center">전체 책 관리</h3>
 		</div>
 		<div
 			style="margin-left: 80px; margin-right: 80px; margin-bottom: 50px; width: auto;">
 
 			<div style="float: right;">
-				<form action="/textant/commentSearch.text" method="get">
+				<form action="/textant/allBookSearch.text" method="get">
 						<input type="hidden" value="1" name="pageNum">
 					<table>
 						<tr>
-							<td colspan="4" style="text-align: center;"><span>댓글 검색</span></td>
+							<td colspan="4" style="text-align: center;"><span>책 검색</span></td>
 						</tr>
 						<tr>
 							<td>
@@ -195,27 +194,31 @@ body {
 				<table class="table"
 					style="margin-left: auto; margin-right: auto; text-align: center;">
 					<tr>
-						<td>번호</td>
-						<td>댓글내용</td>
-						<td>유저번호</td>
 						<td>책번호</td>
-						<td>작성날짜</td>
-						<td>싫어요 수</td>
+							<td>책이름</td>
+							<td>총페이지</td>
+							<td>유저번호</td>
+							<td>장르</td>
+							<td>조회수</td>
+							<td>작성날짜</td>
+							<td>별점</td>
 					</tr>
-					<c:forEach var="commentsList" items="${commentsList}">
+					<c:forEach var="bookInfoList" items="${bookInfoList}">
 
 						<tr style="cursor: pointer;"
-							onClick="window.open('/textant/commentContent.text?num=${commentsList.commentNum}','_self');">
-							<td><c:out value="${commentsList.commentNum}" /></td>
-							<td><c:out value="${commentsList.conet}" /></td>
-							<td><c:out value="${commentsList.userNum}" /></td>
-							<td><c:out value="${commentsList.bookArticleNum}" /></td>
-							<td><c:out value="${commentsList.writeDate.substring(0,10)}" /></td>
-							<td><c:out value="${commentsList.commentBad}" /></td>
+							onClick="window.open('/textant/allBookContent.text?num=${bookInfoList.bookArticleNum}','_self');">
+							<td><c:out value="${bookInfoList.bookArticleNum}" /></td>
+							<td><c:out value="${bookInfoList.bookName}" /></td>
+							<td><c:out value="${bookInfoList.totalPage}" /></td>
+							<td><c:out value="${bookInfoList.userNum}" /></td>
+							<td><c:out value="${bookInfoList.genre}" /></td>
+							<td><c:out value="${bookInfoList.hit}" /></td>
+							<td><c:out value="${bookInfoList.writeDate.substring(0,10)}" /></td>
+							<td><c:out value="${(bookInfoList.totalScore+0.0)/(bookInfoList.scoreNum+0.0)}" /></td>
 						</tr>
 					</c:forEach>
 					<tr>
-						<td colspan="6" align="center" height="40">${pageCode}</td>
+						<td colspan="8" align="center" height="40">${pageCode}</td>
 					</tr>
 				</table>
 			</div>
@@ -224,27 +227,6 @@ body {
 			</div>
 			<div style="width: 700px"> 
 			<table class="table">
-			<tr>
-
-							<td>책번호</td>
-							<td colspan="1">
-							<input name="bookArticleNum" id="bookSearchInputNum"
-							type="text" />
-							<input type="button"
-								onclick="bookSearchDoNum()" value="찾기">
-							</td>
-							<td>책이름</td>
-							<td>
-							<input type="text" name="bookSearch"
-								id="bookSearchInput"> <input type="button"
-								onclick="bookSearchDo()" value="찾기"></td>
-						</tr>
-						<tr>
-							<td colspan="4">책 리스트</td>
-						</tr>
-						<tr>
-							<td colspan="4"><div class="bookList"></div></td>
-						</tr>
 			</table>
 			</div>
 		</div>

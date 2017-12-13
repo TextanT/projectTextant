@@ -1,8 +1,10 @@
 package com.besideYou.textant.manager.service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,7 @@ import com.besideYou.textant.common.dto.NoticeDto;
 import com.besideYou.textant.common.dto.RecommendedBookDto;
 import com.besideYou.textant.common.dto.ReportBookDto;
 import com.besideYou.textant.common.dto.ReportCommentDto;
+import com.besideYou.textant.main.dto.BookInfoDto;
 import com.besideYou.textant.manager.dao.ManagerDao;
 import com.besideYou.textant.manager.dto.ManagingBookDto;
 import com.besideYou.textant.manager.page.ManagerPage;
@@ -28,6 +31,8 @@ public class ManagerServiceImplement implements ManagerService{
 	@Autowired
 	ManagerPage managerPage;
 	
+	@Resource(name = "saveDir")
+	String destinationDir;
 
 	int pageBlock = 5;
 	int pageSize = 10;
@@ -45,7 +50,7 @@ public class ManagerServiceImplement implements ManagerService{
 		
 		oneTen = new HashMap<String, String>();
 		oneTen.put("startPage", "1");
-		oneTen.put("endPage", "10");
+		oneTen.put("endPage", "5");
 		
 		System.out.println(managerDao.getReportCommentList(oneTen));
 		model.addAttribute("getFirstRecommendedBookList",managerDao.getRecommendedBookList(oneTen));
@@ -53,6 +58,11 @@ public class ManagerServiceImplement implements ManagerService{
 		model.addAttribute("getFirstReportCommentList",managerDao.getReportCommentList(oneTen));
 		model.addAttribute("getFirstBadCommentList",managerDao.getBadCommentList(oneTen));
 		model.addAttribute("getFirstNoticeList",managerDao.getNoticeList(oneTen));
+		
+		model.addAttribute("totalRecommendBook" , managerDao.getTotalRecommendBookCount());
+		model.addAttribute("totalReportBook" , managerDao.getTotalReportBookCount());
+		model.addAttribute("totalReportComment" , managerDao.getTotalReportCommentCount());
+		model.addAttribute("totalBadComment" , managerDao.getTotalBadCommentsCount());
 	}
 	
 	@Override
@@ -326,7 +336,7 @@ public class ManagerServiceImplement implements ManagerService{
 		ArrayList<ManagingBookDto> managingList = null;  
 		ManagingBookDto managingDto = null;
 		try {
-			totalCount = managerDao.getTotalReportBookCount();
+			totalCount = managerDao.getTotalReportCommentCount();
 
 			pagingMap = managerPage.paging(pageNum, totalCount, pageSize, pageBlock, req);
 
@@ -456,6 +466,104 @@ public class ManagerServiceImplement implements ManagerService{
 		model.addAttribute("pageCode", pagingMap.get("pageCode"));		
 		
 	}
-	
+
+
+	@Override
+	public void commentContent(int num, Model model, HttpServletRequest req) {
+		CommentDto commentDto;
+		ManagingBookDto managingDto;
+		
+		commentDto = managerDao.getCommentOne(num);
+		
+		managingDto = new ManagingBookDto();
+		managingDto.setUserName(managerDao.getUserName(commentDto.getUserNum()));
+		managingDto.setBookName(managerDao.getBookName(commentDto.getBookArticleNum()));
+		model.addAttribute("referer", req.getHeader("referer").replaceAll("&", "%26"));
+		model.addAttribute("managingList", managingDto);
+		model.addAttribute("commentsList", commentDto);
+	}
+
+	@Override
+	public void deleteComment(int commentNum) {
+		managerDao.deleteComment(commentNum);
+	}
+
+
+
+	@Override
+	public void managerAllBook(Model model, int pageNum, HttpServletRequest req) {
+		int totalCount = 0;
+//		pageNum = 1;
+		ArrayList<BookInfoDto> bookInfoList = null;
+		HashMap<String, String> pagingMap = null;
+		HashMap<String, String> paramMap = null; 
+		  
+		try {
+			totalCount = managerDao.getAllBookCount();
+
+			pagingMap = managerPage.paging(pageNum, totalCount, pageSize, pageBlock, req);
+
+			int startRow = managerPage.getStartRow();
+			int endRow = managerPage.getEndRow();
+			paramMap = new HashMap<>();
+			paramMap.put("startPage", String.valueOf(startRow));
+			paramMap.put("endPage", String.valueOf(endRow));
+
+			
+			bookInfoList = (ArrayList<BookInfoDto>) managerDao.getAllBooks(paramMap);
+			System.out.println(bookInfoList);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("bookInfoList", bookInfoList);
+		model.addAttribute("pageCode", pagingMap.get("pageCode"));		
+	}
+
+
+
+	@Override
+	public void allBookContent(int num, Model model, HttpServletRequest req) {
+		BookInfoDto bookInfoDto;
+		ManagingBookDto managingDto;
+		
+		bookInfoDto = managerDao.getBookOne(num);
+		
+		managingDto = new ManagingBookDto();
+		managingDto.setUserName(managerDao.getUserName(bookInfoDto.getUserNum()));
+		managingDto.setBookName(managerDao.getBookName(bookInfoDto.getBookArticleNum()));
+		model.addAttribute("referer", req.getHeader("referer").replaceAll("&", "%26"));
+		model.addAttribute("managingList", managingDto);
+		model.addAttribute("bookInfoList", bookInfoDto);
+		
+	}
+
+	@Override
+	public void deleteBookInfo(int bookArticleNum) {
+		BookInfoDto bookInfoDto;
+		bookInfoDto = managerDao.getBookOne(bookArticleNum);
+		managerDao.deleteBookInfo(bookArticleNum);
+		
+		File file = new File(destinationDir+bookInfoDto.getFileLocation());
+		System.out.println(file.getPath());
+		allFileDelete(file);
+		
+	}
+	public void allFileDelete(File file) { 
+		  if (file.isDirectory()) {   
+		   if (file.listFiles().length != 0) { 
+		    File[] fileList = file.listFiles();
+		    for (int i = 0; i < fileList.length; i++) {
+		    	allFileDelete(fileList[i]);
+		     file.delete();
+		    }
+		   } else {
+		    file.delete();
+		   }
+		  } else {
+		   file.delete();
+		  }
+		 }
 	
 }

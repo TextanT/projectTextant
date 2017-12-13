@@ -9,6 +9,7 @@ import com.besideYou.textant.common.dto.NoticeDto;
 import com.besideYou.textant.common.dto.RecommendedBookDto;
 import com.besideYou.textant.common.dto.ReportBookDto;
 import com.besideYou.textant.common.dto.ReportCommentDto;
+import com.besideYou.textant.main.dto.BookInfoDto;
 
 public interface ManagerDao {
 	
@@ -42,4 +43,11 @@ public interface ManagerDao {
 	int getTotalBadCommentsCount();
 	ArrayList<CommentDto> searchComment(HashMap<String, String> paramMap);
 	int getTotalCommentsCount(HashMap<String, String> totalMap);
+	CommentDto getCommentOne(int num);
+	int getTotalReportCommentCount();
+	void deleteComment(int commentNum);
+	int getAllBookCount();
+	ArrayList<BookInfoDto> getAllBooks(HashMap<String, String> paramMap);
+	BookInfoDto getBookOne(int num);
+	void deleteBookInfo(int bookArticleNum);
 }

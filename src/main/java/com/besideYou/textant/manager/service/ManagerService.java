@@ -32,6 +32,11 @@ public interface ManagerService {
 	void deleteReportComment(int reportCommentNum);
 	void managerComment(Model model, int pageNum, HttpServletRequest req);
 	void searchComment(Model model, int pageNum, HttpServletRequest req, String searchType, String commentContents);
+	void commentContent(int num, Model model, HttpServletRequest req);
+	void deleteComment(int commentNum);
+	void managerAllBook(Model model, int pageNum, HttpServletRequest req);
+	void allBookContent(int num, Model model, HttpServletRequest req);
+	void deleteBookInfo(int bookArticleNum);
 	
 	
 }

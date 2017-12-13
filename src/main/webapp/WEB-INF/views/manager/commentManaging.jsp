@@ -204,7 +204,7 @@ body {
 					<c:forEach var="commentsList" items="${commentsList}">
 
 						<tr style="cursor: pointer;"
-							onClick="window.open('/textant/managingReportCommentContent.text?num=${commentsList.commentNum}','_self');">
+							onClick="window.open('/textant/commentContent.text?num=${commentsList.commentNum}','_self');">
 							<td><c:out value="${commentsList.commentNum}" /></td>
 							<td><c:out value="${commentsList.conet}" /></td>
 							<td><c:out value="${commentsList.userNum}" /></td>
