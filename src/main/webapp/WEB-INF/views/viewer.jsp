@@ -663,11 +663,12 @@ function commentRead(read){
 						'<a href="#" class="commentGood'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentGood+')">좋아요</a> ┃'+ 
 						'<a href="#" class="commentBad'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentBad+')">싫어요</a> ┃'+
 						'<a href="#" class="reportComment" id="reportComment'+commentNum+'" onclick="reportComment('+commentNum+')">신고하기</a> ┃'+
-						'<a href="#" id="reCoWrite'+commentNum+'" class="toggle2" onclick="commentReplyWrite('+commentNum+')">댓글쓰기</a>'+
+// 						'<a href="#" id="reCoWrite'+commentNum+'" class="toggle2" onclick="commentReplyWrite('+commentNum+')">댓글쓰기</a>'+
+						"<input type='checkbox' id='c"+commentNum+"' class='comment"+commentNum+"' name='chk' onClick='commentReply("+commentNum+","+commentCount+")' value='"+commentNum+"'><label for='c"+commentNum+"' class='commentCount"+commentNum+"'><span></span>답글달기: "+data[index].commentCount+"</label>"+
 						'<input id="nextToPage'+commentNum+'" type="hidden" name="nextToPage'+commentNum+'" value="1">'+	
 						'<input id="commentGroup'+commentNum+'" type="hidden" name="commentGroup" value="0">'+
 					'</td>'+
-				'</tr></table></div>'
+				'</tr></table><div class="innerReply'+commentNum+'"></div></div>'
 			 });
 			$("#coShowBox").append(html);
 		}

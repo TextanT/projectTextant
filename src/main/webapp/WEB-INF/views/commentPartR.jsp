@@ -224,7 +224,8 @@
 					'</tr>'+
 					'<tr>'+
 						'<td class="font7" colspan="2">'+item.nickName+'┃'+item.writeDate+'┃'+' ♥ ('+item.commentGood+') ┃  (☞'+item.commentBad+') ┃ '+
-						'<a href="#" id="showReCo'+commentNum+'" class="comment'+commentNum+'" name="chk" onClick="commentReply('+commentNum+','+commentCount+')">댓글보기('+data[index].commentCount+')</a></td>'+
+// 						'<a href="#" id="showReCo'+commentNum+'" class="comment'+commentNum+'" name="chk" onClick="commentReply('+commentNum+','+commentCount+')">댓글보기('+data[index].commentCount+')</a></td>'+
+						"<input type='checkbox' id='c"+commentNum+"' class='comment"+commentNum+"' name='chk' onClick='commentReply("+commentNum+","+commentCount+")' value='"+commentNum+"'><label for='c"+commentNum+"' class='commentCount"+commentNum+"'><span></span>답글달기: "+data[index].commentCount+"</label></td>"+
 					'</tr>'+
 					
 					'<tr>'+
@@ -322,107 +323,110 @@
 	
 	//commentReply('+commentNum+','+commentCount+')//답글의 답글보기
 	
-// 	function commentReply(commentNum,commentCount){ 
+	function commentReply(commentNum,commentCount){ 
 // 	console.log(commentCount);
-// 	var num=commentCount/$("#pageSize").val();
-// 	var number=Math.ceil(num);
-// 	 if($(".comment"+commentNum).is(":checked")){
-// 		 $.ajax({	
-// 				url:"/textant/commentRead.comment",
-// 				error : function(xhr){
-// 					alert("읽어들일 코맨트 업엉ㅋ");
-// 					html="<div>답글을 남겨주세요.</div>"
-// 					  +"<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
-// 					  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
-// 					  $(".fon"+commentNum).append(html);
-// 				},
-// 				data:{		
-// 					page:$("#page").val(),
-// 					nextPage:$("#nextToPage"+commentNum).val(),
-// 					pageListCount:commentCount,
-// 					pageCountBlock:$("#pageCountBlock").val(),
-// 					pageCut:number,
-// 					bookArticleNum:$("#bookArticleNum").val(),
-// 					commentNum:commentNum,
-// 					commentDelete:0
-// 				},
-// 				beforeSend : function(){
-// 				},
-// 				complete: function(){
-// 					commentDelete($("#pageR").val(),$("#nextToPage"+commentNum).val(),commentCount,$("#pageCountBlock").val(),number,$("#bookArticleNum").val(),commentNum,1)
-// 					var num=$("#nextToPage"+commentNum).val()
-// 					 num++;
+		alert("commentReply");
+	var num=commentCount/$("#pageSize").val();
+	var number=Math.ceil(num);
+	 if($(".comment"+commentNum).is(":checked")){
+		 alert("commentReply1");
+		 $.ajax({	
+				url:"/textant/commentRead.comment",
+				error : function(xhr){
+					alert("읽어들일 코맨트 업엉ㅋ");
+					html="<div>답글을 남겨주세요.</div>"
+					  +"<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
+					  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
+					  $(".innerReply"+commentNum).append(html);
+				},
+				data:{		
+					page:$("#page").val(),
+					nextPage:$("#nextToPage"+commentNum).val(),
+					pageListCount:commentCount,
+					pageCountBlock:$("#pageCountBlock").val(),
+					pageCut:number,
+					bookArticleNum:$("#bookArticleNum").val(),
+					commentNum:commentNum,
+					commentDelete:0
+				},
+				beforeSend : function(){
+				},
+				complete: function(){
+					commentDelete($("#pageR").val(),$("#nextToPage"+commentNum).val(),commentCount,$("#pageCountBlock").val(),number,$("#bookArticleNum").val(),commentNum,1)
+					var num=$("#nextToPage"+commentNum).val()
+					 num++;
 					 	
-// 					 var nextPageNum = $("#nextToPage"+commentNum).val();
-// 					 if(nextPageNum==number){
-// 						 $("#scrollViewTo"+commentNum).attr("type", "hidden");
-// 					 }
-// 					 $("#nextToPage"+commentNum).val(num);
-// 					 $("#commentGroup"+commentNum).val(1);
+					 var nextPageNum = $("#nextToPage"+commentNum).val();
+					 if(nextPageNum==number){
+						 $("#scrollViewTo"+commentNum).attr("type", "hidden");
+					 }
+					 $("#nextToPage"+commentNum).val(num);
+					 $("#commentGroup"+commentNum).val(1);
 					 
-// 					 var commentNumBer="";
-// 						$(".commentToWrite"+commentNum).on("mousedown", function() {
-// 							commentNumBer = 1;
-// 							$("#commentTo").val(commentNumBer);
-// 							commentNumBer = $(".conetToText"+commentNum).val();
-// 							$("#conet").val(commentNumBer);
-// 							commentNumBer = commentNum;
-// 							$("#commentTop").val(commentNumBer);
-// 						});
+					 var commentNumBer="";
+						$(".commentToWrite"+commentNum).on("mousedown", function() {
+							commentNumBer = 1;
+							$("#commentTo").val(commentNumBer);
+							commentNumBer = $(".conetToText"+commentNum).val();
+							$("#conet").val(commentNumBer);
+							commentNumBer = commentNum;
+							$("#commentTop").val(commentNumBer);
+						});
 						
 					
-// 						var commentEnter="";
-// 					 	$('.conetToText'+commentNum).keydown(function(event){
-// 					 		  if(event.keyCode == 13){
-// 					 			 commentEnter = 1;
-// 					 	 		$("#commentTo").val(commentEnter);
-// 					 	 		commentEnter = $(".conetToText"+commentNum).val();
-// 					 	 		$("#conet").val(commentEnter);
-// 					 	 		commentEnter = commentNum;
-// 								$("#commentTop").val(commentEnter);
-// 					 	 		$(".commentToWrite"+commentNum).trigger('click');
-// 					 		  }
-// 					 		});
-// 				},
-// 				success:function(data){
-// 					var html="<hr>";
-// 					 $.each(data, function(index,item) {
-// 						 var commentNum=item.commentNum;
-// 						 var commentCount=item.commentCount;
-// 						 var commentGroup=item.commentGroup;
-// 					 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
-// 					 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
-// 					 +"<div>이것은 답글의 답글 ★: "+item.conet+"</div>"			
-// 					 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
-// 					 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
-// 					 +"<hr></div>"
-// 					 });
-// 					 $(".fon"+commentNum).append(html);
-// 					 html="<input class='scrollViewTo' id='scrollViewTo"+commentNum+"' type='button' onclick='commentToGet("+commentNum+","+commentCount+")' value='더보기' style='width:380px;'>"
-// 						  +"<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
-// 						  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
-// 						  $(".fon"+commentNum).append(html);
-						  
-					 
-// 				}					
-// 			}); 
-		 
-// 	 	}else{
-// 	 		$("#commentGroup"+commentNum).val(0);
-// 	 		$("#nextToPage"+commentNum).val(1);
-// 	 		$(".fon"+commentNum).empty();
-// 	 	}
-	
-// }
-// 	*/
-	
-	//commentReplyWrite('+commentNum+')답글의 답글 쓰기
-	/*
-	 $(".fon"+commentNum).append(html);
+						var commentEnter="";
+					 	$('.conetToText'+commentNum).keydown(function(event){
+					 		  if(event.keyCode == 13){
+					 			 commentEnter = 1;
+					 	 		$("#commentTo").val(commentEnter);
+					 	 		commentEnter = $(".conetToText"+commentNum).val();
+					 	 		$("#conet").val(commentEnter);
+					 	 		commentEnter = commentNum;
+								$("#commentTop").val(commentEnter);
+					 	 		$(".commentToWrite"+commentNum).trigger('click');
+					 		  }
+					 		});
+				},
+				success:function(data){
+					var html="<hr>";
+					 $.each(data, function(index,item) {
+						 var commentNum=item.commentNum;
+						 var commentCount=item.commentCount;
+						 var commentGroup=item.commentGroup;
+					 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
+					 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
+					 +"<div>이것은 답글의 답글 ★: "+item.conet+"</div>"			
+					 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
+					 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
+					 +"<hr></div>"
+					 });
+					 $(".innerReply"+commentNum).append(html);
 					 html="<input class='scrollViewTo' id='scrollViewTo"+commentNum+"' type='button' onclick='commentToGet("+commentNum+","+commentCount+")' value='더보기' style='width:380px;'>"
 						  +"<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
 						  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
-						  $(".fon"+commentNum).append(html);
+						  $(".innerReply"+commentNum).append(html);
+						  
+					 
+				}					
+			}); 
+		 
+	 	}else{
+	 		 alert("commentReply1");
+	 		$("#commentGroup"+commentNum).val(0);
+	 		$("#nextToPage"+commentNum).val(1);
+	 		$(".innerReply"+commentNum).empty();
+	 	}
+	
+}
+	
+	
+	//commentReplyWrite('+commentNum+')답글의 답글 쓰기
+	/*
+	 $(".innerReply"+commentNum).append(html);
+					 html="<input class='scrollViewTo' id='scrollViewTo"+commentNum+"' type='button' onclick='commentToGet("+commentNum+","+commentCount+")' value='더보기' style='width:380px;'>"
+						  +"<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
+						  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
+						  $(".innerReply"+commentNum).append(html);
 	*/
 	
 	
