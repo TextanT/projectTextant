@@ -16,14 +16,13 @@ public class BookInfoDto {
 	private int totalScore;
 	private int scoreNum;
 	private String bookDesc;
-	private int bookType;
-	
+	private String bookType;
 	
 
-	public int getBookType() {
+	public String getBookType() {
 		return bookType;
 	}
-	public void setBookType(int bookType) {
+	public void setBookType(String bookType) {
 		this.bookType = bookType;
 	}
 	private MultipartFile bookFile;

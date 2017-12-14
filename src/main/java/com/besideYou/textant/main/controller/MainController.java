@@ -13,9 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.besideYou.textant.main.converter.PdfService;
@@ -97,6 +99,11 @@ public class MainController {
 	public String guest() {
 		return "redirect:main.text";
 	}
+	@RequestMapping(value = "/find.text", method = RequestMethod.GET)
+	public String findform(HttpServletRequest req, HttpSession session) {
+		
+		return "main/findForm";
+	}
 
 	@RequestMapping(value = "/first.text")
 	public String first(HttpServletRequest req, HttpSession session) {
@@ -105,7 +112,9 @@ public class MainController {
 	
 	@RequestMapping(value = "/main.text", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
+		
 		System.out.println(session.getAttribute("id"));
+		
 		return mainService.home(model, session);
 	}
 	
@@ -117,6 +126,21 @@ public class MainController {
 	
 	@RequestMapping(value = "/write.text", method = RequestMethod.POST)
 	public String write(HttpServletRequest req, HttpSession session, BookInfoDto bookInfoDto) throws Exception {
+		bookInfoDto.setBookType("0");
+		view = pdfServiceText.check(bookInfoDto);
+		if (view == null) {
+			view = "redirect:main.text";
+		}
+		return view;
+	}
+	@RequestMapping(value = "/writeAmateur.text", method = RequestMethod.GET)
+	public String textAmateur(HttpServletRequest req, HttpSession session) {
+		return "writeAmateurForm";
+	}
+	
+	@RequestMapping(value = "/writeAmateur.text", method = RequestMethod.POST)
+	public String writeAmateur(HttpServletRequest req, HttpSession session, BookInfoDto bookInfoDto) throws Exception {
+		bookInfoDto.setBookType("1");
 		view = pdfServiceText.check(bookInfoDto);
 		if (view == null) {
 			view = "redirect:main.text";
@@ -159,4 +183,5 @@ public class MainController {
 		readService.read(fileName, model, bookType);
 		return "viewer/test";
 	}
+	
 }

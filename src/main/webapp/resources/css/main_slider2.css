@@ -11,11 +11,12 @@
 
 .visual {
 	position: relative;
-	width: 490px;
+	width: 45%;
 	z-index: 0;
 	float: right;
 	bottom: 41px;
 }
+
 
 .simg {
 	border: 1px solid #d8d8d8;

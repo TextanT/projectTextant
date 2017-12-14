@@ -32,5 +32,9 @@ public interface CommentDao {
 	List<BookInfoDto> getBookNum(String bookSearch);
 	String getUserName(int userNum);
 	List<BookInfoDto> getBookName(String bookSearch);
+	public int getMainBookListCount();
+	public List<BookInfoDto> getMainRecencyList(HashMap<String, String> mainPageMap);
+	public List<BookInfoDto> getMainScoreList(HashMap<String, String> mainPageMap);
+	public List<BookInfoDto> getMainHitList(HashMap<String, String> mainPageMap);
 	
 }

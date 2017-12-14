@@ -16,4 +16,5 @@ public interface CommentService {
 	public int reportComment(int commentNum,int userNum);
 	List<BookInfoDto> getBookNum(String bookSearch);
 	public List<BookInfoDto> getBookName(String bookSearch);
+	public HashMap<Object, Object> getMainBookList(int sortType, int pageNum);
 }

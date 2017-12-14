@@ -195,6 +195,36 @@
 	<select id="getBookName" parameterType="String" resultType="bookInfo">
 	SELECT * FROM BOOKINFO WHERE bookArticleNum = #{bookNum}
 	</select>
+	<select id="getMainRecencyList" resultType="bookInfo">
+	select outTable.* from (
+	select rownum rum, inTable.*
+	from (select * from bookInfo
+	order by writeDate desc) inTable
+	order by rum) outTable
+	where rum between  #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getMainScoreList" resultType="bookInfo">
+	select outTable.* from (
+	select rownum rum, inTable.*
+	from (select * from bookInfo
+	order by writeDate desc) inTable
+	order by rum) outTable
+	where rum between  #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="getMainHitList" resultType="bookInfo">
+	select outTable.* from (
+	select rownum rum, inTable.*
+	from (select * from bookInfo
+	order by hit desc) inTable
+	order by rum) outTable
+	where rum between  #{startRow} AND #{endRow}
+	</select>
+	<select id="getMainBookListCount" resultType="int">
+	SELECT count(*) 
+	from bookInfo
+	</select>
 </mapper>	
 	
 

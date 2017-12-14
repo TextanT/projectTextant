@@ -26,19 +26,39 @@ a {
 <body>
 	<div class="header">
 		<div class="header_logo" style="padding-top: 20px;">
-			<a href="/textant/main.text" class="logo_a"> <img
-				src="/textant/resources/icon_img/logo_mini.png" class="logo">
-			</a>
-		</div>
+				<div style="float: left;">
+					<a href="/textant/main.text" class="logo_a" style="height: 55px;">
+						<img src="/textant/resources/icon_img/logo_mini.png" class="logo">
+					</a>
+				</div>
+				<div style="float: left;">
+					<span
+						style="margin-top: auto; margin-bottom: auto; font-size: 33px; color: white;">
+						&nbsp | 창작하기</span>
+				</div>
+			</div>
 		<div class="menu_box">
 			<c:if test="${id!=null}">
 				<c:out
 					value="
-			<a href='#' class='menu_title'><span class='menu1' id='menu1'>${id}</span></a>
+			<a href='#' class='menu_title'><span class='menu1' id='menu1'>${nickname}</span></a>
 			
 			<a href='mypage.text' class='menu_title'><span class='menu2'id='menu2'>내정보</span></a> 
 
 			<a href='logout.text' class='menu_title'><span class='menu3'id='menu3'>로그아웃</span></a> 
+			
+			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
+			 "
+					escapeXml="false" />
+			</c:if>
+			<c:if test="${id==null}">
+				<c:out
+					value="
+			<a href='#' class='menu_title'><span class='menu1' id='menu1'>로그인</span></a>
+			
+			<a href='#' class='menu_title'><span class='menu2'id='menu2'>회원가입</span></a> 
+
+			<a href='find.text' class='menu_title'><span class='menu3'id='menu3'>ID/PW찾기</span></a> 
 			
 			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
 			 "
@@ -55,10 +75,13 @@ a {
 			</div>
 			<div class="sub_sub2">
 				<a href='/textant/write.text' class='sub_header_menu2'
-					id="sub_menu2" style="color: highlight">창작카페</a>
+					id="sub_menu2">창작카페</a>
 			</div>
 			<div class="sub_sub3">
-				<a href='' class='sub_header_menu3' id="sub_menu3">장르별</a>
+				<a href='' class='sub_header_menu3' id="sub_menu3" style="color: highlight">장르별검색</a>
+			</div>
+			<div class="sub_sub3">
+				<a href='/textant/write.text' class='sub_header_menu3' id="sub_menu3">책쓰기</a>
 			</div>
 		</div>
 	</div>
@@ -68,51 +91,17 @@ a {
 				<ul>
 					<li><a href="#">카페</a></li>
 					<li><a href="#">베스트</a></li>
-					<li><a href="/textant/write.text">작품쓰기</a></li>
+					<li><a href="/textant/writeAmateur.text">작품쓰기</a></li>
 
 				</ul>
 			</div>
 			<div class="list_box2">
 				<ul>
-					<li><a href="#">역사</a></li>
-					<li><a href="#">스포츠</a></li>
-					<li><a href="#">SF</a></li>
-
+					<li><a href="#">창작도서</a></li>
+					<li><a href="#">일반도서</a></li>
+					<li style="cursor: default;">&nbsp</li>
 				</ul>
 			</div>
-			<div class="list_box3">
-				<ul>
-					<li><a href="#">추리</a></li>
-					<li><a href="#">공포</a></li>
-					<li><a href="#">게임</a></li>
-
-				</ul>
-			</div>
-			<div class="list_box4">
-				<ul>
-					<li><a href="#">판타지</a></li>
-					<li><a href="#">무협</a></li>
-					<li><a href="#">미스테리</a></li>
-
-				</ul>
-			</div>
-			<div class="list_box5">
-				<ul>
-					<li><a href="#">로맨스</a></li>
-					<li><a href="#">전쟁</a></li>
-					<li><a href="#">성장</a></li>
-
-				</ul>
-			</div>
-			<div class="list_box6">
-				<ul>
-					<li><a href="#">시</a></li>
-					<li><a href="#">수필</a></li>
-					<li><a href="#">유머</a></li>
-
-				</ul>
-			</div>
-
 		</div>
 	</div>
 	<div class="serchpos">

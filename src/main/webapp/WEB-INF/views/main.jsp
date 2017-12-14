@@ -10,7 +10,7 @@
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="/textant/resources/Swiper-master/dist/css/swiper.min.css">
-<link href="/textant/resources/css/header.css" rel="stylesheet"
+<link href="/textant/resources/css/headermain.css" rel="stylesheet"
 	type="text/css">
 <link href="/textant/resources/css/footer.css" rel="stylesheet"
 	type="text/css">
@@ -33,7 +33,6 @@
 <script src="/textant/resources/Swiper-master/dist/js/swiper.min.js"></script>
 <title>Document</title>
 <style>
-
 </style>
 </head>
 
@@ -67,7 +66,7 @@
 			
 			<a href='#' class='menu_title'><span class='menu2'id='menu2'>회원가입</span></a> 
 
-			<a href='#' class='menu_title'><span class='menu3'id='menu3'>meme</span></a> 
+			<a href='find.text' class='menu_title'><span class='menu3'id='menu3'>ID/PW찾기</span></a> 
 			
 			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
 			 "
@@ -86,7 +85,7 @@
 			<div id="idDiv" class="idDivc">
 				<span class="id_sp int_id"> <input type="text" class="int"
 					value maxlength="20" autocomplete="off" placeholder="아이디"
-					name="userId">
+					name="userId" id="mologinId">
 				</span>
 			</div>
 
@@ -95,11 +94,14 @@
 			<div id="PassDiv" class="PassDivc">
 				<span class="pass_sp int_pass"> <input type="password"
 					id="pass" class="int" value maxlength="20" autocomplete="off"
-					placeholder="비밀번호" name="pass">
+					placeholder="비밀번호" name="pass" id="mologinPass">
 				</span>
 			</div>
 			<div class="login_div">
 				<a href="#" class="login_btn" id="login_mit">로그인</a>
+			</div>
+			<div class="find_div">
+				<a href="find.text" id="find">아이디/비밀번호 찾기</a>
 			</div>
 			<div class="exit_div">
 				<a href="#" class="js_close" id="exit">돌아가기</a>
@@ -108,7 +110,7 @@
 		</form>
 		<div class="exit2_div">
 			<img src="/textant/resources/icon_img/exit3.jpg" class="js_close"
-				style="cursor: pointer;">
+				style="cursor: pointer;" onclick="modalemp()">
 		</div>
 
 	</div>
@@ -189,10 +191,11 @@
 				<a href='' class='sub_header_menu2' id="sub_menu2">창작카페</a>
 			</div>
 			<div class="sub_sub3">
-				<a href='serchpage.genre' class='sub_header_menu3' id="sub_menu3">장르별</a>
+				<a href='serchpage.genre' class='sub_header_menu3' id="sub_menu3">장르별검색</a>
 			</div>
 			<div class="sub_sub3">
-				<a href='' class='sub_header_menu3' id="sub_menu3">책쓰기</a>
+				<a href='/textant/write.text' class='sub_header_menu3'
+					id="sub_menu3">책쓰기</a>
 			</div>
 		</div>
 	</div>
@@ -202,47 +205,15 @@
 				<ul>
 					<li><a href="#">카페</a></li>
 					<li><a href="#">베스트</a></li>
-					<li><a href="/textant/write.text">작품쓰기</a></li>
+					<li><a href="/textant/writeAmateur.text">작품쓰기</a></li>
 
 				</ul>
 			</div>
 			<div class="list_box2">
 				<ul>
-					<li><a href="#">역사</a></li>
-					<li><a href="#">스포츠</a></li>
-					<li><a href="#">SF</a></li>
-
-				</ul>
-			</div>
-			<div class="list_box3">
-				<ul>
-					<li><a href="#">추리</a></li>
-					<li><a href="#">공포</a></li>
-					<li><a href="#">게임</a></li>
-
-				</ul>
-			</div>
-			<div class="list_box4">
-				<ul>
-					<li><a href="#">판타지</a></li>
-					<li><a href="#">무협</a></li>
-					<li><a href="#">미스테리</a></li>
-
-				</ul>
-			</div>
-			<div class="list_box5">
-				<ul>
-					<li><a href="#">로맨스</a></li>
-					<li><a href="#">전쟁</a></li>
-					<li><a href="#">성장</a></li>
-
-				</ul>
-			</div>
-			<div class="list_box6">
-				<ul>
-					<li><a href="#">시</a></li>
-					<li><a href="#">수필</a></li>
-					<li><a href="#">유머</a></li>
+					<li><a href="#">창작도서</a></li>
+					<li><a href="#">일반도서</a></li>
+					<li style="cursor: default;">&nbsp</li>
 
 				</ul>
 			</div>
@@ -258,21 +229,21 @@
 				<div class="swiper-slide">
 					<div class="img-wrapper">
 						<div class="swiper-size"
-							style="height: 320px; width: 250px; overflow: hidden;">
-							<a href="/textant/read.text?fileName=${files}&bookType=txt"><img
-								src="displayFile.text?fileName=${files}/OriginImg&pageNum=1&fileType=jpg"
-								style="display: block; height: 100%; width: auto;"
+							style="height: 320px; width: 220px; overflow: hidden;">
+							<a href="/textant/read.text?fileName=${files.fileLocation}&bookType=txt"><img
+								src="displayFile.text?fileName=${files.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
+								style="display: block; height: 100%; width: auto; border: 1px solid #e8e8e8;"
 								class="bookimg" /></a>
 						</div>
-						<a href="/textant/read.text?fileName=${files}&bookType=txt"> <span
-							class="bookname" style="text-align: center;">${files}</span><br />
-							<span class="bookname">기시미 이치로작가</span>
+						<a href="/textant/read.text?fileName=${files.fileLocation}&bookType=txt"> <span
+							class="bookname" style="text-align: center;">${files.bookName}</span><br />
+							<span class="bookname">${files.userNum}</span>
 						</a>
-
 					</div>
 				</div>
 			</c:forEach>
 		</div>
+
 		<!-- Add Pagination -->
 		<div class="swiper-pagination"></div>
 		<!-- Add Arrows -->
@@ -280,205 +251,67 @@
 		<div class="swiper-button-prev"></div>
 
 	</div>
-	<div class="book_list_box">
-		<div class="book_list1">
-			<a href="#"><img src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size" onmouseover="bookli1over()"
-				onmouseout="bookli1out()">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap1" id="book_cap1">
-					<h5>너의 췌장을 먹고싶어</h5>
-					<p>기시미이치로</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
+	<div class="book_list_box" style="overflow: hidden; height: 920px;">
+		<div style="float: right; margin-right: 30px;">
+			<div style="float: right;">
+				<img src="/textant/resources/icon_img/likestarnon.png"
+					style="cursor: pointer;" class="likenon"> <img
+					src="/textant/resources/icon_img/likestarselect.png"
+					style="display: none; cursor: pointer;" class="likeselect">
+			</div>
+			<div style="float: right;">
+				<img src="/textant/resources/icon_img/hitnon.png"
+					style="cursor: pointer;" class="hitnon"> <img
+					src="/textant/resources/icon_img/hitselect.png"
+					style="display: none; cursor: pointer;" class="hitselect">
+			</div>
+			<div style="float: right;">
+				<img src="/textant/resources/icon_img/updatanon.png"
+					style="cursor: pointer;display: none;" class="updatanon"> <img
+					src="/textant/resources/icon_img/updataselect.png"
+					 cursor: pointer;" class="updataselect">
+			</div>
+		<input type="text" class="sortType" id="sortType" name="sortType" hidden>
 		</div>
-		<div class="book_list2">
-			<a href="#"><img src="/textant/resources/book_img/자존감수업.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap2" id="book_cap2">
-					<h5>자존감수업</h5>
-					<p>윤홍균</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
-		</div>
+		<br> <br>
+		<div id="booklistdiv">
+<%-- 			<c:forEach var="files" items="${fileList}" varStatus="index"> --%>
 
-		<div class="book_list3">
-			<a href="#"><img src="/textant/resources/book_img/신경끄기의 기술.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap3" id="book_cap3">
-					<h5>신경끄기의기술</h5>
-					<p>마크맨슨</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
-		</div>
-
-
-		<div class="book_list4">
-			<a href="#"><img src="/textant/resources/book_img/세도나메서드.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap4" id="book_cap4">
-					<h5>세도나메서드</h5>
-					<p>헤일도스킨</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
-		</div>
-		<div class="book_list5">
-			<a href="#"><img src="/textant/resources/book_img/언어의온도.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap5" id="book_cap5">
-					<h5>언어의온도</h5>
-					<p>이기주</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
-		</div>
-		<div class="book_list6">
-			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap6" id="book_cap6">
-					<h5>남아있는나날</h5>
-					<p>이기주</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
-		</div>
-		<div class="book_list7">
-			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap7" id="book_cap7">
-					<h5>남아있는나날</h5>
-					<p>이기주</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
-		</div>
-		<div class="book_list8">
-			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap8" id="book_cap8">
-					<h5>남아있는나날</h5>
-					<p>이기주</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
-		</div>
-		<div class="book_list9">
-			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap9" id="book_cap9">
-					<h5>남아있는나날</h5>
-					<p>이기주</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
-		</div>
-		<div class="book_list10">
-			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap10" id="book_cap10">
-					<h5>남아있는나날</h5>
-					<p>이기주</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
-		</div>
-		<div class="book_list11">
-			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap11" id="book_cap11">
-					<h5>남아있는나날</h5>
-					<p>이기주</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
-		</div>
-		<div class="book_list12">
-			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap12" id="book_cap12">
-					<h5>남아있는나날</h5>
-					<p>이기주</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
-		</div>
-		<div class="book_list13">
-			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap13" id="book_cap13">
-					<h5>남아있는나날</h5>
-					<p>이기주</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
-		</div>
-		<div class="book_list14">
-			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap14" id="book_cap14">
-					<h5>남아있는나날</h5>
-					<p>이기주</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
-		</div>
-		<div class="book_list15">
-			<a href="#"><img src="/textant/resources/book_img/남아있는나날.jpg"
-				style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;"
-				class="book_img_size">
-				<div style="width: 176.66px; height: 259px; position: relative;"
-					class="book_cap15" id="book_cap15">
-					<h5>남아있는나날</h5>
-					<p>이기주</p>
-					<br>
-					<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.
-						이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>
-				</div> </a>
+<%-- 				<div class="book_list${index.count}"> --%>
+<%-- 					<a href="/textant/read.text?fileName=${files.fileLocation}"> <img --%>
+<%-- 						src="displayFile.text?fileName=${files.fileLocation}/OriginImg&pageNum=1&fileType=jpg" --%>
+<!-- 						style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;" -->
+<!-- 						class="book_img_size"> -->
+<!-- 						<div style="width: 176.66px; height: 259px; position: relative;" -->
+<%-- 							class="book_cap${index.count}" id="book_cap${index.count}"> --%>
+<%-- 							<h5>${files.bookName}</h5> --%>
+<%-- 							<p>${files.userNum}</p> --%>
+<!-- 							<br> -->
+<!-- 							<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다. -->
+<!-- 								이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p> -->
+<!-- 						</div> -->
+<!-- 					</a> -->
+<!-- 				</div> -->
+<%-- 			</c:forEach> --%>
+			
+			<input type="button" class="genget" id="genget" onclick="mainbooks()"hidden>
+			<input type="hidden" class="pageNum" id="pageNum" name="pageNum" value="1">
+			<!-- 			<div class="book_list1"> -->
+			<!-- 				<a href="#"><img src="/textant/resources/book_img/너의췌장을먹고싶어.jpg" -->
+			<!-- 					style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;" -->
+			<!-- 					class="book_img_size" onmouseover="bookli1over()" -->
+			<!-- 					onmouseout="bookli1out()"> -->
+			<!-- 					<div style="width: 176.66px; height: 259px; position: relative;" -->
+			<!-- 						class="book_cap1" id="book_cap1"> -->
+			<!-- 						<h5>너의 췌장을 먹고싶어</h5> -->
+			<!-- 						<p>기시미이치로</p> -->
+			<!-- 						<br> -->
+			<!-- 						<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다. -->
+			<!-- 							이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p> -->
+			<!-- 					</div> </a> -->
+			<!-- 			</div> -->
+			
+			<div style="width:100px; height: 100px; border: 1px solid black; position: absolute; left: 0; bottom: 0;"></div>
 		</div>
 
 		<!-- 		<div class="book_list4"></div> -->
@@ -617,6 +450,7 @@
 		};
 	</script>
 	<script language="javascript">
+
 		$.ajaxSetup({
 			type : "POST",
 			async : true,
@@ -626,56 +460,164 @@
 			}
 		});
 
-		$(function() {
-			$("#signid").on(
-					"blur",
-					function() {
-						$.ajax({
-							url : "joinIdCheck.text",
-							data : {
-								inputId : $("#signid").val()
-							},
-							success : function(data) {
-								let html;
-								// 								alert(data);
-								if ($("#signid").val() != "") {
-									if (data == 1) {
-										html = "<p>사용가능한 아이디입니다</p>";
-										$("#idCheckStatus").html(html).css(
-												"color", "highlight");
-										$("#idCheckStatus").html(html).css(
-												"font-size", "12px");
-										$("#idCheckStatus").html(html).css(
-												"height", "16.3px");
-										$("#idCheckStatus").html(html).css(
-												"left", "16%");
-
-										;
-									} else if (data == 0) {
-										html = "<p>중복된 아이디입니다</p>";
-										$("#idCheckStatus").html(html).css(
-												"color", "red");
-										$("#idCheckStatus").html(html).css(
-												"font-size", "12px");
-										$("#idCheckStatus").html(html).css(
-												"height", "16.3px");
-										$("#idCheckStatus").html(html).css(
-												"left", "16%");
-									}
-
-								} else {
-									html = "<p>아이디를 입력하세요</p>";
-									$("#idCheckStatus").html(html).css("color",
-											"red");
-									$("#idCheckStatus").html(html).css(
-											"font-size", "13px");
-									$("#idCheckStatus").html(html).css(
-											"height", "16.3px");
-								}
-							}
-						});
-					})
+		$(document).ready(function() {
+			var pageNum =$("#pageNum").val()
+			getMainBookList(pageNum);
 		});
+
+		function getMainBookList(pageNum) {
+
+			var html = "";
+			$.ajax({
+				url : "/textant/getMainBookList.comment",
+
+				error : function(xhr) {
+
+				},
+				complete: function(){
+					var overindex = 2;
+					var outindex = 1;
+					//book1 over	
+					$('.book_list1').mouseenter(function() {
+						document.getElementById('book_cap1').style.zIndex = overindex;
+					});
+					$('.book_list1').mouseleave(function() {
+						document.getElementById('book_cap1').style.zIndex = outindex;
+					});
+					//book2 over
+					$('.book_list2').mouseenter(function() {
+						document.getElementById('book_cap2').style.zIndex = overindex;
+					});
+					$('.book_list2').mouseleave(function() {
+						document.getElementById('book_cap2').style.zIndex = outindex;
+					});
+					//book3 over
+					$('.book_list3').mouseenter(function() {
+						document.getElementById('book_cap3').style.zIndex = overindex;
+					});
+					$('.book_list3').mouseleave(function() {
+						document.getElementById('book_cap3').style.zIndex = outindex;
+					});
+					//book4 over
+					$('.book_list4').mouseenter(function() {
+						document.getElementById('book_cap4').style.zIndex = overindex;
+					});
+					$('.book_list4').mouseleave(function() {
+						document.getElementById('book_cap4').style.zIndex = outindex;
+					});
+					//book5 over
+					$('.book_list5').mouseenter(function() {
+						document.getElementById('book_cap5').style.zIndex = overindex;
+					});
+					$('.book_list5').mouseleave(function() {
+						document.getElementById('book_cap5').style.zIndex = outindex;
+					});
+					//book6 over
+					$('.book_list6').mouseenter(function() {
+						document.getElementById('book_cap6').style.zIndex = overindex;
+					});
+					$('.book_list6').mouseleave(function() {
+						document.getElementById('book_cap6').style.zIndex = outindex;
+					});
+					//book7 over
+					$('.book_list7').mouseenter(function() {
+						document.getElementById('book_cap7').style.zIndex = overindex;
+					});
+					$('.book_list7').mouseleave(function() {
+						document.getElementById('book_cap7').style.zIndex = outindex;
+					});
+					//book8 over
+					$('.book_list8').mouseenter(function() {
+						document.getElementById('book_cap8').style.zIndex = overindex;
+					});
+					$('.book_list8').mouseleave(function() {
+						document.getElementById('book_cap8').style.zIndex = outindex;
+					});
+					//book9 over
+					$('.book_list9').mouseenter(function() {
+						document.getElementById('book_cap9').style.zIndex = overindex;
+					});
+					$('.book_list9').mouseleave(function() {
+						document.getElementById('book_cap9').style.zIndex = outindex;
+					});
+					//book10 over
+					$('.book_list10').mouseenter(function() {
+						document.getElementById('book_cap10').style.zIndex = overindex;
+					});
+					$('.book_list10').mouseleave(function() {
+						document.getElementById('book_cap10').style.zIndex = outindex;
+					});
+					//book11 over
+					$('.book_list11').mouseenter(function() {
+						document.getElementById('book_cap11').style.zIndex = overindex;
+					});
+					$('.book_list11').mouseleave(function() {
+						document.getElementById('book_cap11').style.zIndex = outindex;
+					});
+					//book12 over
+					$('.book_list12').mouseenter(function() {
+						document.getElementById('book_cap12').style.zIndex = overindex;
+					});
+					$('.book_list12').mouseleave(function() {
+						document.getElementById('book_cap12').style.zIndex = outindex;
+					});
+					//book13 over
+					$('.book_list13').mouseenter(function() {
+						document.getElementById('book_cap13').style.zIndex = overindex;
+					});
+					$('.book_list13').mouseleave(function() {
+						document.getElementById('book_cap13').style.zIndex = outindex;
+					});
+					//book14 over
+					$('.book_list14').mouseenter(function() {
+						document.getElementById('book_cap14').style.zIndex = overindex;
+					});
+					$('.book_list14').mouseleave(function() {
+						document.getElementById('book_cap14').style.zIndex = outindex;
+					});
+					//book15 over
+					$('.book_list15').mouseenter(function() {
+						document.getElementById('book_cap15').style.zIndex = overindex;
+					});
+					$('.book_list15').mouseleave(function() {
+						document.getElementById('book_cap15').style.zIndex = outindex;
+					});
+				},
+				data : {
+					sortType : $("#sortType").val(),
+					pageNum : pageNum
+				},
+				success : function(data) {
+					$("#booklistdiv").empty();
+					$.each(data.getMainBookList, function(index, item) {
+						html +="<div class='book_list"+(index+1)+"'>"
+						+"<a href='/textant/read.text?fileName="+item.fileLocation+"&bookType="+/* item.fileLocation.substring(item.fileLocation.lastIndexOf('.')+1) */"txt"+"'> <img "
+						+"src='displayFile.text?fileName="+item.fileLocation+"/OriginImg&pageNum=1&fileType=jpg'"
+							+"style='border: 1px solid #D8D8D8; position: absolute; z-index: 2;'"
+								+"class='book_img_size'>"
+							+"<div style='width: 176.66px; height: 259px; position: relative;'"
+								+"class='book_cap"+(index+1)+"' id='book_cap"+(index+1)+"'>"
+								+"<h5>"+item.bookName+"</h5>"
+								+"<p>"+item.userNum+"</p>"
+								+"<br>"
+								+"<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다."
+								+"이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>"
+								+"</div>"
+								+"</a>"
+								+"</div>"
+					});
+					
+
+					$("#booklistdiv").append(html);
+					
+					html=data.pageCode;
+// 					alert(data.pageCode);
+					
+					$("#booklistdiv").append(html);
+				}
+			});
+
+		};
 	</script>
 	<script>
 		// checkvalue 기능
@@ -750,113 +692,228 @@
 		};
 	</script>
 	<script type="text/javascript">
-		var overindex = 2;
-		var outindex = 1;
-		//book1 over	
-		$('.book_list1').mouseenter(function() {
-			document.getElementById('book_cap1').style.zIndex = overindex;
+// 		var overindex = 2;
+// 		var outindex = 1;
+// 		//book1 over	
+// 		$('.book_list1').mouseenter(function() {
+// 			document.getElementById('book_cap1').style.zIndex = overindex;
+// 		});
+// 		$('.book_list1').mouseleave(function() {
+// 			document.getElementById('book_cap1').style.zIndex = outindex;
+// 		});
+// 		//book2 over
+// 		$('.book_list2').mouseenter(function() {
+// 			document.getElementById('book_cap2').style.zIndex = overindex;
+// 		});
+// 		$('.book_list2').mouseleave(function() {
+// 			document.getElementById('book_cap2').style.zIndex = outindex;
+// 		});
+// 		//book3 over
+// 		$('.book_list3').mouseenter(function() {
+// 			document.getElementById('book_cap3').style.zIndex = overindex;
+// 		});
+// 		$('.book_list3').mouseleave(function() {
+// 			document.getElementById('book_cap3').style.zIndex = outindex;
+// 		});
+// 		//book4 over
+// 		$('.book_list4').mouseenter(function() {
+// 			document.getElementById('book_cap4').style.zIndex = overindex;
+// 		});
+// 		$('.book_list4').mouseleave(function() {
+// 			document.getElementById('book_cap4').style.zIndex = outindex;
+// 		});
+// 		//book5 over
+// 		$('.book_list5').mouseenter(function() {
+// 			document.getElementById('book_cap5').style.zIndex = overindex;
+// 		});
+// 		$('.book_list5').mouseleave(function() {
+// 			document.getElementById('book_cap5').style.zIndex = outindex;
+// 		});
+// 		//book6 over
+// 		$('.book_list6').mouseenter(function() {
+// 			document.getElementById('book_cap6').style.zIndex = overindex;
+// 		});
+// 		$('.book_list6').mouseleave(function() {
+// 			document.getElementById('book_cap6').style.zIndex = outindex;
+// 		});
+// 		//book7 over
+// 		$('.book_list7').mouseenter(function() {
+// 			document.getElementById('book_cap7').style.zIndex = overindex;
+// 		});
+// 		$('.book_list7').mouseleave(function() {
+// 			document.getElementById('book_cap7').style.zIndex = outindex;
+// 		});
+// 		//book8 over
+// 		$('.book_list8').mouseenter(function() {
+// 			document.getElementById('book_cap8').style.zIndex = overindex;
+// 		});
+// 		$('.book_list8').mouseleave(function() {
+// 			document.getElementById('book_cap8').style.zIndex = outindex;
+// 		});
+// 		//book9 over
+// 		$('.book_list9').mouseenter(function() {
+// 			document.getElementById('book_cap9').style.zIndex = overindex;
+// 		});
+// 		$('.book_list9').mouseleave(function() {
+// 			document.getElementById('book_cap9').style.zIndex = outindex;
+// 		});
+// 		//book10 over
+// 		$('.book_list10').mouseenter(function() {
+// 			document.getElementById('book_cap10').style.zIndex = overindex;
+// 		});
+// 		$('.book_list10').mouseleave(function() {
+// 			document.getElementById('book_cap10').style.zIndex = outindex;
+// 		});
+// 		//book11 over
+// 		$('.book_list11').mouseenter(function() {
+// 			document.getElementById('book_cap11').style.zIndex = overindex;
+// 		});
+// 		$('.book_list11').mouseleave(function() {
+// 			document.getElementById('book_cap11').style.zIndex = outindex;
+// 		});
+// 		//book12 over
+// 		$('.book_list12').mouseenter(function() {
+// 			document.getElementById('book_cap12').style.zIndex = overindex;
+// 		});
+// 		$('.book_list12').mouseleave(function() {
+// 			document.getElementById('book_cap12').style.zIndex = outindex;
+// 		});
+// 		//book13 over
+// 		$('.book_list13').mouseenter(function() {
+// 			document.getElementById('book_cap13').style.zIndex = overindex;
+// 		});
+// 		$('.book_list13').mouseleave(function() {
+// 			document.getElementById('book_cap13').style.zIndex = outindex;
+// 		});
+// 		//book14 over
+// 		$('.book_list14').mouseenter(function() {
+// 			document.getElementById('book_cap14').style.zIndex = overindex;
+// 		});
+// 		$('.book_list14').mouseleave(function() {
+// 			document.getElementById('book_cap14').style.zIndex = outindex;
+// 		});
+// 		//book15 over
+// 		$('.book_list15').mouseenter(function() {
+// 			document.getElementById('book_cap15').style.zIndex = overindex;
+// 		});
+// 		$('.book_list15').mouseleave(function() {
+// 			document.getElementById('book_cap15').style.zIndex = outindex;
+// 		});
+	</script>
+	<script type="text/javascript">
+		$('.likenon').click(function() {
+			getMainBookList(1);
+			$('.likenon').css("display", "none");
+			$('.likeselect').css("display", "block");
+			$('.hitnon').css("display", "block");
+			$('.updatanon').css("display", "block");
+			$('.hitselect').css("display", "none");
+			$('.updataselect').css("display", "none");
 		});
-		$('.book_list1').mouseleave(function() {
-			document.getElementById('book_cap1').style.zIndex = outindex;
+	
+		$('.hitnon').click(function() {
+			getMainBookList(1);
+			$('.hitnon').css("display", "none");
+			$('.hitselect').css("display", "block");
+			$('.likenon').css("display", "block");
+			$('.likeselect').css("display", "none");
+			$('.updatanon').css("display", "block");
+			$('.updataselect').css("display", "none");
 		});
-		//book2 over
-		$('.book_list2').mouseenter(function() {
-			document.getElementById('book_cap2').style.zIndex = overindex;
+		$('.updatanon').click(function() {
+			getMainBookList(1);
+			$('.updatanon').css("display", "none");
+			$('.updataselect').css("display", "block");
+			$('.likenon').css("display", "block");
+			$('.likeselect').css("display", "none");
+			$('.hitnon').css("display", "block");
+			$('.hitselect').css("display", "none");
+
 		});
-		$('.book_list2').mouseleave(function() {
-			document.getElementById('book_cap2').style.zIndex = outindex;
-		});
-		//book3 over
-		$('.book_list3').mouseenter(function() {
-			document.getElementById('book_cap3').style.zIndex = overindex;
-		});
-		$('.book_list3').mouseleave(function() {
-			document.getElementById('book_cap3').style.zIndex = outindex;
-		});
-		//book4 over
-		$('.book_list4').mouseenter(function() {
-			document.getElementById('book_cap4').style.zIndex = overindex;
-		});
-		$('.book_list4').mouseleave(function() {
-			document.getElementById('book_cap4').style.zIndex = outindex;
-		});
-		//book5 over
-		$('.book_list5').mouseenter(function() {
-			document.getElementById('book_cap5').style.zIndex = overindex;
-		});
-		$('.book_list5').mouseleave(function() {
-			document.getElementById('book_cap5').style.zIndex = outindex;
-		});
-		//book6 over
-		$('.book_list6').mouseenter(function() {
-			document.getElementById('book_cap6').style.zIndex = overindex;
-		});
-		$('.book_list6').mouseleave(function() {
-			document.getElementById('book_cap6').style.zIndex = outindex;
-		});
-		//book7 over
-		$('.book_list7').mouseenter(function() {
-			document.getElementById('book_cap7').style.zIndex = overindex;
-		});
-		$('.book_list7').mouseleave(function() {
-			document.getElementById('book_cap7').style.zIndex = outindex;
-		});
-		//book8 over
-		$('.book_list8').mouseenter(function() {
-			document.getElementById('book_cap8').style.zIndex = overindex;
-		});
-		$('.book_list8').mouseleave(function() {
-			document.getElementById('book_cap8').style.zIndex = outindex;
-		});
-		//book9 over
-		$('.book_list9').mouseenter(function() {
-			document.getElementById('book_cap9').style.zIndex = overindex;
-		});
-		$('.book_list9').mouseleave(function() {
-			document.getElementById('book_cap9').style.zIndex = outindex;
-		});
-		//book10 over
-		$('.book_list10').mouseenter(function() {
-			document.getElementById('book_cap10').style.zIndex = overindex;
-		});
-		$('.book_list10').mouseleave(function() {
-			document.getElementById('book_cap10').style.zIndex = outindex;
-		});
-		//book11 over
-		$('.book_list11').mouseenter(function() {
-			document.getElementById('book_cap11').style.zIndex = overindex;
-		});
-		$('.book_list11').mouseleave(function() {
-			document.getElementById('book_cap11').style.zIndex = outindex;
-		});
-		//book12 over
-		$('.book_list12').mouseenter(function() {
-			document.getElementById('book_cap12').style.zIndex = overindex;
-		});
-		$('.book_list12').mouseleave(function() {
-			document.getElementById('book_cap12').style.zIndex = outindex;
-		});
-		//book13 over
-		$('.book_list13').mouseenter(function() {
-			document.getElementById('book_cap13').style.zIndex = overindex;
-		});
-		$('.book_list13').mouseleave(function() {
-			document.getElementById('book_cap13').style.zIndex = outindex;
-		});
-		//book14 over
-		$('.book_list14').mouseenter(function() {
-			document.getElementById('book_cap14').style.zIndex = overindex;
-		});
-		$('.book_list14').mouseleave(function() {
-			document.getElementById('book_cap14').style.zIndex = outindex;
-		});
-		//book15 over
-		$('.book_list15').mouseenter(function() {
-			document.getElementById('book_cap15').style.zIndex = overindex;
-		});
-		$('.book_list15').mouseleave(function() {
-			document.getElementById('book_cap15').style.zIndex = outindex;
-		});
+		
+		$('.likenon').mousedown(function() {
+			// 			alert("asd");
+			// 			$('.sortType').val("1");
+			document.getElementById("sortType").value = "3";
+			// 			document.getElementById("jender").value = "0";
+		})
+		$('.hitnon').mousedown(function() {
+			// 			$('.sortType').val(2);
+
+			document.getElementById("sortType").value = "2";
+			// 			document.getElementById("sortType").val(2);
+		})
+		$('.updatanon').mousedown(function() {
+			// 			$('.sortType').val(3);
+			document.getElementById("sortType").value = "1";
+			// 			document.getElementById("sortType").val(3);
+		})
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			document.getElementById("sortType").value = "1";
+			getMainBookList($("#pageNum").val());
+		})
+	</script>
+	<script>
+// 		function mainbooks(page) {
+
+// 			// 		alert($("#genre").val());
+// 			let html = "";
+// 			$
+// 					.ajax({
+// 						type : "GET",
+// 						async : true,
+// 						dataType : "json",
+// 						error : function(xhr) {
+// 							alert("error html = " + xhr.statusText);
+// 						},
+// 						url : "/textant/main.text",
+// 						data : {
+// 							sortType : $("#sortType").val(),
+// 							pageNum : page
+// 						},
+// 						success : function(data) {
+// 							// 					alert(data);
+// 							// 					alert(data.fileLocationList);
+// 							// 					alert(data.length);
+// 							$(".serchbookDiv").empty();
+// 							let num = data.length;
+// 							var pageCode = data.pageCode;
+// 							$
+// 									.each(
+// 											data.fileLocationList,
+// 											function(index, item) {
+// 												// 						 alert(data[index].length);
+// 												// 						
+
+// 												html = '<div class="genre1_book_list'
+// 														+ (index + 1)
+// 														+ '"><a href="#"><img src="displayFile.text?fileName='
+// 														+ item
+// 														+ '/OriginImg&pageNum=1&fileType=jpg" style="border: 1px solid #D8D8D8; position: absolute; z-index: 2; height: 242px;" class="book_img_size" id="bookimg'
+// 														+ (index + 1)
+// 														+ '"><div style="width: 166.45px; height: 244px; position: relative; text-align: center; color: white;" class="book_cap'
+// 														+ (index + 1)
+// 														+ '" id="book_cap'
+// 														+ (index + 1)
+// 														+ '"><h5><c:out value="${lists}"></c:out> </h5><p>기시미이치로</p><br><p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p></div> </a></div>'
+// 												$(".serchbookDiv").append(html);
+// 												// 						 var genre=item.commentNum;
+// 												// 						alert(data[index]);
+
+// 											});
+// 							$('#pageCode').html(pageCode);
+
+// 						}
+// 					});
+// 		}
+	</script>
+	<script type="text/javascript">
+		function modalemp() {
+			$('#mologinId').val('Default Value');
+			$('#mologinPass').empty();
+		}
 	</script>
 </body>
 

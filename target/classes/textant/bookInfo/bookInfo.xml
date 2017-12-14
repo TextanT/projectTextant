@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- mybatis map 선언 표시 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-              "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.besideYou.textant.main.dao.BookInfoDao">	
-	
+<mapper namespace="com.besideYou.textant.main.dao.BookInfoDao">
+
 	<insert id="writeBook" parameterType="bookInfo">
-		INSERT INTO BOOKINFO VALUES(BOOKINFO_SEQ.nextval,#{bookName},#{totalPage},#{userNum},#{thumbnail},#{fileLocation},#{genre},SYSDATE,0,0,0,#{bookDesc},0)
+		INSERT INTO BOOKINFO
+		VALUES(BOOKINFO_SEQ.nextval,#{bookName},#{totalPage},#{userNum},#{thumbnail},#{fileLocation},#{genre},SYSDATE,0,0,0,#{bookDesc},#{bookType})
 	</insert>
+
 	
-	<select id="getNewBooks" resultType="String">
-		SELECT fileLocation from bookInfo order by writeDate desc
-	</select>
+	
+<!-- 	<select id="getNewBooks" resultType="String"> -->
+<!-- 		SELECT fileLocation from bookInfo order by writeDate desc -->
+<!-- 	</select> -->
 	<select id="getTotalPages" parameterType="String" resultType="Integer">
 		SELECT totalpage from bookInfo where fileLocation = #{fileLocation}
 	</select>
@@ -20,6 +23,25 @@
 	</select>
 	<select id="getBookArticleNum" parameterType="String" resultType="Integer">
 		SELECT bookArticleNum from bookInfo where fileLocation = #{fileLocation}
+	</select>
+	
+	<!-- <select id="getUserNickname" parameterType="String"> -->
+	<!-- SELECT NICKNAME FROM BOOKINFO ORDER BY writeDate desc -->
+	<!-- </select> -->
+	<!-- <select id="getUserGrade" parameterType="Integer" resultType="Integer"> -->
+	<!-- SELECT GRADE FROM LOGIN WHERE USERNUM=#{userNum} -->
+	<!-- </select> -->
+	<select id="getNewTotal" resultType="Integer">
+		SELECT COUNT(*) FROM BOOKINFO
+	</select>
+	
+	<select id="getNewBooks" resultType="bookInfo">
+		select outTable.* from (
+	select rownum rum, inTable.*
+	from (select * from bookInfo
+	order by writeDate desc) inTable
+	order by rum) outTable
+	where rum between  1 AND 2
 	</select>
 </mapper>
 	

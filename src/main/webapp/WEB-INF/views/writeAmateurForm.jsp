@@ -55,7 +55,7 @@
 
 </head>
 <body>
-	<form action="/textant/write.text" method="post"
+	<form action="/textant/writeAmateur.text" method="post"
 		enctype="multipart/form-data" id="writeForm">
 		<input type="hidden" id="userNum" name="userNum" value="${userNum}">
 		<input type="hidden" id="line" name="line" value="3">
@@ -69,7 +69,7 @@
 				<div style="float: left;">
 					<span
 						style="margin-top: auto; margin-bottom: auto; font-size: 33px; color: white;">
-						&nbsp | 책쓰기</span>
+						&nbsp | 창작하기</span>
 				</div>
 			</div>
 			<div class="menu_box">
@@ -127,7 +127,7 @@
 					<ul>
 						<li><a href="#">카페</a></li>
 						<li><a href="#">베스트</a></li>
-						<li><a href="/textant/writeAmateur.text">작품쓰기</a></li>
+						<li><a href="#">작품쓰기</a></li>
 
 					</ul>
 				</div>

@@ -169,6 +169,35 @@ a {
     position: relative;
     top: 1px;
 }
+#find {
+    background-color: #d9d9d9;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    text-indent: 0px;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    color: #666666;
+    font-family: Courier New;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    height: 34px;
+    line-height: 34px;
+    width: 230px;
+    text-decoration: none;
+    text-align: center;
+}
+
+#find:hover {
+    background-color: #a8a8a8;
+}
+
+#find:active {
+    position: relative;
+    top: 1px;
+}
 
 .login_div {
     padding-top: 4%;
@@ -191,6 +220,10 @@ a {
 }
 
 .exit_div {
+    padding-top: 3%;
+    padding-left: 17%;
+}
+.find_div {
     padding-top: 3%;
     padding-left: 17%;
 }

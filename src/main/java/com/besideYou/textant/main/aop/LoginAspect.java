@@ -23,7 +23,16 @@ public class LoginAspect {
 	@Pointcut("execution(* com.besideYou.textant.main.controller.MainController.first(..))")
 	public void first(){}
 
-	@Around("write() || text()")
+	@Pointcut("execution(* com.besideYou.textant.main.controller.MainController.textAmateur(..))")
+	public void textAmateur(){}
+	
+	@Pointcut("execution(* com.besideYou.textant.main.controller.MainController.writeAmateur(..))")
+	public void writeAmateur(){}
+	
+//	@Pointcut("execution(* com.pknu.bbs.bbs.controller.BBSController.content(..))")
+//	public void content(){}
+	
+	@Around("write() || text() || textAmateur() || writeAmateur()")
 	public Object writeFormAdvice(ProceedingJoinPoint pjp)throws Throwable{	
 		HttpSession session= null;
 		HttpServletResponse res= null;
