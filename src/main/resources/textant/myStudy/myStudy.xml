@@ -72,13 +72,13 @@
 	<select id="getMyCommentCount" parameterType="HashMap" resultType="int">
 		SELECT count(*) 
 		from comments
+		where userNum=#{userNum}
 		<if test="commentCheak==0">
-			and depth==0
+			and depth=0
 		</if>
 	    <if test="commentCheak==1">
 			and depth!=0
 		</if>
-		where userNum=#{userNum}
 	</select>
 	<select id="getMyBookWriteCount" parameterType="int" resultType="int">
 		SELECT count(*) 
@@ -106,12 +106,18 @@
 		FROM comments
 		where commentNum=#{commentNum}
 		<if test="commentGroup==0">
-			and C.depth=0
+			and depth=0
 		</if>
 	    <if test="commentGroup!=0">
-			and C.depth!=0
+			and depth!=0
 		</if>
 		and userNum=#{userNum}
+	</delete>
+	
+	<delete id="commentReplyDelete" parameterType="comment">
+		DELETE
+		FROM comments
+		where commentGroup=#{commentNum}
 	</delete>
 	
 	<update id="commentReplyDeleteUpdate" parameterType="comment">

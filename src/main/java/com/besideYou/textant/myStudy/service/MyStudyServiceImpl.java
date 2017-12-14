@@ -136,6 +136,7 @@ public class MyStudyServiceImpl implements MyStudyService {
 			myStudyDao.commentReplyDeleteUpdate(commentDto);
 		}else {
 			myStudyDao.commentDelete(commentDto);
+			myStudyDao.commentReplyDelete(commentDto);
 		}
 		
 	}

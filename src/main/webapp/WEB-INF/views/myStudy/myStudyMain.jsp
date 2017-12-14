@@ -336,7 +336,7 @@
 				</table>
         </div>
         <div id="markex">
-            <h3>내가 쓴 답글</h3>
+            <h3>내가 쓴 답글<a href="/textant/myCommentReplyView.text?pageNum=1"style="font-size: 13px; position: absolute; top:1146px; left: 1185px;">더 보기</a></h3>
         </div>
         <div class="bookmark">
         	<table class="table" style="margin-left: auto; margin-right: auto;text-align: center;">

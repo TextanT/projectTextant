@@ -43,4 +43,6 @@ public interface MyStudyDao {
 
 	void bookReadDelete(ReadBookDto readBookDto);
 
+	void commentReplyDelete(CommentDto commentDto);
+
 }

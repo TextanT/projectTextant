@@ -146,7 +146,6 @@ background-color: #EFEEEE;
 			<h3 style="text-align: center">내가 쓴 댓글</h3>
 		</div>
 		<div style="margin-left: 80px; margin-right: 80px;margin-bottom:50px; width: auto;">
-			<div style="text-align: right;"><a href="/textant/recommendBookWrite.text?userNum=${userNum}">추천책 쓰기</a></div>
 			<div class="managing" id="recommendBook"
 				>
 				<table class="table" style="margin-left: auto; margin-right: auto;text-align: center;">
@@ -154,8 +153,9 @@ background-color: #EFEEEE;
 					<td width="10%;">댓글번호</td>
 					<td width="20%;">제목</td>
 					<td width="10%;">페이지</td>
-					<td width="45%;">내용</td>
-					<td width="15%;">날짜</td>					
+					<td width="40%;">내용</td>
+					<td width="15%;">날짜</td>				
+					<td width="5%;">옵션</td>				
 					</tr>
 					<c:forEach var="comment" items="${commentList}">
 					<tr>
@@ -164,6 +164,7 @@ background-color: #EFEEEE;
 					<td><c:out value="${comment.pageGroup}"/></td>
 					<td><c:out value="${comment.conet}"/></td>
 					<td><c:out value="${comment.writeDate.substring(0,10)}"/></td>
+					<td><a name="bookArticleNum" href="/textant/myCommentDelete.text?pageNum=${pageNum}&commentNum=${comment.commentNum}&commentGroup=${comment.commentGroup}">삭제</a></td>
 					</tr>
 					</c:forEach>
 					<tr>	  
@@ -173,7 +174,6 @@ background-color: #EFEEEE;
   </tr>
 				</table>
 			</div>
-		<div style="text-align: right;"><a href="/textant/managerMain.text">관리자 메인</a></div>
 		</div>
 	</div>
 
