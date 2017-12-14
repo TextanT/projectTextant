@@ -35,7 +35,7 @@ public class MainServiceImpl implements MainService {
 		File file;
 		File[] files;
 		
-		List<String> fileNames;
+		List<BookInfoDto> fileNames;
 		//1.추천리스트를 받을것
 		//2.최신순, 별점순, 조회순리스트를 받을것
 		

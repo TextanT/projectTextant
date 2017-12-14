@@ -25,8 +25,13 @@
 		SELECT COUNT(*) FROM BOOKINFO
 	</select>
 	
-	<select id="getNewBooks" resultType="String">
-		SELECT fileLocation from bookInfo order by writeDate desc
+	<select id="getNewBooks" resultType="bookInfo">
+		select outTable.* from (
+	select rownum rum, inTable.*
+	from (select * from bookInfo
+	order by writeDate desc) inTable
+	order by rum) outTable
+	where rum between  1 AND 2
 	</select>
 </mapper>
 	

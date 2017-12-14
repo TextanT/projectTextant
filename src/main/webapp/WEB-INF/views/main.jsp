@@ -251,7 +251,7 @@
 		<div class="swiper-button-prev"></div>
 
 	</div>
-	<div class="book_list_box" style="overflow: hidden; height: 870px;">
+	<div class="book_list_box" style="overflow: hidden; height: 920px;">
 		<div style="float: right; margin-right: 30px;">
 			<div style="float: right;">
 				<img src="/textant/resources/icon_img/likestarnon.png"
@@ -267,10 +267,11 @@
 			</div>
 			<div style="float: right;">
 				<img src="/textant/resources/icon_img/updatanon.png"
-					style="cursor: pointer;" class="updatanon"> <img
+					style="cursor: pointer;display: none;" class="updatanon"> <img
 					src="/textant/resources/icon_img/updataselect.png"
-					style="display: none; cursor: pointer;" class="updataselect">
+					 cursor: pointer;" class="updataselect">
 			</div>
+		<input type="text" class="sortType" id="sortType" name="sortType" hidden>
 		</div>
 		<br> <br>
 		<div id="booklistdiv">
@@ -292,8 +293,8 @@
 <!-- 					</a> -->
 <!-- 				</div> -->
 <%-- 			</c:forEach> --%>
+			
 			<input type="button" class="genget" id="genget" onclick="mainbooks()"hidden>
-			<input type="hidden" class="sortType" id="sortType" name="sortType" value="1">
 			<input type="hidden" class="pageNum" id="pageNum" name="pageNum" value="1">
 			<!-- 			<div class="book_list1"> -->
 			<!-- 				<a href="#"><img src="/textant/resources/book_img/너의췌장을먹고싶어.jpg" -->
@@ -309,6 +310,8 @@
 			<!-- 							이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p> -->
 			<!-- 					</div> </a> -->
 			<!-- 			</div> -->
+			
+			<div style="width:100px; height: 100px; border: 1px solid black; position: absolute; left: 0; bottom: 0;"></div>
 		</div>
 
 		<!-- 		<div class="book_list4"></div> -->
@@ -476,11 +479,9 @@
 					var outindex = 1;
 					//book1 over	
 					$('.book_list1').mouseenter(function() {
-						alert("1작동");
 						document.getElementById('book_cap1').style.zIndex = overindex;
 					});
 					$('.book_list1').mouseleave(function() {
-						alert("2작동");
 						document.getElementById('book_cap1').style.zIndex = outindex;
 					});
 					//book2 over
@@ -587,17 +588,17 @@
 					pageNum : pageNum
 				},
 				success : function(data) {
-
+					$("#booklistdiv").empty();
 					$.each(data.getMainBookList, function(index, item) {
 						html +="<div class='book_list"+(index+1)+"'>"
-						+"<a href='/textant/read.text?fileName="+item.fileLocation+"'> <img"
+						+"<a href='/textant/read.text?fileName="+item.fileLocation+"'> <img "
 						+"src='displayFile.text?fileName="+item.fileLocation+"/OriginImg&pageNum=1&fileType=jpg'"
 							+"style='border: 1px solid #D8D8D8; position: absolute; z-index: 2;'"
 								+"class='book_img_size'>"
 							+"<div style='width: 176.66px; height: 259px; position: relative;'"
 								+"class='book_cap"+(index+1)+"' id='book_cap"+(index+1)+"'>"
-								+"<h5>${item.bookName}</h5>"
-								+"<p>${item.userNum}</p>"
+								+"<h5>"+item.bookName+"</h5>"
+								+"<p>"+item.userNum+"</p>"
 								+"<br>"
 								+"<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다."
 								+"이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>"
@@ -605,10 +606,14 @@
 								+"</a>"
 								+"</div>"
 					});
-// 					html+=data.pageCode;
+					
 
 					$("#booklistdiv").append(html);
-
+					
+					html=data.pageCode;
+// 					alert(data.pageCode);
+					
+					$("#booklistdiv").append(html);
 				}
 			});
 
@@ -797,7 +802,7 @@
 	</script>
 	<script type="text/javascript">
 		$('.likenon').click(function() {
-			$('.sortType').val(1);
+			getMainBookList(1);
 			$('.likenon').css("display", "none");
 			$('.likeselect').css("display", "block");
 			$('.hitnon').css("display", "block");
@@ -805,8 +810,9 @@
 			$('.hitselect').css("display", "none");
 			$('.updataselect').css("display", "none");
 		});
+	
 		$('.hitnon').click(function() {
-			$('.sortType').val(2);
+			getMainBookList(1);
 			$('.hitnon').css("display", "none");
 			$('.hitselect').css("display", "block");
 			$('.likenon').css("display", "block");
@@ -815,7 +821,7 @@
 			$('.updataselect').css("display", "none");
 		});
 		$('.updatanon').click(function() {
-			$('.sortType').val(3);
+			getMainBookList(1);
 			$('.updatanon').css("display", "none");
 			$('.updataselect').css("display", "block");
 			$('.likenon').css("display", "block");
@@ -824,6 +830,30 @@
 			$('.hitselect').css("display", "none");
 
 		});
+		
+		$('.likenon').mousedown(function() {
+			// 			alert("asd");
+			// 			$('.sortType').val("1");
+			document.getElementById("sortType").value = "3";
+			// 			document.getElementById("jender").value = "0";
+		})
+		$('.hitnon').mousedown(function() {
+			// 			$('.sortType').val(2);
+
+			document.getElementById("sortType").value = "2";
+			// 			document.getElementById("sortType").val(2);
+		})
+		$('.updatanon').mousedown(function() {
+			// 			$('.sortType').val(3);
+			document.getElementById("sortType").value = "1";
+			// 			document.getElementById("sortType").val(3);
+		})
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			document.getElementById("sortType").value = "1";
+			getMainBookList($("#pageNum").val());
+		})
 	</script>
 	<script>
 // 		function mainbooks(page) {

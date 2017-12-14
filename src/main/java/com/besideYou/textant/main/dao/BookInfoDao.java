@@ -31,7 +31,7 @@ public interface BookInfoDao {
 
 	public List<BookInfoDto> getMainHitList(HashMap<String, String> mainPageMap);
 
-	public List<String> getNewBooks();
+	public List<BookInfoDto> getNewBooks();
 	
 	
 //	public int getUserGrade(int userNum);

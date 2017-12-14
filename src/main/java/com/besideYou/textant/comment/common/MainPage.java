@@ -29,22 +29,22 @@ public class MainPage {
 
 		sb = new StringBuffer();
 		if(startPage < pageBlock) {
-			sb.append("<img src='/textant/resources/icon_img/exit3.jpg' width='30' height='9'>");			
+			sb.append("<div style='position: absolute;bottom: -640px;left: 140px;'><img src='/textant/resources/icon_img/' width='30' height='9'>");			
 		} else {
-			sb.append("<img src='/textant/resources/icon_img/exit3.jpg' width='30' height='9'");
+			sb.append("<img src='/textant/resources/icon_img/' width='30' height='9'");
 			sb.append(" onclick='genresub(");
 			sb.append(startPage - pageBlock);
-			sb.append(")' style='cursor:pointer'> ");
+			sb.append(")' style='cursor:pointer;'> ");
 		}
 		
 		sb.append("&nbsp;&nbsp;|");
 		for(int i = startPage; i <= endPage; i++) {		
 			if(i == pageNum) {
-				sb.append("&nbsp;&nbsp;<b><font color='#91B7EF'>");
+				sb.append("&nbsp;&nbsp;<b style=''><font color='gray'>");
 				sb.append(i);
 				sb.append("</font></b>");
 			} else {
-				sb.append("&nbsp;&nbsp;<a style='cursor: pointer;' onclick='getMainBookList(");
+				sb.append("&nbsp;&nbsp;<a style='cursor: pointer; color:black;' onclick='getMainBookList(");
 				sb.append(i);
 				sb.append(")'>");
 				sb.append(i);
@@ -54,12 +54,12 @@ public class MainPage {
 		
 		sb.append("&nbsp;&nbsp;|");		
 		if(endPage < totalPage) {
-			sb.append("<img src='/textant/resources/icon_img/exit3.jpg' width='30' height='9'");
+			sb.append("<img src='/textant/resources/icon_img/' width='30' height='9'");
 			sb.append(" onclick='getMainBookList(");
 			sb.append(startPage + pageBlock);
 			sb.append(")' style='cursor:pointer'> ");						
 		} else {
-			sb.append("<img src='/textant/resources/icon_img/exit3.jpg' width='30' height='9'>");			
+			sb.append("<img src='/textant/resources/icon_img/' width='30' height='9'></div>");			
 		}	
 		
 		pagingMap.put("pageCode", sb.toString());
