@@ -21,7 +21,7 @@ public interface MyStudyDao {
 
 	List<BookMarkDto> getMyBookmark(HashMap<String, String> paging);
 
-	int getMyCommentCount(int userNum);
+	int getMyCommentCount(HashMap<String, String> paging);
 
 	int getMyBookWriteCount(int userNum);
 
@@ -37,8 +37,12 @@ public interface MyStudyDao {
 
 	void wishDelete(BookWishDto bookWishDto);
 
-	void bookWriteDelete(ReadBookDto readBookDto);
-
 	void bookMarkDelete(BookMarkDto bookMarkDto);
+
+	void commentReplyDeleteUpdate(CommentDto commentDto);
+
+	void bookReadDelete(ReadBookDto readBookDto);
+
+	void commentReplyDelete(CommentDto commentDto);
 
 }

@@ -3,6 +3,8 @@ package com.besideYou.textant.myStudy.service;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -24,12 +26,21 @@ public class MyStudyServiceImpl implements MyStudyService {
 	@Autowired
 	myStudyPage page;
 	
+	@Resource(name="studyPageSize")
+	Integer studyPageSize;
+	
+	@Resource(name="studyPageBlock")
+	Integer studyPageBlock;
+	
+	
+	
+	
 	@Override
 	public void getMyStudyMain(int userNum, Model model) {
 		HashMap<String, String> paging = new HashMap<>();
 		paging.put("userNum", String.valueOf(userNum));
 		paging.put("startRow", "1");
-		paging.put("endRow", "10");
+		paging.put("endRow", "4");
 		paging.put("commentCheak", "0");
 		model.addAttribute("commentList", myStudyDao.getMyComment(paging));
 		paging.put("commentCheak", "1");
@@ -45,13 +56,12 @@ public class MyStudyServiceImpl implements MyStudyService {
 		HashMap<String, String> paging = new HashMap<>();
 		int count = 0;
 		paging.put("commentCheak", "0");
-		count = myStudyDao.getMyCommentCount(userNum);
 		paging.put("userNum", String.valueOf(userNum));
-			paging =page.paging(pageNum, count, 10, 5);
-			paging.put("count", paging.get("count"));
-			paging.put("startRow", paging.get("startRow"));
-			paging.put("endRow", paging.get("endRow"));
-			paging.put("pageCode", paging.get("pageCode"));
+		count = myStudyDao.getMyCommentCount(paging);
+			paging =page.paging(pageNum, count, studyPageSize, studyPageBlock);
+			paging.put("commentCheak", "0");
+			paging.put("userNum", String.valueOf(userNum));
+			model.addAttribute("pageNum",pageNum);
 			model.addAttribute("pageCode", paging.get("pageCode"));
 			model.addAttribute("commentList", myStudyDao.getMyComment(paging));
 	}
@@ -61,14 +71,13 @@ public class MyStudyServiceImpl implements MyStudyService {
 		HashMap<String, String> paging = new HashMap<>();
 		int count = 0;
 		paging.put("commentCheak", "1");
-		count = myStudyDao.getMyCommentCount(userNum);
 		paging.put("userNum", String.valueOf(userNum));
-		paging =page.paging(pageNum, count, 10, 5);
-		paging.put("count", paging.get("count"));
-		paging.put("startRow", paging.get("startRow"));
-		paging.put("endRow", paging.get("endRow"));
-		paging.put("pageCode", paging.get("pageCode"));
-		model.addAttribute("pageCode", paging.get("pageCode"));
+		count = myStudyDao.getMyCommentCount(paging);
+		paging =page.paging(pageNum, count, studyPageSize, studyPageBlock);
+		paging.put("commentCheak", "1");
+		paging.put("userNum", String.valueOf(userNum));
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("pageCode", paging.get("pageCode").replace("myCommentView", "commentReplyView"));
 		model.addAttribute("commentReplyList", myStudyDao.getMyComment(paging));
 	}
 
@@ -77,13 +86,10 @@ public class MyStudyServiceImpl implements MyStudyService {
 		HashMap<String, String> paging = new HashMap<>();
 		int count = 0;
 		count = myStudyDao.getMyBookWriteCount(userNum);
-		paging.put("userNum", String.valueOf(userNum));
-			paging =page.paging(pageNum, count, 10, 5);
-			paging.put("count", paging.get("count"));
-			paging.put("startRow", paging.get("startRow"));
-			paging.put("endRow", paging.get("endRow"));
-			paging.put("pageCode", paging.get("pageCode").replaceFirst("myCommentView", "myBookWriteView"));
-			model.addAttribute("pageCode", paging.get("pageCode"));
+			paging =page.paging(pageNum, count, studyPageSize, studyPageBlock);
+			paging.put("userNum", String.valueOf(userNum));
+			model.addAttribute("pageNum",pageNum);
+			model.addAttribute("pageCode", paging.get("pageCode").replace("myCommentView", "myBookWriteView"));
 			model.addAttribute("bookWriteList", myStudyDao.getMyBookWrite(paging));
 	}
 
@@ -92,13 +98,10 @@ public class MyStudyServiceImpl implements MyStudyService {
 		HashMap<String, String> paging = new HashMap<>();
 		int count = 0;
 		count = myStudyDao.getMyBookReadCount(userNum);
-		paging.put("userNum", String.valueOf(userNum));
-			paging =page.paging(pageNum, count, 10, 5);
-			paging.put("count", paging.get("count"));
-			paging.put("startRow", paging.get("startRow"));
-			paging.put("endRow", paging.get("endRow"));
-			paging.put("pageCode", paging.get("pageCode").replaceFirst("myCommentView", "myBookReadView"));
-			model.addAttribute("pageCode", paging.get("pageCode"));
+			paging =page.paging(pageNum, count, studyPageSize, studyPageBlock);
+			paging.put("userNum", String.valueOf(userNum));
+			model.addAttribute("pageNum",pageNum);
+			model.addAttribute("pageCode", paging.get("pageCode").replace("myCommentView", "myBookReadView"));
 			model.addAttribute("bookReadList", myStudyDao.getMyBookRead(paging));
 	}
 
@@ -107,13 +110,10 @@ public class MyStudyServiceImpl implements MyStudyService {
 		HashMap<String, String> paging = new HashMap<>();
 		int count = 0;
 		count = myStudyDao.getMyWishCount(userNum);
-		paging.put("userNum", String.valueOf(userNum));
-			paging =page.paging(pageNum, count, 10, 5);
-			paging.put("count", paging.get("count"));
-			paging.put("startRow", paging.get("startRow"));
-			paging.put("endRow", paging.get("endRow"));
-			paging.put("pageCode", paging.get("pageCode").replaceFirst("myCommentView", "myWishView"));
-			model.addAttribute("pageCode", paging.get("pageCode"));
+			paging =page.paging(pageNum, count, studyPageSize, studyPageBlock);
+			paging.put("userNum", String.valueOf(userNum));
+			model.addAttribute("pageNum",pageNum);
+			model.addAttribute("pageCode", paging.get("pageCode").replace("myCommentView", "myWishView"));
 			model.addAttribute("wishtList", myStudyDao.getMyWish(paging));
 	}
 
@@ -122,19 +122,22 @@ public class MyStudyServiceImpl implements MyStudyService {
 		HashMap<String, String> paging = new HashMap<>();
 		int count = 0;
 		count = myStudyDao.getMyBookMarkCount(userNum);
-		paging.put("userNum", String.valueOf(userNum));
-			paging =page.paging(pageNum, count, 10, 5);
-			paging.put("count", paging.get("count"));
-			paging.put("startRow", paging.get("startRow"));
-			paging.put("endRow", paging.get("endRow"));
-			paging.put("pageCode", paging.get("pageCode").replaceFirst("myCommentView", "myBookMarkView"));
-			model.addAttribute("pageCode", paging.get("pageCode"));
-			model.addAttribute("bookmarkList", myStudyDao.getMyBookmark(paging));
+			paging =page.paging(pageNum, count, studyPageSize, studyPageBlock);
+			paging.put("userNum", String.valueOf(userNum));
+			model.addAttribute("pageNum",pageNum);
+			model.addAttribute("pageCode", paging.get("pageCode").replace("myCommentView", "myBookMarkView"));
+			model.addAttribute("bookMarkList", myStudyDao.getMyBookmark(paging));
 	}
 
 	@Override
 	public void commentDelete(CommentDto commentDto) {
-		myStudyDao.commentDelete(commentDto);
+		if(commentDto.getPageGroup()!=0) {
+			myStudyDao.commentDelete(commentDto);
+			myStudyDao.commentReplyDeleteUpdate(commentDto);
+		}else {
+			myStudyDao.commentDelete(commentDto);
+			myStudyDao.commentReplyDelete(commentDto);
+		}
 		
 	}
 
@@ -152,7 +155,7 @@ public class MyStudyServiceImpl implements MyStudyService {
 
 	@Override
 	public void bookReadDelete(ReadBookDto readBookDto) {
-		myStudyDao.bookWriteDelete(readBookDto);
+		myStudyDao.bookReadDelete(readBookDto);
 		
 	}
 

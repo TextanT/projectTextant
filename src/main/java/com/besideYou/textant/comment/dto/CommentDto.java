@@ -19,12 +19,12 @@ public class CommentDto {
 	private String pageCode;
 	private String bookName;
 	private String fileLocation;
-	
-	
+	private String replyTarget;
+	private String bookDesc;
 	
 
 
-
+	
 
 	public int getCommentNum() {
 		return commentNum;
@@ -383,6 +383,46 @@ public class CommentDto {
 
 
 
+	
+
+
+	public String getReplyTarget() {
+		return replyTarget;
+	}
+
+
+
+
+
+
+
+	public void setReplyTarget(String replyTarget) {
+		this.replyTarget = replyTarget;
+	}
+
+	
+
+
+
+
+
+	public String getBookDesc() {
+		return bookDesc;
+	}
+
+
+
+
+
+
+
+	public void setBookDesc(String bookDesc) {
+		this.bookDesc = bookDesc;
+	}
+
+
+
+
 
 
 
@@ -393,6 +433,6 @@ public class CommentDto {
 				+ commentGroup + ", userNum=" + userNum + ", writeDate=" + writeDate + ", commentGood=" + commentGood
 				+ ", commentBad=" + commentBad + ", nickName=" + nickName + ", pageStart=" + pageStart + ", pageStop="
 				+ pageStop + ", totalCount=" + totalCount + ", pageCode=" + pageCode + ", bookName=" + bookName
-				+ ", fileLocation=" + fileLocation + "]";
+				+ ", fileLocation=" + fileLocation + ", replyTarget=" + replyTarget + ", bookDesc=" + bookDesc + "]";
 	}
 }

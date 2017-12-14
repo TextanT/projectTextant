@@ -14,7 +14,7 @@ import com.besideYou.textant.myStudy.dto.BookMarkDto;
 import com.besideYou.textant.myStudy.dto.BookWishDto;
 import com.besideYou.textant.myStudy.dto.ReadBookDto;
 import com.besideYou.textant.myStudy.service.MyStudyService;
-@SessionAttributes("userNum")
+
 @Controller
 public class MyStudyController {
 	@Autowired
@@ -98,7 +98,8 @@ public class MyStudyController {
 		commentDto.setUserNum(userNum);
 		myStudyService.commentDelete(commentDto);
 		
-		return "myStudy/myCommentView?pagaNum="+pageNum;
+		return "redirect:/myCommentView.text?pageNum="+pageNum;
+		
 	}
 	
 	@RequestMapping(value = "myCommentReplyDelete.text")
@@ -107,16 +108,15 @@ public class MyStudyController {
 		commentDto.setUserNum(userNum);
 		myStudyService.commentDelete(commentDto);
 		
-		return "myStudy/myCommentReplyView?pagaNum="+pageNum;
+		return "redirect:myCommentReplyView.text?pageNum="+pageNum;
 	}
 	
 	@RequestMapping(value = "myBookWriteDelete.text")
 	public String BookWriteDelete(HttpSession session,BookInfoDto bookInfoDto,int pageNum) {
-		int userNum=(int)session.getAttribute("userNum");
-		bookInfoDto.setUserNum(userNum);
+		bookInfoDto.setUserNum((int)session.getAttribute("userNum"));
 		myStudyService.bookWriteDelete(bookInfoDto);
 		
-		return "myStudy/myBookWriteView?pagaNum="+pageNum;
+		return "redirect:myBookWriteView.text?pageNum="+pageNum;
 	}
 	
 	@RequestMapping(value = "myBookReadDelete.text")
@@ -125,7 +125,7 @@ public class MyStudyController {
 		readBookDto.setUserNum(userNum);
 		myStudyService.bookReadDelete(readBookDto);
 		
-		return "myStudy/myBookReadView?pagaNum="+pageNum;
+		return "redirect:myBookReadView.text?pageNum="+pageNum;
 	}
 	@RequestMapping(value = "myWishDelete.text")
 	public String myWishDelete(HttpSession session,BookWishDto bookWishDto,int pageNum) {
@@ -133,7 +133,7 @@ public class MyStudyController {
 		bookWishDto.setUserNum(userNum);
 		myStudyService.wishDelete(bookWishDto);
 		
-		return "myStudy/myWishView?pagaNum="+pageNum;
+		return "redirect:myWishView.text?pageNum="+pageNum;
 	}
 	
 	@RequestMapping(value = "myBookMarkDelete.text")
@@ -142,6 +142,6 @@ public class MyStudyController {
 		bookMarkDto.setUserNum(userNum);
 		myStudyService.bookMarkDelete(bookMarkDto);
 		
-		return "myStudy/myBookMarkView?pagaNum="+pageNum;
+		return "redirect:myBookMarkView.text?pageNum="+pageNum;
 	}
 }

@@ -8,17 +8,25 @@
 			SELECT *
 			FROM (SELECT ROWNUM RM, human.* FROM 
 					(SELECT C.*,L.nickName,F.bookName
+					<if test="commentCheak==1">
+						,N.nickname replyTarget
+					</if>
 					 FROM  comments C,login L, bookInfo F
-			         WHERE C.userNum=#{userNum} 
+					 <if test="commentCheak==1">
+						,login N, comments k
+					</if>
+			         WHERE C.userNum=#{userNum}
 			         and C.userNum=L.userNum 
-			         and C.userNum=F.userNum
+                     and c.bookarticlenum=f.bookarticlenum
 			         <if test="commentCheak==0">
 						and C.depth=0
 					</if>
 			         <if test="commentCheak==1">
-						and C.depth!=0
+						and k.usernum=n.usernum
+                     and k.commentnum=c.commentgroup
+                     and C.depth!=0
 					</if>
-			         ORDER BY C.commentNUM desc) human)  
+			         ORDER BY C.commentNUM desc) human)
 			WHERE RM BETWEEN  #{startRow} AND #{endRow}
 	</select>
 	
@@ -34,40 +42,43 @@
 	<select id="getMyBookRead" parameterType="HashMap" resultType="readBook">
 			SELECT *
 			FROM (SELECT ROWNUM RM, human.* FROM  
-					(SELECT L.*,B.fileLocation,B.bookName
+					(SELECT L.*,B.fileLocation,B.bookName,B.bookDesc
 					 FROM readBook L, bookInfo B
 			         WHERE L.userNum=#{userNum} and L.userNum=B.userNum
+			         and L.bookArticlenum=B.bookArticlenum
 			         ORDER BY L.readBookNum desc) human)    
 			WHERE RM BETWEEN  #{startRow} AND #{endRow}
 	</select>
 	<select id="getMyWish" parameterType="HashMap" resultType="bookWish">
 			SELECT *
 			FROM (SELECT ROWNUM RM, human.* FROM 
-					(SELECT W.*,B.fileLocation,B.bookName
+					(SELECT W.*,B.fileLocation,B.bookName,B.bookDesc
 					 FROM bookWish W, bookInfo B
 			         WHERE W.userNum=#{userNum} and W.userNum=B.userNum
+			         and W.bookArticlenum=B.bookArticlenum
 			         ORDER BY W.wishNum desc) human)   
 			WHERE RM BETWEEN  #{startRow} AND #{endRow}
 	</select>
 	<select id="getMyBookmark" parameterType="HashMap" resultType="bookMark">
 			SELECT *
 			FROM (SELECT ROWNUM RM, human.* FROM 
-					(SELECT M.*,B.fileLocation,B.bookName
+					(SELECT M.*,B.fileLocation,B.bookName,B.bookDesc
 					 FROM bookMark M, bookInfo B
 			         WHERE M.userNum=#{userNum} and M.userNum=B.userNum
+			         and M.bookArticlenum=B.bookArticlenum
 			         ORDER BY M.bookMarkNum desc) human)   
 			WHERE RM BETWEEN  #{startRow} AND #{endRow}
 	</select>
-	<select id="getMyCommentCount" parameterType="int" resultType="int">
+	<select id="getMyCommentCount" parameterType="HashMap" resultType="int">
 		SELECT count(*) 
 		from comments
+		where userNum=#{userNum}
 		<if test="commentCheak==0">
-			and C.depth=0
+			and depth=0
 		</if>
 	    <if test="commentCheak==1">
-			and C.depth!=0
+			and depth!=0
 		</if>
-		where userNum=#{userNum}
 	</select>
 	<select id="getMyBookWriteCount" parameterType="int" resultType="int">
 		SELECT count(*) 
@@ -95,13 +106,25 @@
 		FROM comments
 		where commentNum=#{commentNum}
 		<if test="commentGroup==0">
-			and C.depth=0
+			and depth=0
 		</if>
 	    <if test="commentGroup!=0">
-			and C.depth!=0
+			and depth!=0
 		</if>
 		and userNum=#{userNum}
 	</delete>
+	
+	<delete id="commentReplyDelete" parameterType="comment">
+		DELETE
+		FROM comments
+		where commentGroup=#{commentNum}
+	</delete>
+	
+	<update id="commentReplyDeleteUpdate" parameterType="comment">
+		update comments
+		set commentCount=commentCount-1
+		where commentNum=#{commentGroup}
+	</update>
 	
 	<delete id="bookWriteDelete" parameterType="bookInfo">
 		DELETE
@@ -113,19 +136,19 @@
 	<delete id="wishDelete" parameterType="bookWish">
 		DELETE
 		FROM BOOKWISH
-		where bookArticleNum=#{wishNum}
+		where wishNum=#{wishNum}
 		and userNum=#{userNum}
 	</delete>
 	<delete id="bookReadDelete" parameterType="readBook">
 		DELETE
 		FROM READBOOK
-		where bookArticleNum=#{readBoolNum}
+		where readBookNum=#{readBookNum}
 		and userNum=#{userNum}
 	</delete>
 	<delete id="bookMarkDelete" parameterType="bookMark">
 		DELETE
 		FROM BOOKMARK
-		where bookArticleNum=#{bookMarkNum}
+		where bookMarkNum=#{bookMarkNum}
 		and userNum=#{userNum}
 	</delete>
 </mapper>	

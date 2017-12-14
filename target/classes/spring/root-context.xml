@@ -55,6 +55,16 @@
 		<constructor-arg value="5"/>
 	</bean>
 	
+	<bean id="studyPageSize" class="java.lang.Integer" >
+		<constructor-arg>
+			<value>15</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="studyPageBlock" class="java.lang.Integer">
+		<constructor-arg value="5"/>
+	</bean>
+	
 	<bean id="saveDir" class="java.lang.String">
 		<constructor-arg value="d:/temp/convertedBook/"></constructor-arg>
 	</bean>

@@ -542,7 +542,7 @@ function commentWrite() {
 <title>Insert title here</title>
 </head>
 <body>	
-	<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="1">
+	<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="35">
 	<input id="page" type="hidden" name="page" value="1">
 	<input id="nextPage" type="hidden" name="nextPage" value="1">
 	<input id='pageListCount' type='hidden' name='pageListCount'>
