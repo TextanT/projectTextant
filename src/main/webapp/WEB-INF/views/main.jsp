@@ -597,16 +597,14 @@
 								+"class='book_img_size'>"
 							+"<div style='width: 176.66px; height: 259px; position: relative;'"
 								+"class='book_cap"+(index+1)+"' id='book_cap"+(index+1)+"'>"
-								+"<h5>"+item.bookName+"</h5>"
+								+"<h5>"+item.bookName+"</h5>" 
 								+"<p>"+item.userNum+"</p>"
 								+"<br>"
-								+"<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다."
-								+"이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>"
+								+"<p style='text-overflow: ellipsis; overflow:hidden; word-break:break-all;max-height:180px;'>"+item.bookDesc +"</p>"
 								+"</div>"
 								+"</a>"
 								+"</div>"
 					});
-					
 
 					$("#booklistdiv").append(html);
 					
