@@ -174,7 +174,7 @@
 						<option value='romance'>로맨스</option>
 						<option value='war'>전쟁</option>
 						<option value='growth'>성장</option>
-						<option value='verse'>시</option>
+						<option value='verse'>인문학</option>
 						<option value='essay'>수필</option>
 						<option value='humor'>유머</option>
 				</select></label>
@@ -197,24 +197,29 @@
 						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
 						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
 						style="height: 150px;"></a>
+						<input type="radio" name="inside" value="textantcor" checked>
+				</div> 
+				
+				<div class="samplecover1">
+					<a class="fancybox" data-fancybox-group="gallery"
+						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
+						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
+						style="height: 150px;"></a>
+						<input type="radio" name="inside" value="textantcor">
 				</div>
 				<div class="samplecover1">
 					<a class="fancybox" data-fancybox-group="gallery"
 						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
 						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
 						style="height: 150px;"></a>
+						<input type="radio" name="inside" value="textantcor">
 				</div>
 				<div class="samplecover1">
 					<a class="fancybox" data-fancybox-group="gallery"
 						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
 						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
 						style="height: 150px;"></a>
-				</div>
-				<div class="samplecover1">
-					<a class="fancybox" data-fancybox-group="gallery"
-						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
-						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
-						style="height: 150px;"></a>
+						<input type="radio" name="inside" value="textantcor">
 				</div>
 
 				<div class="userimgDiv" style="display: none;">

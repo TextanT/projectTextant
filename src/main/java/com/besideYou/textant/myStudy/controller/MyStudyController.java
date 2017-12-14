@@ -1,5 +1,6 @@
 package com.besideYou.textant.myStudy.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class MyStudyController {
 	
 	//메인페이지
 	@RequestMapping(value = "myStudy.text")
-	public String myStudymain(HttpSession session, Model model) {
+	public String myStudymain(HttpSession session, Model model, HttpServletRequest req) {
 		int userNum=(int)session.getAttribute("userNum");
 //		System.out.println("userNum:"+session.getAttribute("userNum"));
 		myStudyService.getMyStudyMain(userNum, model);

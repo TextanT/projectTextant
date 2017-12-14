@@ -559,6 +559,7 @@ $(document).ready(function(){
 				bookArticleNum:$("#bookArticleNum").val()
 			},
 			error : function(xhr){
+				alert("다불러오는거")
 				alert("error html = " + xhr.statusText);
 			},
 			success: function(json){
@@ -591,7 +592,7 @@ $(document).ready(function(){
 						let currPage = $(".sample-docs").turn("page");
 						$("#pageGo").attr('placeholder',(Math.floor(currPage/2))*2);
 						
-					},500);
+					},100);
 				});
 				
 				commentRead(json);
@@ -619,6 +620,7 @@ function commentRead(read){
 			commentDelete:0
 		},
 		error : function(xhr){
+			alert("덜불러오는거");
 			alert("error html = " + xhr.statusText);
 		},
 		complete: function(){		

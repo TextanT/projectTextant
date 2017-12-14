@@ -34,7 +34,7 @@ a {
 				<div style="float: left;">
 					<span
 						style="margin-top: auto; margin-bottom: auto; font-size: 33px; color: white;">
-						&nbsp | 창작하기</span>
+						&nbsp | 장르별 검색</span>
 				</div>
 			</div>
 		<div class="menu_box">
@@ -119,7 +119,7 @@ a {
 				<div class="serchoption10" id="serchoptionid">로맨스</div>
 				<div class="serchoption11" id="serchoptionid">전쟁</div>
 				<div class="serchoption12" id="serchoptionid">성장</div>
-				<div class="serchoption13" id="serchoptionid">시</div>
+				<div class="serchoption13" id="serchoptionid">인문학</div>
 				<div class="serchoption14" id="serchoptionid">수필</div>
 				<div class="serchoption15" id="serchoptionid">유머</div>
 				<div class="serchoption16" id="serchoptionid">액션</div>

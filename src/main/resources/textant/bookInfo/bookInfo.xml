@@ -43,6 +43,53 @@
 	order by rum) outTable
 	where rum between  1 AND 2
 	</select>
+	<update id="updateScore" parameterType="String">
+	UPDATE BOOKINFO 
+    SET hit = hit + 1 
+    WHERE FILELOCATION=#{fileLocation}
+	</update>
+<!-- 	(SELECT nvl(hit,0)+1 -->
+<!--                       FROM BOOKINFO -->
+<!--                       WHERE FILELOCATION=#{fileLocation} -->
+<!-- ) -->
+
+<select id="getRecommendBooks" resultType="recommendedBook">
+SELECT * FROM recommendedBook
+</select>
+
+<select id="getOneBook" parameterType="Integer" resultType="bookInfo">
+SELECT * FROM BOOKINFO WHERE BOOKARTICLENUM = #{bookArticleNum}
+</select>
+
+<select id="getNoticeList" resultType="notice">
+	select outTable.* 
+		from (
+		select rownum rum, inTable.* 
+			  from (
+			  	select * 
+			  	from notice
+			  	where type = 0 
+			  	order by writeDate desc
+			  	) inTable  
+			  order by rum
+			  ) outTable 
+		where rum between #{startPage} and #{endPage}
+	</select>
+<select id="getEventList" resultType="notice">
+	select outTable.* 
+		from (
+		select rownum rum, inTable.* 
+			  from (
+			  	select * 
+			  	from notice
+			  	where type = 1 
+			  	order by writeDate desc
+			  	) inTable  
+			  order by rum
+			  ) outTable 
+		where rum between #{startPage} and #{endPage}
+	</select>
+
 </mapper>
 	
 	

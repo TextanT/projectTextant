@@ -2,11 +2,8 @@ package com.besideYou.textant.main.main;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -15,10 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.besideYou.textant.genre.genrepage.GenrePage;
+import com.besideYou.textant.common.dto.RecommendedBookDto;
 import com.besideYou.textant.main.dao.BookInfoDao;
 import com.besideYou.textant.main.dto.BookInfoDto;
 import com.besideYou.textant.main.mainpage.MainPage;
+import com.besideYou.textant.manager.dao.ManagerDao;
 
 @Service
 public class MainServiceImpl implements MainService {
@@ -28,7 +26,6 @@ public class MainServiceImpl implements MainService {
 	BookInfoDao bookInfoDao;
 	@Autowired
 	MainPage mainPage;
-	
 	@Override
 	public String home(Model model, HttpSession session) {
 		
@@ -36,11 +33,24 @@ public class MainServiceImpl implements MainService {
 		File[] files;
 		
 		List<BookInfoDto> fileNames;
+		List<RecommendedBookDto> recommendNames;
+		BookInfoDto bookInfoDto;
+		HashMap<String, String> oneFive;
 		//1.추천리스트를 받을것
 		//2.최신순, 별점순, 조회순리스트를 받을것
-		
-		fileNames = bookInfoDao.getNewBooks();
-		
+		fileNames = new ArrayList<>();
+		recommendNames = bookInfoDao.getRecommendBooks();
+		for(RecommendedBookDto rbd : recommendNames) {
+			bookInfoDto = bookInfoDao.getOneBook(rbd.getBookArticleNum());
+			bookInfoDto.setBookDesc(rbd.getRecommendComment());
+			fileNames.add(bookInfoDto);
+		}
+
+		oneFive = new HashMap<String, String>();
+		oneFive.put("startPage", "1");
+		oneFive.put("endPage", "4");
+		model.addAttribute("getFirstNoticeList", bookInfoDao.getNoticeList(oneFive));
+		model.addAttribute("getFirstEventList", bookInfoDao.getEventList(oneFive));
 //		List<String> bookname;
 //		
 //		bookname = bookInfoDao.getbookname();

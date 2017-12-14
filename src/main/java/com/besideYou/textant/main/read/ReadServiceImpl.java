@@ -21,7 +21,7 @@ public class ReadServiceImpl implements ReadService {
 	int totalPageNum = 0;
 	String bookName = null;
 	System.out.println(fileName);
-	
+	bookInfoDao.updateScore(fileName);
 	totalPageNum = bookInfoDao.getTotalPages(fileName);
 	bookName = bookInfoDao.getBookName(fileName);
 	

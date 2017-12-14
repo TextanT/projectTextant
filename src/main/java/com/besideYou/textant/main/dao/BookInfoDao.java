@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.besideYou.textant.common.dto.NoticeDto;
+import com.besideYou.textant.common.dto.RecommendedBookDto;
 import com.besideYou.textant.main.dto.BookInfoDto;
 @Repository
 public interface BookInfoDao {
@@ -44,5 +46,15 @@ public interface BookInfoDao {
 	
 //	public int getUserNum(LoginDto loginDto);
 	public int getBookArticleNum(String fileLocation);
+
+	public void updateScore(String fileName);
+
+	public List<RecommendedBookDto> getRecommendBooks();
+
+	public BookInfoDto getOneBook(int bookArticleNum);
+
+	public List<NoticeDto> getNoticeList(HashMap<String, String> oneFive);
+
+	public List<NoticeDto> getEventList(HashMap<String, String> oneFive);
 
 }
