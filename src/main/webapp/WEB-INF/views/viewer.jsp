@@ -16,44 +16,35 @@
 .margin10 {margin:10px;}
 .padding10 {padding:10px 0;}
 .ellipsis100{width:270px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-
 /* BOOK VIEWER */
 #viewer-top {width:600px; margin:0 auto;}
 #viewer-bottom {width:400px; margin:0 auto;}
 #page-counter {margin: 20px;}
 #pageGo {width: 50px;}
-
 /* NAV */ 
 nav {width:170px; height:100%; background:white; 
 	position:fixed; top:0; right:0; z-index:101;
 	font-size:0.8em;}
 nav img {width:20px; height:20x;}
 nav a{text-decoration:none;}
-
 #look-comment a{background:#69F;  z-index:101;}
-
 #nav-pop {position: absolute; bottom:30px; padding:10px; background:#fff; display:none; z-index:101;}
 #nav-pop ul {list-style-type: none;}
 #nav-pop ul li {float:right;}
 #nav-config {position: absolute; bottom:0px; right:0px; z-index:101;}
-
 .coOpen {display:block; width:50px; height:30px; line-height:30px;}
 .open1 {position:absolute; top:100px; left:0px;}
 .open2 {position:absolute; top:100px; left:50px;}
 .open3 {width:100px; position:absolute; top:130px; left:0px;}
-
-
 /* COMMENT */
 .coClose {display:block; width:30px; height:30px; 
 		line-height:30px; font-size:18px; font-weight:bold; text-align:center; text-decoration:none;}
 .closeR {position:absolute; top:15px; right:15px;}
 .close2 {position:absolute; top:15px; left:15px;}
-
 .comment{width:35%; height:95%; background:#ccc; font-size:0.9em;}
 .RightWrap{position:fixed; top:5%; right:-500px; z-index:100;}
 .LeftWrap{position:fixed; top:0; left:0px; display:none; z-index:100;}
 .commentL{margin-top:50px; padding:3%;}
-
 #coWrite{margin:50px 0;}
 #coWrite a {display:bolck; width:100px; height:25px; line-height: 25px; text-align:center; 
 	background-color:yellow; margin-top:10px;}
@@ -65,7 +56,6 @@ nav a{text-decoration:none;}
 #coShow{margin-top:3%;}
 #coShow table{width:100%; border-top:1px white dashed; margin-top:20px; }
 #reCoWriteForm{display:none;}
-
 #modalBg {position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
     background: rgba(0, 0, 0, 0.8);
@@ -77,15 +67,12 @@ nav a{text-decoration:none;}
 .totalCom > h3 {display:inline; width:100px; }	
 #totalComCount {display:inline-block; width:100px; }	
 	
-
 /* BOOKMARK*/	
 .Bookmark{display:none; z-index: 501;
 	background-color:white;
 	position: absolute; top: 2%; left: 0%;
 	width: 40%; height: 90%;
 	padding: 16px;}
-
-
 </style>
 
 <!-- <script type="text/javascript" src="/textant/resources/js/jquery-1.11.1.min.js"></script> -->
@@ -237,50 +224,32 @@ nav a{text-decoration:none;}
 
 
 <script type="text/javascript">
-
-
-
-
-
-
-
-
 function loadApp() {
-
 	var flipbook = $('.sample-docs');
-
 	// Check if the CSS was already loaded
 	
 	if (flipbook.width()==0 || flipbook.height()==0) {
 		setTimeout(loadApp, 10);
 		return;
 	}
-
 	// Mousewheel
-
 	$('#book-zoom').mousewheel(function(event, delta, deltaX, deltaY) {
-
 		var data = $(this).data(),
 			step = 30,
 			flipbook = $('.sample-docs'),
 			actualPos = $('#slider').slider('value')*step;
-
 		if (typeof(data.scrollX)==='undefined') {
 			data.scrollX = actualPos;
 			data.scrollPage = flipbook.turn('page');
 		}
-
 		data.scrollX = Math.min($( "#slider" ).slider('option', 'max')*step,
 			Math.max(0, data.scrollX + deltaX));
-
 		var actualView = Math.round(data.scrollX/step),
 			page = Math.min(flipbook.turn('pages'), Math.max(1, actualView*2 - 2));
-
 		if ($.inArray(data.scrollPage, flipbook.turn('view', page))==-1) {
 			data.scrollPage = page;
 			flipbook.turn('page', page);
 		}
-
 		if (data.scrollTimer)
 			clearInterval(data.scrollTimer);
 		
@@ -289,15 +258,11 @@ function loadApp() {
 			data.scrollPage = undefined;
 			data.scrollTimer = undefined;
 		}, 1000);
-
 	});
-
 	// Slider
-
 	$( "#slider" ).slider({
 		min: 1,
 		max: 100,
-
 		start: function(event, ui) {
 			if (!window._thumbPreview) {
 				_thumbPreview = $('<div />');//현재페이지 프리뷰 제거 , {'class': 'thumbnail'}).html('<div></div>');
@@ -305,14 +270,11 @@ function loadApp() {
 				_thumbPreview.appendTo($(ui.handle));
 			} else
 				setPreview(ui.value);
-
 			moveBar(false);
 		},
-
 		slide: function(event, ui) {
 			setPreview(ui.value);
 		},
-
 		stop: function() {
 			if (window._thumbPreview)
 				_thumbPreview.removeClass('show');
@@ -320,94 +282,64 @@ function loadApp() {
 			$('.sample-docs').turn('page', Math.max(1, $(this).slider('value')*2 - 2));
 		}
 	});
-
-
 	// URIs
 	
 	Hash.on('^page\/([0-9]*)$', {
 		yep: function(path, parts) {
 			var page = parts[1];
-
 			if (page!==undefined) {
 				if ($('.sample-docs').turn('is'))
 					$('.sample-docs').turn('page', page);
 			}
-
 		},
 		nop: function(path) {
-
 			if ($('.sample-docs').turn('is'))
 				$('.sample-docs').turn('page', 1);
 		}
 	});
-
 	// Arrows
-
 	$(document).keydown(function(e){
-
 		var previous = 37, next = 39, enter = 13;
-
 		switch (e.keyCode) {
 			case previous:
-
 				$('.sample-docs').turn('previous');
-
 			break;
 			case next:
 				
 				$('.sample-docs').turn('next');
-
 			break;
 			case enter:
 				
 				let pageNum = $('#pageGo').val();
 				$('.sample-docs').turn('page',pageNum);
-
 		}
-
 	});
 	// Events for the next button
-
 	$('.next-button').bind($.mouseEvents.over, function() {		
 		$(this).addClass('next-button-hover');
-
 	}).bind($.mouseEvents.out, function() {		
 		$(this).removeClass('next-button-hover');
-
 	}).bind($.mouseEvents.down, function() {		
 		$(this).addClass('next-button-down');
-
 	}).bind($.mouseEvents.up, function() {		
 		$(this).removeClass('next-button-down');
-
 	}).click(function() {		
 		$('.sample-docs').turn('next');
-
 	});
-
 	// Events for the next button
 	
 	$('.previous-button').bind($.mouseEvents.over, function() {		
 		$(this).addClass('previous-button-hover');
-
 	}).bind($.mouseEvents.out, function() {		
 		$(this).removeClass('previous-button-hover');
-
 	}).bind($.mouseEvents.down, function() {		
 		$(this).addClass('previous-button-down');
-
 	}).bind($.mouseEvents.up, function() {		
 		$(this).removeClass('previous-button-down');
-
 	}).click(function() {		
 		$('.sample-docs').turn('previous');
-
 	});
-
-
-
 	// Create the flipbook
-
 	flipbook.turn({
 		elevation: 50,
 		acceleration: false,
@@ -416,7 +348,6 @@ function loadApp() {
 		duration: 1000,
 		pages: "${totalPageNum+1}",
 		when: {
-
 		turning: function(e, page, view) {
 			
 			var book = $(this),
@@ -444,68 +375,43 @@ function loadApp() {
 					return;
 				}
 			}
-
 			Hash.go('page/'+page).update();
-
 			if (page==1 || page==pages)
 				$('.sample-docs .tabs').hide();
-
 				event.stopImmediatePropagation();
 			
-
 		},
-
 		turned: function(e, page, view) {
-
 			var book = $(this);
-
 			$('#slider').slider('value', getViewNumber(book, page));
-
 			if (page!=1 && page!=book.turn('pages'))
 				$('.sample-docs .tabs').fadeIn(500);
 			else
 				$('.sample-docs .tabs').hide();
-
 			book.turn('center');
 			updateTabs();
-
 		},
-
 		start: function(e, pageObj) {
 	
 			moveBar(true);
-
 		},
-
 		end: function(e, pageObj) {
 		
 			var book = $(this);
-
 			setTimeout(function() {
 				$('#slider').slider('value', getViewNumber(book));
 			}, 1);
-
 			moveBar(false);
-
 		},
-
 		missing: function (e, pages) {
-
 			for (var i = 0; i < pages.length; i++)
 				addPage(pages[i], $(this));
-
 		}
 	}
 	}). turn('page', 2);
-
-
 	$('#slider').slider('option', 'max', numberOfViews(flipbook));
-
 	flipbook.addClass('animated');
-
-
 	// Show canvas
-
 	$('#canvas').css({visibility: 'visible'});
 	
 }
@@ -525,13 +431,8 @@ $(".nextPage").on("click",function(){
 $(".maxPage").on("click",function(){
 	$('.sample-docs').turn('page', '${totalPageNum+1}');
 });
-
-
-
 // Hide canvas
-
 $('#canvas').css({visibility: 'hidden'});
-
 yepnope({
 	test: Modernizr.csstransforms,
 	yep: ['/textant/resources/js/turn.min.js', '/textant/resources/css/jquery.ui.css'],
@@ -540,13 +441,6 @@ yepnope({
 	complete: loadApp
 });
 //*******************
-
-
-
-
-
-
-
 //*******************오른쪽 슬라이드 
 $(document).ready(function(){
 		$.ajax({
@@ -599,7 +493,6 @@ $(document).ready(function(){
 			},
 		});
 	});
-
 //전체 댓글 읽어오기
 function commentRead(read){
 	let html= "";
@@ -636,7 +529,6 @@ function commentRead(read){
 			 }
 			 
 			 $("#nextPage").val(num);
-
 		},
 		success: function(data){
 			 $.each(data, function(index,item) {
@@ -648,21 +540,23 @@ function commentRead(read){
 				 '<table border="1" class="padding10">'+
 					'<tr>'+
 					'<td rowspan="4" width="30px">+ profilePicture+</td>'+
-					'<td colspan="2" ><i class="font7">'+item.commentNum+'</i><br><p class="ellipsis100">'+item.conet+'</p></td>'+
+					'<td colspan="2" ><i class="font7">'+item.commentNum+'</i><br><p id="coContent" class="ellipsis100">'+item.conet+'</p></td>'+
 				'</tr>'+
 				'<tr>'+
-					'<td class="font7" colspan="2" align="right"><a href="#" id="ellipsisView" onClick="ellipsisView">더보기 ▼</a></td>'+
+					'<td class="font7" colspan="2" align="right"><a href="javascript:ellipsisView">더보기 ▼</a></td>'+
 				'</tr>'+
 				'<tr>'+
-					'<td class="font7" colspan="2">'+item.nickName+'님 ┃'+item.writeDate+'┃'+' ♥ (<span class="comGoodCount'+commentNum+'">'+item.commentGood+'</span>) ┃  (☞'+item.commentBad+') ┃ '+
+					'<td class="font7" colspan="2">'+item.nickName+'님 ┃'+item.writeDate+'┃'+
+					' ♥ (<span class="comGoodCount'+commentNum+'">'+item.commentGood+'</span>) ┃  '+
+					'☞ (<span class="comBadCount'+commentNum+'">'+item.commentBad+'</span>) ┃ '+
 					'<a href="#" id="showReCo'+commentNum+'" class="comment'+commentNum+'" name="chk" onClick="commentReply('+commentNum+','+commentCount+')">댓글보기('+data[index].commentCount+')</a></td>'+
 				'</tr>'+
 				
 				'<tr>'+
 					'<td class="font7" colspan="2" align="right">'+
 						'<input id="commentDeleteButton'+commentNum+'" type="hidden" onclick="commentDeleteOk('+commentNum+','+commentGroup+')" value="삭제"> ┃'+
-						'<a href="#" class="commentGood'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentGood+')">좋아요</a> ┃'+ 
-						'<a href="#" class="commentBad'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentBad+')">싫어요</a> ┃'+
+						'<a href="javascript:GoodBad('+commentNum+','+commentGood+')" class="commentGood'+commentNum+'">좋아요</a> ┃'+ 
+						'<a href="javascript:GoodBad('+commentNum+','+commentBad+')" class="commentBad'+commentNum+'">싫어요</a> ┃'+
 						'<a href="#" class="reportComment" id="reportComment'+commentNum+'" onclick="reportComment('+commentNum+')">신고하기</a> ┃'+
 						'<a href="#" id="reCoWrite'+commentNum+'" class="toggle2" onclick="commentReplyWrite('+commentNum+')">댓글쓰기</a>'+
 						'<input id="nextToPage'+commentNum+'" type="hidden" name="nextToPage'+commentNum+'" value="1">'+	
@@ -680,16 +574,12 @@ $(function(){
 // 		$(".RightWrap").animate({right:170},500,"swing") 
 // 		if(".open1") event.stopImmediatePropagation();
 // 	});
-
 	$(".close1").click(function(){
 		$(".RightWrap").animate({right:-500},500,"swing")
 		if(".close1") event.stopImmediatePropagation();
 	});
-
 	//event.stopImmediatePropagation();
 }); 
-
-
 //*******************왼쪽 슬라이드 
 $(function() {
 	$(".open2").click(function(){
@@ -697,7 +587,6 @@ $(function() {
 	});
 	if(".open2")event.stopImmediatePropagation();
 });
-
 //////// 토글, 스윙 부딛힘
 //$(function(){
 //	$(".close2").click(function(){
@@ -706,21 +595,15 @@ $(function() {
 //	});
 	//event.stopImmediatePropagation();
 //}); 
-
-
 //**********************전체 댓글 보기
 	function wrapWindowByMask(){
 		var bgHeight = $(document).height();  
 		var bgWidth = $(window).width();  
-
 		$('#modalBg').css({'width':bgWidth,'height':bgHeight});  
-
 		$('#modalBg').fadeIn(1000);      
 		$('#modalBg').fadeTo("slow",0.5);    
-
 		$('.totalCom').show();
 	}
-
 	$(document).ready(function(){
 		$('.open3').click(function(e){
 			e.preventDefault();
@@ -773,7 +656,6 @@ $(function() {
 				}
 		});
 	}); 
-
 	
 //******************* 댓글쓰기 폼 보이기
 $(function() {
@@ -795,8 +677,6 @@ $(function() {
 	});
 	if(".toggle2")event.stopImmediatePropagation();
 });
-
-
 //******************* nav pop-up toggle
 $(function() {
 	$(".navPopBtn").click(function(){
@@ -804,8 +684,6 @@ $(function() {
 	});
 	if(this)event.stopImmediatePropagation();
 });
-
-
 //******************* 책 내용 이미지로 보기- 텍스트로 보기 전환
 let bookType = "txt";
 bookType = '${bookType}';
@@ -813,7 +691,6 @@ bookType = '${bookType}';
 let pageNum =3;
 let maxPage = 9999;
 maxPage = '${totalPageNum}';
-
 $(document).ready(function(){
 			if(bookType=="txt"){
 				for(let i = 1; i <= maxPage; i++){
@@ -826,28 +703,21 @@ $(document).ready(function(){
 				}		
 			}		
 		});
-
 $('#goText').click(function(){
 	location.href="read.text?fileName=${fileName}&bookType=txt";
 });
-
 $('#goJpg').click(function(){
 	location.href="read.text?fileName=${fileName}&bookType=jpg";
 });
-
-
 //**********************북마크 내용 보기
 	function wrapWindowByMask1(){
 		var bgHeight = $(document).height();  
 		var bgWidth = $(window).width();  
-
 		$('#modalBg').css({'width':bgWidth,'height':bgHeight});  
 		$('#modalBg').fadeIn(1000);      
 		$('#modalBg').fadeTo("slow",0.5);    
-
 		$('.Bookmark').show();
 	}
-
 	$(document).ready(function(){
 		$('.openBookmark').click(function(e){
 			e.preventDefault();
@@ -857,16 +727,11 @@ $('#goJpg').click(function(){
 		    e.preventDefault();  
 		    $('#modalBg, .Bookmark').hide();  
 		});       
-
 		$('#modalBg').click(function () {  
 		    $(this).hide();  
 		    $('.Bookmark').hide();  
 		});      
 	});
-
-
-
-
 </script>
 
 

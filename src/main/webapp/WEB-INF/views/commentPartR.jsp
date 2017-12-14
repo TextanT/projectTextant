@@ -11,13 +11,10 @@
 
 <style type="text/css">
 #coInner {width:95%; height:95%; margin:0 auto;}
-
 .disNone {display: none;}
-
 #coShow {overflow-y:scroll;}
 .height80 {height: 80%;}
 .height70 {height: 60%;}
-
 #moreSee {margin-top: 30px; width:100%;}
 </style>
 
@@ -88,7 +85,6 @@
 
 
 <script>
-
 	$.ajaxSetup({
 		type:"POST",
 		async:true,
@@ -167,7 +163,6 @@
 			}					
 		}); 
 };
-
 	
 	
 	$(".coWriteBtn").click(function(){ //답글 쓰기 
@@ -222,10 +217,8 @@
 		});
 	});
 	
-
 	//오른쪽 댓글보기 창에 대한,전체 댓글 정보 가져오기
 	function commentInfo(){
-
 		let currPage = $(".sample-docs").turn("page");
 		let nowPage = (Math.floor(currPage/2))*2;
 		
@@ -353,36 +346,37 @@
 	
 	
 	
-	//commentGoodOrBad('+commentNum+','+commentBad+')//싫어요
-	function commentGoodOrBad(commentNum,commentGoodOrBad){
-	
-	$.ajax({	
-		url:"/textant/commentGoodOrBad.comment",
-		data:{				
-			commentNum:commentNum,
-			commentGoodOrBad:commentGoodOrBad
-		},
-		success:function(data){
-			var AllCheckCount =data.commentGoodOrBadAllCount;
-			var coodBadCheck=data.commentGoodOrBadAllCheck;
-			if(AllCheckCount!=0){
-				if(coodBadCheck==1){
-					setTimeout(function() {
-						$(".comGoodCount"+commentNum).text("좋아용용ㅇ"+AllCheckCount);
-					},500);
-					
-				}else{
-					$(".commentBad"+commentNum).val("싫어요"+AllCheckCount);
+	function GoodBad(commentNum,commentGoodOrBad){ //좋아요 싫어요
+		
+		$.ajax({	
+			url:"/textant/commentGoodOrBad.comment",
+			data:{				
+				commentNum:commentNum,
+				commentGoodOrBad:commentGoodOrBad
+			},
+			success:function(data){
+				var Count =data.commentGoodOrBadAllCount;
+				var check=data.commentGoodOrBadAllCheck;
+				
+				if(Count!=0){
+					if(check==1){
+							$(".comGoodCount"+commentNum).text(Count);	
+						
+					}else{
+						setTimeout(function() {
+							$(".comBadCount"+commentNum).text(Count);						
+						},500);
+						
+					}
+				}else if(check==1){
+					alert("이미 싫어요를 누르셨습니다.");
+				}else if(check==2){
+					alert("이미 좋아요를 누르셨습니다.");
 				}
-			}else if(coodBadCheck==1){
-				alert("이미 싫어요를 누르셨습니다.");
-			}else if(coodBadCheck==2){
-				alert("이미 좋아요를 누르셨습니다.");
-			}
-			 
-		}					
-	}); 
-}
+				 
+			}					
+		}); 
+	}
 	//reportComment('+commentNum+')//신고하기
 	
 	//commentDeleteOk('+commentNum+','+commentGroup+')//삭제하기
