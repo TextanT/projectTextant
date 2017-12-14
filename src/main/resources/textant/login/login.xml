@@ -23,6 +23,9 @@
 	<select id="findid" parameterType="String" resultType="String">
 		SELECT USERID FROM LOGIN WHERE EMAIL = #{email}
 	</select>
+	<select id="findpass" parameterType="HashMap" resultType="String">
+		SELECT PASS FROM LOGIN WHERE EMAIL = #{email} AND USERID = #{id}
+	</select>
 </mapper>
 	
 	

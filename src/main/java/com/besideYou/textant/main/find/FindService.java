@@ -8,7 +8,8 @@ import com.besideYou.textant.main.dto.LoginDto;
 
 public interface FindService {
 
-	String findid(LoginDto loginDto, HttpSession session,Model model,String email);
+	String findid(LoginDto loginDto, HttpSession session,Model model, String email);
 	
+	String findpass(LoginDto loginDto, HttpSession session,Model model, String id, String email);
 	
 }

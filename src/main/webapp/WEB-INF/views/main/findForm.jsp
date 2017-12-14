@@ -65,7 +65,7 @@
 	margin-left: 20px;
 }
 
-.findpassName {
+.findpassEmail {
 	box-sizing: border-box;
 	padding: 5px 11px 5px 8px;
 	background: #fff;
@@ -238,12 +238,12 @@
 			</div>
 		</form>
 		
-		<form>
+		<form action="findpass.text" method="post" id="findpassForm">
 			<div class="passfind">
 				<h3>비밀번호찾기</h3>
-				<input type="text" class="findpassName" placeholder="이름을 입력해주세요"><br>
-				<input type="text" class="findpassId" placeholder="아이디을 입력해주세요">
-				<a href="#" class="passFinding">비밀번호찾기</a>
+				<input type="text" class="findpassId" name="id" placeholder="아이디을 입력해주세요"><br>
+				<input type="text" class="findpassEmail" name="email" placeholder="이메일을 입력해주세요">
+				<a href="#" class="passFinding" id="findpassmit">비밀번호찾기</a>
 			</div>
 		</form>
 	</div>
@@ -268,12 +268,22 @@
 	<script type="text/javascript">
 		window.onload = function() {
 			document.getElementById('findidmit').onclick = function() {
-				window.open("findid.text?email="+$(".findidEmail").val(),"new","width=700,height=500,top=100,left=100"); 
+				window.open("findid.text?email="+$(".findidEmail").val(),"new","width=450,height=80,top=400,left=400"); 
 // 				document.getElementById('findidForm').submit();
-				return false;
+
+// 				return false;
+			}
+			document.getElementById('findpassmit').onclick = function() {
+				window.open("findpass.text?id="+$(".findpassId").val()+"&email="+$(".findpassEmail").val(),"new","width=450,height=80,top=400,left=400"); 
+//					document.getElementById('findidForm').submit(); 
+// 				return false;
 			}
 		};
-
+	</script>
+	<script type="text/javascript">
+// 	window.onload = function() {
+		
+// 	};
 	</script>
 </body>
 </html>

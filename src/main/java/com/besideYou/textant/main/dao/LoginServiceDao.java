@@ -1,5 +1,7 @@
 package com.besideYou.textant.main.dao;
 
+import java.util.HashMap;
+
 import org.springframework.stereotype.Repository;
 
 import com.besideYou.textant.main.dto.LoginDto;
@@ -16,4 +18,5 @@ public interface LoginServiceDao {
 	
 	public String findid(String email);
 
+	public String findpass(HashMap<String, String> passMap);
 }

@@ -188,7 +188,7 @@
 				<a href='' class='sub_header_menu1'>내서재</a>
 			</div>
 			<div class="sub_sub2">
-				<a href='creative.text' class='sub_header_menu2' id="sub_menu2">창작카페</a>
+				<a href='' class='sub_header_menu2' id="sub_menu2">창작카페</a>
 			</div>
 			<div class="sub_sub3">
 				<a href='serchpage.genre' class='sub_header_menu3' id="sub_menu3">장르별검색</a>

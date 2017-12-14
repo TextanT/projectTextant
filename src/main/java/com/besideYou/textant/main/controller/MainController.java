@@ -110,9 +110,14 @@ public class MainController {
 		return "main/findForm";
 	}
 	@RequestMapping(value = "/findid.text", method = {RequestMethod.POST,RequestMethod.GET})
-	public String findid(LoginDto loginDto, HttpSession session, Model model, String email) {
+	public String findid(LoginDto loginDto, HttpSession session, Model model,String email) {
 		
 		return findService.findid(loginDto, session, model,email);
+	}
+	@RequestMapping(value = "/findpass.text", method = {RequestMethod.POST,RequestMethod.GET})
+	public String findpass(LoginDto loginDto, HttpSession session, Model model, String id, String email) {
+		
+		return findService.findpass(loginDto, session, model, id, email);
 	}
 
 	@RequestMapping(value = "/first.text")

@@ -1,5 +1,7 @@
 package com.besideYou.textant.main.find;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +37,31 @@ public class FindServiceImpl implements FindService {
 		}
 		return view;
 	}
+
+	@Override
+	public String findpass(LoginDto loginDto, HttpSession session, Model model, String id, String email) {
+		String dbPass;
+		String view;
+		
+		System.out.println(email);
+		System.out.println(id);
+		HashMap<String, String> passMap =new HashMap<String, String>();
+		passMap.put("email", email);
+		passMap.put("id",id);
+		dbPass = loginDao.findpass(passMap);
+
+		System.out.println("dbPass:" + dbPass);
+
+		if (dbPass != null) {
+				
+			
+				model.addAttribute("findpass",dbPass);
+				
+				view = "main/passfindOk";
+		} else {
+			view = "main/noId";
+		}
+		return view;
+	}
+	
 }
