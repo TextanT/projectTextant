@@ -30,8 +30,8 @@ public class MyStudyController {
 	@RequestMapping(value = "myStudy.text")
 	public String myStudymain(HttpSession session, Model model) {
 		int userNum=(int)session.getAttribute("userNum");
-//		System.out.println("userNum:"+session.getAttribute("userNum"));
 		myStudyService.getMyStudyMain(userNum, model);
+		
 		
 		return "myStudy/myStudyMain";
 	}

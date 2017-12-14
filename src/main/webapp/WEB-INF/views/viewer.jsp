@@ -548,58 +548,57 @@ yepnope({
 
 
 //*******************오른쪽 슬라이드 
-$(document).ready(function(){
-		$.ajax({
-			url:"/textant/commentCount.comment",
-			type:"POST",
-			async:true,
-			dataType:"json",
-			data:{
-				page:$("#page").val(),
-				bookArticleNum:$("#bookArticleNum").val()
-			},
-			error : function(xhr){
-				alert("error html = " + xhr.statusText);
-			},
-			success: function(json){
-				
-								
-				$(".open1").click(function(){
-					$(".RightWrap").animate({right:170},500,"swing") 
-					if(".open1") event.stopImmediatePropagation();
-					
-					setTimeout(function() {
-						let currPage = $(".sample-docs").turn("page");
-						let nowPage = (Math.floor(currPage/2))*2;
-						
-						let html="<span id='nowP'>"+json.pageCountBlock+"p ~ "+nowPage+"p ┃   현재페이지 : "+nowPage+"p ┃   댓글 "+json.pageListCount+"개</span>";
-						$("#nowP").remove();
-						$("#infoOne").append(html);
-						
-						$("#pageListCount").val(json.pageListCount);
-						$("#pageCountBlock").val(json.pageCountBlock);
-						$("#pageCut").val(json.pageCut);
-						$("#pageSize").val(json.pageSize);
-						
-						
-					}, 1000);
-					
-				});
-				
-				$(".sample-docs").bind('turning',function(){
-					setTimeout(function() {
-						let currPage = $(".sample-docs").turn("page");
-						$("#pageGo").attr('placeholder',(Math.floor(currPage/2))*2);
-						
-					},500);
-				});
-				
-				commentRead(json);
-				
-			},
-		});
-	});
+// $(document).ready(function(){
+// 	alert("commentCount()ready");
+// 	commentCount();
+// 	});
+	$(".sample-docs").bind('turning',function(){
+				setTimeout(function() {
+					let currPage = $(".sample-docs").turn("page");
+					$("#pageGo").attr('placeholder',(Math.floor(currPage/2))*2);
+					$("#pageR").attr('value',(Math.floor(currPage/2))*2);
+					$("#pageL").attr('value',(Math.floor(currPage/2))*2);
+				},50);
+			});
+function commentCount(){
+	alert("commentCount()");
+	$.ajax({
+		url:"/textant/commentCount.comment",
+		type:"POST",
+		async:true,
+		dataType:"json",
+		data:{
+			page:$("#pageR").val(),
+			bookArticleNum:$("#bookArticleNum").val()
+		},
+		error : function(xhr){
+			alert("error html = " + xhr.statusText);
+		},
+		success: function(json){
 
+			
+			setTimeout(function() {
+				let currPage = $(".sample-docs").turn("page");
+				let nowPage = (Math.floor(currPage/2))*2;
+				
+				let html="<span id='nowP'>"+json.pageCountBlock+"p ~ "+nowPage+"p ┃   현재페이지 : "+nowPage+"p ┃   댓글 "+json.pageListCount+"개</span>";
+				$("#nowP").remove();
+				$("#infoOne").append(html);
+				
+				$("#pageListCount").val(json.pageListCount);
+				$("#pageCountBlock").val(json.pageCountBlock);
+				$("#pageCut").val(json.pageCut);
+				$("#pageSize").val(json.pageSize);
+				
+				
+			}, 10);
+			
+			
+			commentRead(json);
+			
+		},
+	});
+}
 //전체 댓글 읽어오기
 function commentRead(read){
 	let html= "";
@@ -609,8 +608,8 @@ function commentRead(read){
 		async:true,
 		dataType:"json",
 		data:{
-			page:$("#page").val(),
-			nextPage:$("#nextPage").val(),
+			page:$("#pageR").val(),
+			nextPage:$("#nextPageR").val(),
 			pageListCount:read.pageListCount,
 			pageCountBlock:read.pageCountBlock,
 			pageCut:read.pageCut,
@@ -621,12 +620,12 @@ function commentRead(read){
 		error : function(xhr){
 			alert("error html = " + xhr.statusText);
 		},
-		complete: function(){		
-			commentDelete($("#page").val(),$("#nextPage").val(),read.pageListCount,read.pageCountBlock,read.pageCut,read.bookArticleNum,0,1)
+		complete: function(){	
+			commentDelete($("#pageR").val(),$("#nextPageR").val(),read.pageListCount,read.pageCountBlock,read.pageCut,read.bookArticleNum,0,1)
 			
-			var num=$("#nextPage").val();
+			var num=$("#nextPageR").val();
 			 num++;
-			 var nextPageNum = $("#nextPage").val(); 
+			 var nextPageNum = $("#nextPageR").val(); 
 			 var pageCutNum = $("#pageCut").val();
 			 
 			 if(nextPageNum==pageCutNum){
@@ -635,7 +634,7 @@ function commentRead(read){
 				 $("#moreSee").attr("type", "button");
 			 }
 			 
-			 $("#nextPage").val(num);
+			 $("#nextPageR").val(num);
 
 		},
 		success: function(data){

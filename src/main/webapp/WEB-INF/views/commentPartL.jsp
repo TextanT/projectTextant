@@ -21,8 +21,8 @@ input[type="checkbox"]{
 
 </head>
 <body>		
-	<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="1">
-	<input id="page" type="hidden" name="page" value="1">
+	<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="${bookArticleNum}">
+	<input id="pageL" type="hidden" name="page" value="1">
 	<input id="nextPage" type="hidden" name="nextPage" value="1">
 	<input id='pageListCount' type='hidden' name='pageListCount'>
 	<input id='pageCountBlock' type='hidden' name='pageCountBlock'>
@@ -156,69 +156,69 @@ function commentListWrite() {
  	
 	
 }
-function comentRead(read){ //전체 댓글 읽어오기 
-			var html = "";
-	$.ajax({	
-		url:"/textant/commentRead.comment",
-//			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
-		error : function(xhr){
-			 $("#scrollView").attr("type", "hidden");
-		},
-		data:{				
-			page:$("#page").val(),
-			nextPage:$("#nextPage").val(),
-			pageListCount:read.pageListCount,
-			pageCountBlock:read.pageCountBlock,
-			pageCut:read.pageCut,
-			bookArticleNum:read.bookArticleNum,
-			commentNum:0,
-			commentDelete:0
-		},
-		beforeSend : function(){
+// function comentRead(read){ //전체 댓글 읽어오기 
+// 			var html = "";
+// 	$.ajax({	
+// 		url:"/textant/commentRead.comment",
+// //			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
+// 		error : function(xhr){
+// 			 $("#scrollView").attr("type", "hidden");
+// 		},
+// 		data:{				
+// 			page:$("#page").val(),
+// 			nextPage:$("#nextPage").val(),
+// 			pageListCount:read.pageListCount,
+// 			pageCountBlock:read.pageCountBlock,
+// 			pageCut:read.pageCut,
+// 			bookArticleNum:read.bookArticleNum,
+// 			commentNum:0,
+// 			commentDelete:0
+// 		},
+// 		beforeSend : function(){
 			
 			
-		},
-		complete: function(){
+// 		},
+// 		complete: function(){
 			
-			commentDelete($("#page").val(),$("#nextPage").val(),read.pageListCount,read.pageCountBlock,read.pageCut,read.bookArticleNum,0,1)
+// 			commentDelete($("#page").val(),$("#nextPage").val(),read.pageListCount,read.pageCountBlock,read.pageCut,read.bookArticleNum,0,1)
 			
-			var num=$("#nextPage").val();
-			 num++;
-			 var nextPageNum = $("#nextPage").val(); 
-			 var pageCutNum = $("#pageCut").val();
-			 if(nextPageNum==pageCutNum){
-				 $("#scrollView").attr("type", "hidden");
-			 }else{
-				 $("#scrollView").attr("type", "button");
-			 }
-			 $("#nextPage").val(num);
-		},
-		success:function(data){
-			 $.each(data, function(index,item) {
-				 var commentNum=item.commentNum;
-				 var commentCount=item.commentCount;
-				 var commentGroup=item.commentGroup;
-			 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
-			 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
-			 +"<div>답글: "+item.conet+"</div>"			 
-			 +"<input type='checkbox' id='c"+commentNum+"' class='comment"+commentNum+"' name='chk' onClick='commentReply("+commentNum+","+commentCount+")' value='"+commentNum+"'><label for='c"+commentNum+"' class='commentCount"+commentNum+"'><span></span>답글달기: "+data[index].commentCount+"</label><br/>"
-			 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
-			 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
-			 +"<input type='button' class='reportComment' id='reportComment"+commentNum+"' onclick='reportComment("+commentNum+")'><label for='reportComment"+commentNum+"'><span></span>신고하기</label>"
-			 +"<input id='nextToPage"+commentNum+"' type='hidden' name='nextToPage"+commentNum+"' value='1'>"	
-			 +"<input id='commentGroup"+commentNum+"' type='hidden' name='commentGroup' value='0'>"
-			 +"<div class='fon"+commentNum+"'></div><hr></div>"
-			 });
+// 			var num=$("#nextPage").val();
+// 			 num++;
+// 			 var nextPageNum = $("#nextPage").val(); 
+// 			 var pageCutNum = $("#pageCut").val();
+// 			 if(nextPageNum==pageCutNum){
+// 				 $("#scrollView").attr("type", "hidden");
+// 			 }else{
+// 				 $("#scrollView").attr("type", "button");
+// 			 }
+// 			 $("#nextPage").val(num);
+// 		},
+// 		success:function(data){
+// 			 $.each(data, function(index,item) {
+// 				 var commentNum=item.commentNum;
+// 				 var commentCount=item.commentCount;
+// 				 var commentGroup=item.commentGroup;
+// 			 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
+// 			 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
+// 			 +"<div>답글: "+item.conet+"</div>"			 
+// 			 +"<input type='checkbox' id='c"+commentNum+"' class='comment"+commentNum+"' name='chk' onClick='commentReply("+commentNum+","+commentCount+")' value='"+commentNum+"'><label for='c"+commentNum+"' class='commentCount"+commentNum+"'><span></span>답글달기: "+data[index].commentCount+"</label><br/>"
+// 			 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
+// 			 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
+// 			 +"<input type='button' class='reportComment' id='reportComment"+commentNum+"' onclick='reportComment("+commentNum+")'><label for='reportComment"+commentNum+"'><span></span>신고하기</label>"
+// 			 +"<input id='nextToPage"+commentNum+"' type='hidden' name='nextToPage"+commentNum+"' value='1'>"	
+// 			 +"<input id='commentGroup"+commentNum+"' type='hidden' name='commentGroup' value='0'>"
+// 			 +"<div class='fon"+commentNum+"'></div><hr></div>"
+// 			 });
 		 	
-			 $(".aaa").append(html);
+// 			 $(".aaa").append(html);
 			 
 			 
 			 
-		}					
-	});
+// 		}					
+// 	});
 	
 	
-};
+// };
 function commentGet(){ //"메인 더보기"
 	
 			var html="";
