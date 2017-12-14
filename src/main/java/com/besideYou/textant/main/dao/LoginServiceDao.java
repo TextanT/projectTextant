@@ -13,5 +13,7 @@ public interface LoginServiceDao {
 	public String joinchek(String inputId);
 	
 	public LoginDto getUserNum(LoginDto loginDto);
+	
+	public String findid(String email);
 
 }

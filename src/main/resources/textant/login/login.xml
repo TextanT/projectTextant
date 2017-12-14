@@ -20,7 +20,9 @@
 	<select id="getUserNum" parameterType="login" resultType="login">
 		SELECT USERNUM,NICKNAME FROM LOGIN WHERE USERID=#{userId} AND SITEFROM = #{siteFrom}
 	</select>
-	
+	<select id="findid" parameterType="String" resultType="String">
+		SELECT USERID FROM LOGIN WHERE EMAIL = #{email}
+	</select>
 </mapper>
 	
 	

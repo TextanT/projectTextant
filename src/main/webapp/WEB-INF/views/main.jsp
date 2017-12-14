@@ -590,11 +590,13 @@
 				success : function(data) {
 					$("#booklistdiv").empty();
 					$.each(data.getMainBookList, function(index, item) {
-						html +="<div class='book_list"+(index+1)+"'>"
-						+"<a href='/textant/read.text?fileName="+item.fileLocation+"&bookType="+/* item.fileLocation.substring(item.fileLocation.lastIndexOf('.')+1) */"txt"+"'> <img "
+						html +="<div class='book_list"+(index+1)+"'style='width:176.66px; height:259px; overflow:hidden;'>"
+						+"<a href='/textant/read.text?fileName="+item.fileLocation+"&bookType="+/* item.fileLocation.substring(item.fileLocation.lastIndexOf('.')+1) */"txt"+"'>" 
+						+"<img "
 						+"src='displayFile.text?fileName="+item.fileLocation+"/OriginImg&pageNum=1&fileType=jpg'"
-							+"style='border: 1px solid #D8D8D8; position: absolute; z-index: 2;'"
+							+"style='border: 1px solid #D8D8D8; position: absolute; z-index: 2; height:28.2%; width:auto;'"
 								+"class='book_img_size'>"
+								
 							+"<div style='width: 176.66px; height: 259px; position: relative;'"
 								+"class='book_cap"+(index+1)+"' id='book_cap"+(index+1)+"'>"
 								+"<h5>"+item.bookName+"</h5>"

@@ -25,6 +25,7 @@ import com.besideYou.textant.main.converter.TempPdfService1;
 import com.besideYou.textant.main.display.DisplayService;
 import com.besideYou.textant.main.dto.BookInfoDto;
 import com.besideYou.textant.main.dto.LoginDto;
+import com.besideYou.textant.main.find.FindService;
 import com.besideYou.textant.main.login.LoginService;
 import com.besideYou.textant.main.main.MainService;
 import com.besideYou.textant.main.read.ReadService;
@@ -52,6 +53,9 @@ public class MainController {
 
 	@Autowired
 	ReadService readService;
+	
+	@Autowired
+	FindService findService;
 	
 	
 
@@ -99,10 +103,16 @@ public class MainController {
 	public String guest() {
 		return "redirect:main.text";
 	}
+	
 	@RequestMapping(value = "/find.text", method = RequestMethod.GET)
 	public String findform(HttpServletRequest req, HttpSession session) {
 		
 		return "main/findForm";
+	}
+	@RequestMapping(value = "/findid.text", method = {RequestMethod.POST,RequestMethod.GET})
+	public String findid(LoginDto loginDto, HttpSession session, Model model, String email) {
+		
+		return findService.findid(loginDto, session, model,email);
 	}
 
 	@RequestMapping(value = "/first.text")
