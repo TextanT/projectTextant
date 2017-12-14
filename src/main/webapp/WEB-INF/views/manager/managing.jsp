@@ -29,6 +29,12 @@ body {
 .main{
 background-color: #EFEEEE;
 } 
+.text-muted{
+/* font-style: italic; */
+font:bold;
+font-size: 20px; 
+padding-left: 5px;
+}
 </style>
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
 <script
@@ -94,7 +100,7 @@ padding-left: 40px;
 			</div>
 		</div>
 	</div>
-
+ 
 	<div class="sub_header">
 		<div class="menu_dd">
 			<div class="sub_sub1">

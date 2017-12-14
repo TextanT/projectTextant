@@ -33,7 +33,7 @@
 			<h4><a href="#" class="openCoWrite toggle"> 덧글쓰기 </a></h4>
 			
 			<!--서버에 넘겨야 할 것들 -->  
-			<input type="hidden" id="bookArticleNum" name="bookArticleNum" value="1">
+			<input type="hidden" id="bookArticleNum" name="bookArticleNum" value="${bookArticleNum}">
 			<input type="hidden" id="page" name="page" value="1">
 			<input type="hidden" id="nextPage" name="nextPage" value="1">
 			<input type="hidden" id="pageListCount" name="pageListCount">
