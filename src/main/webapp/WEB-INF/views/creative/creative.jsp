@@ -185,10 +185,10 @@
 	<div class="sub_header">
 		<div class="menu_dd">
 			<div class="sub_sub1">
-				<a href='myStudy.text' class='sub_header_menu1'>내서재</a>
+				<a href='' class='sub_header_menu1'>내서재</a>
 			</div>
 			<div class="sub_sub2">
-				<a href='creative.text' class='sub_header_menu2' id="sub_menu2">창작카페</a>
+				<a href='' class='sub_header_menu2' id="sub_menu2">창작카페</a>
 			</div>
 			<div class="sub_sub3">
 				<a href='serchpage.genre' class='sub_header_menu3' id="sub_menu3">장르별검색</a>
@@ -230,12 +230,12 @@
 					<div class="img-wrapper">
 						<div class="swiper-size"
 							style="height: 320px; width: 220px; overflow: hidden;">
-							<a href="/textant/read.text?fileName=${files.fileLocation}&bookType=txt" target="_black"><img
+							<a href="/textant/read.text?fileName=${files.fileLocation}&bookType=txt"><img
 								src="displayFile.text?fileName=${files.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
 								style="display: block; height: 100%; width: auto; border: 1px solid #e8e8e8;"
 								class="bookimg" /></a>
 						</div>
-						<a href="/textant/read.text?fileName=${files.fileLocation}&bookType=txt" target="_black"> <span
+						<a href="/textant/read.text?fileName=${files.fileLocation}&bookType=txt"> <span
 							class="bookname" style="text-align: center;">${files.bookName}</span><br />
 							<span class="bookname">${files.userNum}</span>
 						</a>
@@ -329,18 +329,18 @@
 				<div class="tab_container">
 					<div id="tab1" class="tab_content">
 						<ul>
-						<c:forEach var="noticeList" items="${getFirstNoticeList}">
-							<li><c:out value="${noticeList.writeDate.substring(0,10)}"/> 
-							<c:out value="${noticeList.title}"/></li>
-						</c:forEach>
+							<li><a href="#">17/11/24 공지사항 입니다.</a></li>
+							<li><a href="#">17/11/25 공지사항 입니다.</a></li>
+							<li><a href="#">17/11/26 공지사항 입니다.</a></li>
+							<li><a href="#">17/11/27 공지사항 입니다.</a></li>
 						</ul>
 					</div>
 					<div id="tab2" class="tab_content">
 						<ul>
-						<c:forEach var="eventList" items="${getFirstEventList}">
-							<li><c:out value="${eventList.writeDate.substring(0,10)}"/> 
-							<c:out value="${eventList.title}"/></li>
-						</c:forEach>
+							<li><a href="#">17/11/24 업데이트 입니다.</a></li>
+							<li><a href="#">17/11/24 업데이트 입니다.</a></li>
+							<li><a href="#">17/11/24 업데이트 입니다.</a></li>
+							<li><a href="#">17/11/24 업데이트 입니다.</a></li>
 						</ul>
 					</div>
 				</div>
@@ -591,21 +591,24 @@
 					$("#booklistdiv").empty();
 					$.each(data.getMainBookList, function(index, item) {
 						html +="<div class='book_list"+(index+1)+"'style='width:176.66px; height:259px; overflow:hidden;'>"
-						+"<a href='/textant/read.text?fileName="+item.fileLocation+"&bookType="+/* item.fileLocation.substring(item.fileLocation.lastIndexOf('.')+1) */"txt"+"' target='_black'> <img "
+						+"<a href='/textant/read.text?fileName="+item.fileLocation+"&bookType="+/* item.fileLocation.substring(item.fileLocation.lastIndexOf('.')+1) */"txt"+"'>" 
+						+"<img "
 						+"src='displayFile.text?fileName="+item.fileLocation+"/OriginImg&pageNum=1&fileType=jpg'"
 							+"style='border: 1px solid #D8D8D8; position: absolute; z-index: 2; height:28.2%; width:auto;'"
 								+"class='book_img_size'>"
 								
 							+"<div style='width: 176.66px; height: 259px; position: relative;'"
 								+"class='book_cap"+(index+1)+"' id='book_cap"+(index+1)+"'>"
-								+"<h5>"+item.bookName+"</h5>" 
+								+"<h5>"+item.bookName+"</h5>"
 								+"<p>"+item.userNum+"</p>"
 								+"<br>"
-								+"<p style='text-overflow: ellipsis; overflow:hidden; word-break:break-all;max-height:180px;'>"+item.bookDesc +"</p>"
+								+"<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다."
+								+"이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>"
 								+"</div>"
 								+"</a>"
 								+"</div>"
 					});
+					
 
 					$("#booklistdiv").append(html);
 					

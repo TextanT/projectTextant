@@ -371,7 +371,10 @@ body {
 		</div>
 
 	</div>
-
+	<div class="fristG">
+		<img src="/textant/resources/img/fritsg.gif" style="padding-left: 280px;padding-top:163px;
+		position: absolute;">
+	</div>
 	<div class="box1">
 		<form action="login.text" method="post" id="loginForm">
 			<div id="box1_Id" class="box1_Id">
