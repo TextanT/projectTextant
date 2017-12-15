@@ -61,9 +61,11 @@ public class CommentController {
 	@RequestMapping(value="/commentRead.comment")
 	@ResponseBody
 	public List<CommentDto> commentRead(HttpSession session, int page,int nextPage,int pageListCount,int pageCountBlock,int pageCut,int bookArticleNum,int commentNum,int commentDelete){
-		System.out.println("commentRead 사용핬어영");
-		int userNum=(int)session.getAttribute("userNum");
-		System.out.println(userNum);
+		int userNum=0;
+		if(session.getAttribute("userNum")!=null) {
+		userNum=(int)session.getAttribute("userNum");
+		}
+		
 		return commentService.scrollView(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete,userNum);
 	}
 	
@@ -86,25 +88,44 @@ public class CommentController {
 	@RequestMapping(value="/commentWrite.comment")
 	@ResponseBody
 	public HashMap<String, Integer> scrollWrite(CommentDto commentDto,int page,int commentTo,int commentTop,HttpSession session,int commentCheck) {
-		commentDto.setPageGroup(page);
-		commentDto.setUserNum((int)session.getAttribute("userNum"));
-		
+		HashMap<String,Integer> natLogin;
+		if(session.getAttribute("userNum")!=null) {
+			commentDto.setPageGroup(page);
+			commentDto.setUserNum((int)session.getAttribute("userNum"));
+			}else {
+				natLogin= new HashMap<>();
+				natLogin.put("ScrollResetDivision", 3);
+				return natLogin;
+			}
 		return commentService.scroll(commentDto,commentTo,commentTop);
 	}
 
 	@RequestMapping(value="/commentGoodOrBad.comment")
 	@ResponseBody
 	public HashMap<String, Integer> commentGoodOrBad(HttpSession session, int commentNum,int commentGoodOrBad){
-//		String userNum = (String)session.getAttribute("userNum");
-		int userNum=(int)session.getAttribute("userNum");;
+		HashMap<String,Integer> natLogin;
+		int userNum=0;
+		if(session.getAttribute("userNum")!=null) {
+			userNum=(int)session.getAttribute("userNum");
+			}else {
+				natLogin= new HashMap<>();
+				natLogin.put("commentGoodOrBadAllCount", 0);
+				natLogin.put("commentGoodOrBadAllCheck", 3);
+				return natLogin;
+			}
+		
 		return commentService.commentGoodOrBad(commentNum,commentGoodOrBad,userNum);
 	}
 	
 	@RequestMapping(value="/reportComment.comment")
 	@ResponseBody
 	public int reportComment(HttpSession session, int commentNum){
-//		String userNum = (String)session.getAttribute("userNum");
-		int userNum=(int)session.getAttribute("userNum");;
+		int userNum=0;
+		if(session.getAttribute("userNum")!=null) {
+			userNum=(int)session.getAttribute("userNum");
+			}else {
+				return 3;
+			}
 		return commentService.reportComment(commentNum,userNum);
 	}
 	

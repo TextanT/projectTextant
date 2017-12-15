@@ -277,7 +277,7 @@
 	 			}
 	 		},
 			success: function(data){
-				if(data.ScrollResetDivision != 0){
+				if(data.ScrollResetDivision == 1){
 					commentNum = $("#commentTop").val();
 					scrollCommentTopCount = data.scrollCommentTopCount;
 					scrollResetDivision = data.ScrollResetDivision;
@@ -287,23 +287,17 @@
 					$(".coPlace").val("");
 					$(".commentToText"+commentNum).val("");
 					
-				}else{
+				}else if(data.ScrollResetDivision == 0){
 					$("#nowP").empty();
 					$("#coShowBox").empty();
 					$("#nextPageR").val(1);
 					$(".coPlace").val("");
 					$(".commentToText"+commentNum).val("");
 					commentCount()
+				}else{
+					alert("로그인 하셔야 가능한 서비스 입니다");
 				}
 			},
-// 			complete: function(){
-// 				if(scrollResetDivision != 0){
-// 					$(".comment"+commentNum).html("댓글보기("+scrollCommentTopCount+")");	
-// 					$("#reCoWrite"+commentNum).attr("onClick","commentReply("+commentNum+","+commentCount+")");
-// 					commentReply(commentNum,scrollCommentTopCount);
-// 				}
-				
-// 			}
 		});
 	}
 	function commentDelete(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete){

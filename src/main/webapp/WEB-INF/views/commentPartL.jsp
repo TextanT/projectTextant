@@ -449,6 +449,8 @@ function commentGoodOrBad(commentNum,commentGoodOrBad){
 				alert("이미싫어요눌렀엉");
 			}else if(coodBadCheck==2){
 				alert("이미좋아요눌렀엉");
+			}else if(coodBadCheck==3){
+				alert("로그인 하셔야 가능한 서비스 입니다")
 			}
 			 
 		}					
@@ -530,8 +532,10 @@ function reportComment(commentNum){
 		success:function(data){
 			if(data==1){
 				alert("정상적으로 신고 되었습니다");
-			}else{
+			}else if(data==0){
 				alert("이미 신고 하셨습니다");
+			}else{
+				alert("로그인 하셔야 가능한 서비스 입니다");
 			}
 			
 		}					
