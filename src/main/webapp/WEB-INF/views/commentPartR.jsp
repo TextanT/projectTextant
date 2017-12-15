@@ -92,7 +92,8 @@
 		async:true,
 		dataType:"json",
 	});
-	
+	var commentGood=1;
+	var commentBad=2;
 	$(document).ready(function(){
 		$('#moreSee').click(function(){
 			commentGet_R();
@@ -121,61 +122,60 @@
 	 		commentNumber = $(".coPlace").val();
 	 		$("#conet").val(commentNumber);
 	 	});
+	 	
+	 	$(".coWriteBtn").click(function (){ //답글 쓰기 
+			commentWrite();
+		});
 	});
 	
-// 	function commentCount(){
-// 		$.ajax({
-// 			url:"/textant/commentCount.comment",
-// 			type:"POST",
-// 			async:true,
-// 			dataType:"json",
-// 			data:{
-// 				page:$("#pageR").val(),
-// 				bookArticleNum:$("#bookArticleNum").val()
-// 			},
-// 			error : function(xhr){
-// 				alert("error html = " + xhr.statusText);
-// 			},
-// 			success: function(json){
-				
-								
-// 				$(".open1").click(function(){
-// 					$(".RightWrap").animate({right:170},500,"swing") 
-// 					if(".open1") event.stopImmediatePropagation();
+	
+	function commentToGet(commentNum,commentCount){ //답글 의 답글의 더 보기
+		var num=commentCount/$("#pageSize").val();
+		var number=Math.ceil(num);
+			 $.ajax({	
+					url:"/textant/commentRead.comment",
+					data:{		
+						page:$("#pageR").val(),
+						nextPage:$("#nextToPage"+commentNum).val(),
+						pageListCount:commentCount,
+						pageCountBlock:$("#pageCountBlock").val(),
+						pageCut:number,
+						bookArticleNum:$("#bookArticleNum").val(),
+						commentNum:commentNum,
+						commentDelete:0
+					},
+					beforeSend : function(){
+					},
+					complete: function(){
+						commentDelete($("#pageR").val(),$("#nextToPage"+commentNum).val(),commentCount,$("#pageCountBlock").val(),number,$("#bookArticleNum").val(),commentNum,1)
+						var num=$("#nextToPage"+commentNum).val()
+						 num++;
+						 	
+						 var nextPageNum = $("#nextToPage"+commentNum).val();
+						 if(nextPageNum==number){
+							 $("#scrollViewTo"+commentNum).attr("type", "hidden");
+						 }
+						 $("#nextToPage"+commentNum).val(num);
+					},
+					success:function(data){
 					
-// 					setTimeout(function() {
-// 						alert("작동성공");
-// 						let currPage = $(".sample-docs").turn("page");
-// 						let nowPage = (Math.floor(currPage/2))*2;
-						
-// 						let html="<span id='nowP'>"+json.pageCountBlock+"p ~ "+nowPage+"p ┃   현재페이지 : "+nowPage+"p ┃   댓글 "+json.pageListCount+"개</span>";
-// 						$("#nowP").remove();
-// 						$("#infoOne").append(html);
-						
-// 						$("#pageListCount").val(json.pageListCount);
-// 						$("#pageCountBlock").val(json.pageCountBlock);
-// 						$("#pageCut").val(json.pageCut);
-// 						$("#pageSize").val(json.pageSize);
-						
-						
-// 					}, 1000);
-					
-// 				});
-				
-// 				$(".sample-docs").bind('turning',function(){
-// 					setTimeout(function() {
-// 						let currPage = $(".sample-docs").turn("page");
-// 						$("#pageGo").attr('placeholder',(Math.floor(currPage/2))*2);
-// 						$("#pageR").attr('value',(Math.floor(currPage/2))*2);
-// 						$("#pageL").attr('value',(Math.floor(currPage/2))*2);
-// 					},50);
-// 				});
-				
-// 				commentRead(json);
-				
-// 			},
-// 		});
-// 	}
+						var html="";
+						 $.each(data, function(index,item) {
+							 var commentNum=item.commentNum;
+							 var commentCount=item.commentCount;
+							 var commentGroup=item.commentGroup;
+							 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
+							 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
+							 +"<div>답글: "+item.conet+"</div>"			
+							 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
+							 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
+							 +"<hr></div>"
+							 });
+						 $(html).insertAfter($(".innerReply"+commentNum).children("div").last());
+					}					
+				}); 
+			
+	}
 	function commentGet_R(){ //"메인 더보기"
 		let html="";
 		$.ajax({	
@@ -247,7 +247,9 @@
 
 	
 	
-	$(".coWriteBtn").click(function(){ //답글 쓰기 
+	
+	
+	function commentWrite(){ //답글 쓰기 
 		let commentNum="";
 		let scrollCommentTopCount="";
 		let scrollResetDivision="";
@@ -259,7 +261,7 @@
 				commentTo:$("#commentTo").val(),
 				commentTop:$("#commentTop").val(),
 				commentCheck:$("#commentCheck").val(),
-				conet:$("#coPlace").val(),
+				conet:$("#conet").val(),
 				depth:$("#depth").val(),
 				bookArticleNum:$("#bookArticleNum").val(),
 				commentGroup:$("#commentGroup").val()
@@ -267,6 +269,13 @@
 			error : function(xhr){
 				alert("error html = " + xhr.statusText);
 			},
+			complete: function(){
+	 			if(scrollResetDivision!=0){
+	 			$(".commentCount"+commentNum).html("<span></span>답글달기: "+scrollCommentTopCount);	
+	 			$("#commentCount"+commentNum).attr("onClick","commentReply("+commentNum+","+commentCount+")");
+	 			commentReply(commentNum,scrollCommentTopCount);
+	 			}
+	 		},
 			success: function(data){
 				if(data.ScrollResetDivision != 0){
 					commentNum = $("#commentTop").val();
@@ -284,52 +293,83 @@
 					$("#nextPageR").val(1);
 					$(".coPlace").val("");
 					$(".commentToText"+commentNum).val("");
-					commentCount();
+					commentCount()
 				}
 			},
-			complete: function(){
-				if(scrollResetDivision != 0){
-					$(".comment"+commentNum).html("댓글보기("+scrollCommentTopCount+")");	
-					$("#reCoWrite"+commentNum).attr("onClick","commentReply("+commentNum+","+commentCount+")");
-					commentReply(commentNum,scrollCommentTopCount);
-				}
+// 			complete: function(){
+// 				if(scrollResetDivision != 0){
+// 					$(".comment"+commentNum).html("댓글보기("+scrollCommentTopCount+")");	
+// 					$("#reCoWrite"+commentNum).attr("onClick","commentReply("+commentNum+","+commentCount+")");
+// 					commentReply(commentNum,scrollCommentTopCount);
+// 				}
 				
-			}
+// 			}
 		});
-	});
-	
-
-	//오른쪽 댓글보기 창에 대한,전체 댓글 정보 가져오기
-// 	function commentInfo(){
-
-// 		let currPage = $(".sample-docs").turn("page");
-// 		let nowPage = (Math.floor(currPage/2))*2;
-		
-// 		let html="<span id='nowP'>"+json.pageCountBlock+"p ~ "+nowPage+"p ┃   현재페이지 : "+nowPage+"p ┃   댓글 "+json.pageListCount+"개</span>";
-// 		$("#nowP").remove();
-// 		$("#infoOne").append(html);
-		
-// 		$("#pageListCount").val(json.pageListCount);
-// 			$("#pageCountBlock").val(json.pageCountBlock);
-// 			$("#pageCut").val(json.pageCut);
-// 			$("#pageSize").val(json.pageSize);
-			
-// 			commentRead(json);
-		
-// 	};
-	
-	
-	//ellipsisView//답글 text-overflow:ellipsis 더보기 
-	
-	//commentReply('+commentNum+','+commentCount+')//답글의 답글보기
-	
+	}
+	function commentDelete(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete){
+		 $.ajax({	
+				url:"/textant/commentRead.comment",
+				data:{		
+					page:page,
+					nextPage:nextPage,
+					pageListCount:pageListCount,
+					pageCountBlock:pageCountBlock,
+					pageCut:pageCut,
+					bookArticleNum:bookArticleNum,
+					commentNum:commentNum,
+					commentDelete:commentDelete
+				},
+				beforeSend : function(){
+				},
+				complete: function(){
+					
+				},
+				success:function(data){
+				
+					$.each(data, function(index,item) {
+						 var commentNum=item.commentNum;
+					 	$("#commentDeleteButton"+commentNum).attr("type", "button");
+					 });
+					
+					
+				}					
+			});
+	}
+	function commentDeleteOk(commentNum,commentGroup){
+		var commentCountNum ="";
+		$.ajax({	
+			url:"/textant/commentDelete.comment",
+			data:{		
+				commentNum:commentNum,
+				commentGroup:commentGroup
+			},
+			beforeSend : function(){
+			},
+			complete: function(){
+				if(commentGroup!=0){
+					$(".commentCount"+commentGroup).html("<span></span>답글달기: "+commentCountNum);	
+					$("#commentCount"+commentGroup).attr("onClick","commentReply("+commentGroup+","+commentCountNum+")");
+					commentReply(commentGroup,commentCount);
+					}
+			},
+			success:function(data){
+				commentCountNum =data;
+				if(commentGroup!=0){
+					$("#nextToPage"+commentGroup).val(1);
+					$("#commentGroup"+commentGroup).val(0);
+				}else{
+					$("#nowP").empty();
+					$("#coShowBox").empty();
+					$("#nextPageR").val(1);
+					commentCount();
+				}
+			}					
+		});
+	}
 	function commentReply(commentNum,commentCount){ 
-// 	console.log(commentCount);
-		alert("commentReply");
 	var num=commentCount/$("#pageSize").val();
 	var number=Math.ceil(num);
 	 if($(".comment"+commentNum).is(":checked")){
-		 alert("commentReply1");
 		 $.ajax({	
 				url:"/textant/commentRead.comment",
 				error : function(xhr){
@@ -340,7 +380,7 @@
 					  $(".innerReply"+commentNum).append(html);
 				},
 				data:{		
-					page:$("#page").val(),
+					page:$("#pageR").val(),
 					nextPage:$("#nextToPage"+commentNum).val(),
 					pageListCount:commentCount,
 					pageCountBlock:$("#pageCountBlock").val(),
@@ -363,14 +403,14 @@
 					 $("#nextToPage"+commentNum).val(num);
 					 $("#commentGroup"+commentNum).val(1);
 					 
-					 var commentNumBer="";
+					 var commentNumber="";
 						$(".commentToWrite"+commentNum).on("mousedown", function() {
-							commentNumBer = 1;
-							$("#commentTo").val(commentNumBer);
-							commentNumBer = $(".conetToText"+commentNum).val();
-							$("#conet").val(commentNumBer);
-							commentNumBer = commentNum;
-							$("#commentTop").val(commentNumBer);
+							commentNumber = 1;
+							$("#commentTo").val(commentNumber);
+							commentNumber = $(".conetToText"+commentNum).val();
+							$("#conet").val(commentNumber);
+							commentNumber = commentNum;
+							$("#commentTop").val(commentNumber);
 						});
 						
 					
@@ -411,7 +451,6 @@
 			}); 
 		 
 	 	}else{
-	 		 alert("commentReply1");
 	 		$("#commentGroup"+commentNum).val(0);
 	 		$("#nextToPage"+commentNum).val(1);
 	 		$(".innerReply"+commentNum).empty();

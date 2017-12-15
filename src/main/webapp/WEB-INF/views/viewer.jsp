@@ -539,19 +539,9 @@ yepnope({
 	both: ['/textant/resources/css/docs1.css', '/textant/resources/js/docs.js'],
 	complete: loadApp
 });
-//*******************
 
 
 
-
-
-
-
-//*******************오른쪽 슬라이드 
-// $(document).ready(function(){
-// 	alert("commentCount()ready");
-// 	commentCount();
-// 	});
 	$(".sample-docs").bind('turning',function(){
 				setTimeout(function() {
 					let currPage = $(".sample-docs").turn("page");
@@ -560,8 +550,8 @@ yepnope({
 					$("#pageL").attr('value',(Math.floor(currPage/2))*2);
 				},50);
 			});
+	
 function commentCount(){
-	alert("commentCount()");
 	$.ajax({
 		url:"/textant/commentCount.comment",
 		type:"POST",
@@ -635,6 +625,11 @@ function commentRead(read){
 			 }
 			 
 			 $("#nextPageR").val(num);
+			 
+			 $(".close1").on("click",function(){
+			 		$("#coShowBox").empty();
+			 		$("#nextPageR").val(1);
+				});
 
 		},
 		success: function(data){
