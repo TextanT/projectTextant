@@ -131,20 +131,7 @@ body {
 		</div>
 	</div>
 
-	<footer>
-		<div>
-			<img height="50px" src="/textant/resources/icon_img/footer_logo.png"
-				class="footer_img">
-		</div>
-		<address>
-			Tel. 010-1234-1234<br> Fax. 051)555-555<br> E-Mail.
-			cwj1102@naver.com<br> 주소. 부산광역시 남구 신선로 365 부경대학교<br> <br>
-			<br> <a href="#" class="foo_a">회사소개</a> <a href="#"
-				class="foo_a">광고문의</a> <a href="#" class="foo_a">제휴문의</a> <a
-				href="#" class="foo_a">인재채용</a> <a href="#" class="foo_a">서비스약관</a>
-			<a href="#" class="foo_a">고객센터</a> <a href="#" class="foo_a">Q&A게시판</a>
-		</address>
-	</footer>
+	<%@include file="../footer.jsp" %>
 
 	<div style="position: fixed; bottom: 15px; right: 30px;">
 		<a href="#" id="MOVE_TOP_BTN"><img

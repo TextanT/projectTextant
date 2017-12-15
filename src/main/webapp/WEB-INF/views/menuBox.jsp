@@ -67,6 +67,13 @@
 					placeholder="비밀번호" name="pass" id="mologinPass">
 				</span>
 			</div>
+			<div class="apiLogo">
+<!-- 			<a href="naverlogin.text" style="position:absolute; left:19%;top:33%;"><img src="/textant/resources/icon_img/naver_width_bar.png"></a> -->
+<!-- 			<a href="kakao.text" style="position:absolute; left:19%;top:40%;"><img src="/textant/resources/icon_img/kakao_width_bar.png"></a> -->
+		
+		<%@include file="api/naverApi.jsp" %>
+		<%@include file="api/kakaoApi.jsp" %>
+			</div>
 			<div class="login_div">
 				<a href="#" class="login_btn" id="login_mit">로그인</a>
 			</div>
