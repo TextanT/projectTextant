@@ -349,7 +349,7 @@
 				if(commentGroup!=0){
 					$(".commentCount"+commentGroup).html("<span></span>답글달기: "+commentCountNum);	
 					$("#commentCount"+commentGroup).attr("onClick","commentReply("+commentGroup+","+commentCountNum+")");
-					commentReply(commentGroup,commentCount);
+					commentReply(commentGroup,commentCountNum);
 					}
 			},
 			success:function(data){
