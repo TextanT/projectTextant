@@ -29,12 +29,12 @@ public class myStudyPage {
 
 		sb = new StringBuffer();
 		if(startPage < pageBlock) {
-			sb.append("<img src='images/hot.png' width='30' height='9'>");			
+			sb.append("<span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>");			
 		} else {
-			sb.append("<img src='images/hot.png' width='30' height='9'");
+			sb.append("<span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"");
 			sb.append(" onclick='location.href=\"myCommentView.text?pageNum=");
 			sb.append(startPage - pageBlock);
-			sb.append("\"' style='cursor:pointer'> ");
+			sb.append("\"' style='cursor:pointer'></span> ");
 		}
 		
 		sb.append("&nbsp;&nbsp;|");
@@ -54,12 +54,12 @@ public class myStudyPage {
 		
 		sb.append("&nbsp;&nbsp;|");		
 		if(endPage < totalPage) {
-			sb.append("<img src='images/hot.png' width='30' height='9'");
+			sb.append("&nbsp;&nbsp;<span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"");
 			sb.append(" onclick='location.href=\"myCommentView.text?pageNum=");
 			sb.append(startPage + pageBlock);
-			sb.append("\"' style='cursor:pointer'> ");						
+			sb.append("\"' style='cursor:pointer'></span> ");						
 		} else {
-			sb.append("<img src='images/hot.png' width='30' height='9'>");			
+			sb.append("&nbsp;&nbsp;<span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>");			
 		}	
 
 		pagingMap.put("pageCode", sb.toString());

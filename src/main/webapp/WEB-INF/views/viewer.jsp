@@ -539,68 +539,56 @@ yepnope({
 	both: ['/textant/resources/css/docs1.css', '/textant/resources/js/docs.js'],
 	complete: loadApp
 });
-//*******************
 
 
 
+	$(".sample-docs").bind('turning',function(){
+				setTimeout(function() {
+					let currPage = $(".sample-docs").turn("page");
+					$("#pageGo").attr('placeholder',(Math.floor(currPage/2))*2);
+					$("#pageR").attr('value',(Math.floor(currPage/2))*2);
+					$("#pageL").attr('value',(Math.floor(currPage/2))*2);
+				},50);
+			});
+	
+function commentCount(){
+	$.ajax({
+		url:"/textant/commentCount.comment",
+		type:"POST",
+		async:true,
+		dataType:"json",
+		data:{
+			page:$("#pageR").val(),
+			bookArticleNum:$("#bookArticleNum").val()
+		},
+		error : function(xhr){
+			alert("error html = " + xhr.statusText);
+		},
+		success: function(json){
 
-
-
-
-//*******************오른쪽 슬라이드 
-$(document).ready(function(){
-		$.ajax({
-			url:"/textant/commentCount.comment",
-			type:"POST",
-			async:true,
-			dataType:"json",
-			data:{
-				page:$("#page").val(),
-				bookArticleNum:$("#bookArticleNum").val()
-			},
-			error : function(xhr){
-				alert("다불러오는거")
-				alert("error html = " + xhr.statusText);
-			},
-			success: function(json){
+			
+			setTimeout(function() {
+				let currPage = $(".sample-docs").turn("page");
+				let nowPage = (Math.floor(currPage/2))*2;
 				
-								
-				$(".open1").click(function(){
-					$(".RightWrap").animate({right:170},500,"swing") 
-					if(".open1") event.stopImmediatePropagation();
-					
-					setTimeout(function() {
-						let currPage = $(".sample-docs").turn("page");
-						let nowPage = (Math.floor(currPage/2))*2;
-						
-						let html="<span id='nowP'>"+json.pageCountBlock+"p ~ "+nowPage+"p ┃   현재페이지 : "+nowPage+"p ┃   댓글 "+json.pageListCount+"개</span>";
-						$("#nowP").remove();
-						$("#infoOne").append(html);
-						
-						$("#pageListCount").val(json.pageListCount);
-						$("#pageCountBlock").val(json.pageCountBlock);
-						$("#pageCut").val(json.pageCut);
-						$("#pageSize").val(json.pageSize);
-						
-						
-					}, 1000);
-					
-				});
+				let html="<span id='nowP'>"+json.pageCountBlock+"p ~ "+nowPage+"p ┃   현재페이지 : "+nowPage+"p ┃   댓글 "+json.pageListCount+"개</span>";
+				$("#nowP").remove();
+				$("#infoOne").append(html);
 				
-				$(".sample-docs").bind('turning',function(){
-					setTimeout(function() {
-						let currPage = $(".sample-docs").turn("page");
-						$("#pageGo").attr('placeholder',(Math.floor(currPage/2))*2);
-						
-					},100);
-				});
+				$("#pageListCount").val(json.pageListCount);
+				$("#pageCountBlock").val(json.pageCountBlock);
+				$("#pageCut").val(json.pageCut);
+				$("#pageSize").val(json.pageSize);
 				
-				commentRead(json);
 				
-			},
-		});
+			}, 10);
+			
+			
+			commentRead(json);
+			
+		},
 	});
-
+}
 //전체 댓글 읽어오기
 function commentRead(read){
 	let html= "";
@@ -610,8 +598,8 @@ function commentRead(read){
 		async:true,
 		dataType:"json",
 		data:{
-			page:$("#page").val(),
-			nextPage:$("#nextPage").val(),
+			page:$("#pageR").val(),
+			nextPage:$("#nextPageR").val(),
 			pageListCount:read.pageListCount,
 			pageCountBlock:read.pageCountBlock,
 			pageCut:read.pageCut,
@@ -623,12 +611,12 @@ function commentRead(read){
 			alert("덜불러오는거");
 			alert("error html = " + xhr.statusText);
 		},
-		complete: function(){		
-			commentDelete($("#page").val(),$("#nextPage").val(),read.pageListCount,read.pageCountBlock,read.pageCut,read.bookArticleNum,0,1)
+		complete: function(){	
+			commentDelete($("#pageR").val(),$("#nextPageR").val(),read.pageListCount,read.pageCountBlock,read.pageCut,read.bookArticleNum,0,1)
 			
-			var num=$("#nextPage").val();
+			var num=$("#nextPageR").val();
 			 num++;
-			 var nextPageNum = $("#nextPage").val(); 
+			 var nextPageNum = $("#nextPageR").val(); 
 			 var pageCutNum = $("#pageCut").val();
 			 
 			 if(nextPageNum==pageCutNum){
@@ -637,7 +625,12 @@ function commentRead(read){
 				 $("#moreSee").attr("type", "button");
 			 }
 			 
-			 $("#nextPage").val(num);
+			 $("#nextPageR").val(num);
+			 
+			 $(".close1").on("click",function(){
+			 		$("#coShowBox").empty();
+			 		$("#nextPageR").val(1);
+				});
 
 		},
 		success: function(data){
@@ -666,11 +659,12 @@ function commentRead(read){
 						'<a href="#" class="commentGood'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentGood+')">좋아요</a> ┃'+ 
 						'<a href="#" class="commentBad'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentBad+')">싫어요</a> ┃'+
 						'<a href="#" class="reportComment" id="reportComment'+commentNum+'" onclick="reportComment('+commentNum+')">신고하기</a> ┃'+
-						'<a href="#" id="reCoWrite'+commentNum+'" class="toggle2" onclick="commentReplyWrite('+commentNum+')">댓글쓰기</a>'+
+// 						'<a href="#" id="reCoWrite'+commentNum+'" class="toggle2" onclick="commentReplyWrite('+commentNum+')">댓글쓰기</a>'+
+						"<input type='checkbox' id='c"+commentNum+"' class='comment"+commentNum+"' name='chk' onClick='commentReply("+commentNum+","+commentCount+")' value='"+commentNum+"'><label for='c"+commentNum+"' class='commentCount"+commentNum+"'><span></span>답글달기: "+data[index].commentCount+"</label>"+
 						'<input id="nextToPage'+commentNum+'" type="hidden" name="nextToPage'+commentNum+'" value="1">'+	
 						'<input id="commentGroup'+commentNum+'" type="hidden" name="commentGroup" value="0">'+
 					'</td>'+
-				'</tr></table></div>'
+				'</tr></table><div class="innerReply'+commentNum+'"></div></div>'
 			 });
 			$("#coShowBox").append(html);
 		}
