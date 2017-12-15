@@ -28,12 +28,13 @@
 	<div id="coWrite">
 		<!-- 현재페이지 댓글 보기 -->
 		<span id="infoOne"></span>
-		
+		<c:if test="${id!=null}">
 			<h4><a href="#" class="openCoWrite toggle"> 덧글쓰기 </a></h4>
-			
+			</c:if>
 			<!--서버에 넘겨야 할 것들 -->  
 			<input type="hidden" id="bookArticleNum" name="bookArticleNum" value="${bookArticleNum}">
 			<input type="hidden" id="pageR" name="page" value="1">
+			<input type="hidden" id="loginCheck" name="loginCheck" value="${id}">
 			<input type="hidden" id="nextPageR" name="nextPageR" value="1">
 			<input type="hidden" id="pageListCount" name="pageListCount">
 			<input type="hidden" id="pageCountBlock" name="pageCountBlock">
@@ -361,18 +362,30 @@
 			}					
 		});
 	}
+	
 	function commentReply(commentNum,commentCount){ 
 	var num=commentCount/$("#pageSize").val();
 	var number=Math.ceil(num);
+	var loginCheck=$("#loginCheck").val();
 	 if($(".comment"+commentNum).is(":checked")){
 		 $.ajax({	
 				url:"/textant/commentRead.comment",
 				error : function(xhr){
+					var loginCheckOk="";
 					alert("읽어들일 코맨트 업엉ㅋ");
-					html="<div>답글을 남겨주세요.</div>"
-					  +"<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
-					  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
-					  $(".innerReply"+commentNum).append(html);
+					if (loginCheck == "") {
+						alert("로그인 하셔야 가능한 서비스 입니다");
+					}else{
+						
+						loginCheckOk+="<div>답글을 남겨주세요.</div>"
+							  +"<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
+							  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
+							  $(".innerReply"+commentNum).append(loginCheckOk);
+					}
+// 					html="<div>답글을 남겨주세요.</div>"
+// 					  +"<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
+// 					  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
+// 					  $(".innerReply"+commentNum).append(html);
 				},
 				data:{		
 					page:$("#pageR").val(),
@@ -423,6 +436,7 @@
 					 		});
 				},
 				success:function(data){
+					
 					var html="<hr>";
 					 $.each(data, function(index,item) {
 						 var commentNum=item.commentNum;
@@ -437,11 +451,11 @@
 					 });
 					 $(".innerReply"+commentNum).append(html);
 					 html="<input class='scrollViewTo' id='scrollViewTo"+commentNum+"' type='button' onclick='commentToGet("+commentNum+","+commentCount+")' value='더보기' style='width:380px;'>"
-						  +"<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
+					 if(loginCheck!=""){
+						 html+="<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
 						  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
-						  $(".innerReply"+commentNum).append(html);
-						  
-					 
+						  }
+					 $(".innerReply"+commentNum).append(html);
 				}					
 			}); 
 		 
@@ -496,6 +510,29 @@
 		}					
 	}); 
 }
+	function reportComment(commentNum){
+		$.ajax({	
+			url:"/textant/reportComment.comment",
+			data:{		
+				commentNum:commentNum
+			},
+			beforeSend : function(){
+			},
+			complete: function(){
+				
+			},
+			success:function(data){
+				if(data==1){
+					alert("정상적으로 신고 되었습니다");
+				}else if(data==0){
+					alert("이미 신고 하셨습니다");
+				}else{
+					alert("로그인 하셔야 가능한 서비스 입니다");
+				}
+				
+			}					
+		});
+	}
 	//reportComment('+commentNum+')//신고하기
 	
 	//commentDeleteOk('+commentNum+','+commentGroup+')//삭제하기

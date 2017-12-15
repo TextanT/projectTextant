@@ -21,27 +21,27 @@ input[type="checkbox"]{
 
 </head>
 <body>		
-	<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="${bookArticleNum}">
-	<input id="pageL" type="hidden" name="page" value="1">
-	<input id="nextPage" type="hidden" name="nextPage" value="1">
-	<input id='pageListCount' type='hidden' name='pageListCount'>
-	<input id='pageCountBlock' type='hidden' name='pageCountBlock'>
-	<input id='pageCut' type='hidden' name='pageCut'>
-	<input id='pageSize' type='hidden' name='pageSize'>
-	<input id='commentTo' type='hidden' name='commentTo'>
-	<input id='conet' type='hidden' name='conet'>
-	<input id='commentTop' type="hidden" name='commentTop' value='0'>
-	<input id='commentCheck' type="hidden" name='commentCheck' value='0'>
+<%-- 	<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="${bookArticleNum}"> --%>
+<!-- 	<input id="pageL" type="hidden" name="page" value="1"> -->
+<!-- 	<input id="nextPage" type="hidden" name="nextPage" value="1"> -->
+<!-- 	<input id='pageListCount' type='hidden' name='pageListCount'> -->
+<!-- 	<input id='pageCountBlock' type='hidden' name='pageCountBlock'> -->
+<!-- 	<input id='pageCut' type='hidden' name='pageCut'> -->
+<!-- 	<input id='pageSize' type='hidden' name='pageSize'> -->
+<!-- 	<input id='commentTo' type='hidden' name='commentTo'> -->
+<!-- 	<input id='conet' type='hidden' name='conet'> -->
+<!-- 	<input id='commentTop' type="hidden" name='commentTop' value='0'> -->
+<!-- 	<input id='commentCheck' type="hidden" name='commentCheck' value='0'> -->
 	
-	<!-- 덧글을 보여주는 책의 페이지 / 현재페이지 / 전체답글 갯수 -->
-	<div class="bbb"></div>
+<!-- 	<!-- 덧글을 보여주는 책의 페이지 / 현재페이지 / 전체답글 갯수 --> -->
+<!-- 	<div class="bbb"></div> -->
 		
-	<div class="ccc" style="overflow-y:scroll;width:400px;height:500px;">
-			<div class="aaa"></div>
-		<input class="scrollView" id="scrollView" type="button" onclick="commentGet()" value="더보기" style="width:380px;">
-	</div>
-	<input class="conetText" name="conetText" type="text">
-	<input class="commentWrite" type="button" onclick="commentWrite()" value="쓰기">
+<!-- 	<div class="ccc" style="overflow-y:scroll;width:400px;height:500px;"> -->
+<!-- 			<div class="aaa"></div> -->
+<!-- 		<input class="scrollView" id="scrollView" type="button" onclick="commentGet()" value="더보기" style="width:380px;"> -->
+<!-- 	</div> -->
+<!-- 	<input class="conetText" name="conetText" type="text"> -->
+<!-- 	<input class="commentWrite" type="button" onclick="commentWrite()" value="쓰기"> -->
 
 
 	<script>
@@ -421,41 +421,41 @@ input[type="checkbox"]{
 // 			}); 
 		
 // }
-function commentGoodOrBad(commentNum,commentGoodOrBad){
+// function commentGoodOrBad(commentNum,commentGoodOrBad){
 	
-	$.ajax({	
-		url:"/textant/commentGoodOrBad.comment",
-//			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
-		data:{				
-			commentNum:commentNum,
-			commentGoodOrBad:commentGoodOrBad
-		},
-		beforeSend : function(){
-//				alert("시작전");
-		},
-		complete: function(){
-//				alert("완료후");
-		},
-		success:function(data){
-			var AllCheckCount =data.commentGoodOrBadAllCount;
-			var coodBadCheck=data.commentGoodOrBadAllCheck;
-			if(AllCheckCount!=0){
-				if(coodBadCheck==1){
-					$(".commentGood"+commentNum).val("좋아요"+AllCheckCount);
-				}else{
-					$(".commentBad"+commentNum).val("싫어요"+AllCheckCount);
-				}
-			}else if(coodBadCheck==1){
-				alert("이미싫어요눌렀엉");
-			}else if(coodBadCheck==2){
-				alert("이미좋아요눌렀엉");
-			}else if(coodBadCheck==3){
-				alert("로그인 하셔야 가능한 서비스 입니다")
-			}
+// 	$.ajax({	
+// 		url:"/textant/commentGoodOrBad.comment",
+// //			data{}에서는 EL을 ""로 감싸야함..그외에는 그냥 사용
+// 		data:{				
+// 			commentNum:commentNum,
+// 			commentGoodOrBad:commentGoodOrBad
+// 		},
+// 		beforeSend : function(){
+// //				alert("시작전");
+// 		},
+// 		complete: function(){
+// //				alert("완료후");
+// 		},
+// 		success:function(data){
+// 			var AllCheckCount =data.commentGoodOrBadAllCount;
+// 			var coodBadCheck=data.commentGoodOrBadAllCheck;
+// 			if(AllCheckCount!=0){
+// 				if(coodBadCheck==1){
+// 					$(".commentGood"+commentNum).val("좋아요"+AllCheckCount);
+// 				}else{
+// 					$(".commentBad"+commentNum).val("싫어요"+AllCheckCount);
+// 				}
+// 			}else if(coodBadCheck==1){
+// 				alert("이미싫어요눌렀엉");
+// 			}else if(coodBadCheck==2){
+// 				alert("이미좋아요눌렀엉");
+// 			}else if(coodBadCheck==3){
+// 				alert("로그인 하셔야 가능한 서비스 입니다")
+// 			}
 			 
-		}					
-	}); 
-}
+// 		}					
+// 	}); 
+// }
 // function commentDelete(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete){
 // 	 $.ajax({	
 // 			url:"/textant/commentRead.comment",
@@ -518,29 +518,29 @@ function commentGoodOrBad(commentNum,commentGoodOrBad){
 // 		}					
 // 	});
 // }
-function reportComment(commentNum){
-	$.ajax({	
-		url:"/textant/reportComment.comment",
-		data:{		
-			commentNum:commentNum
-		},
-		beforeSend : function(){
-		},
-		complete: function(){
+// function reportComment(commentNum){
+// 	$.ajax({	
+// 		url:"/textant/reportComment.comment",
+// 		data:{		
+// 			commentNum:commentNum
+// 		},
+// 		beforeSend : function(){
+// 		},
+// 		complete: function(){
 			
-		},
-		success:function(data){
-			if(data==1){
-				alert("정상적으로 신고 되었습니다");
-			}else if(data==0){
-				alert("이미 신고 하셨습니다");
-			}else{
-				alert("로그인 하셔야 가능한 서비스 입니다");
-			}
+// 		},
+// 		success:function(data){
+// 			if(data==1){
+// 				alert("정상적으로 신고 되었습니다");
+// 			}else if(data==0){
+// 				alert("이미 신고 하셨습니다");
+// 			}else{
+// 				alert("로그인 하셔야 가능한 서비스 입니다");
+// 			}
 			
-		}					
-	});
-}
+// 		}					
+// 	});
+// }
 </script>
 </body>
 </html>
