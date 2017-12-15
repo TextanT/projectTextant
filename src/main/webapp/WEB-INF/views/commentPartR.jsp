@@ -355,6 +355,7 @@
 			success:function(data){
 				commentCountNum =data;
 				if(commentGroup!=0){
+					$(".innerReply"+commentNum).empty();
 					$("#nextToPage"+commentGroup).val(1);
 					$("#commentGroup"+commentGroup).val(0);
 				}else{
