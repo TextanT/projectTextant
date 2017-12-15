@@ -9,12 +9,54 @@
 		select outTable.* from (
 		select rownum rum, inTable.*
 		from (select * from bookInfo
-		where bookType = 1
+		where bookType
+		= 1
 		order by writeDate desc) inTable
 		order by rum) outTable
-		where rum between 1 AND 3
+		where rum
+		between 1 AND 3
+	</select>
+
+	<select id="getRecommendBooks" resultType="recommendedBook">
+		SELECT * FROM
+		recommendedBook
+	</select>
+
+	<select id="getOneBook" parameterType="Integer" resultType="bookInfo">
+		SELECT * FROM BOOKINFO WHERE BOOKARTICLENUM = #{bookArticleNum} AND
+		BOOKTYPE = 1
 	</select>
 	
+	
+	
+<select id="getNoticeList" resultType="notice">
+	select outTable.* 
+		from (
+		select rownum rum, inTable.* 
+			  from (
+			  	select * 
+			  	from notice
+			  	where type = 2 
+			  	order by writeDate desc
+			  	) inTable  
+			  order by rum
+			  ) outTable 
+		where rum between #{startPage} and #{endPage}
+	</select>
+<select id="getEventList" resultType="notice">
+	select outTable.* 
+		from (
+		select rownum rum, inTable.* 
+			  from (
+			  	select * 
+			  	from notice
+			  	where type = 3 
+			  	order by writeDate desc
+			  	) inTable  
+			  order by rum
+			  ) outTable 
+		where rum between #{startPage} and #{endPage}
+	</select>
 </mapper>
 	
 	

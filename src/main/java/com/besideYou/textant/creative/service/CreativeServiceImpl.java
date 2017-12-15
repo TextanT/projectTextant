@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.besideYou.textant.common.dto.RecommendedBookDto;
 import com.besideYou.textant.creative.dao.CreativeDao;
 import com.besideYou.textant.creative.page.CreativePage;
 import com.besideYou.textant.main.dto.BookInfoDto;
@@ -32,27 +33,26 @@ public class CreativeServiceImpl implements CreativeService{
 		File[] files;
 		
 		List<BookInfoDto> fileNames;
-		//1.추천리스트를 받을것
-		//2.최신순, 별점순, 조회순리스트를 받을것
-		
-		fileNames = creativeDao.getCreBooks();
-		
-//		List<String> bookname;
-//		
-//		bookname = bookInfoDao.getbookname();
-		
-		/*file = new File(destinationDir);
-		files = file.listFiles();
-		fileNames = new ArrayList<String>();
-		
-		for (File lis : files) {
-			System.out.println("파일이름 : " + lis.getName());
-			fileNames.add(lis.getName());
+		List<RecommendedBookDto> recommendNames;
+		BookInfoDto bookInfoDto;
+		HashMap<String, String> oneFive;
+
+		fileNames = new ArrayList<>();
+		recommendNames = creativeDao.getRecommendBooks();
+		for(RecommendedBookDto rbd : recommendNames) {
+			bookInfoDto = creativeDao.getOneBook(rbd.getBookArticleNum());
+			if(bookInfoDto!=null) {
+				bookInfoDto.setBookDesc(rbd.getRecommendComment());
+				fileNames.add(bookInfoDto);
+			}
 		}
-		*/
 		
-//		HashMap<Object, Object> genreMap =new HashMap<>();
-//		genreMap = mainPage.paging(1, bookInfoDao.getNewTotal(), 15, 5);
+		oneFive = new HashMap<String, String>();
+		oneFive.put("startPage", "1");
+		oneFive.put("endPage", "4");
+		model.addAttribute("getFirstNoticeList", creativeDao.getNoticeList(oneFive));
+		model.addAttribute("getFirstEventList", creativeDao.getEventList(oneFive));
+
 		
 		model.addAttribute("");
 		model.addAttribute("fileList", fileNames);
@@ -60,7 +60,8 @@ public class CreativeServiceImpl implements CreativeService{
 		model.addAttribute("nickname", session.getAttribute("nickname"));
 		model.addAttribute("id", session.getAttribute("id"));
 		
-		return "main";
+		return "creative/creative";
+		
 	}
 	
 	@Override

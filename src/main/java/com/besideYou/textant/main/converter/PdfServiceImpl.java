@@ -336,7 +336,7 @@ public class PdfServiceImpl implements PdfService {
 //				if(userGrade>=4) {
 					bookInfoDao.writeBook(bookInfoDto);
 //				} else {
-					bookInfoDao.writeAmateurBook(bookInfoDto);					
+//					bookInfoDao.writeAmateurBook(bookInfoDto);					
 //				}
 				System.out.println(bookInfoDto);
 			} catch (Exception e) {

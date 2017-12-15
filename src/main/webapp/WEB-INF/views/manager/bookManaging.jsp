@@ -83,72 +83,7 @@ body {
 		</div>
 	</div>
 
-	<div class="sub_header">
-		<div class="menu_dd">
-			<div class="sub_sub1">
-				<a href='' class='sub_header_menu1'>내서재</a>
-			</div>
-			<div class="sub_sub2">
-				<a href='/textant/write.text' class='sub_header_menu2'
-					id="sub_menu2">창작카페</a>
-			</div>
-			<div class="sub_sub3">
-				<a href='' class='sub_header_menu3' id="sub_menu3">장르별</a>
-			</div>
-		</div>
-	</div>
-	<div class="menu_top">
-		<div class="menu_box1">
-			<div class="list_box1">
-				<ul>
-					<li><a href="#">카페</a></li>
-					<li><a href="#">베스트</a></li>
-					<li><a href="#">작품쓰기</a></li>
-
-				</ul>
-			</div>
-			<div class="list_box2">
-				<ul>
-					<li><a href="#">역사</a></li>
-					<li><a href="#">스포츠</a></li>
-					<li><a href="#">SF</a></li>
-
-				</ul>
-			</div>
-			<div class="list_box3">
-				<ul>
-					<li><a href="#">추리</a></li>
-					<li><a href="#">공포</a></li>
-					<li><a href="#">게임</a></li>
-
-				</ul>
-			</div>
-			<div class="list_box4">
-				<ul>
-					<li><a href="#">판타지</a></li>
-					<li><a href="#">무협</a></li>
-					<li><a href="#">미스테리</a></li>
-
-				</ul>
-			</div>
-			<div class="list_box5">
-				<ul>
-					<li><a href="#">로맨스</a></li>
-					<li><a href="#">전쟁</a></li>
-					<li><a href="#">성장</a></li>
-
-				</ul>
-			</div>
-			<div class="list_box6">
-				<ul>
-					<li><a href="#">시</a></li>
-					<li><a href="#">수필</a></li>
-					<li><a href="#">유머</a></li>
-				</ul>
-			</div>
-
-		</div>
-	</div>
+	<%@include file="../topMenu.jsp" %>
 	<br />
 	<div id="managingDistrict">
 		<div style="margin-top: 50px;">

@@ -58,7 +58,7 @@ SELECT * FROM recommendedBook
 </select>
 
 <select id="getOneBook" parameterType="Integer" resultType="bookInfo">
-SELECT * FROM BOOKINFO WHERE BOOKARTICLENUM = #{bookArticleNum}
+SELECT * FROM BOOKINFO WHERE BOOKARTICLENUM = #{bookArticleNum} AND BOOKTYPE = 0
 </select>
 
 <select id="getNoticeList" resultType="notice">

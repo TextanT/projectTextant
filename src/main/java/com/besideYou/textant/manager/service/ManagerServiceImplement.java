@@ -51,7 +51,6 @@ public class ManagerServiceImplement implements ManagerService {
 		oneTen.put("startPage", "1");
 		oneTen.put("endPage", "5");
 
-		System.out.println(managerDao.getReportCommentList(oneTen));
 		model.addAttribute("getFirstRecommendedBookList", managerDao.getRecommendedBookList(oneTen));
 		model.addAttribute("getFirstReportBookList", managerDao.getReportBookList(oneTen));
 		model.addAttribute("getFirstReportCommentList", managerDao.getReportCommentList(oneTen));
@@ -186,21 +185,6 @@ public class ManagerServiceImplement implements ManagerService {
 	@Override
 	public void updateRecommendBook(RecommendedBookDto recommendedBookDto, HttpSession session) {
 		managerDao.updateRecommendBook(recommendedBookDto);
-
-		/*
-		 * RecommendedBookDto recommendedBookDto; ManagingBookDto managingDto;
-		 * 
-		 * recommendedBookDto = managerDao.getRecommendedBookOne(recommendNum);
-		 * managingDto = new ManagingBookDto();
-		 * managingDto.setNum(recommendedBookDto.getRecommendNum());
-		 * managingDto.setBookName(managerDao.getBookName(recommendedBookDto.
-		 * getBookArticleNum()));
-		 * managingDto.setUserName(managerDao.getUserName(recommendedBookDto.getUserNum(
-		 * ))); managingDto.setComment(recommendedBookDto.getRecommendComment());
-		 * managingDto.setWriteDate(recommendedBookDto.getWriteDate());
-		 * model.addAttribute("managingList", managingDto);
-		 */
-
 	}
 
 	@Override
@@ -226,7 +210,6 @@ public class ManagerServiceImplement implements ManagerService {
 	@Override
 	public void managerNotice(Model model, int pageNum, HttpServletRequest req) {
 		int totalCount = 0;
-		// pageNum = 1;
 		ArrayList<NoticeDto> noticeList = null;
 		HashMap<String, String> pagingMap = null;
 		HashMap<String, String> paramMap = null;
@@ -263,7 +246,6 @@ public class ManagerServiceImplement implements ManagerService {
 		}
 
 		model.addAttribute("totalCount", totalCount);
-		System.out.println(pagingMap.get("pageCode"));
 		model.addAttribute("managingList", managingList);
 		model.addAttribute("pageCode", pagingMap.get("pageCode"));
 
@@ -306,7 +288,6 @@ public class ManagerServiceImplement implements ManagerService {
 	@Override
 	public void managerReportComment(Model model, int pageNum, HttpServletRequest req) {
 		int totalCount = 0;
-		// pageNum = 1;
 		ArrayList<ReportCommentDto> reportCommentList = null;
 		HashMap<String, String> pagingMap = null;
 		HashMap<String, String> paramMap = null;
@@ -403,7 +384,6 @@ public class ManagerServiceImplement implements ManagerService {
 	public void searchComment(Model model, int pageNum, HttpServletRequest req, String searchType,
 			String commentContents) {
 		int totalCount = 0;
-		// pageNum = 1;
 		ArrayList<CommentDto> commentsList = null;
 		HashMap<String, String> pagingMap = null;
 		HashMap<String, String> paramMap = null;
@@ -430,7 +410,6 @@ public class ManagerServiceImplement implements ManagerService {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-		System.out.println(pagingMap.get("pageCode"));
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("commentsList", commentsList);
 		model.addAttribute("pageCode", pagingMap.get("pageCode"));
@@ -460,7 +439,6 @@ public class ManagerServiceImplement implements ManagerService {
 	@Override
 	public void managerAllBook(Model model, int pageNum, HttpServletRequest req) {
 		int totalCount = 0;
-		// pageNum = 1;
 		ArrayList<BookInfoDto> bookInfoList = null;
 		HashMap<String, String> pagingMap = null;
 		HashMap<String, String> paramMap = null;
@@ -477,7 +455,6 @@ public class ManagerServiceImplement implements ManagerService {
 			paramMap.put("endPage", String.valueOf(endRow));
 
 			bookInfoList = (ArrayList<BookInfoDto>) managerDao.getAllBooks(paramMap);
-			System.out.println(bookInfoList);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
@@ -510,9 +487,7 @@ public class ManagerServiceImplement implements ManagerService {
 		managerDao.deleteBookInfo(bookArticleNum);
 
 		File file = new File(destinationDir + bookInfoDto.getFileLocation());
-		System.out.println(file.getPath());
 		allFileDelete(file);
-
 	}
 
 	@Override

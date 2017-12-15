@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -72,76 +72,14 @@
 						&nbsp | 창작하기</span>
 				</div>
 			</div>
-			<div class="menu_box">
-				<c:if test="${id!=null}">
-					<c:out
-						value="
-			<a href='#' class='menu_title'><span class='menu1' id='menu1'>${nickname}</span></a>
-			 
-			<a href='mypage.text' class='menu_title'><span class='menu2'id='menu2'>내정보</span></a> 
-
-			<a href='logout.text' class='menu_title'><span class='menu3'id='menu3'>로그아웃</span></a> 
 			
-			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
-			 "
-						escapeXml="false" />
-				</c:if>
-				<c:if test="${id==null}">
-					<c:out
-						value="
-			<a href='#' class='menu_title'><span class='menu1' id='menu1'>로그인</span></a>
-			
-			<a href='#' class='menu_title'><span class='menu2'id='menu2'>회원가입</span></a> 
+	<%@include file="menuBox.jsp" %>
+	
+	</div>
+	
+	<%@include file="topMenu.jsp" %>
 
-			<a href='find.text' class='menu_title'><span class='menu3'id='menu3'>ID/PW찾기</span></a> 
-			
-			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
-			 "
-						escapeXml="false" />
-				</c:if>
 
-			</div>
-		</div>
-
-		<div class="sub_header">
-			<div class="menu_dd">
-				<div class="sub_sub1">
-					<a href='' class='sub_header_menu1'>내서재</a>
-				</div>
-				<div class="sub_sub2">
-					<a href='/textant/write.text' class='sub_header_menu2'
-						id="sub_menu2" style="color: highlight">창작카페</a>
-				</div>
-				<div class="sub_sub3">
-					<a href='serchpage.genre' class='sub_header_menu3' id="sub_menu3">장르별검색</a>
-				</div>
-				<div class="sub_sub3">
-					<a href='/textant/write.text' class='sub_header_menu3'
-						id="sub_menu3">책쓰기</a>
-				</div>
-			</div>
-		</div>
-		<div class="menu_top">
-			<div class="menu_box1">
-				<div class="list_box1">
-					<ul>
-						<li><a href="#">카페</a></li>
-						<li><a href="#">베스트</a></li>
-						<li><a href="#">작품쓰기</a></li>
-
-					</ul>
-				</div>
-				<div class="list_box2">
-					<ul>
-						<li><a href="#">창작도서</a></li>
-						<li><a href="#">일반도서</a></li>
-						<li style="cursor: default;">&nbsp</li>
-
-					</ul>
-				</div>
-
-			</div>
-		</div>
 		<div class="writeForm">
 			<div class="writer_nameDiv">
 				<label class="writer_name">작가명 <input type="text"

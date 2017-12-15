@@ -36,5 +36,9 @@ public interface CommentDao {
 	public List<BookInfoDto> getMainRecencyList(HashMap<String, String> mainPageMap);
 	public List<BookInfoDto> getMainScoreList(HashMap<String, String> mainPageMap);
 	public List<BookInfoDto> getMainHitList(HashMap<String, String> mainPageMap);
+	public int getCreativeBookListCount();
+	public List<BookInfoDto> getCreativeRecencyList(HashMap<String, String> mainPageMap);
+	public List<BookInfoDto> getCreativeHitList(HashMap<String, String> mainPageMap);
+	public List<BookInfoDto> getCreativeScoreList(HashMap<String, String> mainPageMap);
 	
 }

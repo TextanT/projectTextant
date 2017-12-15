@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 
@@ -44,182 +45,10 @@
 				src="/textant/resources/icon_img/logo_mini.png" class="logo">
 			</a>
 		</div>
-		<div class="menu_box">
-			<c:if test="${id!=null}">
-				<c:out
-					value="
-			<a href='#' class='menu_title'><span class='menu1' >${nickname}</span></a>
-			
-			<a href='mypage.text' class='menu_title'><span class='menu2'>내정보</span></a> 
-
-			<a href='logout.text' class='menu_title'><span class='menu3'id='menu3'>로그아웃</span></a> 
-			
-			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
-			 "
-					escapeXml="false" />
-			</c:if>
-
-			<c:if test="${id==null}">
-				<c:out
-					value="
-			<a href='#' class='menu_title'><span class='menu1' id='menu1'>로그인</span></a>
-			
-			<a href='#' class='menu_title'><span class='menu2'id='menu2'>회원가입</span></a> 
-
-			<a href='find.text' class='menu_title'><span class='menu3'id='menu3'>ID/PW찾기</span></a> 
-			
-			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
-			 "
-					escapeXml="false" />
-			</c:if>
-
-
-
-		</div>
-	</div>
-	<!-- 모달창 -->
-	<div id="modal_log">
-		<form action="login.text" method="post" id="loginForm">
-			<button type="submit" class="aass" id="sasd"></button>
-
-			<div id="idDiv" class="idDivc">
-				<span class="id_sp int_id"> <input type="text" class="int"
-					value maxlength="20" autocomplete="off" placeholder="아이디"
-					name="userId" id="mologinId">
-				</span>
-			</div>
-
-			<div style="height: 15px;"></div>
-
-			<div id="PassDiv" class="PassDivc">
-				<span class="pass_sp int_pass"> <input type="password"
-					id="pass" class="int" value maxlength="20" autocomplete="off"
-					placeholder="비밀번호" name="pass" id="mologinPass">
-				</span>
-			</div>
-			<div class="login_div">
-				<a href="#" class="login_btn" id="login_mit">로그인</a>
-			</div>
-			<div class="find_div">
-				<a href="find.text" id="find">아이디/비밀번호 찾기</a>
-			</div>
-			<div class="exit_div">
-				<a href="#" class="js_close" id="exit">돌아가기</a>
-			</div>
-
-		</form>
-		<div class="exit2_div">
-			<img src="/textant/resources/icon_img/exit3.jpg" class="js_close"
-				style="cursor: pointer;" onclick="modalemp()">
-		</div>
+	<%@include file="menuBox.jsp" %>
 
 	</div>
-	<!-- 모달창 -->
-	<div id="modal">
-		<form action="sign.text" method="post" id="signForm">
-			<button type="submit" class="aass" id="sasd"></button>
-
-			<div id="idDiv" class="idDivc">
-				<span class="id_sp int_id"> <input type="text" id="signid"
-					class="int" value maxlength="20" autocomplete="off"
-					placeholder="아이디" name="userId">
-				</span>
-			</div>
-			<div id="idCheckStatus"></div>
-
-			<div style="height: 15px;"></div>
-
-			<div id="PassDiv" class="PassDivc">
-				<span class="pass_sp int_pass"> <input type="password"
-					id="pass" class="int" value maxlength="20" autocomplete="off"
-					placeholder="비밀번호" name="pass">
-				</span>
-			</div>
-			<div id="PasscDiv" class="PasscDivc">
-				<span class="passc_sp int_pass"> <input type="password"
-					id="passcheck" class="int" value maxlength="20" autocomplete="off"
-					placeholder="비밀번호확인" onblur="checkvalue()">
-				</span>
-			</div>
-
-			<div id="status"></div>
-
-			<div id="mailDiv" class="mailDivc">
-				<span class="mail_sp int_pass"> <input type="email" id="mail"
-					class="int" value maxlength="20" autocomplete="off"
-					placeholder="E-mail" name="email">
-				</span>
-			</div>
-			<div id="nicknameDiv" class="nicknameDivc">
-				<span class="nickname_sp int_pass"> <input type="text"
-					id="nickname" class="int" value maxlength="20" autocomplete="off"
-					placeholder="별명" name="nickName">
-				</span>
-			</div>
-			<div class="wrap">
-				<input name="radio" type="radio" id="radio0" class="radio"
-					onclick="gender1()"> <label for="radio0"
-					class="radio-label"> <i class="fa fa-check"></i> <span>남자</span>
-				</label> <input type="text" name="jender" id="jender" hidden="hidden">
-
-				<input name="radio" type="radio" id="radio1" class="radio"
-					onclick="gender2()"> <label for="radio1"
-					class="radio-label"> <i class="fa fa-check"></i> <span>여자</span>
-				</label>
-			</div>
-
-			<div class="signUp_div">
-				<a href="#" class="signUp_btn" id="sign_mit">화원가입</a>
-			</div>
-			<div class="exit_div">
-				<a href="#" class="js_close" id="exit">돌아가기</a>
-			</div>
-
-		</form>
-		<div class="exit2_div">
-			<img src="/textant/resources/icon_img/exit3.jpg" class="js_close"
-				style="cursor: pointer;">
-		</div>
-
-	</div>
-	<div class="sub_header">
-		<div class="menu_dd">
-			<div class="sub_sub1">
-				<a href='myStudy.text' class='sub_header_menu1'>내서재</a>
-			</div>
-			<div class="sub_sub2">
-				<a href='creative.text' class='sub_header_menu2' id="sub_menu2">창작카페</a>
-			</div>
-			<div class="sub_sub3">
-				<a href='serchpage.genre' class='sub_header_menu3' id="sub_menu3">장르별검색</a>
-			</div>
-			<div class="sub_sub3">
-				<a href='/textant/write.text' class='sub_header_menu3'
-					id="sub_menu3">책쓰기</a>
-			</div>
-		</div>
-	</div>
-	<div class="menu_top">
-		<div class="menu_box1">
-			<div class="list_box1">
-				<ul>
-					<li><a href="#">카페</a></li>
-					<li><a href="#">베스트</a></li>
-					<li><a href="/textant/writeAmateur.text">작품쓰기</a></li>
-
-				</ul>
-			</div>
-			<div class="list_box2">
-				<ul>
-					<li><a href="#">창작도서</a></li>
-					<li><a href="#">일반도서</a></li>
-					<li style="cursor: default;">&nbsp</li>
-
-				</ul>
-			</div>
-
-		</div>
-	</div>
+	<%@include file="topMenu.jsp" %>
 
 
 	<div class="swiper-container" onmouseover="slidestop()"
@@ -230,12 +59,12 @@
 					<div class="img-wrapper">
 						<div class="swiper-size"
 							style="height: 320px; width: 220px; overflow: hidden;">
-							<a href="/textant/read.text?fileName=${files.fileLocation}&bookType=txt" target="_black"><img
+							<a href="/textant/read.text?fileName=${files.fileLocation}&bookType=jpg" target="_black"><img
 								src="displayFile.text?fileName=${files.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
 								style="display: block; height: 100%; width: auto; border: 1px solid #e8e8e8;"
 								class="bookimg" /></a>
 						</div>
-						<a href="/textant/read.text?fileName=${files.fileLocation}&bookType=txt" target="_black"> <span
+						<a href="/textant/read.text?fileName=${files.fileLocation}&bookType=jpg" target="_black"> <span
 							class="bookname" style="text-align: center;">${files.bookName}</span><br />
 							<span class="bookname">${files.userNum}</span>
 						</a>
@@ -459,7 +288,56 @@
 				alert("error html = " + xhr.statusText);
 			}
 		});
-
+		$(function() {
+					$("#signid").on(
+							"blur",
+							function() {
+								$.ajax({
+									url : "joinIdCheck.text",
+									data : {
+										inputId : $("#signid").val()
+									},
+									success : function(data) {
+										let html;
+										// 								alert(data);
+										if ($("#signid").val() != "") {
+											if (data == 1) {
+												html = "<p>사용가능한 아이디입니다</p>";
+												$("#idCheckStatus").html(html).css(
+														"color", "highlight");
+												$("#idCheckStatus").html(html).css(
+														"font-size", "12px");
+												$("#idCheckStatus").html(html).css(
+														"height", "16.3px");
+												$("#idCheckStatus").html(html).css(
+														"left", "16%");
+		
+												;
+											} else if (data == 0) {
+												html = "<p>중복된 아이디입니다</p>";
+												$("#idCheckStatus").html(html).css(
+														"color", "red");
+												$("#idCheckStatus").html(html).css(
+														"font-size", "12px");
+												$("#idCheckStatus").html(html).css(
+														"height", "16.3px");
+												$("#idCheckStatus").html(html).css(
+														"left", "16%");
+											}
+		
+										} else {
+											html = "<p>아이디를 입력하세요</p>";
+											$("#idCheckStatus").html(html).css("color",
+													"red");
+											$("#idCheckStatus").html(html).css(
+													"font-size", "13px");
+											$("#idCheckStatus").html(html).css(
+													"height", "16.3px");
+										}
+									}
+								});
+							})
+				});
 		$(document).ready(function() {
 			var pageNum =$("#pageNum").val()
 			getMainBookList(pageNum);
@@ -593,7 +471,7 @@
 						html +="<div class='book_list"+(index+1)+"'style='width:176.66px; height:259px; overflow:hidden;'>"
 						+"<a href='/textant/read.text?fileName="+item.fileLocation+"&bookType="+/* item.fileLocation.substring(item.fileLocation.lastIndexOf('.')+1) */"txt"+"' target='_black'> <img "
 						+"src='displayFile.text?fileName="+item.fileLocation+"/OriginImg&pageNum=1&fileType=jpg'"
-							+"style='border: 1px solid #D8D8D8; position: absolute; z-index: 2; height:28.2%; width:auto;'"
+							+"style='border: 1px solid #D8D8D8; position: absolute; z-index: 2; '"
 								+"class='book_img_size'>"
 								
 							+"<div style='width: 176.66px; height: 259px; position: relative;'"
@@ -855,6 +733,7 @@
 		})
 	</script>
 	<script>
+	
 // 		function mainbooks(page) {
 
 // 			// 		alert($("#genre").val());

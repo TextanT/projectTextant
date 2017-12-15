@@ -42,8 +42,10 @@ public class MainServiceImpl implements MainService {
 		recommendNames = bookInfoDao.getRecommendBooks();
 		for(RecommendedBookDto rbd : recommendNames) {
 			bookInfoDto = bookInfoDao.getOneBook(rbd.getBookArticleNum());
-			bookInfoDto.setBookDesc(rbd.getRecommendComment());
-			fileNames.add(bookInfoDto);
+			if(bookInfoDto!=null) {
+				bookInfoDto.setBookDesc(rbd.getRecommendComment());
+				fileNames.add(bookInfoDto);
+			}
 		}
 
 		oneFive = new HashMap<String, String>();

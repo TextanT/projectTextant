@@ -275,47 +275,13 @@
 		</div>
 		<br> <br>
 		<div id="booklistdiv">
-<%-- 			<c:forEach var="files" items="${fileList}" varStatus="index"> --%>
-
-<%-- 				<div class="book_list${index.count}"> --%>
-<%-- 					<a href="/textant/read.text?fileName=${files.fileLocation}"> <img --%>
-<%-- 						src="displayFile.text?fileName=${files.fileLocation}/OriginImg&pageNum=1&fileType=jpg" --%>
-<!-- 						style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;" -->
-<!-- 						class="book_img_size"> -->
-<!-- 						<div style="width: 176.66px; height: 259px; position: relative;" -->
-<%-- 							class="book_cap${index.count}" id="book_cap${index.count}"> --%>
-<%-- 							<h5>${files.bookName}</h5> --%>
-<%-- 							<p>${files.userNum}</p> --%>
-<!-- 							<br> -->
-<!-- 							<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다. -->
-<!-- 								이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p> -->
-<!-- 						</div> -->
-<!-- 					</a> -->
-<!-- 				</div> -->
-<%-- 			</c:forEach> --%>
 			
 			<input type="button" class="genget" id="genget" onclick="mainbooks()"hidden>
 			<input type="hidden" class="pageNum" id="pageNum" name="pageNum" value="1">
-			<!-- 			<div class="book_list1"> -->
-			<!-- 				<a href="#"><img src="/textant/resources/book_img/너의췌장을먹고싶어.jpg" -->
-			<!-- 					style="border: 1px solid #D8D8D8; position: absolute; z-index: 2;" -->
-			<!-- 					class="book_img_size" onmouseover="bookli1over()" -->
-			<!-- 					onmouseout="bookli1out()"> -->
-			<!-- 					<div style="width: 176.66px; height: 259px; position: relative;" -->
-			<!-- 						class="book_cap1" id="book_cap1"> -->
-			<!-- 						<h5>너의 췌장을 먹고싶어</h5> -->
-			<!-- 						<p>기시미이치로</p> -->
-			<!-- 						<br> -->
-			<!-- 						<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다. -->
-			<!-- 							이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p> -->
-			<!-- 					</div> </a> -->
-			<!-- 			</div> -->
 			
 			<div style="width:100px; height: 100px; border: 1px solid black; position: absolute; left: 0; bottom: 0;"></div>
 		</div>
 
-		<!-- 		<div class="book_list4"></div> -->
-		<!-- 		<div class="book_list5"></div> -->
 	</div>
 
 
@@ -469,7 +435,7 @@
 
 			var html = "";
 			$.ajax({
-				url : "/textant/getMainBookList.comment",
+				url : "/textant/getCreativeBookList.comment",
 
 				error : function(xhr) {
 
@@ -594,7 +560,7 @@
 						+"<a href='/textant/read.text?fileName="+item.fileLocation+"&bookType="+/* item.fileLocation.substring(item.fileLocation.lastIndexOf('.')+1) */"txt"+"'>" 
 						+"<img "
 						+"src='displayFile.text?fileName="+item.fileLocation+"/OriginImg&pageNum=1&fileType=jpg'"
-							+"style='border: 1px solid #D8D8D8; position: absolute; z-index: 2; height:28.2%; width:auto;'"
+							+"style='border: 1px solid #D8D8D8; position: absolute; z-index: 2; '"
 								+"class='book_img_size'>"
 								
 							+"<div style='width: 176.66px; height: 259px; position: relative;'"
@@ -602,18 +568,16 @@
 								+"<h5>"+item.bookName+"</h5>"
 								+"<p>"+item.userNum+"</p>"
 								+"<br>"
-								+"<p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다."
-								+"이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p>"
+								+"<p>"+item.bookDesc+"</p>"
 								+"</div>"
 								+"</a>"
 								+"</div>"
-					});
+					}); 
 					
 
 					$("#booklistdiv").append(html);
 					
 					html=data.pageCode;
-// 					alert(data.pageCode);
 					
 					$("#booklistdiv").append(html);
 				}
@@ -694,115 +658,6 @@
 		};
 	</script>
 	<script type="text/javascript">
-// 		var overindex = 2;
-// 		var outindex = 1;
-// 		//book1 over	
-// 		$('.book_list1').mouseenter(function() {
-// 			document.getElementById('book_cap1').style.zIndex = overindex;
-// 		});
-// 		$('.book_list1').mouseleave(function() {
-// 			document.getElementById('book_cap1').style.zIndex = outindex;
-// 		});
-// 		//book2 over
-// 		$('.book_list2').mouseenter(function() {
-// 			document.getElementById('book_cap2').style.zIndex = overindex;
-// 		});
-// 		$('.book_list2').mouseleave(function() {
-// 			document.getElementById('book_cap2').style.zIndex = outindex;
-// 		});
-// 		//book3 over
-// 		$('.book_list3').mouseenter(function() {
-// 			document.getElementById('book_cap3').style.zIndex = overindex;
-// 		});
-// 		$('.book_list3').mouseleave(function() {
-// 			document.getElementById('book_cap3').style.zIndex = outindex;
-// 		});
-// 		//book4 over
-// 		$('.book_list4').mouseenter(function() {
-// 			document.getElementById('book_cap4').style.zIndex = overindex;
-// 		});
-// 		$('.book_list4').mouseleave(function() {
-// 			document.getElementById('book_cap4').style.zIndex = outindex;
-// 		});
-// 		//book5 over
-// 		$('.book_list5').mouseenter(function() {
-// 			document.getElementById('book_cap5').style.zIndex = overindex;
-// 		});
-// 		$('.book_list5').mouseleave(function() {
-// 			document.getElementById('book_cap5').style.zIndex = outindex;
-// 		});
-// 		//book6 over
-// 		$('.book_list6').mouseenter(function() {
-// 			document.getElementById('book_cap6').style.zIndex = overindex;
-// 		});
-// 		$('.book_list6').mouseleave(function() {
-// 			document.getElementById('book_cap6').style.zIndex = outindex;
-// 		});
-// 		//book7 over
-// 		$('.book_list7').mouseenter(function() {
-// 			document.getElementById('book_cap7').style.zIndex = overindex;
-// 		});
-// 		$('.book_list7').mouseleave(function() {
-// 			document.getElementById('book_cap7').style.zIndex = outindex;
-// 		});
-// 		//book8 over
-// 		$('.book_list8').mouseenter(function() {
-// 			document.getElementById('book_cap8').style.zIndex = overindex;
-// 		});
-// 		$('.book_list8').mouseleave(function() {
-// 			document.getElementById('book_cap8').style.zIndex = outindex;
-// 		});
-// 		//book9 over
-// 		$('.book_list9').mouseenter(function() {
-// 			document.getElementById('book_cap9').style.zIndex = overindex;
-// 		});
-// 		$('.book_list9').mouseleave(function() {
-// 			document.getElementById('book_cap9').style.zIndex = outindex;
-// 		});
-// 		//book10 over
-// 		$('.book_list10').mouseenter(function() {
-// 			document.getElementById('book_cap10').style.zIndex = overindex;
-// 		});
-// 		$('.book_list10').mouseleave(function() {
-// 			document.getElementById('book_cap10').style.zIndex = outindex;
-// 		});
-// 		//book11 over
-// 		$('.book_list11').mouseenter(function() {
-// 			document.getElementById('book_cap11').style.zIndex = overindex;
-// 		});
-// 		$('.book_list11').mouseleave(function() {
-// 			document.getElementById('book_cap11').style.zIndex = outindex;
-// 		});
-// 		//book12 over
-// 		$('.book_list12').mouseenter(function() {
-// 			document.getElementById('book_cap12').style.zIndex = overindex;
-// 		});
-// 		$('.book_list12').mouseleave(function() {
-// 			document.getElementById('book_cap12').style.zIndex = outindex;
-// 		});
-// 		//book13 over
-// 		$('.book_list13').mouseenter(function() {
-// 			document.getElementById('book_cap13').style.zIndex = overindex;
-// 		});
-// 		$('.book_list13').mouseleave(function() {
-// 			document.getElementById('book_cap13').style.zIndex = outindex;
-// 		});
-// 		//book14 over
-// 		$('.book_list14').mouseenter(function() {
-// 			document.getElementById('book_cap14').style.zIndex = overindex;
-// 		});
-// 		$('.book_list14').mouseleave(function() {
-// 			document.getElementById('book_cap14').style.zIndex = outindex;
-// 		});
-// 		//book15 over
-// 		$('.book_list15').mouseenter(function() {
-// 			document.getElementById('book_cap15').style.zIndex = overindex;
-// 		});
-// 		$('.book_list15').mouseleave(function() {
-// 			document.getElementById('book_cap15').style.zIndex = outindex;
-// 		});
-	</script>
-	<script type="text/javascript">
 		$('.likenon').click(function() {
 			getMainBookList(1);
 			$('.likenon').css("display", "none");
@@ -834,21 +689,14 @@
 		});
 		
 		$('.likenon').mousedown(function() {
-			// 			alert("asd");
-			// 			$('.sortType').val("1");
 			document.getElementById("sortType").value = "3";
-			// 			document.getElementById("jender").value = "0";
 		})
 		$('.hitnon').mousedown(function() {
-			// 			$('.sortType').val(2);
 
 			document.getElementById("sortType").value = "2";
-			// 			document.getElementById("sortType").val(2);
 		})
 		$('.updatanon').mousedown(function() {
-			// 			$('.sortType').val(3);
 			document.getElementById("sortType").value = "1";
-			// 			document.getElementById("sortType").val(3);
 		})
 	</script>
 	<script type="text/javascript">
@@ -857,65 +705,11 @@
 			getMainBookList($("#pageNum").val());
 		})
 	</script>
-	<script>
-// 		function mainbooks(page) {
-
-// 			// 		alert($("#genre").val());
-// 			let html = "";
-// 			$
-// 					.ajax({
-// 						type : "GET",
-// 						async : true,
-// 						dataType : "json",
-// 						error : function(xhr) {
-// 							alert("error html = " + xhr.statusText);
-// 						},
-// 						url : "/textant/main.text",
-// 						data : {
-// 							sortType : $("#sortType").val(),
-// 							pageNum : page
-// 						},
-// 						success : function(data) {
-// 							// 					alert(data);
-// 							// 					alert(data.fileLocationList);
-// 							// 					alert(data.length);
-// 							$(".serchbookDiv").empty();
-// 							let num = data.length;
-// 							var pageCode = data.pageCode;
-// 							$
-// 									.each(
-// 											data.fileLocationList,
-// 											function(index, item) {
-// 												// 						 alert(data[index].length);
-// 												// 						
-
-// 												html = '<div class="genre1_book_list'
-// 														+ (index + 1)
-// 														+ '"><a href="#"><img src="displayFile.text?fileName='
-// 														+ item
-// 														+ '/OriginImg&pageNum=1&fileType=jpg" style="border: 1px solid #D8D8D8; position: absolute; z-index: 2; height: 242px;" class="book_img_size" id="bookimg'
-// 														+ (index + 1)
-// 														+ '"><div style="width: 166.45px; height: 244px; position: relative; text-align: center; color: white;" class="book_cap'
-// 														+ (index + 1)
-// 														+ '" id="book_cap'
-// 														+ (index + 1)
-// 														+ '"><h5><c:out value="${lists}"></c:out> </h5><p>기시미이치로</p><br><p>이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.이곳에는 책의 줄거리가 들어갑니다.</p></div> </a></div>'
-// 												$(".serchbookDiv").append(html);
-// 												// 						 var genre=item.commentNum;
-// 												// 						alert(data[index]);
-
-// 											});
-// 							$('#pageCode').html(pageCode);
-
-// 						}
-// 					});
-// 		}
-	</script>
 	<script type="text/javascript">
 		function modalemp() {
 			$('#mologinId').val('Default Value');
 			$('#mologinPass').empty();
-		}
+		} 
 	</script>
 </body>
 

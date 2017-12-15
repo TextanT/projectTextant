@@ -19,8 +19,6 @@ public class CreativeController {
 	@RequestMapping(value = "/creative.text", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
 		
-//		System.out.println(session.getAttribute("id"));
-		
 		return creativeService.home(model, session);
 	}
 }

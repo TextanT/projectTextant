@@ -125,4 +125,11 @@ public class CommentController {
 		
 		return commentService.getMainBookList(sortType,pageNum);
 	}
+	
+	@RequestMapping(value = "/getCreativeBookList.comment")
+	@ResponseBody
+	public HashMap<Object,Object> getCreativeBookList(int sortType,int pageNum){
+		
+		return commentService.getCreativeBookList(sortType,pageNum);
+	}
 }

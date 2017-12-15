@@ -299,11 +299,12 @@ public class CommentServiceImpl implements CommentService {
 		System.out.println(commentDao.getBookName(bookSearch));
 		return commentDao.getBookName(bookSearch);
 	}
+	
 	@Override
 	public HashMap<Object, Object> getMainBookList(int sortType, int pageNum) {
 		HashMap<Object, Object> getMainBookList = new HashMap<>();
 		HashMap<String, String> mainPageMap = new HashMap<>();
-		List<BookInfoDto> bookList = new ArrayList();
+		List<BookInfoDto> bookList = new ArrayList<BookInfoDto>();
 		int getMainBookListCount = commentDao.getMainBookListCount();
 
 		switch (sortType) {
@@ -324,6 +325,37 @@ public class CommentServiceImpl implements CommentService {
 			mainPageMap = mainPage.paging(pageNum, getMainBookListCount, 15, 5);
 			getMainBookList.put("pageCode", mainPageMap.get("pageCode"));
 			bookList = commentDao.getMainScoreList(mainPageMap);
+			getMainBookList.put("getMainBookList", bookList);
+			break;
+		}
+		return getMainBookList;
+	}
+	
+	@Override
+	public HashMap<Object, Object> getCreativeBookList(int sortType, int pageNum) {
+		HashMap<Object, Object> getMainBookList = new HashMap<>();
+		HashMap<String, String> mainPageMap = new HashMap<>();
+		List<BookInfoDto> bookList = new ArrayList<BookInfoDto>();
+		int getMainBookListCount = commentDao.getCreativeBookListCount();
+		
+		switch (sortType) {
+		case 1:
+			mainPageMap = mainPage.paging(pageNum, getMainBookListCount, 15, 5);
+			getMainBookList.put("pageCode", mainPageMap.get("pageCode"));
+			bookList = commentDao.getCreativeRecencyList(mainPageMap);
+			getMainBookList.put("getMainBookList", bookList);
+			break;
+		case 2:
+			
+			mainPageMap = mainPage.paging(pageNum, getMainBookListCount, 15, 5);
+			getMainBookList.put("pageCode", mainPageMap.get("pageCode"));
+			bookList = commentDao.getCreativeHitList(mainPageMap);
+			getMainBookList.put("getMainBookList", bookList);
+			break;
+		case 3:
+			mainPageMap = mainPage.paging(pageNum, getMainBookListCount, 15, 5);
+			getMainBookList.put("pageCode", mainPageMap.get("pageCode"));
+			bookList = commentDao.getCreativeScoreList(mainPageMap);
 			getMainBookList.put("getMainBookList", bookList);
 			break;
 		}
