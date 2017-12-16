@@ -111,7 +111,7 @@ let totalCount = "${totalVisitCount}";
 		},
 		data: [{
 			type: "column",
-			yValueFormatString: "#,##0\"\"",
+			yValueFormatString: "#,##0\"\"명",
 			dataPoints: [
 				{ label: visitDateList[1], y: Number(visitCountList[1]) },	
 				{ label: visitDateList[2], y: Number(visitCountList[2]) },	
