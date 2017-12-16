@@ -55,20 +55,26 @@ public class KakaoController {
 	}*/
 	
 	@RequestMapping(value="/naverData.text")
-	public String naverData(int userId, String email, String nickName, String gender, String realName, HttpSession session) {
+	public String naverData(int userId,String kaId,int siteFrom, String email, String nickName, String gender, String realName, HttpSession session) {
 		
 		//loginDto와 age의 타입이 달라 생기는 오류 - 받는것 - 스트링 loginDto age - Integer
 		
 		LoginDto loginDto = new LoginDto();
-		
-		loginDto.setUserId(String.valueOf(userId));
+		if(kaId!=null) {
+			loginDto.setUserId(kaId);
+		}else {
+			loginDto.setUserId(String.valueOf(userId));
+		}
 		loginDto.setEmail(email);
 		loginDto.setNickName(nickName);
 		loginDto.setRealName(realName);
+		loginDto.setSiteFrom(siteFrom);
 		if(gender.contains("M")) {
 			loginDto.setGender(1);
-		}else {
+		}else if(gender.contains("F")){
 			loginDto.setGender(0);			
+		}else {
+			loginDto.setGender(3);
 		}
 		
 		naverService.naverLogin(loginDto,session);

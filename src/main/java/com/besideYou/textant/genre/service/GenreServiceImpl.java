@@ -22,14 +22,17 @@ public class GenreServiceImpl implements GenreService {
 	GenrePage genrePage;
 
 	@Override
-	public HashMap<Object, Object> genreserch(Model model,String genre ,int pageNum) {
+	public HashMap<Object, Object> genreserch(Model model,String genre ,int pageNum,int booktype) {
 		
 		List<String> gen = new ArrayList();
 		HashMap<String, String> genreMap =new HashMap<>();
 		HashMap<Object, Object> goodMap = null;
 		int genreCount=0;
-
-		genreCount=genreDao.getGenreCount(genre);
+		genreMap.put("genre", genre);
+		
+		genreMap.put("booktype", String.valueOf(booktype));
+		
+		genreCount=genreDao.getGenreCount(genreMap);
 
 
 		System.out.println("genreService.genreser : "+genreCount);
@@ -37,6 +40,8 @@ public class GenreServiceImpl implements GenreService {
 		genreMap = genrePage.paging(pageNum, genreCount, 15, 5);
 		
 		genreMap.put("genre", genre);
+		
+		genreMap.put("booktype", String.valueOf(booktype));
 		
 //		System.out.println("/-/-/-/-/-/-/-/-/"+genreMap.put("genre", genre));
 		
@@ -56,5 +61,6 @@ public class GenreServiceImpl implements GenreService {
 		
 		return goodMap;
 	}
+	
 
 }

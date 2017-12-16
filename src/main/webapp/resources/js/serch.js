@@ -659,7 +659,7 @@ $('.serchoption16').click(function() {
 	var pagNum="";
 	pagNum=$("#pageNum").val();
 	genresub(pagNum);
-	if ($('.radio15').val() == 1) {
+	if ($('.radio16').val() == 1) {
 		$('.serchoption16').css("color", "white");
 		$('.serchoption16').css("background", "#819FF7");
 		$('.serchoption1').css("color", "");

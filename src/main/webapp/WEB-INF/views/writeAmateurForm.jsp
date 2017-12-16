@@ -53,7 +53,7 @@
 }
 </style>
 
-</head>
+</head>   
 <body>
 	<form action="/textant/writeAmateur.text" method="post"
 		enctype="multipart/form-data" id="writeForm">
@@ -73,7 +73,7 @@
 				</div>
 			</div>
 			
-	<%@include file="menuBox.jsp" %>
+	<%@include file="menuBoxAop.jsp" %>
 	
 	</div>
 	

@@ -5,12 +5,12 @@
 
 <mapper namespace="com.besideYou.textant.api.kakao.dao.NaverLoginDao">	
 
-	<select id="naverLoginCheck" parameterType="String" resultType="login">
-			SELECT * FROM LOGIN WHERE SITEFROM=1 AND EMAIL = #{email}
+	<select id="naverLoginCheck" parameterType="login" resultType="login">
+			SELECT * FROM LOGIN WHERE SITEFROM=#{siteFrom} AND EMAIL = #{email}
 	</select>
 	
 	<insert id="naverLoginInsert" parameterType="login">
-		INSERT INTO LOGIN VALUES(login_seq.nextval,#{userId},0,1,0,#{email},#{nickName},#{profilePicture},#{realName},0,#{gender},#{comments})
+		INSERT INTO LOGIN VALUES(login_seq.nextval,#{userId},0,#{siteFrom},0,#{email},#{nickName},#{profilePicture},#{realName},0,#{gender},#{comments})
 	</insert>
 	
 <!-- 	<select id="joinchek" parameterType="String" resultType="String"> -->

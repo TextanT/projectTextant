@@ -34,13 +34,15 @@ a {
 				<div style="float: left;">
 					<span
 						style="margin-top: auto; margin-bottom: auto; font-size: 33px; color: white;">
-						&nbsp | 장르별 검색</span>
+						&nbsp | 창작도서 장르별 검색</span>
 				</div>
 			</div>
 	<%@include file="../menuBox.jsp" %>
 
 	</div>
 	<%@include file="../topMenu.jsp" %>
+
+	
 	<div class="serchpos">
 		<div class="serchDiv">
 			<div class="serchpotionDiv">
@@ -135,7 +137,7 @@ a {
 				data : {
 					genre : $("#genre").val(),
 					pageNum : page,
-					booktype : 0
+					booktype : 1
 				},success:function(data){
 // 					alert(data);
 // 					alert(data.fileLocationList);

@@ -10,7 +10,10 @@
 </head>
 <body>
   <!-- 네이버아이디로로그인 버튼 노출 영역 -->
-  <div id="naver_id_login"></div>
+<!--   <div id="naver_id_login"></div>  -->
+  <a href="https://nid.naver.com/oauth2.0/authorize?response_type=token&client_id=N0B6XXo2rqhysUglG48w&redirect_uri=http%3A%2F%2Flocalhost%3A800%2Ftextant%2Fcallback.text&state=91cfe082-9979-4ab1-ba9f-58883b8bc589" style="position:absolute; left:20%;top:33%;">
+  <img src="/textant/resources/icon_img/naver_login_btn.png"id="naver_id_login">
+  </a>
   <!-- //네이버아이디로로그인 버튼 노출 영역 -->
   <script type="text/javascript">
   	var naver_id_login = new naver_id_login("N0B6XXo2rqhysUglG48w", "http://localhost:800/textant/callback.text");

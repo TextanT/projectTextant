@@ -45,6 +45,7 @@
 		<input type="hidden" name="age" class="age" id="age">
 		<input type="hidden" name="gender" class="gender" id="gender">
 		<input type="hidden" name="realName" class="realname" id="name">
+		<input type="hidden" name="siteFrom" class="siteFrom" value="1">
 	</form>
 </body>
 </html>

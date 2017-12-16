@@ -12,14 +12,16 @@
 		(SELECT FILELOCATION
 		FROM BOOKINFO
 		WHERE GENRE = #{genre}
+		AND BOOKTYPE = #{booktype} 
 		ORDER by bookArticleNum desc) human)
 		WHERE RM BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
-	<select id="getGenreCount" parameterType="String" resultType="int">
+	<select id="getGenreCount" parameterType="HashMap" resultType="int">
 		SELECT COUNT(*)
 		FROM BOOKINFO
         WHERE GENRE = #{genre}
+        AND BOOKTYPE = #{booktype}
 	</select>
 	
 	

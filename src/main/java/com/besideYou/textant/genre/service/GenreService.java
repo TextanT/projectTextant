@@ -9,5 +9,6 @@ import com.besideYou.textant.main.dto.BookInfoDto;
 
 public interface GenreService {
 
-	HashMap<Object, Object> genreserch(Model model,String genre,int pageNum);
+	HashMap<Object, Object> genreserch(Model model,String genre,int pageNum, int booktype);
+
 }

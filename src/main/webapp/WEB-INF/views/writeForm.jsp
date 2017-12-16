@@ -72,7 +72,7 @@
 						&nbsp | 책쓰기</span>
 				</div>
 			</div>
-				<%@include file="menuBox.jsp" %>
+				<%@include file="menuBoxAop.jsp" %>
 
 	</div>
 	<%@include file="topMenu.jsp" %>

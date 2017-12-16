@@ -104,6 +104,7 @@ public class MainController {
 		return "redirect:main.text";
 	}
 	
+	
 	@RequestMapping(value = "/find.text", method = RequestMethod.GET)
 	public String findform(HttpServletRequest req, HttpSession session) {
 		
