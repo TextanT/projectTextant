@@ -18,7 +18,7 @@
 	</select>
 	
 	<select id="getUserNum" parameterType="login" resultType="login">
-		SELECT USERNUM,NICKNAME FROM LOGIN WHERE USERID=#{userId} AND SITEFROM = #{siteFrom}
+		SELECT USERNUM,NICKNAME FROM LOGIN WHERE USERID=#{userId} AND SITEFROM = 0
 	</select>
 	<select id="findid" parameterType="String" resultType="String">
 		SELECT USERID FROM LOGIN WHERE EMAIL = #{email}
