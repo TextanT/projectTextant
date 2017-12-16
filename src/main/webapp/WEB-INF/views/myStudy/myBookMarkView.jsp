@@ -333,6 +333,7 @@ h1{
     .book_cap1>h5 {
         padding-top: 10px;
     }
+   
 </style>
 </head>
 <body>
@@ -434,7 +435,7 @@ h1{
 		<div class="serchbookDiv">
 			<c:forEach var="bookMark" items="${bookMarkList}">
 				<div class="genre1_book_list" onmouseenter="bookCapOn(${bookMark.bookMarkNum})" onmouseleave="bookCapOff(${bookMark.bookMarkNum})">
-					<a name="bookArticleNum" href="/textant/myBookMarkDelete.text?pageNum=${pageNum}&bookMarkNum=${bookMark.bookMarkNum}">삭제</a><br>
+					<a class="bookMarkNum" name="bookMarkNum" href="/textant/myBookMarkDelete.text?pageNum=${pageNum}&bookMarkNum=${bookMark.bookMarkNum}">삭제</a><br>
 					<a href="/textant/read.text?fileName=${bookMark.fileLocation}">
 						<img src="displayFile.text?fileName=${bookMark.fileLocation}/OriginImg&pageNum=1&fileType=jpg" style="border: 1px solid #D8D8D8; width: 166.45px; height: 244px; position: absolute; z-index: 2; height: 242px;" class="book_img_size" id="bookimg" >
 							
@@ -496,6 +497,8 @@ h1{
 			$('.menu_box1').mouseout(function() {
 				$('.menu_box1').css("display", "none");
 			})
+			
+			
 		})
 	</script>
 	<script type="text/javascript">
