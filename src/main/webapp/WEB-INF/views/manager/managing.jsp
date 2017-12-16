@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -67,7 +68,68 @@ body {
 border-left: 1px solid #999;
 padding-left: 40px;
 }
-</style> 
+</style>
+<script>
+window.onload = function () {
+let totalCount = "${totalVisitCount}";	
+
+ let size = "${totalVisitCount.size()}";
+	let visitDateList = []; 
+	let visitCountList = []; 
+	function Init() {
+			visitDateList[1] = "${totalVisitCount.get(0).visitDate}";
+			visitCountList[1] = "${totalVisitCount.get(0).visitCount}";
+			visitDateList[2] = "${totalVisitCount.get(1).visitDate}";
+			visitCountList[2] = "${totalVisitCount.get(1).visitCount}";
+			visitDateList[3] = "${totalVisitCount.get(2).visitDate}";
+			visitCountList[3] = "${totalVisitCount.get(2).visitCount}";
+			visitDateList[4] = "${totalVisitCount.get(3).visitDate}";
+			visitCountList[4] = "${totalVisitCount.get(3).visitCount}";
+			visitDateList[5] = "${totalVisitCount.get(4).visitDate}";
+			visitCountList[5] = "${totalVisitCount.get(4).visitCount}";
+			visitDateList[6] = "${totalVisitCount.get(5).visitDate}";
+			visitCountList[6] = "${totalVisitCount.get(5).visitCount}";
+			visitDateList[7] = "${totalVisitCount.get(6).visitDate}";
+			visitCountList[7] = "${totalVisitCount.get(6).visitCount}";
+	}
+ 
+ Init();
+ 
+ var chart = new CanvasJS.Chart("chartContainer", {
+		animationEnabled: true,
+		theme: "light2", // "light1", "light2", "dark1", "dark2"
+		title: {
+			text: "방문자수"
+		},
+		axisY: {
+			title: "방문자 수",
+			suffix: "명",
+			includeZero: false
+		},
+		axisX: {
+			title: "날짜"
+		},
+		data: [{
+			type: "column",
+			yValueFormatString: "#,##0\"\"",
+			dataPoints: [
+				{ label: visitDateList[1], y: Number(visitCountList[1]) },	
+				{ label: visitDateList[2], y: Number(visitCountList[2]) },	
+				{ label: visitDateList[3], y: Number(visitCountList[3]) },	
+				{ label: visitDateList[4], y: Number(visitCountList[4]) },	
+				{ label: visitDateList[5], y: Number(visitCountList[5]) },	
+				{ label: visitDateList[6], y: Number(visitCountList[6]) },	
+				{ label: visitDateList[7], y: Number(visitCountList[7]) },	
+				
+			]
+		}]
+	});
+chart.render();
+
+}
+</script>
+
+ 
 </head>
 <body>
 	<div class="header">
@@ -139,6 +201,10 @@ padding-left: 40px;
 			</div>
 			<div class="col-sm-9 col-md-10 main">
 				<h1 class="page-header">관리자 메인</h1>
+				
+				
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
 
 				<div class="row placeholders">
 					<div class="col-xs-6 col-sm-3 placeholder">
@@ -302,10 +368,6 @@ padding-left: 40px;
 		</div>
 	</div>
 
-
-
-
-
 	<footer>
 		<div>
 			<img height="50px" src="/textant/resources/icon_img/footer_logo.png"
@@ -353,6 +415,7 @@ padding-left: 40px;
 				})
 			})
 		</script>
-
+		
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@ import com.besideYou.textant.common.dto.RecommendedBookDto;
 import com.besideYou.textant.common.dto.ReportBookDto;
 import com.besideYou.textant.common.dto.ReportCommentDto;
 import com.besideYou.textant.main.dto.BookInfoDto;
+import com.besideYou.textant.manager.dto.CountDto;
 
 public interface ManagerDao {
 	
@@ -52,4 +53,5 @@ public interface ManagerDao {
 	void deleteBookInfo(int bookArticleNum);
 	int getTotalBookCount(HashMap<String, String> totalMap);
 	ArrayList<BookInfoDto> searchAllBook(HashMap<String, String> paramMap);
+	ArrayList<CountDto> weekVisiter();
 }

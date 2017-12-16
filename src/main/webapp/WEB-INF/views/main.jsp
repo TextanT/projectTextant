@@ -80,7 +80,7 @@
 		<div class="swiper-button-prev"></div>
 
 	</div>
-	<div class="book_list_box" style="overflow: hidden; height: 920px;">
+	<div class="book_list_box" style="overflow: hidden; height: 920px;position: relative;">
 		<div style="float: right; margin-right: 30px;">
 			<div style="float: right;">
 				<img src="/textant/resources/icon_img/likestarnon.png"
@@ -239,6 +239,7 @@
 		<a href="#" class="foo_a">서비스약관</a> <a href="#" class="foo_a">고객센터</a>
 		<a href="#" class="foo_a">Q&A게시판</a>
 	</address>
+	<div>총방문자수 : ${totalVisitCount}</div><div>오늘방문자수 : ${todayVisitCount}</div>
 	</footer>
 
 	<div style="position: fixed; bottom: 15px; right: 30px;">

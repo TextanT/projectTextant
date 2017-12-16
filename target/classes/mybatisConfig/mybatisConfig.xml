@@ -27,6 +27,7 @@
 	    <typeAlias alias="recommendedBook" type="com.besideYou.textant.common.dto.RecommendedBookDto" />
 	    <typeAlias alias="reportBook" type="com.besideYou.textant.common.dto.ReportBookDto" />
 	    <typeAlias alias="reportComment" type="com.besideYou.textant.common.dto.ReportCommentDto" />  
+	    <typeAlias alias="countDto" type="com.besideYou.textant.manager.dto.CountDto" />  
 	</typeAliases>
 	
 <!-- 	<mappers> -->

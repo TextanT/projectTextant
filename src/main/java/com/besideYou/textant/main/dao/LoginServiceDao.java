@@ -19,4 +19,10 @@ public interface LoginServiceDao {
 	public String findid(String email);
 
 	public String findpass(HashMap<String, String> passMap);
+
+	public void setTotalCount();
+
+	public int getTotalCount();
+
+	public int getTodayCount();
 }

@@ -26,20 +26,19 @@
 	<select id="findpass" parameterType="HashMap" resultType="String">
 		SELECT PASS FROM LOGIN WHERE EMAIL = #{email} AND USERID = #{id}
 	</select>
+	
+	<insert id="setTotalCount">
+	INSERT INTO TOTALCOUNTTABLE VALUES(TOTALCOUNT_SEQ.NEXTVAL,SYSDATE)
+	</insert>
+	
+	<select id="getTotalCount" parameterType="HashMap" resultType="Integer">
+	SELECT COUNT(*) FROM TOTALCOUNTTABLE
+	</select>
+	<select id="getTodayCount" parameterType="HashMap" resultType="Integer">
+	SELECT COUNT(*) 
+	FROM TOTALCOUNTTABLE
+	WHERE WRITEDATE 
+		between to_date(to_char(sysdate,'YYYYMMDD'),'YYYYMMDD') and sysdate
+	</select>
+	
 </mapper>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	

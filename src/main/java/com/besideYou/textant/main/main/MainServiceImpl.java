@@ -14,9 +14,9 @@ import org.springframework.ui.Model;
 
 import com.besideYou.textant.common.dto.RecommendedBookDto;
 import com.besideYou.textant.main.dao.BookInfoDao;
+import com.besideYou.textant.main.dao.LoginServiceDao;
 import com.besideYou.textant.main.dto.BookInfoDto;
 import com.besideYou.textant.main.mainpage.MainPage;
-import com.besideYou.textant.manager.dao.ManagerDao;
 
 @Service
 public class MainServiceImpl implements MainService {
@@ -24,8 +24,15 @@ public class MainServiceImpl implements MainService {
 	String destinationDir;
 	@Autowired
 	BookInfoDao bookInfoDao;
+	
+	@Autowired
+	LoginServiceDao loginServiceDao;
+	
 	@Autowired
 	MainPage mainPage;
+	
+	int totalCount;
+	int todayCount;
 	@Override
 	public String home(Model model, HttpSession session) {
 		
@@ -75,6 +82,13 @@ public class MainServiceImpl implements MainService {
 		
 		model.addAttribute("nickname", session.getAttribute("nickname"));
 		model.addAttribute("id", session.getAttribute("id"));
+		
+		
+		totalCount = loginServiceDao.getTotalCount();
+		todayCount = loginServiceDao.getTodayCount();
+		
+		model.addAttribute("totalVisitCount", totalCount);
+		model.addAttribute("todayVisitCount", todayCount);
 		
 		return "main";
 	}

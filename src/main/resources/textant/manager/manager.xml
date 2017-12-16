@@ -282,4 +282,11 @@
 			  ) outTable 
 		where rum between #{startPage} and #{endPage}
 	</select>
+	<select id="weekVisiter" resultType="countDto">
+	select to_char(writeDate,'MM/DD') visitDate,count(*) visitCount
+        from totalcounttable
+where to_char(writedate,'YYYYMMDD') between to_char(sysdate-6,'YYYYMMDD') and to_char(sysdate,'YYYYMMDD')
+group by to_char(writeDate,'MM/DD')
+order by to_char(writeDate,'MM/DD') asc
+	</select>
 </mapper>

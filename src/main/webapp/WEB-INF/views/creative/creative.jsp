@@ -251,7 +251,7 @@
 		<div class="swiper-button-prev"></div>
 
 	</div>
-	<div class="book_list_box" style="overflow: hidden; height: 920px;">
+	<div class="book_list_box" style="overflow: hidden; height: 920px;position: relative;">
 		<div style="float: right; margin-right: 30px;">
 			<div style="float: right;">
 				<img src="/textant/resources/icon_img/likestarnon.png"

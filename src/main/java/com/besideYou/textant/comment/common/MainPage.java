@@ -29,9 +29,9 @@ public class MainPage {
 
 		sb = new StringBuffer();
 		if(startPage < pageBlock) {
-			sb.append("<div style='position: absolute;bottom: -640px;left: 140px;'><img src='/textant/resources/icon_img/' width='30' height='9'>");			
+			sb.append("<div style='position: absolute;bottom: 10px;'><img src='/textant/resources/icon_img/best_left.jpg' width='30' height='12'>");			
 		} else {
-			sb.append("<img src='/textant/resources/icon_img/' width='30' height='9'");
+			sb.append("<img src='/textant/resources/icon_img/best_left.jpg' width='30' height='12'");
 			sb.append(" onclick='genresub(");
 			sb.append(startPage - pageBlock);
 			sb.append(")' style='cursor:pointer;'> ");
@@ -54,12 +54,12 @@ public class MainPage {
 		
 		sb.append("&nbsp;&nbsp;|");		
 		if(endPage < totalPage) {
-			sb.append("<img src='/textant/resources/icon_img/' width='30' height='9'");
+			sb.append("<img src='/textant/resources/icon_img/best_right.jpg' width='30' height='12'");
 			sb.append(" onclick='getMainBookList(");
 			sb.append(startPage + pageBlock);
 			sb.append(")' style='cursor:pointer'> ");						
 		} else {
-			sb.append("<img src='/textant/resources/icon_img/' width='30' height='9'></div>");			
+			sb.append("<img src='/textant/resources/icon_img/best_right.jpg' width='30' height='12'></div>");			
 		}	
 		
 		pagingMap.put("pageCode", sb.toString());

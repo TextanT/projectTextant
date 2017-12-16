@@ -3,6 +3,7 @@ package com.besideYou.textant.manager.service;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import com.besideYou.textant.common.dto.ReportBookDto;
 import com.besideYou.textant.common.dto.ReportCommentDto;
 import com.besideYou.textant.main.dto.BookInfoDto;
 import com.besideYou.textant.manager.dao.ManagerDao;
+import com.besideYou.textant.manager.dto.CountDto;
 import com.besideYou.textant.manager.dto.ManagingBookDto;
 import com.besideYou.textant.manager.page.ManagerPage;
 
@@ -47,6 +49,8 @@ public class ManagerServiceImplement implements ManagerService {
 	public void managerMain(Model model) {
 		HashMap<String, String> oneTen;
 
+		
+		
 		oneTen = new HashMap<String, String>();
 		oneTen.put("startPage", "1");
 		oneTen.put("endPage", "5");
@@ -61,6 +65,11 @@ public class ManagerServiceImplement implements ManagerService {
 		model.addAttribute("totalReportBook", managerDao.getTotalReportBookCount());
 		model.addAttribute("totalReportComment", managerDao.getTotalReportCommentCount());
 		model.addAttribute("totalBadComment", managerDao.getTotalBadCommentsCount());
+		
+		
+		List<CountDto> weekVisiter = managerDao.weekVisiter();
+		System.out.println(weekVisiter);
+		model.addAttribute("totalVisitCount",weekVisiter);
 	}
 
 	@Override
