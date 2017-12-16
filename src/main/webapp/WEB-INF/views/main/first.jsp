@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link href="/textant/resources/css/log.css" type="text/css"
+<link href="/textant/resources/css/logf.css" type="text/css"
 	rel="stylesheet">
 <style>
 * {
@@ -20,7 +20,7 @@ a {
 }
 
 body {
-	background-image: url(/textant/resources/background_img/fritsPage2.jpg);
+	background-image: url(/textant/resources/background_img/backV2.png);
 	background-position: center center;
 	background-size: cover;
 	background-attachment: fixed;
@@ -30,7 +30,7 @@ body {
 
 @media screen and (max-width:1920px) {
 	body {
-		background-image: url(/textant/resources/background_img/fritsPage2.jpg);
+		background-image: url(/textant/resources/background_img/backV2.png);
 		background-position: center center;
 		background-size: cover;
 		background-attachment: fixed;
@@ -41,7 +41,7 @@ body {
 
 @media screen and (max-width:1440px) {
 	body {
-		background-image: url(/textant/resources/background_img/fritsPage2.jpg);
+		background-image: url(/textant/resources/background_img/backV2.png);
 		background-position: center center;
 		background-size: cover;
 		background-attachment: fixed;
@@ -52,7 +52,7 @@ body {
 
 @media screen and (max-width:1024px) {
 	body {
-		background-image: url(/textant/resources/background_img/fritsPage2.jpg);
+		background-image: url(/textant/resources/background_img/backV2.png);
 		background-position: center center;
 		background-size: cover;
 		background-attachment: fixed;
@@ -62,7 +62,14 @@ body {
 }
 
 .box1 {
+	background:rgba(118,118,118,0.5);
 	text-align: center;
+	border: 1px solid #e8e8e8;
+	width: 30%; 
+	margin: auto;
+	margin-top: 18%; 
+	padding-top:7%; 
+	padding-bottom: 10%;
 }
 
 .login_btn {
@@ -81,7 +88,7 @@ body {
 	font-style: normal;
 	height: 34px;
 	line-height: 34px;
-	width: 150px;
+	width: 250px;
 	text-decoration: none;
 	text-align: center;
 }
@@ -111,7 +118,7 @@ body {
 	font-style: normal;
 	height: 34px;
 	line-height: 34px;
-	width: 150px;
+	width: 250px;
 	text-decoration: none;
 	text-align: center;
 }
@@ -141,7 +148,7 @@ body {
 	font-style: normal;
 	height: 34px;
 	line-height: 34px;
-	width: 150px;
+	width: 250px; 
 	text-decoration: none;
 	text-align: center;
 }
@@ -216,18 +223,18 @@ body {
 }
 
 .login_div {
-	padding-top: 2%;
-	padding-left: 35%;
+	padding-top: 5%;
+	padding-left: 2%;
 }
 
 .sign_div {
 	padding-top: 2%;
-	padding-left: 35%;
+	padding-left: 2%;
 }
 
 .guest_div {
 	padding-top: 2%;
-	padding-left: 35%;
+	padding-left: 2%;
 }
 
 .signUp_div {
@@ -245,8 +252,8 @@ body {
 	border: 1px solid #D8D8D8;
 	/*            width: 100px;*/
 	padding: 10px;
-	margin-left: 55%;
-	margin-right: 20%;
+	margin-left: 19%;
+	margin-right: 17.2%;
 	margin-top: 13%;
 }
 
@@ -264,9 +271,9 @@ body {
 	border: 1px solid #D8D8D8;
 	/* width: 100px;*/
 	padding: 10px;
-	margin-left: 55%;
-	margin-right: 20%;
-	margin-top: 3%;
+	margin-left: 19%;
+	margin-right: 17.2%; 
+	margin-top: 3%; 
 }
 
 .box1_pass .int {
@@ -371,10 +378,10 @@ body {
 		</div>
 
 	</div>
-	<div class="fristG">
-		<img src="/textant/resources/img/fritsg.gif" style="padding-left: 280px;padding-top:163px;
-		position: absolute;">
-	</div>
+<!-- 	<div class="fristG"> -->
+<!-- 		<img src="/textant/resources/img/fritsg.gif" style="padding-left: 280px;padding-top:163px; -->
+<!-- 		position: absolute;"> -->
+<!-- 	</div> -->
 	<div class="box1">
 		<form action="login.text" method="post" id="loginForm">
 			<div id="box1_Id" class="box1_Id">

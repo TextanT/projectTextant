@@ -39,7 +39,7 @@ public class LoginServiceImpl implements LoginService {
 				
 				session.setAttribute("id", id);
 				
-				
+				System.out.println(loginDto);
 				loginDto = loginDao.getUserNum(loginDto);
 				session.setAttribute("userNum", loginDto.getUserNum());
 				System.out.println("userNum:session:"+session.getAttribute("userNum"));

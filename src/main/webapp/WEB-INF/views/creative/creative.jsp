@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 
@@ -10,8 +10,8 @@
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="/textant/resources/Swiper-master/dist/css/swiper.min.css">
-<link href="/textant/resources/css/headermain.css" rel="stylesheet"
-	type="text/css">
+<link href="/textant/resources/css/header.css" rel="stylesheet"
+	type="text/css"> 
 <link href="/textant/resources/css/footer.css" rel="stylesheet"
 	type="text/css">
 <link href="/textant/resources/css/main_slider.css" rel="stylesheet"
@@ -22,7 +22,7 @@
 	type="text/css">
 <link href="/textant/resources/css/notice.css" rel="stylesheet"
 	type="text/css">
-<link href="/textant/resources/css/sign_modal.css" type="text/css"
+<link href="/textant/resources/css/sign_modal.css" type="text/css" 
 	rel="stylesheet">
 <link href="/textant/resources/css/log.css" type="text/css"
 	rel="stylesheet">
@@ -40,148 +40,20 @@
 
 	<div class="header">
 		<div class="header_logo" style="padding-top: 20px;">
-			<a href="/textant/main.text" class="logo_a"> <img
-				src="/textant/resources/icon_img/logo_mini.png" class="logo">
-			</a>
+			<div style="float: left;">
+				<a href="/textant/main.text" class="logo_a" style="height: 55px;">
+					<img src="/textant/resources/icon_img/logo_mini.png" class="logo">
+				</a>
+			</div>
+			<div style="float: left;">
+				<a href="/textant/managerMain.text" style="text-decoration: none;"><span
+					style="margin-top: auto; margin-bottom: auto; font-size: 33px; color: white;">
+						&nbsp | 창작 카페</span></a>
+			</div>
 		</div>
-		<div class="menu_box">
-			<c:if test="${id!=null}">
-				<c:out
-					value="
-			<a href='#' class='menu_title'><span class='menu1' >${nickname}</span></a>
-			
-			<a href='mypage.text' class='menu_title'><span class='menu2'>내정보</span></a> 
-
-			<a href='logout.text' class='menu_title'><span class='menu3'id='menu3'>로그아웃</span></a> 
-			
-			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
-			 "
-					escapeXml="false" />
-			</c:if>
-
-			<c:if test="${id==null}">
-				<c:out
-					value="
-			<a href='#' class='menu_title'><span class='menu1' id='menu1'>로그인</span></a>
-			
-			<a href='#' class='menu_title'><span class='menu2'id='menu2'>회원가입</span></a> 
-
-			<a href='find.text' class='menu_title'><span class='menu3'id='menu3'>ID/PW찾기</span></a> 
-			
-			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
-			 "
-					escapeXml="false" />
-			</c:if>
-
-
-
-		</div>
+		<%@include file="../menuBox.jsp" %>
 	</div>
-	<!-- 모달창 -->
-	<div id="modal_log">
-		<form action="login.text" method="post" id="loginForm">
-			<button type="submit" class="aass" id="sasd"></button>
-
-			<div id="idDiv" class="idDivc">
-				<span class="id_sp int_id"> <input type="text" class="int"
-					value maxlength="20" autocomplete="off" placeholder="아이디"
-					name="userId" id="mologinId">
-				</span>
-			</div>
-
-			<div style="height: 15px;"></div>
-
-			<div id="PassDiv" class="PassDivc">
-				<span class="pass_sp int_pass"> <input type="password"
-					id="pass" class="int" value maxlength="20" autocomplete="off"
-					placeholder="비밀번호" name="pass" id="mologinPass">
-				</span>
-			</div>
-			<div class="login_div">
-				<a href="#" class="login_btn" id="login_mit">로그인</a>
-			</div>
-			<div class="find_div">
-				<a href="find.text" id="find">아이디/비밀번호 찾기</a>
-			</div>
-			<div class="exit_div">
-				<a href="#" class="js_close" id="exit">돌아가기</a>
-			</div>
-
-		</form>
-		<div class="exit2_div">
-			<img src="/textant/resources/icon_img/exit3.jpg" class="js_close"
-				style="cursor: pointer;" onclick="modalemp()">
-		</div>
-
-	</div>
-	<!-- 모달창 -->
-	<div id="modal">
-		<form action="sign.text" method="post" id="signForm">
-			<button type="submit" class="aass" id="sasd"></button>
-
-			<div id="idDiv" class="idDivc">
-				<span class="id_sp int_id"> <input type="text" id="signid"
-					class="int" value maxlength="20" autocomplete="off"
-					placeholder="아이디" name="userId">
-				</span>
-			</div>
-			<div id="idCheckStatus"></div>
-
-			<div style="height: 15px;"></div>
-
-			<div id="PassDiv" class="PassDivc">
-				<span class="pass_sp int_pass"> <input type="password"
-					id="pass" class="int" value maxlength="20" autocomplete="off"
-					placeholder="비밀번호" name="pass">
-				</span>
-			</div>
-			<div id="PasscDiv" class="PasscDivc">
-				<span class="passc_sp int_pass"> <input type="password"
-					id="passcheck" class="int" value maxlength="20" autocomplete="off"
-					placeholder="비밀번호확인" onblur="checkvalue()">
-				</span>
-			</div>
-
-			<div id="status"></div>
-
-			<div id="mailDiv" class="mailDivc">
-				<span class="mail_sp int_pass"> <input type="email" id="mail"
-					class="int" value maxlength="20" autocomplete="off"
-					placeholder="E-mail" name="email">
-				</span>
-			</div>
-			<div id="nicknameDiv" class="nicknameDivc">
-				<span class="nickname_sp int_pass"> <input type="text"
-					id="nickname" class="int" value maxlength="20" autocomplete="off"
-					placeholder="별명" name="nickName">
-				</span>
-			</div>
-			<div class="wrap">
-				<input name="radio" type="radio" id="radio0" class="radio"
-					onclick="gender1()"> <label for="radio0"
-					class="radio-label"> <i class="fa fa-check"></i> <span>남자</span>
-				</label> <input type="text" name="jender" id="jender" hidden="hidden">
-
-				<input name="radio" type="radio" id="radio1" class="radio"
-					onclick="gender2()"> <label for="radio1"
-					class="radio-label"> <i class="fa fa-check"></i> <span>여자</span>
-				</label>
-			</div>
-
-			<div class="signUp_div">
-				<a href="#" class="signUp_btn" id="sign_mit">화원가입</a>
-			</div>
-			<div class="exit_div">
-				<a href="#" class="js_close" id="exit">돌아가기</a>
-			</div>
-
-		</form>
-		<div class="exit2_div">
-			<img src="/textant/resources/icon_img/exit3.jpg" class="js_close"
-				style="cursor: pointer;">
-		</div>
-
-	</div>
+	
 	<div class="sub_header">
 		<div class="menu_dd">
 			<div class="sub_sub1">
@@ -363,20 +235,7 @@
 
 
 
-	<footer>
-	<div>
-		<img height="50px" src="/textant/resources/icon_img/footer_logo.png"
-			class="footer_img">
-	</div>
-	<address>
-		Tel. 010-1234-1234<br> Fax. 051)555-555<br> E-Mail.
-		cwj1102@naver.com<br> 주소. 부산광역시 남구 신선로 365 부경대학교<br> <br>
-		<br> <a href="#" class="foo_a">회사소개</a> <a href="#" class="foo_a">광고문의</a>
-		<a href="#" class="foo_a">제휴문의</a> <a href="#" class="foo_a">인재채용</a>
-		<a href="#" class="foo_a">서비스약관</a> <a href="#" class="foo_a">고객센터</a>
-		<a href="#" class="foo_a">Q&A게시판</a>
-	</address>
-	</footer>
+	<%@include file="../footer.jsp" %>
 
 	<div style="position: fixed; bottom: 15px; right: 30px;">
 		<a href="#" id="MOVE_TOP_BTN"><img

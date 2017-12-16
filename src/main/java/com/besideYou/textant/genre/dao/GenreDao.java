@@ -8,5 +8,5 @@ import com.besideYou.textant.main.dto.BookInfoDto;
 public interface GenreDao {
 
 	List<String> genreserch(HashMap<String, String> genreMap);
-	int getGenreCount(String genre);
+	int getGenreCount(HashMap<String, String> genreMap);
 }

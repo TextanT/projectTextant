@@ -25,4 +25,6 @@ public interface LoginServiceDao {
 	public int getTotalCount();
 
 	public int getTodayCount();
+
+	public String getNickName(LoginDto loginDto);
 }

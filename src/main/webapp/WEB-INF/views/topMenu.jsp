@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 <div class="sub_header">
@@ -30,15 +31,15 @@
 			<div class="list_box1">
 				<ul>
 					<li><a href="#">카페</a></li>
-					<li><a href="#">베스트</a></li>
 					<li><a href="/textant/writeAmateur.text">작품쓰기</a></li>
+					<li style="cursor: default;">&nbsp</li>
 
 				</ul>
 			</div>
 			<div class="list_box2">
 				<ul>
-					<li><a href="#">창작도서</a></li>
-					<li><a href="#">일반도서</a></li>
+					<li><a href="/textant/creativeSerch.genre">창작도서</a></li>
+					<li><a href="serchpage.genre">일반도서</a></li>
 					<li style="cursor: default;">&nbsp</li>
 
 				</ul>

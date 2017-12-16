@@ -37,73 +37,10 @@ a {
 						&nbsp | 장르별 검색</span>
 				</div>
 			</div>
-		<div class="menu_box">
-			<c:if test="${id!=null}">
-				<c:out
-					value="
-			<a href='#' class='menu_title'><span class='menu1' id='menu1'>${nickname}</span></a>
-			
-			<a href='mypage.text' class='menu_title'><span class='menu2'id='menu2'>내정보</span></a> 
+	<%@include file="../menuBox.jsp" %>
 
-			<a href='logout.text' class='menu_title'><span class='menu3'id='menu3'>로그아웃</span></a> 
-			
-			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
-			 "
-					escapeXml="false" />
-			</c:if>
-			<c:if test="${id==null}">
-				<c:out
-					value="
-			<a href='#' class='menu_title'><span class='menu1' id='menu1'>로그인</span></a>
-			
-			<a href='#' class='menu_title'><span class='menu2'id='menu2'>회원가입</span></a> 
-
-			<a href='find.text' class='menu_title'><span class='menu3'id='menu3'>ID/PW찾기</span></a> 
-			
-			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
-			 "
-					escapeXml="false" />
-			</c:if>
-
-		</div>
 	</div>
-
-	<div class="sub_header">
-		<div class="menu_dd">
-			<div class="sub_sub1">
-				<a href='' class='sub_header_menu1'>내서재</a>
-			</div>
-			<div class="sub_sub2">
-				<a href='/textant/write.text' class='sub_header_menu2'
-					id="sub_menu2">창작카페</a>
-			</div>
-			<div class="sub_sub3">
-				<a href='' class='sub_header_menu3' id="sub_menu3" style="color: highlight">장르별검색</a>
-			</div>
-			<div class="sub_sub3">
-				<a href='/textant/write.text' class='sub_header_menu3' id="sub_menu3">책쓰기</a>
-			</div>
-		</div>
-	</div>
-	<div class="menu_top">
-		<div class="menu_box1">
-			<div class="list_box1">
-				<ul>
-					<li><a href="#">카페</a></li>
-					<li><a href="#">베스트</a></li>
-					<li><a href="/textant/writeAmateur.text">작품쓰기</a></li>
-
-				</ul>
-			</div>
-			<div class="list_box2">
-				<ul>
-					<li><a href="#">창작도서</a></li>
-					<li><a href="#">일반도서</a></li>
-					<li style="cursor: default;">&nbsp</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+	<%@include file="../topMenu.jsp" %>
 	<div class="serchpos">
 		<div class="serchDiv">
 			<div class="serchpotionDiv">
@@ -138,6 +75,7 @@ a {
     			<input type="radio" name="1" class="radio13" onclick="radio13()" value='verse'>
     			<input type="radio" name="1" class="radio14" onclick="radio14()" value='essay'> 
     			<input type="radio" name="1" class="radio15" onclick="radio15()" value='humor'> 
+    			<input type="radio" name="1" class="radio16" onclick="radio16()" value='action'> 
     			<input type="hidden" id="pageNum" name="pageNum" value='1'> 
     			
     			<input type="text" class="genre" id="genre" name="genre" hidden>
@@ -176,20 +114,7 @@ a {
 
 
 
-	<footer>
-	<div>
-		<img height="50px" src="/textant/resources/icon_img/footer_logo.png"
-			class="footer_img">
-	</div>
-	<address>
-		Tel. 010-1234-1234<br> Fax. 051)555-555<br> E-Mail.
-		cwj1102@naver.com<br> 주소. 부산광역시 남구 신선로 365 부경대학교<br> <br>
-		<br> <a href="#" class="foo_a">회사소개</a> <a href="#" class="foo_a">광고문의</a>
-		<a href="#" class="foo_a">제휴문의</a> <a href="#" class="foo_a">인재채용</a>
-		<a href="#" class="foo_a">서비스약관</a> <a href="#" class="foo_a">고객센터</a>
-		<a href="#" class="foo_a">Q&A게시판</a>
-	</address>
-	</footer>
+	<%@include file="../footer.jsp" %>
 	<script type="text/javascript" src="/textant/resources/js/serch.js">
 		
 	</script>
@@ -209,7 +134,8 @@ a {
 				url : "/textant/genre.genre",
 				data : {
 					genre : $("#genre").val(),
-					pageNum : page
+					pageNum : page,
+					booktype : 0
 				},success:function(data){
 // 					alert(data);
 // 					alert(data.fileLocationList);

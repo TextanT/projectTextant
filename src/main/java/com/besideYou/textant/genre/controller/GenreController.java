@@ -23,7 +23,7 @@ public class GenreController {
 	
 	@RequestMapping(value="/genre.genre", method = RequestMethod.GET)
 	@ResponseBody
-	public HashMap<Object, Object> genre(Model model, BookInfoDto bookInfoDto, String genre,int pageNum) {
+	public HashMap<Object, Object> genre(Model model, BookInfoDto bookInfoDto, String genre,int pageNum,int booktype) {
 	
 		
 //		HashMap<String,List> a = new HashMap();
@@ -44,24 +44,48 @@ public class GenreController {
 		
 		
 		
-		return genreService.genreserch(model,genre,pageNum);
+		return genreService.genreserch(model,genre,pageNum,booktype);
+	}
+	
+	
+	
+	@RequestMapping(value="/creativegenre.genre", method = RequestMethod.GET)
+	@ResponseBody
+	public HashMap<Object, Object> defgenre(Model model, BookInfoDto bookInfoDto, String genre,int pageNum, int booktype) {
+		
+		
+//		HashMap<String,List> a = new HashMap();
+		
+		List b; 
+		b = new ArrayList();
+		for(int i =1; i<=15; i++) {
+			
+			b.add(i);
+		}
+//		genreService.genreserch(genre);
+		
+		
+		
+		System.out.println("장르"+genre);
+		
+		model.addAttribute("testList",b);
+		
+		
+		
+		return genreService.genreserch(model,genre,pageNum,booktype);
 	}
 	
 	
 	@RequestMapping(value="/serchpage.genre")
 	public String serchpage(Model model) {
 		
-//		List b;
-//		b = new ArrayList();
-//		for(int i =1; i<=15; i++) {
-//			
-//			b.add(i);
-//		}
-//		
-//		model.addAttribute("testList",b);
-//		
 		return "/WEB-INF/views/main/searchpage.jsp";
 	}
+	@RequestMapping(value = "/creativeSerch.genre")
+	public String createSerch(Model model) {
+		return "/WEB-INF/views/main/creativeSerch.jsp";
+	}
+	
 	
 	
 }

@@ -9,9 +9,13 @@
 	<configs>
 		<config>src/main/resources/spring/root-context.xml</config>
 		<config>src/main/resources/spring/main-context.xml</config>
+		<config>src/main/resources/spring/apiLogin-context.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/resources/spring/comment-context.xml</config>
+		<config>src/main/resources/spring/creative-context.xml</config>
+		<config>src/main/resources/spring/myStudy-context.xml</config>
+		<config>src/main/resources/spring/genre-context.xml</config>
 		<config>src/main/resources/spring/manager-context.xml</config>
 	</autoconfigs>
 	<configSets>
