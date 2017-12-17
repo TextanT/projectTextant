@@ -203,9 +203,9 @@ chart.render();
 				<h1 class="page-header">관리자 메인</h1>
 				
 				
-<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+			<div id="chartContainer" style="height: 300px; width: 100%;"></div>
 
-
+			<h3>신고 및 전체 현황</h3>
 				<div class="row placeholders">
 					<div class="col-xs-6 col-sm-3 placeholder">
 						<h4>댓글신고수</h4>

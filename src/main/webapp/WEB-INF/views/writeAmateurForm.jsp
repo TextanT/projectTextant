@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link href="/textant/resources/css/header.css" rel="stylesheet"
+<link href="/textant/resources/css/header-creative.css" rel="stylesheet"
 	type="text/css">
 <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 <!-- Add jQuery library -->
@@ -135,26 +135,31 @@
 						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
 						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
 						style="height: 150px;"></a>
+						<input type="radio" name="inside" value="1">
+				</div> 
+				
+				<div class="samplecover1">
+					<a class="fancybox" data-fancybox-group="gallery"
+						href="/textant/resources/book_img/다빈치코드.jpg"><img
+						src="/textant/resources/book_img/다빈치코드.jpg"
+						style="height: 150px;"></a>
+						<input type="radio" name="inside" value="2">
 				</div>
 				<div class="samplecover1">
 					<a class="fancybox" data-fancybox-group="gallery"
-						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
-						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
+						href="/textant/resources/book_img/메이즈러너_데스큐어.jpg"><img
+						src="/textant/resources/book_img/메이즈러너_데스큐어.jpg"
 						style="height: 150px;"></a>
+						<input type="radio" name="inside" value="3">
 				</div>
 				<div class="samplecover1">
 					<a class="fancybox" data-fancybox-group="gallery"
-						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
-						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
+						href="/textant/resources/book_img/신경끄기의 기술.jpg"><img
+						src="/textant/resources/book_img/신경끄기의 기술.jpg"
 						style="height: 150px;"></a>
+						<input type="radio" name="inside" value="4">
 				</div>
-				<div class="samplecover1">
-					<a class="fancybox" data-fancybox-group="gallery"
-						href="/textant/resources/book_img/너의췌장을먹고싶어.jpg"><img
-						src="/textant/resources/book_img/너의췌장을먹고싶어.jpg"
-						style="height: 150px;"></a>
-				</div>
-
+						<input type="radio" name="inside" value="0" checked="checked" style="display: none;">
 				<div class="userimgDiv" style="display: none;">
 					<a class="cover_btn" id="cover_mit" style="float: left;"
 						onclick="document.all.bookcover.click(); bookimgch();">외부파일선택</a>

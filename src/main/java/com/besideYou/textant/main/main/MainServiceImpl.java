@@ -87,6 +87,8 @@ public class MainServiceImpl implements MainService {
 		totalCount = loginServiceDao.getTotalCount();
 		todayCount = loginServiceDao.getTodayCount();
 		
+		session.setAttribute("totalVisitCount", totalCount);
+		session.setAttribute("todayVisitCount", todayCount);
 		model.addAttribute("totalVisitCount", totalCount);
 		model.addAttribute("todayVisitCount", todayCount);
 		

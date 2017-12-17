@@ -14,6 +14,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 
+import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -28,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.besideYou.textant.main.dao.BookInfoDao;
 import com.besideYou.textant.main.dto.BookInfoDto;
@@ -43,11 +45,55 @@ public class PdfServiceImpl implements PdfService {
 	
 	int totalPageNum, currPageNum;
 	BookInfoDto bookInfoDto;
-
+	DiskFileItem diskFileItem;
+	MultipartFile multipartImgFile;
+	File tempfile;
 	@Override
-	public String check(BookInfoDto bookInfoDto) throws Exception {
+	public String check(BookInfoDto bookInfoDto,int inside) throws Exception {
 		
 		this.bookInfoDto = bookInfoDto;
+/*		
+		switch(inside) {
+		case 1 :
+			tempfile = new File(destinationDir+"1.jpg");
+			diskFileItem = new DiskFileItem(tempfile.getName(), "image/jpeg", false, tempfile.getName(), (int)tempfile.length(), tempfile.getParentFile());
+			diskFileItem.getOutputStream();
+			multipartImgFile = new CommonsMultipartFile(diskFileItem);
+			bookInfoDto.setBookImg(multipartImgFile);
+			System.out.println("inside!! "+ inside);
+			break;
+		case 2 : 
+			tempfile = new File(destinationDir+"2.jpg");
+			diskFileItem = new DiskFileItem("2", "image/jpeg", false, tempfile.getName(), (int)tempfile.length(), tempfile.getParentFile());
+			diskFileItem.getOutputStream();
+			multipartImgFile = new CommonsMultipartFile(diskFileItem);
+			bookInfoDto.setBookImg(multipartImgFile);
+			System.out.println("inside!! "+ inside);
+			break;
+		case 3 : 
+			tempfile = new File(destinationDir+"3.jpg");
+			diskFileItem = new DiskFileItem("3", "image/jpeg", false, tempfile.getName(), (int)tempfile.length(), tempfile.getParentFile());
+			diskFileItem.getOutputStream();
+			multipartImgFile = new CommonsMultipartFile(diskFileItem);
+			bookInfoDto.setBookImg(multipartImgFile);
+			System.out.println("inside!! "+ inside);
+			break;
+		case 4 : 
+			tempfile = new File(destinationDir+"4.jpg");
+			diskFileItem = new DiskFileItem("4", "image/jpeg", false, tempfile.getName(), (int)tempfile.length(), tempfile.getParentFile());
+			diskFileItem.getOutputStream();
+			multipartImgFile = new CommonsMultipartFile(diskFileItem);
+			bookInfoDto.setBookImg(multipartImgFile);
+			System.out.println("inside!! "+ inside);
+			break;
+		default : 
+			break;
+		}
+	*/	
+		
+		
+		
+		
 		
 		String view;
 		String type;

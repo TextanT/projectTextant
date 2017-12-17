@@ -13,13 +13,13 @@
 </head>
 <body>
 <form action="naverData.text" class="kakao_mit" id="kakao_mit" method="post">
-	<input type="button" hidden class="mit" id="mit" onclick="kakao_submit()">
-	<input type="text" name="kaId" class="id" id="id" >
-	<input type="text" name="email" class="email" id="email">
-	<input type="text" name="nickName" class="nickname" id="nickname">
-		<input type="text" name="age" class="age" id="age" value="0">
-		<input type="text" name="realName" class="realname" id="realname">
-		<input type="text" name="siteFrom" class="siteFrom" value="2">
+	<input type="button" class="mit" id="mit" onclick="kakao_submit()" style="display: none;">
+	<input type="text" name="kaId" class="id" id="id" style="display:none;">
+	<input type="text" name="email" class="email" id="email" style="display:none;">
+	<input type="text" name="nickName" class="nickname" id="nickname" style="display:none;">
+		<input type="text" name="age" class="age" id="age" value="0" style="display:none;">
+		<input type="text" name="realName" class="realname" id="realname" style="display:none;">
+		<input type="text" name="siteFrom" class="siteFrom" value="2" style="display:none;">
 	</form>
 
 <!-- 	<a  href="javascript:loginWithKakao()" style="position:absolute; left:19%;top:40%;"><img src="/textant/resources/icon_img/kakao_width_bar.png"></a> -->
