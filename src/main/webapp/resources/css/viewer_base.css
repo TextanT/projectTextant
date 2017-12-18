@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+*{margin:0; padding:0; text-decoration:none;}
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+body, div, p, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, fieldset{margin:0; padding:0;}
+
+body{font-family:'nanum gothic', sans-serif;
+		font-size:12px;
+		line-height:18px;
+		color:#121212;}
+ul{list-style:none;}
+a{color:#121212; text-decoration:none;}
+a:visited {color: #121212; text-decoration:none;}
+a:hover {color: #121212; text-decoration:none;}
+a:focus {color: #121212; text-decoration:none;}
+a:active {color: ; text-decoration:none;}	
+img{border:0;
+	vertical-align:top;}
+
+select, input{vertical-align:top;}
+feildset{border:0;}
+legend{display:none;}
+ul, ol{list-style:none;}
+
+.cf{}
+.cf:after{display:block; content:""; clear:both;}
+/*cf=clear float*/

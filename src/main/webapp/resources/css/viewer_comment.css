@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+
+/* COMMENT */
+.coClose {display:block; width:30px; height:30px; 
+		line-height:30px; font-size:18px; font-weight:bold; 
+		text-align:center; }
+.closeR {position:absolute; top:15px; right:15px;}
+.close2 {position:absolute; top:15px; left:15px;}
+.xBtn {width: 25px; height:25px;}
+
+.comment{width:35%; height:100%; /*background:#f7efe5; */
+	background-image:url(/textant/resources/img/commentBg.jpg);
+	background-repeat: repeat-y;
+	font-size:0.9em;
+	z-index:200;
+	}
+.commentOption{
+	border-left: 1px solid #aaa;
+	
+	-webkit-box-shadow:0 0 20px #ccc;
+	-moz-box-shadow:0 0 20px #ccc;
+	-o-box-shadow:0 0 20px #ccc;
+	-ms-box-shadow:0 0 20px #ccc;
+	box-shadow:0 0 20px #ccc;
+	}
+.RightWrap{position:fixed; top:0; right:-500px; 
+	}
+.RightWrapShadow{ 
+	position:absolute; top:0; right:0;
+	width:5px; height:100%; z-index:301;
+	
+	-webkit-box-shadow:20px 0 20px #ccc;
+	-moz-box-shadow:20px 0 20px #ccc;
+	-o-box-shadow:20px 0 20px #ccc;
+	-ms-box-shadow:20px 0 20px #ccc;
+	box-shadow:20px 0 20px #ccc;
+	}
+.LeftWrap{position:fixed; top:0; left:0px; display:none; }
+
+.nowP { color: #999;}
+.coWrite{margin:40px 0 5px 0;}
+.coWrite a{color:#121212; text-decoration:none;}
+.coWrite a:visited {color: #121212; text-decoration:none;}
+.coWrite a:hover {color: #121212; text-decoration:none;}
+.coWrite a:focus {color: #121212; text-decoration:none;}
+.coWrite a:active {color: ; text-decoration:none;}	
+.btnEffect {display:bolck; width:100px; height:30px;
+	line-height: 30px; text-align:center; 
+	border-radius:3px;
+	background-color:white; margin-top:10px;}
+.btnEffect:hover{
+	border: 1px solid #333;
+	
+	-webkit-transform: translateY(-2px);
+  	transform: translateY(-2px);
+  	-webkit-transform: translateX(-2px);
+  	transform: translateX(-2px);
+  	
+	-webkit-box-shadow:2px 2px 5px #aaa;
+	-moz-box-shadow:2px 2px 5px #aaa;
+	-o-box-shadow:2px 2px 5px #aaa;
+	-ms-box-shadow:2px 2px 5px #aaa;
+	box-shadow:2px 2px 5px #aaa; }		
+.coWrite table{width:100%; }
+.coWriteForm {font-size: 0.95em;}
+.coWriteBtn_widthL{width:67%;} 
+.coPlace{width:100%; height:100%;} 
+.coWriteBtn_widthR{width:30%; padding-left:5px; } 
+.coWriteBtn{line-height:80px; width: 100%; height:92px; 
+	background-color:white;
+	border-style:none;}
+
+	
+.coShow{margin-top:3%;}
+.coShowBox {width: 100%;}
+.coTotalForm{background-color:white; 
+	margin:20px 10px 0 0; padding:10px;}
+.coTotalForm table{width:100%;
+	border-style:none;}
+.coShow table a{color:#999; text-decoration:none;}
+.coShow table a:visited {color: #999; text-decoration:none;}
+.coShow table a:hover {color: #999; text-decoration:none; background-color:#ccc; color:white; height:1.2em;}
+.coShow table a:focus {color: #999; text-decoration:none;}
+.coShow table a:active {color: ; text-decoration:none;}	
+#funcLine input[type=button] {
+	background-color:white;
+	border-style:none
+	}
+#profileImg {
+	width:70px; height:85px;
+	margin-right:10px;
+	border: 3px solid #ccc;
+	}	
+#reCoWriteForm{display:none;}

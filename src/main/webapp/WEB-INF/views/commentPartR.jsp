@@ -10,11 +10,11 @@
 
 
 <style type="text/css">
-#coInner {width:90%; height:95%; margin:0 auto;}
+.coInner {width:90%; height:95%; margin:0 auto;}
 
 .disNone {display: none;}
 
-#coShow {overflow-y:scroll;}
+.coShow {overflow-y:scroll;}
 .height80 {height: 85%;}
 .height70 {height: 66.5%;}
 
@@ -23,7 +23,7 @@
 	background-color:#dbc3a6; 
 	border-style:none;
 	border-radius:3px;}
-#moreSee:hover{
+.moreSee:hover{
 	-webkit-box-shadow:2px 2px 5px #aaa;
 	-moz-box-shadow:2px 2px 5px #aaa;
 	-o-box-shadow:2px 2px 5px #aaa;
@@ -38,14 +38,17 @@
 	background-color:white; 
 	border:1px solid #999;
 	border-radius:5px;}
-		
+
+.ellipsis100{width:270px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.elVisible{width:270px; overflow:visible;}	
+	
 </style>
 
 </head>
 <body>
-<div id="coInner">
+<div id="coInner" class="coInner">
 		
-	<div id="coWrite">
+	<div id="coWrite" class="coWrite">
 		<!-- 현재페이지 댓글 보기 -->
 		<span id="infoOne"></span>
 		<a href="#" class="openCoWrite toggle"><h5 class="btnEffect"> 덧글쓰기 </h5></a>
@@ -64,7 +67,7 @@
 			<input type="hidden" id="commentTop" name="commentTop" value="0">
 			<input type="hidden" id="commentCheck" name="commentCheck" value="0">
 	
-			<table id="coWriteForm" class="disNone toggleChild">
+			<table id="coWriteForm" class="disNone toggleChild coWriteForm">
 				<tr>
 					<c:if test="${id != null}"><td>${id} 님</td></c:if>
 					<c:if test="${id == null}"><td>게스트 님</td></c:if>
@@ -95,8 +98,8 @@
 			</table>
 		</div>
 
-		<div id="coShow" class="height80">
-			<div id="coShowBox"></div>
+		<div id="coShow" class="height80 coShow">
+			<div id="coShowBox" class="coShowBox"></div>
 			<input type="button" class="moreSee" id="moreSee" value="더보기">
 		</div><!-- #coShow -->
 			
@@ -107,7 +110,7 @@
 
 <script>
 
-	//ajax, 스크립트 시작하기 
+	//ajax, 스크립트 시작하기
 
 	$.ajaxSetup({
 		type:"POST",
@@ -119,16 +122,19 @@
 	var commentBad=2;
 	
 	$(document).ready(function(){
-		$('#moreSee').click(function(){
-			commentGet_R();
-		});
+
+		//******************** 오른쪽 슬라이드 열기
 		$(".open1").click(function(){
 			$(".RightWrap").animate({right:170},500,"swing").addClass('commentOption'); 
 			$("#RightWrapShadow").animate({right:1},500,"swing").addClass('RightWrapShadow');
 			if(".open1") event.stopImmediatePropagation();
 			
 			commentCount();
-		});
+		})
+		
+		$('#moreSee').click(function(){ // 메인 더보기 버튼
+			commentGet_R();
+		});;
 		
 // 		var commentEnter=""; // 답글 쓰기: enter로 넘기기
 // 	 	$('.coPlace').keydown(function(event){
@@ -141,7 +147,7 @@
 // 	 		  }
 // 	 		});
 	 	
-	 	var commentNumber="";
+	 	var commentNumber=""; //답글 쓰기
 	 	$(".coWriteBtn").on("mousedown", function() {
 			commentNumber = 0;
 	 		$("#commentTo").val(commentNumber);
@@ -153,6 +159,48 @@
 			commentWrite();
 		});
 	});
+	
+	
+	///////////////////////////// 오른쪽 코멘트창 열때 상단 정보 불러오기 
+	function commentCount(){
+		$.ajax({
+			url:"/textant/commentCount.comment",
+			type:"POST",
+			async:true,
+			dataType:"json",
+			data:{
+				page:$("#pageR").val(),
+				bookArticleNum:$("#bookArticleNum").val()
+			},
+			error : function(xhr){
+				alert("error html = " + xhr.statusText);
+			},
+			success: function(json){
+
+				
+				setTimeout(function() {
+					let currPage = $(".sample-docs").turn("page");
+					let nowPage = (Math.floor(currPage/2))*2;
+					
+					let html="<span id='nowP' >현재페이지 : <span class='lager'>"+nowPage+"</span><i>p</i> ┃ " 
+					+json.pageCountBlock+"<i>p</i> ~ "+nowPage+"<i>p</i>&nbsp;&nbsp;&nbsp;댓글 <span class='lager'>"
+					+json.pageListCount+"</span>개</span>";
+					
+					$("#nowP").remove();
+					$("#infoOne").append(html);
+					
+					$("#pageListCount").val(json.pageListCount);
+					$("#pageCountBlock").val(json.pageCountBlock);
+					$("#pageCut").val(json.pageCut);
+					$("#pageSize").val(json.pageSize);
+					
+					
+				}, 10);
+				
+				commentRead(json);
+			},
+		});
+	}
 	
 	
 	//////////////////////////////전체 댓글 읽어오기
@@ -211,7 +259,7 @@
 							'<td colspan="2" ><!--<i class="font7">'+item.commentNum+'</i><br>--><p class="ellipsis100 font9">'+item.conet+'</p></td>'+
 						'</tr>'+
 						'<tr>'+
-							'<td class="font7 gray6" colspan="2" align="right"><a href="#" id="ellipsisView">더보기 ▼</a></td>'+
+							'<td class="font7 gray6" colspan="2" align="right"><a href="#">더보기 ▼</a></td>'+
 						'</tr>'+
 						'<tr>'+
 							'<td class="font7 gray6" colspan="2">'+item.nickName+'님 ┃'+item.writeDate+'┃'+
@@ -244,11 +292,15 @@
 
 		var parent = $(this).closest('table');
 		
-		if($('#inFormTbl p').hasClass('ellipsis100')){
+		if($('#formTbl p').hasClass('ellipsis100')){
 			parent.find('.ellipsis100').removeClass('ellipsis100').addClass('elVisible');
-		} else {
+		}
+		else {
 			parent.find('.elVisible').removeClass('elVisible').addClass('ellipsis100');
 		}
+// 		if($('#inFormTbl p').hasClass('elVisible')){
+// 			parent.find('.elVisible').removeClass('elVisible').addClass('elVisible');
+// 		}
 	});
 	
 	
