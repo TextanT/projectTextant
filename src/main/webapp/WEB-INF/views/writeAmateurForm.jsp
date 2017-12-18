@@ -199,7 +199,7 @@
 			</div>
 
 			<a class="write_btn" id="write_mit" onclick="fileCheck(this.form)">글올리기</a>
-			<a class="back_btn" id="back_mit">취소</a>
+			<a class="back_btn" id="back_mit" onclick="javascript:history.back(-1)">취소</a>
 		</div>
 
 	</form>
