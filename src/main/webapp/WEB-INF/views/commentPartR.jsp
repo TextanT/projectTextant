@@ -100,7 +100,7 @@
 			commentGet_R();
 		});
 		$(".open1").click(function(){
-			$(".RightWrap").animate({right:170},500,"swing") 
+			$(".RightWrap").animate({right:170},500,"swing").addClass('WrapOption'); 
 			if(".open1") event.stopImmediatePropagation();
 			commentCount();
 		});

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>${bookName}</title>
+<title>『${bookName}』</title>
 
 <style>
 *{margin:0; padding:0; text-decoration:none;}
