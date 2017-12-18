@@ -14,7 +14,7 @@ public class FileSaveHelper {
 	private String saveProfile;
 	
 	public String save(MultipartFile fname) {
-		// randomUUID은 전세계에서 유일한 값
+	
 		String storedFname=UUID.randomUUID().toString()+"_"+fname.getOriginalFilename();
 		
 		try {

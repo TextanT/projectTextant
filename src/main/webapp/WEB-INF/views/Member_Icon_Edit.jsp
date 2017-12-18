@@ -22,34 +22,29 @@ small {
 }
 </style>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-
 </head>
 <body>
 <div class="container">
-<form action="/textant/Member_Icon_Edit.text" method="post">
+<form action="/textant/Member_Icon_Edit" method="post">
 	
-	 <div class='reg'></div>
-	 	<input type="file" name="file" value="파일선택">
-	 	<input type="button" value="삭제"/>
+	 <div class='fileDrop'></div>
+	 	<input type="button" value="모두삭제"/>
 	 <div class='uploadedList'></div>	
-	 <br>
-	 <div>
-	 	<input type="submit" value="등록하기">
-	    <input type="reset" value="등록취소">   	 
-	  </div>
+	 <input type="submit" value="등록">
+	 <input type="reset" value="취소">
 </form>
 </div>
 <script>
-
-$("input[type=reset]").on("click", function(){	 
+// 글쓰기 취소시에 업로드 되어있는 파일 삭제
+   $("input[type=reset]").on("click", function(){	 
 	   allDeleteFiles();	
 	});
-
-$(".fileDrop").on("dragenter dragover", function(event){
-	event.preventDefault();		
-});
 	
-$(".reg").on("drop", function(event){
+$(".fileDrop").on("dragenter dragover", function(event){
+		event.preventDefault();		
+	});
+	
+$(".fileDrop").on("drop", function(event){
 	event.preventDefault();	
 	var files = event.originalEvent.dataTransfer.files;				
 	var formData = new FormData();
@@ -69,7 +64,7 @@ $(".reg").on("drop", function(event){
 			  alert(data);				  
 			  $.each(data,function(index, fileName){					  					 
 				  if(checkImageType(fileName)){						 
-					  str ="<div><img src='display2File.bbs?fileName="+fileName+"'/>"	
+					  str ="<div><img src='displayFile2.text?fileName="+fileName+"'/>"	
 						  +"<small class='human' data-src='"+fileName+"'>X</small>"
 						  +"<input type='hidden' name='fileNames' value='"+getImageLink(fileName)+"'></div>";
 				  }else{
@@ -89,8 +84,8 @@ $(".reg").on("drop", function(event){
 
 $(".uploadedList").on("click", "small", function(event){			
 	var that = $(this);
-$.ajax({
-	   url:"/bbs/deleteFile.bbs",
+   $.ajax({
+	   url:"/textant/deleteFile.text",
 	   type:"post",
 	   data: {
 		   fileName:$(this).attr("data-src")
@@ -102,23 +97,22 @@ $.ajax({
 			   alert("삭제성공");
 		   }
 	   }
-});
+   });
 });
 
 $("input[type=button]").on("click", function(event){			
-	allDeleteFiles();
+ 	allDeleteFiles();
 });
 
 function allDeleteFiles(){
 	var files=[];
 	$.each($(".human"),function(index,item){
-
 		files.push($(this).attr("data-src"));						
 	});	
 
-jQuery.ajaxSettings.traditional = true;
-$.ajax({
-	   url:"/bbs/deleteAllFiles.bbs",
+   jQuery.ajaxSettings.traditional = true;
+   $.ajax({
+	   url:"/textant/deleteAllFiles.text",
 	   type:"post",
 	   data: {files: files},
 	   dataType:"text",		  
@@ -128,11 +122,10 @@ $.ajax({
 			   alert("삭제성공");
 		   }
 	   }
-});
+   });
 }
 
 function checkImageType(fileName){	
-
 	var pattern = /.jpg|.gif|.png/i;		
 	return fileName.match(pattern);		
 }

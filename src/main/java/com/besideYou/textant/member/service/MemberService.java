@@ -17,13 +17,11 @@ public interface MemberService {
 
 	public MemberDto modifyGetMyInfo(String userNum);
 
-	public void delete(String userNum, String userId, Model model);
-
 	public void getMie(String userNum, int fileStatus, Model model);
 
 	public void mie(MemberDto mDto, String[] deleteFileName, Model model, int fileCount);
 
-	public void Member_Icon_Edit(MemberDto mDto);
+
 
 	
 

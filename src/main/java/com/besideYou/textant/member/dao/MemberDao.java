@@ -25,8 +25,6 @@ public interface MemberDao {
 	
 	public void dbDelFileName(ArrayList<String> delFileList);
 
-	public void delete(String userNum);
-
 	public MemberDto getMie(String userNum);
 
 	public int mie(MemberDto mDto);

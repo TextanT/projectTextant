@@ -27,13 +27,8 @@ public class MemberImpl implements MemberService{
 	@Autowired
 	private MemberDao memberDao;
 	
-	@Autowired
-	private FileSaveHelper fileSaveHelper;
-	
 	@Resource(name="saveProfile")
 	String saveProfile;
-	
-	private MemberDto mDto;;
 
 	
 	@Override
@@ -54,6 +49,7 @@ public class MemberImpl implements MemberService{
 		
 		memberDao.modifyMyInfo(memberDto);
 		}
+
 	
 	public void commonFileUpload(int articleNum, List<String> fileNames) {
 		FileDto fileDto = null;
@@ -64,24 +60,19 @@ public class MemberImpl implements MemberService{
 			fileDto.setArticleNum(articleNum);
 			memberDao.insertFile(fileDto);				
 		}
-	}
-
-	@Override
-	public void delete(String userNum, String userId, Model model) {
-		memberDao.delete(userNum);
-		model.addAttribute("userNum", userNum);
-		model.addAttribute("userId", userId);
 		
 	}
 
 	@Override
 	public void getMie(String userNum, int fileStatus, Model model) {
-		model.addAttribute("mDto", memberDao.getMie(userNum));
+		model.addAttribute("profile", memberDao.getMie(userNum));
 		if(fileStatus==1){	
 			List<String> fileList = memberDao.getFiles(userNum);
 			model.addAttribute("fileList", fileList);
 			model.addAttribute("fileCount", fileList.size());
 		}else{
+//			기존의 글이 파일 업로드가 없는 글이었을 경우는 updateForm.jsp의 fileCount에 공백값이
+//			들어가므로 update.bbs 요청시 400에러가 남..그래서 편법으로 0 줬음
 			model.addAttribute("fileCount", 0);
 		}
 		
@@ -89,52 +80,8 @@ public class MemberImpl implements MemberService{
 
 	@Override
 	public void mie(MemberDto mDto, String[] deleteFileName, Model model, int fileCount) {
-		
-		if(deleteFileName != null) {
-			ArrayList<String> delFileList = new ArrayList<>();
-			for(String delFileName : deleteFileName) {
-				delFileList.add(delFileName);
-			}
-			memberDao.dbDelFileName(delFileList);
-			for(String storedFname : deleteFileName) {
-				storageDelFileName(storedFname);
-			}
-		}
-		if(mDto.getFileNames() == null) {
-			if(deleteFileName != null) {
-				if(fileCount == deleteFileName.length) {
-					mDto.setFileStatus((byte)0);
-				}
-			}
-		}else {
-			commonFileUpload(mDto.getUserNum(), mDto.getFileNames());
-			mDto.setFileStatus((byte)1);
-		}
-		memberDao.mie(mDto);	
-		model.addAttribute("fileStatus", mDto.getFileStatus());
-	}	
-
-	public void storageDelFileName(String storedFname) {
-		if(storedFname != null) {
-			String formatName = storedFname.substring(storedFname.lastIndexOf(".")+1);    
-			MediaType mType = MediaUtils.getMediaType(formatName);
-			
-			if(mType != null) {
-				
-				String front = storedFname.substring(0,12);
-				String end = storedFname.substring(12);
-				new File(saveProfile+(front+"s_"+end).replace('/', File.separatorChar)).delete();
-			}
-			File file = new File(saveProfile+storedFname);
-			if(file.exists()) {
-				file.delete();
-			}
-		}
-	}
-
-	@Override
-	public void Member_Icon_Edit(MemberDto mDto) {
 		// TODO Auto-generated method stub
 		
 	}
+	
 }

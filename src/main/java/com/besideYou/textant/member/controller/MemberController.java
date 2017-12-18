@@ -52,42 +52,38 @@ public class MemberController {
 //-----------------------------------------------------------------------------------------------------------	
 	
 
-	@RequestMapping(value="/Member_Icon_Edit.text",method=RequestMethod.GET)
-	public String mieForm(HttpSession session){		
+//	@RequestMapping(value="/Member_Icon_Edit.text",method=RequestMethod.GET)
+//	public String mieForm(HttpSession session){		
+//		return "Member_Icon_Edit";
+//	}
+//
+//	@Transactional
+//	@RequestMapping(value="/Member_Icon_Edit.text", method=RequestMethod.POST)
+//	public String mie(MemberDto mDto, HttpSession session) {
+//		mDto.setUserId((String)session.getAttribute("userId"));
+//		memberService.Member_Icon_Edit(mDto);
+//		return "redirect:/mypage";
+//	}
+	
+	
+	
+	
+	@RequestMapping(value="/Member_Icon_Edit.text", method=RequestMethod.GET)
+	public String getMie(@ModelAttribute("userNum") String userNum, 
+							   @ModelAttribute("userId") String userId, 
+							   @ModelAttribute("fileStatus") int fileStatus, Model model){
+				
+		memberService.getMie(userNum, fileStatus, model);	
 		return "Member_Icon_Edit";
 	}
-
-	@Transactional
+	
 	@RequestMapping(value="/Member_Icon_Edit.text", method=RequestMethod.POST)
-	public String mie(MemberDto mDto, HttpSession session) {
-		mDto.setUserId((String)session.getAttribute("userId"));
-		memberService.Member_Icon_Edit(mDto);
-		return "redirect:/mypage";
+	public String mie(MemberDto mDto, String[] deleteFileName, String userId, Model model, int fileCount){	
+		memberService.mie(mDto, deleteFileName, model, fileCount);						
+		return "Member_Icon_Edit";
 	}
 	
-	
-	
-	
-//	@RequestMapping(value="/Member_Icon_Edit.text", method=RequestMethod.GET)
-//	public String getMie(@ModelAttribute("userNum") String userNum, 
-//							   @ModelAttribute("userId") String userId, 
-//							   @ModelAttribute("fileStatus") int fileStatus, Model model){
-//				
-//		memberService.getMie(userNum, fileStatus, model);	
-//		return "Member_Icon_Edit.text";
-//	}
-//	
-//	@RequestMapping(value="/Member_Icon_Edit.text", method=RequestMethod.POST)
-//	public String mie(MemberDto mDto, String[] deleteFileName, String userId, Model model, int fileCount){	
-//		memberService.mie(mDto, deleteFileName, model, fileCount);						
-//		return "rMember_Icon_Edit";
-//	}
-	
 //-----------------------------------------------------------------------------------------------------------		
-	@RequestMapping(value="/delete.bbs")
-	public String delete(String userNum, String userId, Model model) {
-	memberService.delete(userNum, userId, model);
-	return "redirect:Member_Icon_Edit?";
-}
+
 
 }
