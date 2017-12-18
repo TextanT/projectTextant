@@ -366,7 +366,7 @@ nav a{text-decoration:none;}
 			</li>
 			<li><a href="#" id="starClick">별점주기   <img src="/textant/resources/img/icon_06.png" alt="별점주기"></a></li>
 			<li>
-				<a href="/reportComment.comment">책 신고하기   <img src="/textant/resources/img/icon_08.png" alt="신고하기"></a>
+				<a href="reportBook.comment">책 신고하기   <img src="/textant/resources/img/icon_08.png" alt="신고하기"></a>
 			</li>
 			<c:if test="${isText != 'isText'}">
 				<c:if test="${bookType=='jpg'}">
@@ -411,22 +411,22 @@ nav a{text-decoration:none;}
 
 
 
-<div class="LeftWrap comment">
+<!-- <div class="LeftWrap comment"> -->
 
 
 
-<div id="RightWrapShadow" class="RightWrapShadow"></div>
+<!-- <div id="RightWrapShadow" class="RightWrapShadow"></div> -->
 
 
 
-		<a href="#" class="coClose closeR close2"><img src="/textant/resources/img/icon_x.png" alt"X" class="xBtn"></a>
+<!-- 		<a href="#" class="coClose closeR close2"><img src="/textant/resources/img/icon_x.png" alt"X" class="xBtn"></a> -->
 		
-		<div class="commentL">
+<!-- 		<div class="commentL"> -->
 		
-<%-- 				<%@include file="commentPartL.jsp" %> --%>
-				<%@include file="commentPartR.jsp" %>
-		</div> <!--//#comment -->
-</div> <!--//.LeftWrap --> 
+<%-- <%-- 				<%@include file="commentPartL.jsp" %> --%> --%>
+<%-- 				<%@include file="commentPartR.jsp" %> --%>
+<!-- 		</div> //#comment -->
+<!-- </div> //.LeftWrap  -->
 
 
 

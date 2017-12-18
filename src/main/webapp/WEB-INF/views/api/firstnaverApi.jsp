@@ -11,7 +11,7 @@
 <body>
   <!-- 네이버아이디로로그인 버튼 노출 영역 -->
 <!--   <div id="naver_id_login"></div>  -->
-  <a href="https://nid.naver.com/oauth2.0/authorize?response_type=token&client_id=N0B6XXo2rqhysUglG48w&redirect_uri=http%3A%2F%2Flocalhost%3A800%2Ftextant%2Fcallback.text&state=91cfe082-9979-4ab1-ba9f-58883b8bc589" style="position:absolute; left:41.7%;top:44%;">
+  <a href="https://nid.naver.com/oauth2.0/authorize?response_type=token&client_id=N0B6XXo2rqhysUglG48w&redirect_uri=http%3A%2F%2Flocalhost%3A800%2Ftextant%2Fcallback.text&state=91cfe082-9979-4ab1-ba9f-58883b8bc589" style="padding-left: 2%;">
   <img src="/textant/resources/icon_img/naver_login_btn.png"id="naver_id_login">
   </a>
   <!-- //네이버아이디로로그인 버튼 노출 영역 -->
