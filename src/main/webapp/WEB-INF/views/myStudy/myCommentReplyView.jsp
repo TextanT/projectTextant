@@ -12,8 +12,7 @@
 <link href="/textant/resources/css/footer.css" rel="stylesheet"
 	type="text/css">
 	
-<title>Insert title here</title>
-<style>
+<title>TEXTANT</title><style>
 body{
 
 }

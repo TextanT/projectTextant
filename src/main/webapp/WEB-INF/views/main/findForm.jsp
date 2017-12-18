@@ -9,8 +9,7 @@
 	type="text/css">
 <link href="/textant/resources/css/footer.css" rel="stylesheet"
 	type="text/css">
-<title>Insert title here</title>
-</head>
+<title>TEXTANT</title></head>
 <style>
 .find_pos {
 	width: 80%;

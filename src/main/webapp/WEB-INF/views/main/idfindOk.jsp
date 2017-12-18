@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
+<title>TEXTANT</title></head>
 <body>
 <%-- <jsp:forward page="/"> --%>
 	<h2>당신의 아이디는 ${findid} 입니다.</h2>

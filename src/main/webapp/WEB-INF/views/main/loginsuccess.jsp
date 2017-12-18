@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
+<title>TEXTANT</title></head>
 <body>
 	<tr class="header_tr">
 				<!--           /*로그인이 되면 로그인에서 마이페이지로 변환*/-->

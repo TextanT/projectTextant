@@ -9,6 +9,7 @@
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link href="/textant/resources/css/logf.css" type="text/css"
 	rel="stylesheet">
+	<title>TEXTANT</title>
 <style>
 * {
 	margin: 0;

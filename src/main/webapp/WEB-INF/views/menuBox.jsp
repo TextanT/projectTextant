@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link href="/textant/resources/css/sign_modal.css" type="text/css"
+<title>TEXTANT</title><link href="/textant/resources/css/sign_modal.css" type="text/css"
 	rel="stylesheet">
 <link href="/textant/resources/css/log.css" type="text/css"
 	rel="stylesheet">

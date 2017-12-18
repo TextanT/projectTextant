@@ -12,7 +12,7 @@
 <link href="/textant/resources/css/footer.css" rel="stylesheet"
 	type="text/css">
 
-<title>Insert title here</title>
+<title>관리자 페이지</title>
 <style>
 body {
 	

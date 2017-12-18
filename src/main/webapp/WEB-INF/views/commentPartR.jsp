@@ -174,7 +174,7 @@
 				commentDelete:0
 			},
 			error : function(xhr){
-				alert("이 영역에는 덧글이 없습니다.");
+// 				alert("이 영역에는 덧글이 없습니다.");
 			},
 			complete: function(){	
 				commentDelete($("#pageR").val(),$("#nextPageR").val(),read.pageListCount,read.pageCountBlock,read.pageCut,read.bookArticleNum,0,1)

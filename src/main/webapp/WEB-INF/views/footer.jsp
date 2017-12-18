@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link href="/textant/resources/css/footer.css" rel="stylesheet"
+<title>TEXTANT</title><link href="/textant/resources/css/footer.css" rel="stylesheet"
 	type="text/css">
 	<style type="text/css">
 	.pointerless:hover{

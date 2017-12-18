@@ -307,12 +307,33 @@
 <body>
 	<div class="header">
 		<div class="header_logo" style="padding-top: 20px;">
-			<a href="/textant/main.text" class="logo_a"> <img
-				src="/textant/resources/icon_img/logo_mini.png" class="logo">
-			</a>
-		</div>
-	<%@include file="menuBox.jsp" %>
+			<div style="float: left;">
+				<a href="/textant/main.text" class="logo_a" style="height: 55px;">
+					<img src="/textant/resources/icon_img/logo_mini.png" class="logo">
+				</a>
+			</div>
+			<div style="float: left;">
+				<a href="/textant/mypage.text" style="text-decoration: none;"><span
+					style="margin-top: auto; margin-bottom: auto; font-size: 33px; color: white;">
+						&nbsp | 내정보</span></a>
+			</div>
+			<div class="menu_box">
+				<c:if test="${id!=null}">
+					<c:out
+						value="
+			<a href='#' class='menu_title'><span class='menu1' id='menu1'>${id}</span></a>
+			
+			<a href='mypage.text' class='menu_title'><span class='menu2'id='menu2'>내정보</span></a> 
 
+			<a href='logout.text' class='menu_title'><span class='menu3'id='menu3'>로그아웃</span></a> 
+			
+			<a href='first.text' class='menu_title'><span class='menu4'id='menu4'>처음으로</span></a>
+			 "
+						escapeXml="false" />
+				</c:if>
+
+			</div>
+		</div>
 	</div>
 	<%@include file="topMenu.jsp" %>
 	
@@ -328,7 +349,7 @@
 			   			<tbody>			
 							<tr>
 								<td align="center" style="border:1px solid #eeeeee; padding:4px 0 4px 0;">
-								<img src="/textant/resources/mpImage/dara_e.jpg" width="150" alt=""></td>
+								<img src="/textant/resources/mpImage/profile1.jpg" width="194" alt=""></td>
 							</tr>
 							<tr>
 								<td height="20"></td>
@@ -358,7 +379,7 @@
             </div>
             <div class="comput">
                 <div style="font-size: 15px;">소개</div>
-                <textarea name="comments" cols="60" rows="5" value="${memberDto.comments}" readonly="readonly" class="computT"></textarea>
+                <textarea name="comments" cols="60" rows="5" value="" readonly="readonly" class="computT">${memberDto.comments}</textarea>
             </div>
             <div class="buttonbox">
                 <input type="button" value="수정하기" onclick="location.href='modify.text?userNum=${memberDto.userNum}'" class="comit">

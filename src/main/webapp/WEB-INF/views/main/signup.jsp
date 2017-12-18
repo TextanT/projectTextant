@@ -6,8 +6,7 @@
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<title>TEXTANT</title><script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style>
 body {
 	/* background-image: url(/textant/resources/background_img/book-2572101_1920.jpg);

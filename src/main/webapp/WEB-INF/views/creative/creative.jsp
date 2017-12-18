@@ -31,8 +31,7 @@
 <link href="/textant/resources/css/bookover.css" type="text/css"
 	rel="stylesheet">
 <script src="/textant/resources/Swiper-master/dist/js/swiper.min.js"></script>
-<title>Document</title>
-<style>
+<title>TEXTANT</title><style>
 </style>
 </head>
 
