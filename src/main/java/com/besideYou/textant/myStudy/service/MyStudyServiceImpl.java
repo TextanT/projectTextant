@@ -47,6 +47,7 @@ public class MyStudyServiceImpl implements MyStudyService {
 		model.addAttribute("commentReplyList", myStudyDao.getMyComment(paging));
 		model.addAttribute("bookWriteList", myStudyDao.getMyBookWrite(paging));
 		model.addAttribute("bookReadList", myStudyDao.getMyBookRead(paging));
+		System.out.println(myStudyDao.getMyBookRead(paging));
 		model.addAttribute("wishList", myStudyDao.getMyWish(paging));
 		model.addAttribute("bookMarkList", myStudyDao.getMyBookmark(paging));
 	}

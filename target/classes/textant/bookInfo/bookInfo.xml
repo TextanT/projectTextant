@@ -9,7 +9,19 @@
 		INSERT INTO BOOKINFO
 		VALUES(BOOKINFO_SEQ.nextval,#{bookName},#{totalPage},#{userNum},#{thumbnail},#{fileLocation},#{genre},SYSDATE,0,0,0,#{bookDesc},#{bookType})
 	</insert>
+	<insert id="setReadBook" parameterType="readBook">
+		INSERT INTO READBOOK
+		VALUES(READBOOK_SEQ.nextval,#{bookArticleNum},#{userNum},0,SYSDATE)
+	</insert>
+<select id="getReadBook" parameterType="readBook" resultType="readBook">
+SELECT * FROM READBOOK WHERE bookArticleNum = #{bookArticleNum} and userNum = #{userNum}
+</select>
 
+<update id="updateReadBook" parameterType="readBook">
+UPDATE READBOOK 
+SET READBOOKNUM = readBook_seq.nextval 
+WHERE bookArticleNum = #{bookArticleNum} and userNum = #{userNum}
+</update>
 	
 	
 <!-- 	<select id="getNewBooks" resultType="String"> -->

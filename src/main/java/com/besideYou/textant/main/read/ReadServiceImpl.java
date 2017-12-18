@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.besideYou.textant.main.dao.BookInfoDao;
+import com.besideYou.textant.myStudy.dto.ReadBookDto;
 
 @Service
 public class ReadServiceImpl implements ReadService {
@@ -17,10 +18,22 @@ public class ReadServiceImpl implements ReadService {
 	@Autowired
 	BookInfoDao bookInfoDao;
 	
+	ReadBookDto readBookDto;
 	public String read(String fileName, Model model, String bookType, HttpSession session) throws Exception{
+		if(session.getAttribute("userNum")!=null) {
+			readBookDto = new ReadBookDto();
+			readBookDto.setBookArticleNum(bookInfoDao.getBookArticleNum(fileName));
+			readBookDto.setUserNum((int)session.getAttribute("userNum"));
+			
+			ReadBookDto readOk = bookInfoDao.getReadBook(readBookDto);
+			System.out.println("isItExist? : "+readOk);
+			if(readOk.getBookArticleNum()==0) {
+				bookInfoDao.setReadBook(readBookDto);
+			} else {
+				bookInfoDao.updateReadBook(readBookDto);
+			}
+		}
 		
-		
-//		bookInfoDao.setReadBook(bookInfoDao.getBookArticleNum(fileName),);
 		
 		
 	int totalPageNum = 0;

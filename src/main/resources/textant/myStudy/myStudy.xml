@@ -44,7 +44,7 @@
 			FROM (SELECT ROWNUM RM, human.* FROM  
 					(SELECT L.*,B.fileLocation,B.bookName,B.bookDesc
 					 FROM readBook L, bookInfo B
-			         WHERE L.userNum=#{userNum} and L.userNum=B.userNum
+			         WHERE L.userNum=#{userNum} 
 			         and L.bookArticlenum=B.bookArticlenum
 			         ORDER BY L.readBookNum desc) human)    
 			WHERE RM BETWEEN  #{startRow} AND #{endRow}

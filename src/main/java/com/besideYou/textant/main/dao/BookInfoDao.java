@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.besideYou.textant.common.dto.NoticeDto;
 import com.besideYou.textant.common.dto.RecommendedBookDto;
 import com.besideYou.textant.main.dto.BookInfoDto;
+import com.besideYou.textant.myStudy.dto.ReadBookDto;
 @Repository
 public interface BookInfoDao {
 
@@ -56,5 +57,11 @@ public interface BookInfoDao {
 	public List<NoticeDto> getNoticeList(HashMap<String, String> oneFive);
 
 	public List<NoticeDto> getEventList(HashMap<String, String> oneFive);
+
+	public void setReadBook(ReadBookDto readBookDto);
+
+	public ReadBookDto getReadBook(ReadBookDto readBookDto);
+
+	public void updateReadBook(ReadBookDto readBookDto);
 
 }
