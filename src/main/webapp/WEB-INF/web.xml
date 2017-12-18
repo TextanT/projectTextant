@@ -57,6 +57,7 @@
 			classpath:/spring/myStudy-context.xml
 			classpath:/spring/creative-context.xml
 			classpath:/spring/apiLogin-context.xml
+			classpath:/spring/member-context.xml
 			</param-value>
 		</init-param>
 		
