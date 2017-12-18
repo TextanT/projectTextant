@@ -22,7 +22,7 @@
 		<a href="#" class="foo_a">서비스약관</a> <a href="#" class="foo_a">고객센터</a>
 		<a href="#" class="foo_a">Q&A게시판</a>
 	</address>
-	<div>총방문자수 : ${totalVisitCount}</div><div>오늘방문자수 : ${todayVisitCount}</div>
+	<div>총방문자수 : ${totalVisitCountNum}</div><div>오늘방문자수 : ${todayVisitCount}</div>
 	</footer>
 </body>
 </html>
