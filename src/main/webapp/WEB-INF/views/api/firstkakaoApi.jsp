@@ -23,7 +23,7 @@
 	</form>
 
 <!-- 	<a  href="javascript:loginWithKakao()" style="position:absolute; left:19%;top:40%;"><img src="/textant/resources/icon_img/kakao_width_bar.png"></a> -->
-	<div id="kakao-login-btn"style="position:absolute; left:20%;top:43%;" class="kakao-log-btn"></div>
+	<div id="kakao-login-btn"style="position:absolute; left:41.7%;top:51%;" class="kakao-log-btn"></div>
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js"type="text/javascript"></script>       
 	<script type='text/javascript'>
 // 	//<![CDATA[

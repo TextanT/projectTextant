@@ -3,12 +3,14 @@ package com.besideYou.textant.genre.service;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.ui.Model;
 
 import com.besideYou.textant.main.dto.BookInfoDto;
 
 public interface GenreService {
 
-	HashMap<Object, Object> genreserch(Model model,String genre,int pageNum, int booktype);
+	HashMap<Object, Object> genreserch(HttpSession session, Model model, String genre,int pageNum, int booktype);
 
 }

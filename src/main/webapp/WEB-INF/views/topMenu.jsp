@@ -30,7 +30,7 @@
 		<div class="menu_box1">
 			<div class="list_box1">
 				<ul>
-					<li><a href="#">카페</a></li>
+					<li><a href="creative.text">카페</a></li>
 					<li><a href="/textant/writeAmateur.text">작품쓰기</a></li>
 					<li style="cursor: default;">&nbsp</li>
 

@@ -67,8 +67,8 @@ body {
 	border: 1px solid #e8e8e8;
 	width: 30%; 
 	margin: auto;
-	margin-top: 18%; 
-	padding-top:7%; 
+	margin-top: 5%; 
+	padding-top:5%; 
 	padding-bottom: 10%;
 }
 
@@ -223,7 +223,7 @@ body {
 }
 
 .login_div {
-	padding-top: 5%;
+	padding-top: 40%;
 	padding-left: 2%;
 }
 
@@ -254,7 +254,7 @@ body {
 	padding: 10px;
 	margin-left: 19%;
 	margin-right: 17.2%;
-	margin-top: 13%;
+	margin-top: 1%;
 }
 
 .box1_Id .int {
@@ -299,6 +299,9 @@ body {
 	position: absolute;
 	top: 1px;
 	right: 1px;
+}
+.kakao-log-btn{
+	left:100%;
 }
 </style>
 </head>
@@ -382,6 +385,9 @@ body {
 <!-- 		<img src="/textant/resources/img/fritsg.gif" style="padding-left: 280px;padding-top:163px; -->
 <!-- 		position: absolute;"> -->
 <!-- 	</div> -->
+	<div style="width:80%; margin: auto; text-align: center;">
+		<img src="/textant/resources/icon_img/fristLogo2.png" style="width: 70%; margin: auto;">
+	</div>
 	<div class="box1">
 		<form action="login.text" method="post" id="loginForm">
 			<div id="box1_Id" class="box1_Id">
@@ -395,6 +401,8 @@ body {
 				</span>
 			</div>
 			<button type="submit" class="aass" id="sasd" style="display: none;"></button>
+			<%@include file="../api/firstnaverApi.jsp" %>
+			<%@include file="../api/firstkakaoApi.jsp" %>
 			<div class="login_div">
 				<a href="#" class="login_btn" id="login_mit">로그인</a>
 			</div>
@@ -434,7 +442,7 @@ body {
 		};
 		function gender2() {
 
-			alert("여자");
+// 			alert("여자");
 			document.getElementById("jender").value = "0";
 
 		};

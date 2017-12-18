@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -22,7 +24,7 @@ public class GenreServiceImpl implements GenreService {
 	GenrePage genrePage;
 
 	@Override
-	public HashMap<Object, Object> genreserch(Model model,String genre ,int pageNum,int booktype) {
+	public HashMap<Object, Object> genreserch(HttpSession session, Model model,String genre ,int pageNum,int booktype) {
 		
 		List<String> gen = new ArrayList();
 		HashMap<String, String> genreMap =new HashMap<>();
@@ -58,6 +60,9 @@ public class GenreServiceImpl implements GenreService {
 		goodMap.put("pageCode",genreMap.get("pageCode"));
 		System.out.println(gen);
 //		System.out.println("이미지 경로----"+genreDao.genreserch(genreMap));
+		
+		model.addAttribute("nickname", session.getAttribute("nickname"));
+		model.addAttribute("id", session.getAttribute("id"));
 		
 		return goodMap;
 	}
