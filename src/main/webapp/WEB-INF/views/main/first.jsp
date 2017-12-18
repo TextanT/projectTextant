@@ -223,7 +223,7 @@ body {
 }
 
 .login_div {
-	padding-top: 40%;
+	padding-top: 5%;
 	padding-left: 2%;
 }
 
@@ -274,6 +274,7 @@ body {
 	margin-left: 19%;
 	margin-right: 17.2%; 
 	margin-top: 3%; 
+	margin-bottom: 3%;
 }
 
 .box1_pass .int {

@@ -29,7 +29,7 @@ public class MainPage {
 
 		sb = new StringBuffer();
 		if(startPage < pageBlock) {
-			sb.append("<div style='position: absolute;bottom: 10px;'><img src='/textant/resources/icon_img/best_left.jpg' width='30' height='12'>");			
+			sb.append("<div style='width:100%; text-align:center; bottom:20px;position: absolute;'><img src='/textant/resources/icon_img/best_left.jpg' width='30' height='12'>");			
 		} else {
 			sb.append("<img src='/textant/resources/icon_img/best_left.jpg' width='30' height='12'");
 			sb.append(" onclick='genresub(");
