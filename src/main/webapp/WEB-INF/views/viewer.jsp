@@ -10,60 +10,254 @@
 
 <style>
 *{margin:0; padding:0; text-decoration:none;}
-.font7 {font-size:0.7em;}
-.gray {color:#eee;}
-.textEllipsis {white-space:pre-line; overflow:hidden; text-overflow:ellipsis;}
-.margin10 {margin:10px;}
-.padding10 {padding:10px 0;}
-.ellipsis100{width:270px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+body, div, p, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, fieldset{margin:0; padding:0;}
 
+body{font-family:'nanum gothic', sans-serif;
+		font-size:12px;
+		line-height:18px;
+		color:#121212;}
+ul{list-style:none;}
+a{color:#121212; text-decoration:none;}
+a:visited {color: #121212; text-decoration:none;}
+a:hover {color: #121212; text-decoration:none;}
+a:focus {color: #121212; text-decoration:none;}
+a:active {color: ; text-decoration:none;}	
+img{border:0;
+	vertical-align:top;}
+
+select, input{vertical-align:top;}
+feildset{border:0;}
+legend{display:none;}
+ul, ol{list-style:none;}
+
+.cf{}
+.cf:after{display:block; content:""; clear:both;}
+/*cf=clear float*/
+/*****************기본 css 끝나는 지점*/
+
+html { scrollbar-arrow-color: #efefef;
+        scrollbar-Track-Color: #f7efe5; 
+        scrollbar-base-color: #dfdfdf;
+        scrollbar-Face-Color: #dfdfdf;
+        scrollbar-3dLight-Color: #dfdfdf;         
+        scrollbar-DarkShadow-Color: #dfdfdf;
+        scrollbar-Highlight-Color: #dfdfdf;
+        scrollbar-Shadow-Color: #dfdfdf}
+        /* Chrome, Safari용 스크롤 바 */
+::-webkit-scrollbar {width: 8px; height: 8px; border: 3px solid #fff; }
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment 
+{display: block; height: 10px; background: url('./images/bg.png') #f7efe5}
+::-webkit-scrollbar-track {background: #efefef; -webkit-border-radius: 10px; border-radius:10px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2)}
+::-webkit-scrollbar-thumb {height: 50px; width: 50px; background: rgba(0,0,0,.2); -webkit-border-radius: 8px; border-radius: 8px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.1)}
+
+
+.font7 {font-size:0.7em;}
+.font9 {font-size:0.9em;}
+.gray {color:#aaa;}
+.gray6 {color:#999;}
+/* .textEllipsis {white-space:pre-line; overflow:hidden; text-overflow:ellipsis;} */
+.padding10 {padding:10px 0;}
+.lager{font-size:1.2em;}
+.ellipsis100{width:270px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.elVisible{width:100%; overflow:visible;}
+
+body{
+	background-image:url(/textant/resources/img/side_bg.png);
+	background-position:right bottom;
+	background-repeat: no-repeat;
+	}
+	
 /* BOOK VIEWER */
 #viewer-top {width:600px; margin:0 auto;}
-#viewer-bottom {width:400px; margin:0 auto;}
-#page-counter {margin: 20px;}
-#pageGo {width: 50px;}
+#viewer-bottom {width:300px; margin:0 auto;}
+#page-counter {margin: 20px;
+	/*background-image:url(/textant/resources/img/icon_arrow.png);*/
+	background-repeat: no-repeat;}
+#pageGo {width: 40px;}
+.pageGoEnter{width:30px; height:16px;
+	background-image:url(/textant/resources/img/icon_arrow_03.png);
+	background-repeat: no-repeat;
+	}
+.pageGoEnter i {color:#333; text-shadow:2px 2px 5px #333;}	
+#viewer-bottom a{color:#121212; text-decoration:none;}
+#viewer-bottom a:visited {color: #121212; text-decoration:none;}
+#viewer-bottom a:hover {color: #121212; text-decoration:none;}
+#viewer-bottom a:focus {color: #121212; text-decoration:none;}
+#viewer-bottom a:active {color: ; text-decoration:none;}	
 
 /* NAV */ 
 nav {width:170px; height:100%; background:white; 
-	position:fixed; top:0; right:0; z-index:101;
-	font-size:0.8em;}
-nav img {width:20px; height:20x;}
+	position:fixed; top:0; right:0; 
+	z-index:300;
+	
+	background-image:url(/textant/resources/img/side_bg.png);
+	background-position:right bottom;
+	background-repeat: no-repeat;
+	}
 nav a{text-decoration:none;}
 
-#look-comment a{background:#69F;  z-index:101;}
+#look-comment {
+	background-image:url(/textant/resources/img/side_bg_bookMark.png);
+	background-repeat: no-repeat;
+	
+	width: 150px; height: 130px;
+	position:relative; top:100px; left:0px;}
+#look-comment a{z-index:301;}
+.blueBg{width:65px; height:20px;
+	background:#4d4458;
+	
+	position:absolute; 
+	top:56px; left:0px;
+	}
+.white {color:white; line-height:20px;}	
+#look-comment img{
+	-webkit-transform: translateZ(0);
+  	transform: translateZ(0);
+  	-webkit-transition-duration: 0.3s;
+  	transition-duration: 0.3s;
+  	-webkit-transition-property: transform;
+  	transition-property: transform;
+	}
+#look-comment img:hover {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+	}	
+.open1> img {
+	position:absolute; 
+	top:71px; left:11px;
+	}
+.open2> img {
+	position:absolute; 
+	top:63px; left:54px;
+	}
+.open3> img {
+	position:absolute; 
+	top:24px; left:45px;
+	}		
 
-#nav-pop {position: absolute; bottom:30px; padding:10px; background:#fff; display:none; z-index:101;}
-#nav-pop ul {list-style-type: none;}
-#nav-pop ul li {float:right;}
-#nav-config {position: absolute; bottom:0px; right:0px; z-index:101;}
+#nav-pop {position: absolute; bottom:70px; 
+	padding:25px 10px; margin:11px; background:#fff; 
+	display:none; z-index:301;
+	
+	border-radius: 5px;
+	-webkit-box-shadow:0 0 10px #ccc;
+	-moz-box-shadow:0 0 10px #ccc;
+	-o-box-shadow:0 0 10px #ccc;
+	-ms-box-shadow:0 0 10px #ccc;
+	box-shadow:0 0 10px #ccc;}
+#nav-pop ul {list-style-type: none; align:right;}
+#nav-pop ul li { text-align:right;}
+#nav-pop ul li img {width:20px; height:20x;}
+.navIcon {width:20px; height:20x; line-height:20px;
+	background-image:url(/textant/resources/img/icon.png);
+	background-position:-17 -5;
+	background-repeat: no-repeat;
+ }
+#nav-pop a{color:#121212; text-decoration:none;}
+#nav-pop a:visited {color: #121212; text-decoration:none;}
+#nav-pop a:hover {color: #121212; text-decoration:none;}
+#nav-pop a:focus {color: #121212; text-decoration:none;}
+#nav-pop a:active {color: ; text-decoration:none;}	 
+#nav-config {position: absolute; bottom:20px; right:20px; 
+	z-index:301;}
 
 .coOpen {display:block; width:50px; height:30px; line-height:30px;}
-.open1 {position:absolute; top:100px; left:0px;}
-.open2 {position:absolute; top:100px; left:50px;}
-.open3 {width:100px; position:absolute; top:130px; left:0px;}
+
 
 
 /* COMMENT */
 .coClose {display:block; width:30px; height:30px; 
-		line-height:30px; font-size:18px; font-weight:bold; text-align:center; text-decoration:none;}
+		line-height:30px; font-size:18px; font-weight:bold; 
+		text-align:center; }
 .closeR {position:absolute; top:15px; right:15px;}
 .close2 {position:absolute; top:15px; left:15px;}
+.xBtn {width: 25px; height:25px;}
 
-.comment{width:35%; height:95%; background:#ccc; font-size:0.9em;}
-.RightWrap{position:fixed; top:5%; right:-500px; z-index:100;}
-.LeftWrap{position:fixed; top:0; left:0px; display:none; z-index:100;}
+.comment{width:35%; height:100%; /*background:#f7efe5; */
+	background-image:url(/textant/resources/img/commentBg.jpg);
+	background-repeat: repeat-y;
+	font-size:0.9em;
+	z-index:200;
+	}
+.commentOption{
+	border-left: 1px solid #aaa;
+	
+	-webkit-box-shadow:0 0 20px #ccc;
+	-moz-box-shadow:0 0 20px #ccc;
+	-o-box-shadow:0 0 20px #ccc;
+	-ms-box-shadow:0 0 20px #ccc;
+	box-shadow:0 0 20px #ccc;
+	}
+.RightWrap{position:fixed; top:0; right:-500px; 
+	}
+.RightWrapShadow{ 
+	position:absolute; top:0; right:0;
+	width:5px; height:100%; z-index:301;
+	
+	-webkit-box-shadow:20px 0 20px #ccc;
+	-moz-box-shadow:20px 0 20px #ccc;
+	-o-box-shadow:20px 0 20px #ccc;
+	-ms-box-shadow:20px 0 20px #ccc;
+	box-shadow:20px 0 20px #ccc;
+	}
+.LeftWrap{position:fixed; top:0; left:0px; display:none; }
 .commentL{margin-top:50px; padding:3%;}
 
-#coWrite{margin:50px 0;}
-#coWrite a {display:bolck; width:100px; height:25px; line-height: 25px; text-align:center; 
-	background-color:yellow; margin-top:10px;}
+#nowP { color: #999;}
+#coWrite{margin:40px 0 5px 0;}
+#coWrite a{color:#121212; text-decoration:none;}
+#coWrite a:visited {color: #121212; text-decoration:none;}
+#coWrite a:hover {color: #121212; text-decoration:none;}
+#coWrite a:focus {color: #121212; text-decoration:none;}
+#coWrite a:active {color: ; text-decoration:none;}	
+.btnEffect {display:bolck; width:100px; height:30px;
+	line-height: 30px; text-align:center; 
+	border-radius:3px;
+	background-color:white; margin-top:10px;}
+.btnEffect:hover{
+	border: 1px solid #333;
+	
+	-webkit-transform: translateY(-2px);
+  	transform: translateY(-2px);
+  	-webkit-transform: translateX(-2px);
+  	transform: translateX(-2px);
+  	
+	-webkit-box-shadow:2px 2px 5px #aaa;
+	-moz-box-shadow:2px 2px 5px #aaa;
+	-o-box-shadow:2px 2px 5px #aaa;
+	-ms-box-shadow:2px 2px 5px #aaa;
+	box-shadow:2px 2px 5px #aaa; }		
 #coWrite table{width:100%; }
-.coWriteBtn{line-height:80px; width: 100%; height:92px;}
-.coWriteBtn_widthL{width:70%;}
-.coPlace{width:100%; height:100%;}
-.coWriteBtn_widthR{width:30%;}
+#coWriteForm {font-size: 0.95em;}
+.coWriteBtn_widthL{width:67%;} 
+.coPlace{width:100%; height:100%;} 
+.coWriteBtn_widthR{width:30%; padding-left:5px; } 
+.coWriteBtn{line-height:80px; width: 100%; height:92px; }
+#coWriteForm input[type=submit] { 
+	background-color:white;
+	border-style:none;}
+	
 #coShow{margin-top:3%;}
-#coShow table{width:100%; border-top:1px white dashed; margin-top:20px; }
+#coShowBox {width: 100%;}
+.coTotalForm{background-color:white; 
+	margin:20px 10px 0 0; padding:10px;}
+.coTotalForm table{width:100%;
+	border-style:none;}
+#coShow table a{color:#999; text-decoration:none;}
+#coShow table a:visited {color: #999; text-decoration:none;}
+#coShow table a:hover {color: #999; text-decoration:none; background-color:#ccc; color:white; height:1.2em;}
+#coShow table a:focus {color: #999; text-decoration:none;}
+#coShow table a:active {color: ; text-decoration:none;}	
+#funcLine input[type=button] {
+	background-color:white;
+	border-style:none
+	}
+#profileImg {
+	width:70px; height:85px;
+	margin-right:10px;
+	border: 3px solid #ccc;
+	}	
 #reCoWriteForm{display:none;}
 
 #modalBg {position: absolute;
@@ -97,7 +291,6 @@ nav a{text-decoration:none;}
 <script type="text/javascript" src="/textant/resources/js/modernizr.2.5.3.min.js"></script>
 <script type="text/javascript" src="/textant/resources/js/hash.js"></script>
 
-
 </head>
 
 <body>
@@ -126,74 +319,76 @@ nav a{text-decoration:none;}
 	</div>	
 	<div id="viewer-bottom">
 		<div id="page-counter">
-			<div id=""> 
 			 <p>
-			 <a href="#" class="firstPage">ㅣ◀ </a>
-			 <a href="#" class="previousPage">◀</a>    
-			 <input type="number" id="pageGo" placeholder="thisPage"> / ${totalPageNum+1}  
-			 <a href="#" class="pageGoEnter"><b><i>Go</i></b></a> 
-			 <a href="#" class="nextPage">▶</a>  
-			 <a href="#" class="maxPage">▶ㅣ</a>
+			 	 <a href="#" class="firstPage"><img src="/textant/resources/img/icon_arrow_01.png" alt="제일 첫 장 가기"></a>
+				 <a href="#" class="previousPage"><img src="/textant/resources/img/icon_arrow_02.png" alt="앞 장 가기"></a>    
+				 <input type="number" id="pageGo" placeholder="thisPage"> / ${totalPageNum+1}&nbsp;&nbsp;&nbsp;
+				 <a href="#" class="pageGoEnter"><i>Go</i>&nbsp;&nbsp;&nbsp;</a> 
+				 <a href="#" class="nextPage"><img src="/textant/resources/img/icon_arrow_04.png" alt="뒷장 가기"></a>  
+				 <a href="#" class="maxPage"><img src="/textant/resources/img/icon_arrow_05.png" alt="제일 마지막 장 가기"></a>
 			 </p>
-			</div>
 		</div>
 	</div><!--viewer-bottom-->
 </section> <!--canvas-->
 
+
+
 <!-- NAVIGATION-->
 <nav>
 	<div id="look-comment">
-		<br><br><br> 답글보기
-		<a href="#" class="coOpen open1"><img src="" alt="">왼쪽</a>
-		<a href="#" class="coOpen open2"><img src="" alt="">오른쪽</a>
-		<a href="#" class="coOpen open3"><img src="" alt="">전체보기</a>
+		<div class="blueBg"><span class="white"> 답글보기</span></div>
+		<a href="#" class="coOpen open1"><img src="/textant/resources/img/side_bookMark_left.png" alt="왼쪽"></a>
+		<a href="#" class="coOpen open2"><img src="/textant/resources/img/side_bookMark_right.png" alt="오른쪽"></a>
+		<a href="#" class="coOpen open3"><img src="/textant/resources/img/side_bookMark_all.png" alt="전체보기"></a>		
 	</div>
 	
 	<div id="nav-pop" class="margin10">
 		<ul>
-			<li><a href="#" class="openBookmark">북마크 보기 <img src="/textant/resources/img/if_office-01_809597.png" alt="북마크보기"></a></li>
+			<li><a href="#" class="openBookmark">북마크 보기   <img src="/textant/resources/img/icon_01.png" alt="북마크 보기"></a></li>
 			<li>
 				<c:if test="${bookmark==0}">
-					<a href="#">북마크 하기 <img src="/textant/resources/img/if_bookmark-outline_326548.png" alt="북마크 하기"></a>
+					<a href="#">북마크 하기   <img src="/textant/resources/img/icon_02png" alt="북마크 하기"></a>
 				</c:if>
 				<c:if test="${bookmark==1}">
-					<a href="#">북마크 없애기 <img src="/textant/resources/img/if_bookmark-outline_326548.png" alt="북마크  없애기"></a>
+					<a href="#">북마크 없애기   <img src="/textant/resources/img/icon_03" alt="북마크 없애기"></a>
 				</c:if>
 			</li>
 			<li>
 				<c:if test="${addShelf==0}">
-					<a href="#">책장에 추가 <img src="/textant/resources/img/if_book_sans_add_103401.png" alt="책장에 추가"></a>
+					<a href="#">책장에 추가   <img src="/textant/resources/img/icon_04.png" alt="책장에 추가"></a>
 				</c:if>
 				<c:if test="${addShelf==1}">
-					<a href="#">책장에서 빼기 <img src="/textant/resources/img/if_book_sans_add_103401.png" alt="책장에서 빼기"></a>
+					<a href="#">책장에서 빼기   <img src="/textant/resources/img/icon_05.png" alt="책장에서 빼기"></a>
 				</c:if>
 			</li>
-			<li><a href="#">별점주기 <img src="/textant/resources/img/if_star_103714.png" alt="별점주기"></a></li>
+			<li><a href="#">별점주기   <img src="/textant/resources/img/icon_06.png" alt="별점주기"></a></li>
 			<li>
-				<a href="/reportComment.comment">신고하기 <img src="/textant/resources/img/if_office-01_809597.png" alt="신고하기"></a>
+				<a href="/reportComment.comment">신고하기   <img src="/textant/resources/img/icon_08.png" alt="신고하기"></a>
 			</li>
 			<c:if test="${isText != 'isText'}">
 				<c:if test="${bookType=='jpg'}">
-					<li><a href="#" id="goText" class="convertToTxt convert">전자책으로 보기 <img src="/textant/resources/img/if_office-01_809597.png" alt="전자책으로 보기"></a></li>
+					<li><a href="#" id="goText" class="convertToTxt convert">전자책으로 보기   <img src="/textant/resources/img/icon_10.png" alt="전자책으로 보기"></a></li>
 				</c:if>
 				<c:if test="${bookType=='txt'}">
-					<li><a href="#"  id="goJpg" class="convertToJpg convert">이미지로 보기 <img src="/textant/resources/img/if_office-01_809597.png" alt="이미지로 보기"></a></li>
+					<li><a href="#"  id="goJpg" class="convertToJpg convert">이미지로 보기   <img src="/textant/resources/img/icon_11.png" alt="이미지로 보기"></a></li>
 				</c:if>
 
 			</c:if>
 		</ul>
 	</div>
 	<div id="nav-config" class="margin10">
-		<a href="#" class="navPopBtn"><img src="/textant/resources/img/if_settings_103345.png" alt=""></a>
+		<a href="#" class="navPopBtn"><img src="/textant/resources/img/if_settings_103345.png" alt="메뉴 열기" class="xBtn"></a>
 	</div>
 </nav>
 
 
-<div class="RightWrap comment">
 
-	<a href="#" class="coClose closeR close1">X</a>
+<div class="RightWrap comment">
+	<div id="RightWrapShadow" class="RightWrapShadow"></div>
+
+	<a href="#" class="coClose closeR close1"><img src="/textant/resources/img/icon_x.png" alt"X" class="xBtn"></a>
 	
-	<div class=" ">
+	<div class="commentR">
 				<%@include file="commentPartR.jsp" %>
 	</div> <!--//#comment -->
 </div> <!--//.RightWrap -->
@@ -201,7 +396,7 @@ nav a{text-decoration:none;}
 
 
 <div class="LeftWrap comment">
-		<a href="#" class="coClose closeR close2">X</a>
+		<a href="#" class="coClose closeR close2"><img src="/textant/resources/img/icon_x.png" alt"X" class="xBtn"></a>
 		
 		<div class="commentL">
 		
@@ -215,7 +410,7 @@ nav a{text-decoration:none;}
 <div class="totalCom">
 	<div>
 		<h3>『 ${bookName} 』<span id="totalComCount"></span></h3>
-		<a href="#" class="coClose closeR close3">X</a>
+		<a href="#" class="coClose closeR close3"><img src="/textant/resources/img/icon_x.png" alt"X" class="xBtn"></a>
 		
 	</div>
 </div> <!--totalCom-->
@@ -223,7 +418,7 @@ nav a{text-decoration:none;}
 <div class="Bookmark">
 		<div>
 		<h3>${id}<small>님의</small> 북마크</h3>
-		<a href="#" class="coClose closeR close4">X</a>
+		<a href="#" class="coClose closeR close4"><img src="/textant/resources/img/icon_x.png" alt"X" class="xBtn"></a>
 		<%@include file="BookMarkInViewer.jsp" %>
 		<div>
 </div> <!--Bookmark-->
@@ -237,13 +432,6 @@ nav a{text-decoration:none;}
 
 
 <script type="text/javascript">
-
-
-
-
-
-
-
 
 function loadApp() {
 
@@ -509,6 +697,8 @@ function loadApp() {
 	$('#canvas').css({visibility: 'visible'});
 	
 }
+
+// 하단 페이지 카운팅
 $(".pageGoEnter").on("click",function(){
 	let pageNum = $('#pageGo').val();
 	$('.sample-docs').turn('page',pageNum);
@@ -526,6 +716,14 @@ $(".maxPage").on("click",function(){
 	$('.sample-docs').turn('page', '${totalPageNum+1}');
 });
 
+$(".sample-docs").bind('turning',function(){
+			setTimeout(function() {
+				let currPage = $(".sample-docs").turn("page");
+				$("#pageGo").attr('placeholder',(Math.floor(currPage/2))*2);
+				$("#pageR").attr('value',(Math.floor(currPage/2))*2);
+				$("#pageL").attr('value',(Math.floor(currPage/2))*2);
+			},50);
+		});
 
 
 // Hide canvas
@@ -542,15 +740,9 @@ yepnope({
 
 
 
-	$(".sample-docs").bind('turning',function(){
-				setTimeout(function() {
-					let currPage = $(".sample-docs").turn("page");
-					$("#pageGo").attr('placeholder',(Math.floor(currPage/2))*2);
-					$("#pageR").attr('value',(Math.floor(currPage/2))*2);
-					$("#pageL").attr('value',(Math.floor(currPage/2))*2);
-				},50);
-			});
-	
+		
+		
+//*******************오른쪽 슬라이드 	
 function commentCount(){
 	$.ajax({
 		url:"/textant/commentCount.comment",
@@ -571,7 +763,10 @@ function commentCount(){
 				let currPage = $(".sample-docs").turn("page");
 				let nowPage = (Math.floor(currPage/2))*2;
 				
-				let html="<span id='nowP'>"+json.pageCountBlock+"p ~ "+nowPage+"p ┃   현재페이지 : "+nowPage+"p ┃   댓글 "+json.pageListCount+"개</span>";
+				let html="<span id='nowP'>현재페이지 : <span class='lager'>"+nowPage+"</span><i>p</i> ┃ " 
+				+json.pageCountBlock+"<i>p</i> ~ "+nowPage+"<i>p</i>&nbsp;&nbsp;&nbsp;댓글 <span class='lager'>"
+				+json.pageListCount+"</span>개</span>";
+				
 				$("#nowP").remove();
 				$("#infoOne").append(html);
 				
@@ -583,94 +778,11 @@ function commentCount(){
 				
 			}, 10);
 			
-			
 			commentRead(json);
-			
 		},
 	});
 }
-//전체 댓글 읽어오기
-function commentRead(read){
-	let html= "";
-	$.ajax({
-		url:"/textant/commentRead.comment",
-		type:"POST",
-		async:true,
-		dataType:"json",
-		data:{
-			page:$("#pageR").val(),
-			nextPage:$("#nextPageR").val(),
-			pageListCount:read.pageListCount,
-			pageCountBlock:read.pageCountBlock,
-			pageCut:read.pageCut,
-			bookArticleNum:read.bookArticleNum,
-			commentNum:0,
-			commentDelete:0
-		},
-		error : function(xhr){
-			alert("덜불러오는거");
-			alert("error html = " + xhr.statusText);
-		},
-		complete: function(){	
-			commentDelete($("#pageR").val(),$("#nextPageR").val(),read.pageListCount,read.pageCountBlock,read.pageCut,read.bookArticleNum,0,1)
-			
-			var num=$("#nextPageR").val();
-			 num++;
-			 var nextPageNum = $("#nextPageR").val(); 
-			 var pageCutNum = $("#pageCut").val();
-			 
-			 if(nextPageNum==pageCutNum){
-				 $("#moreSee").attr("type", "hidden");
-			 }else{
-				 $("#moreSee").attr("type", "button");
-			 }
-			 
-			 $("#nextPageR").val(num);
-			 
-			 $(".close1").on("click",function(){
-			 		$("#coShowBox").empty();
-			 		$("#nextPageR").val(1);
-				});
 
-		},
-		success: function(data){
-			 $.each(data, function(index,item) {
-				 let commentNum=item.commentNum;
-				 let commentCount=item.commentCount;
-				 let commentGroup=item.commentGroup;
-				 
-				 html +='<div class="commentDelete'+commentNum+'">'+
-				 '<table border="1" class="padding10">'+
-					'<tr>'+
-					'<td rowspan="4" width="30px">+ profilePicture+</td>'+
-					'<td colspan="2" ><i class="font7">'+item.commentNum+'</i><br><p class="ellipsis100">'+item.conet+'</p></td>'+
-				'</tr>'+
-				'<tr>'+
-					'<td class="font7" colspan="2" align="right"><a href="#" id="ellipsisView" onClick="ellipsisView">더보기 ▼</a></td>'+
-				'</tr>'+
-				'<tr>'+
-					'<td class="font7" colspan="2">'+item.nickName+'님 ┃'+item.writeDate+'┃'+' ♥ (<span class="comGoodCount'+commentNum+'">'+item.commentGood+'</span>) ┃  (☞'+item.commentBad+') ┃ '+
-					'<a href="#" id="showReCo'+commentNum+'" class="comment'+commentNum+'" name="chk" onClick="commentReply('+commentNum+','+commentCount+')">댓글보기('+data[index].commentCount+')</a></td>'+
-				'</tr>'+
-				
-				'<tr>'+
-					'<td class="font7" colspan="2" align="right">'+
-						'<input id="commentDeleteButton'+commentNum+'" type="hidden" onclick="commentDeleteOk('+commentNum+','+commentGroup+')" value="삭제"> ┃'+
-						'<a href="#" class="commentGood'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentGood+')">좋아요</a> ┃'+ 
-						'<a href="#" class="commentBad'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentBad+')">싫어요</a> ┃'+
-						'<a href="#" class="reportComment" id="reportComment'+commentNum+'" onclick="reportComment('+commentNum+')">신고하기</a> ┃'+
-// 						'<a href="#" id="reCoWrite'+commentNum+'" class="toggle2" onclick="commentReplyWrite('+commentNum+')">댓글쓰기</a>'+
-						"<input type='checkbox' id='c"+commentNum+"' class='comment"+commentNum+"' name='chk' onClick='commentReply("+commentNum+","+commentCount+")' value='"+commentNum+"'><label for='c"+commentNum+"' class='commentCount"+commentNum+"'><span></span>답글달기: "+data[index].commentCount+"</label>"+
-						'<input id="nextToPage'+commentNum+'" type="hidden" name="nextToPage'+commentNum+'" value="1">'+	
-						'<input id="commentGroup'+commentNum+'" type="hidden" name="commentGroup" value="0">'+
-					'</td>'+
-				'</tr></table><div class="innerReply'+commentNum+'"></div></div>'
-			 });
-			$("#coShowBox").append(html);
-		}
-	});
-	
-};
 $(function(){
 // 	$(".open1").click(function(){
 // 		$(".RightWrap").animate({right:170},500,"swing") 
@@ -704,7 +816,7 @@ $(function() {
 //}); 
 
 
-//**********************전체 댓글 보기
+//********************** '전체 댓글' 보기
 	function wrapWindowByMask(){
 		var bgHeight = $(document).height();  
 		var bgWidth = $(window).width();  
@@ -733,45 +845,59 @@ $(function() {
 		    $(this).hide();  
 		    $('.totalCom').hide();  
 		});      
+		
+		
+		$.ajax({
+			url: "/textant/commentTotalCount.comment",
+			type: "GET",
+			dataType: "json",
+			data:{
+				page:$("#page").val(),
+				bookArticleNum:$("#bookArticleId").val()
+			},
+			success: function(json){
+				$("#totalComCount").append("<small> &nbsp;&nbsp;&nbsp;답글&nbsp;" +json.totalCount+"&nbsp;개</small>");
+			}
+		});
 	});
 	
+//전체 댓글 보기에 문제 없으면 삭제할 코드 	
+// 	$(document).ready(function(){
+// 		$.ajax({
+// 			url: "/textant/commentTotalCount.comment",
+// 			type: "GET",
+// 			dataType: "json",
+// 			data:{
+// 				page:$("#page").val(),
+// 				bookArticleNum:$("#bookArticleId").val()
+// 			},
+// 			success: function(json){
+// 				$("#totalComCount").append("<small> &nbsp;&nbsp;&nbsp;답글&nbsp;" +json.totalCount+"&nbsp;개</small>");
+// 			}
+// 	});
+// 	}); 
+	
 	
 	$(document).ready(function(){
-		$.ajax({
-				url: "/textant/commentTotalCount.comment",
-				type: "GET",
-				dataType: "json",
-				data:{
-					page:$("#page").val(),
-					bookArticleNum:$("#bookArticleId").val()
-				},
-				success: function(json){
-					$("#totalComCount").append("<small> &nbsp;&nbsp;&nbsp;답글&nbsp;" +json.totalCount+"&nbsp;개</small>");
-				}
-		});
-	}); 
-	
-	
-	$(document).ready(function(){
-		$.ajax({
-				url: "/textant/read.text",
-				type: "GET",
-				dataType: "jsp",
-				data:{
-					page:$("#page").val(),
-					bookArticleNum:$("#bookArticleId").val()
-				},
-				success: function(html){
-					$(document).load(function(){
-						let bbb= $(".page-wrapper").attr(".page");	
-						alert(Math.floor(bbb/2)*2);
-						});
-				}
-		});
+// 		$.ajax({
+// 				url: "/textant/read.text",
+// 				type: "GET",
+// 				dataType: "jsp",
+// 				data:{
+// 					page:$("#page").val(),
+// 					bookArticleNum:$("#bookArticleId").val()
+// 				},
+// 				success: function(html){
+// 					$(document).load(function(){
+// 						let bbb= $(".page-wrapper").attr(".page");	
+// 						alert(Math.floor(bbb/2)*2);
+// 						});
+// 				}
+// 		});
 	}); 
 
 	
-//******************* 댓글쓰기 폼 보이기
+//******************* 댓글쓰기 폼 보이기/숨기기에 따른, 댓글 내용 영역 사이즈 조절
 $(function() {
 	$(".toggle").click(function(){
 		$("#coWriteForm").toggleClass("disNone");

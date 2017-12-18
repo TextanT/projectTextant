@@ -10,15 +10,25 @@
 
 
 <style type="text/css">
-#coInner {width:95%; height:95%; margin:0 auto;}
+#coInner {width:90%; height:95%; margin:0 auto;}
 
 .disNone {display: none;}
 
 #coShow {overflow-y:scroll;}
-.height80 {height: 80%;}
-.height70 {height: 60%;}
+.height80 {height: 85%;}
+.height70 {height: 66.5%;}
 
-#moreSee {margin-top: 30px; width:100%;}
+.moreSee {margin: 30px 1% 10px 1%; 
+	width:98%; height:25px; line-height:25px;
+	background-color:#dbc3a6; 
+	border-style:none;
+	border-radius:3px;}
+#moreSee:hover{
+	-webkit-box-shadow:2px 2px 5px #aaa;
+	-moz-box-shadow:2px 2px 5px #aaa;
+	-o-box-shadow:2px 2px 5px #aaa;
+	-ms-box-shadow:2px 2px 5px #aaa;
+	box-shadow:2px 2px 5px #aaa; }		
 </style>
 
 </head>
@@ -28,9 +38,8 @@
 	<div id="coWrite">
 		<!-- 현재페이지 댓글 보기 -->
 		<span id="infoOne"></span>
-		<c:if test="${id!=null}">
-			<h4><a href="#" class="openCoWrite toggle"> 덧글쓰기 </a></h4>
-			</c:if>
+		<a href="#" class="openCoWrite toggle"><h5 class="btnEffect"> 덧글쓰기 </h5></a>
+			
 			<!--서버에 넘겨야 할 것들 -->  
 			<input type="hidden" id="bookArticleNum" name="bookArticleNum" value="${bookArticleNum}">
 			<input type="hidden" id="pageR" name="page" value="1">
@@ -53,7 +62,7 @@
 				<c:if test="${id != null}">
 					<tr>	
 						<td class="coWriteBtn_widthL">
-							<textarea rows="5" id="coPlace" class="coPlace"></textarea>
+							<textarea rows="7" id="coPlace" class="coPlace"></textarea>
 						</td>
 						<td class="coWriteBtn_widthR">
 							<input type="submit" value="입력" id="coWriteBtn" class="coWriteBtn">
@@ -62,10 +71,10 @@
 				</c:if>
 				<c:if test="${id == null}">
 					<tr>
-						<td>
-							<textarea rows="5" cols="70" class="coPlace" placeholder="로그인 후 덧글을 입력해주세요"></textarea>
+						<td class="coWriteBtn_widthL">
+							<textarea rows="7" cols="70" class="coPlace" placeholder="로그인 후 덧글을 입력해주세요"></textarea>
 						</td>
-						<td class="coWriteBtn_width">
+						<td class="coWriteBtn_widthR">
 							<input type="button" value="입력" disabled="disabled" class="coWriteBtn">
 						</td>
 				</c:if>
@@ -88,31 +97,37 @@
 
 <script>
 
+	//ajax, 스크립트 시작하기 
+
 	$.ajaxSetup({
 		type:"POST",
 		async:true,
 		dataType:"json",
 	});
+	
 	var commentGood=1;
 	var commentBad=2;
+	
 	$(document).ready(function(){
 		$('#moreSee').click(function(){
 			commentGet_R();
 		});
 		$(".open1").click(function(){
-			$(".RightWrap").animate({right:170},500,"swing") 
+			$(".RightWrap").animate({right:170},500,"swing").addClass('commentOption'); 
+			$("#RightWrapShadow").animate({right:1},500,"swing").addClass('RightWrapShadow');
 			if(".open1") event.stopImmediatePropagation();
+			
 			commentCount();
 		});
 		
-// 		var commentEnter="";
-// 	 	$('.conetText').keydown(function(event){
+// 		var commentEnter=""; // 답글 쓰기: enter로 넘기기
+// 	 	$('.coPlace').keydown(function(event){
 // 	 		  if(event.keyCode == 13){
 // 	 			 commentEnter = 0;
 // 	 	 		$("#commentTo").val(commentEnter);
-// 	 	 		commentEnter = $(".conetText").val();
+// 	 	 		commentEnter = $(".coPlace").val();
 // 	 	 		$("#conet").val(commentEnter);
-// 	 	 		$(".commentWrite").trigger('click');
+// 	 	 		$(".coWriteBtn").trigger('click');
 // 	 		  }
 // 	 		});
 	 	
@@ -130,7 +145,470 @@
 	});
 	
 	
-	function commentToGet(commentNum,commentCount){ //답글 의 답글의 더 보기
+	//////////////////////////////전체 댓글 읽어오기
+	function commentRead(read){
+		let html= "";
+		$.ajax({
+			url:"/textant/commentRead.comment",
+			type:"POST",
+			async:true,
+			dataType:"json",
+			data:{
+				page:$("#pageR").val(),
+				nextPage:$("#nextPageR").val(),
+				pageListCount:read.pageListCount,
+				pageCountBlock:read.pageCountBlock,
+				pageCut:read.pageCut,
+				bookArticleNum:read.bookArticleNum,
+				commentNum:0,
+				commentDelete:0
+			},
+			error : function(xhr){
+				alert("이 영역에는 덧글이 없습니다.");
+			},
+			complete: function(){	
+				commentDelete($("#pageR").val(),$("#nextPageR").val(),read.pageListCount,read.pageCountBlock,read.pageCut,read.bookArticleNum,0,1)
+				
+				var num=$("#nextPageR").val();
+				 num++;
+				 var nextPageNum = $("#nextPageR").val(); 
+				 var pageCutNum = $("#pageCut").val();
+				 
+				 if(nextPageNum==pageCutNum){
+					 $("#moreSee").attr("type", "hidden");
+				 }else{
+					 $("#moreSee").attr("type", "button");
+				 }
+				 
+				 $("#nextPageR").val(num);
+				 
+				 $(".close1").on("click",function(){
+				 		$("#coShowBox").empty();
+				 		$("#nextPageR").val(1);
+					});
+
+			},
+			success: function(data){
+				 $.each(data, function(index,item) {
+					 let commentNum=item.commentNum;
+					 let commentCount=item.commentCount;
+					 let commentGroup=item.commentGroup;
+					 
+					 html +='<div class="commentDelete'+commentNum+'  coTotalForm">'+
+					 '<table id="formTbl">'+
+						'<tr id="inFormTbl">'+
+							'<td rowspan="4" width="30px"><div id="profileImg"></div></td>'+
+							'<td colspan="2" ><!--<i class="font7">'+item.commentNum+'</i><br>--><p class="ellipsis100 font9">'+item.conet+'</p></td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td class="font7 gray6" colspan="2" align="right"><a href="#" id="ellipsisView">더보기 ▼</a></td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td class="font7 gray6" colspan="2">'+item.nickName+'님 ┃'+item.writeDate+'┃'+
+							'<img src="/textant/resources/img/heart.png" alt="좋아요" style="width:12px; height:12px;"> (<span class="comGoodCount'+commentNum+'">'+item.commentGood+'</span>) ┃  '+
+							'<img src="/textant/resources/img/broken-heart.png" alt="싫어요" style="width:12px; height:12px; opacity:0.5;"> (<span class="comBadCount'+commentNum+'">'+item.commentBad+'</span>)┃ '+
+							'<a href="#" id="showReCo'+commentNum+'" class="comment'+commentNum+'" name="chk" onClick="commentReply('+commentNum+','+commentCount+')"><!--댓글보기('+data[index].commentCount+')</a>--></td>'+
+						'</tr>'+
+						
+						'<tr>'+
+							'<td id="funcLine" class="font7 gray6" colspan="2" align="right">'+
+								'<input id="commentDeleteButton'+commentNum+'" type="hidden" onclick="commentDeleteOk('+commentNum+','+commentGroup+')" value="삭제"> ┃'+
+								'<a href="#" class="commentGood'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentGood+')">좋아요</a> ┃'+ 
+								'<a href="#" class="commentBad'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentBad+')">싫어요</a> ┃'+
+								'<a href="#" class="reportComment" id="reportComment'+commentNum+'" onclick="reportComment('+commentNum+')">신고하기</a> ┃'+
+	//	 						'<a href="#" id="reCoWrite'+commentNum+'" class="toggle2" onclick="commentReplyWrite('+commentNum+')">댓글쓰기</a>'+
+								"<input type='checkbox' id='c"+commentNum+"' class='comment"+commentNum+"' name='chk' onClick='commentReply("+commentNum+","+commentCount+")' value='"+commentNum+"'><label for='c"+commentNum+"' class='commentCount"+commentNum+"'><span></span>답글보기: "+data[index].commentCount+"</label>"+
+								'<input id="nextToPage'+commentNum+'" type="hidden" name="nextToPage'+commentNum+'" value="1">'+	
+								'<input id="commentGroup'+commentNum+'" type="hidden" name="commentGroup" value="0">'+
+							'</td>'+
+						'</tr></table><hr><div class="innerReply'+commentNum+'"></div></div>'
+				 });
+				$("#coShowBox").append(html);
+			}
+		});
+		
+	};
+	
+	//말줄임표 처리된 덧글 더보기 
+	$(document).on("click", "#formTbl tr:nth-child(2) a",  function(){
+
+		var parent = $(this).closest('table');
+		
+		if($('#inFormTbl p').hasClass('ellipsis100')){
+			parent.find('.ellipsis100').removeClass('ellipsis100').addClass('elVisible');
+		} else {
+			parent.find('.elVisible').removeClass('elVisible').addClass('ellipsis100');
+		}
+	});
+	
+	
+	////////////////////////// 메인 덧글에 대한 기능 
+	
+	
+	function commentWrite(){ //답글 쓰기 
+		let commentNum="";
+		let scrollCommentTopCount="";
+		let scrollResetDivision="";
+		
+		$.ajax({
+			url:"/textant/commentWrite.comment",
+			data:{
+				page:$("#pageR").val(),
+				commentTo:$("#commentTo").val(),
+				commentTop:$("#commentTop").val(),
+				commentCheck:$("#commentCheck").val(),
+				conet:$("#conet").val(),
+				depth:$("#depth").val(),
+				bookArticleNum:$("#bookArticleNum").val(),
+				commentGroup:$("#commentGroup").val()
+			},
+			error : function(xhr){
+				alert("내용이 없거나, 500자 이상 입니다. 확인해주세요   " + xhr.statusText);
+			},
+			complete: function(){
+	 			if(scrollResetDivision!=0){
+	 			$(".commentCount"+commentNum).html("<span></span>답글달기: "+scrollCommentTopCount);	
+	 			$("#commentCount"+commentNum).attr("onClick","commentReply("+commentNum+","+commentCount+")");
+	 			commentReply(commentNum,scrollCommentTopCount);
+	 			}
+	 		},
+			success: function(data){
+				if(data.ScrollResetDivision == 1){
+					commentNum = $("#commentTop").val();
+					scrollCommentTopCount = data.scrollCommentTopCount;
+					scrollResetDivision = data.ScrollResetDivision;
+					$(".innerReply"+commentNum).empty();
+					$("#nextToPage"+commentNum).val(1);
+					$("#commentGroup"+commentNum).val(0);
+					$(".coPlace").val("");
+					$(".commentToText"+commentNum).val("");
+					
+				}else if(data.ScrollResetDivision == 0){
+					$("#nowP").empty();
+					$("#coShowBox").empty();
+					$("#nextPageR").val(1);
+					$(".coPlace").val("");
+					$(".commentToText"+commentNum).val("");
+					commentCount()
+				}else{
+					alert("로그인 하셔야 가능한 서비스 입니다");
+				}
+			},
+		});
+	}
+	
+	
+
+	
+	function commentGet_R(){ //메인 "더보기"
+		let html="";
+		$.ajax({	
+			url:"/textant/commentRead.comment",
+			data:{				
+				page:$("#pageR").val(),
+				nextPage:$("#nextPageR").val(),
+				pageListCount:$("#pageListCount").val(),
+				pageCountBlock:$("#pageCountBlock").val(),
+				pageCut:$("#pageCut").val(),
+				bookArticleNum:$("#bookArticleNum").val(),
+				commentNum:0,
+				commentDelete:0
+			},
+			complete: function(){
+				
+				commentDelete($("#pageR").val(),$("#nextPageR").val(),$("#pageListCount").val(),$("#pageCountBlock").val(),$("#pageCut").val(),$("#bookArticleNum").val(),0,1)
+				 
+				let num=$("#nextPageR").val()
+				 num++;
+							 
+				let nextPageNum = $("#nextPageR").val(); 
+				let pageCutNum = $("#pageCut").val();
+				if(nextPageNum==pageCutNum){
+					 $("#moreSee").attr("type", "hidden");
+				 }else{
+					 $("#moreSee").attr("type", "button");
+				 }
+				 $("#nextPageR").val(num);
+			},
+			success:function(data){
+			
+				 $.each(data, function(index,item) {
+					 let commentNum=item.commentNum;
+					 let commentCount=item.commentCount;
+					 let commentGroup=item.commentGroup;
+					 
+					 html +='<div class="commentDelete'+commentNum+'  coTotalForm">'+
+					 '<table id="formTbl">'+
+						'<tr id="inFormTbl">'+
+							'<td rowspan="4" width="30px"><div id="profileImg"></div></td>'+
+							'<td colspan="2" ><!--<i class="font7">'+item.commentNum+'</i><br>--><p class="ellipsis100 font9">'+item.conet+'</p></td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td class="font7 gray6" colspan="2" align="right"><a href="#" id="ellipsisView">더보기 ▼</a></td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td class="font7 gray6" colspan="2">'+item.nickName+'님 ┃'+item.writeDate+'┃'+
+							'<img src="/textant/resources/img/heart.png" alt="좋아요" style="width:12px; height:12px;"> (<span class="comGoodCount'+commentNum+'">'+item.commentGood+'</span>) ┃  '+
+							'<img src="/textant/resources/img/broken-heart.png" alt="싫어요" style="width:12px; height:12px; opacity:0.5;"> (<span class="comBadCount'+commentNum+'">'+item.commentBad+'</span>)┃ '+
+							'<a href="#" id="showReCo'+commentNum+'" class="comment'+commentNum+'" name="chk" onClick="commentReply('+commentNum+','+commentCount+')"><!--댓글보기('+data[index].commentCount+')</a>--></td>'+
+						'</tr>'+
+						
+						'<tr>'+
+							'<td id="funcLine" class="font7 gray6" colspan="2" align="right">'+
+								'<input id="commentDeleteButton'+commentNum+'" type="hidden" onclick="commentDeleteOk('+commentNum+','+commentGroup+')" value="삭제"> ┃'+
+								'<a href="#" class="commentGood'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentGood+')">좋아요</a> ┃'+ 
+								'<a href="#" class="commentBad'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentBad+')">싫어요</a> ┃'+
+								'<a href="#" class="reportComment" id="reportComment'+commentNum+'" onclick="reportComment('+commentNum+')">신고하기</a> ┃'+
+	//	 						'<a href="#" id="reCoWrite'+commentNum+'" class="toggle2" onclick="commentReplyWrite('+commentNum+')">댓글쓰기</a>'+
+								"<input type='checkbox' id='c"+commentNum+"' class='comment"+commentNum+"' name='chk' onClick='commentReply("+commentNum+","+commentCount+")' value='"+commentNum+"'><label for='c"+commentNum+"' class='commentCount"+commentNum+"'><span></span>답글보기: "+data[index].commentCount+"</label>"+
+								'<input id="nextToPage'+commentNum+'" type="hidden" name="nextToPage'+commentNum+'" value="1">'+	
+								'<input id="commentGroup'+commentNum+'" type="hidden" name="commentGroup" value="0">'+
+							'</td>'+
+						'</tr></table><hr><div class="innerReply'+commentNum+'"></div></div>'
+				 });
+				$("#coShowBox").append(html);
+			}					
+		}); 
+};
+	
+	/////////////////////////공통 기능 
+
+	//로그인한 유저가 쓴 글에만 '삭제' 버튼 보이기
+	function commentDelete(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete){
+		 $.ajax({	
+				url:"/textant/commentRead.comment",
+				data:{		
+					page:page,
+					nextPage:nextPage,
+					pageListCount:pageListCount,
+					pageCountBlock:pageCountBlock,
+					pageCut:pageCut,
+					bookArticleNum:bookArticleNum,
+					commentNum:commentNum,
+					commentDelete:commentDelete
+				},
+				beforeSend : function(){
+				},
+				complete: function(){
+					
+				},
+				success:function(data){
+				
+					$.each(data, function(index,item) {
+						 var commentNum=item.commentNum;
+					 	$("#commentDeleteButton"+commentNum).attr("type", "button");
+					 });
+					
+					
+				}					
+			});
+	}
+	
+	
+	function commentDeleteOk(commentNum,commentGroup){ //삭제하기
+		var commentCountNum ="";
+		$.ajax({	
+			url:"/textant/commentDelete.comment",
+			data:{		
+				commentNum:commentNum,
+				commentGroup:commentGroup
+			},
+			beforeSend : function(){
+			},
+			complete: function(){
+				if(commentGroup!=0){
+					$(".commentCount"+commentGroup).html("<span></span>답글달기: "+commentCountNum);	
+					$("#commentCount"+commentGroup).attr("onClick","commentReply("+commentGroup+","+commentCountNum+")");
+					commentReply(commentGroup,commentCountNum);
+					}
+			},
+			success:function(data){
+				commentCountNum =data;
+				if(commentGroup!=0){
+					$(".innerReply"+commentGroup).empty();
+					$("#nextToPage"+commentGroup).val(1);
+					$("#commentGroup"+commentGroup).val(0);
+				}else{
+					$("#nowP").empty();
+					$("#coShowBox").empty();
+					$("#nextPageR").val(1);
+					commentCount();
+				}
+			}					
+		});
+	}
+	
+	
+	function commentGoodOrBad(commentNum,commentGoodOrBad){  // 좋아요 싫어요
+	
+	$.ajax({	
+		url:"/textant/commentGoodOrBad.comment",
+		data:{				
+			commentNum:commentNum,
+			commentGoodOrBad:commentGoodOrBad
+		},
+		success:function(data){
+			var AllCheckCount =data.commentGoodOrBadAllCount;
+			var coodBadCheck=data.commentGoodOrBadAllCheck;
+			if(AllCheckCount!=0){
+				if(coodBadCheck==1){
+					setTimeout(function() {
+						$(".comGoodCount"+commentNum).text(AllCheckCount);
+					},100);
+					
+				}else{
+					setTimeout(function() {
+						$(".comBadCount"+commentNum).text(AllCheckCount);
+					},100);
+				}
+			}else if(coodBadCheck==1){
+				alert("이 글에 이미 '싫어요'를 누르셨습니다.");
+			}else if(coodBadCheck==2){
+				alert("이 글에 이미 '좋아요'를 누르셨습니다.");
+			}
+			 
+		}					
+	}); 
+}
+	function reportComment(commentNum){ //신고하기 
+		$.ajax({	
+			url:"/textant/reportComment.comment",
+			data:{		
+				commentNum:commentNum
+			},
+			beforeSend : function(){
+			},
+			complete: function(){
+				
+			},
+			success:function(data){
+				if(data==1){
+					alert("정상적으로 신고 되었습니다");
+				}else if(data==0){
+					alert("이미 신고 하셨습니다");
+				}else{
+					alert("로그인 하셔야 가능한 서비스 입니다");
+				}
+				
+			}					
+		});
+	}
+	
+	
+	//////////////////////////////덧글의 답글에 대한 기능 
+
+function commentReply(commentNum,commentCount){  //덧글의 답글 보기와 쓰기
+	var num=commentCount/$("#pageSize").val();
+	var number=Math.ceil(num);
+	var loginCheck=$("#loginCheck").val();
+	 if($(".comment"+commentNum).is(":checked")){
+		 $.ajax({	
+			url:"/textant/commentRead.comment",
+			error : function(xhr){
+				var loginCheckOk="";
+				
+				$(".innerReply"+commentNum).append("답글이 없습니다.");
+				
+				if (loginCheck == "") {
+					alert("로그인 하셔야 가능한 서비스 입니다");
+					
+				}else{
+					
+					loginCheckOk+="<div>답글을 남겨주세요.</div><br>"
+						  +"<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
+						  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
+						  $(".innerReply"+commentNum).append(loginCheckOk);
+				}
+			},
+			data:{		
+				page:$("#pageR").val(),
+				nextPage:$("#nextToPage"+commentNum).val(),
+				pageListCount:commentCount,
+				pageCountBlock:$("#pageCountBlock").val(),
+				pageCut:number,
+				bookArticleNum:$("#bookArticleNum").val(),
+				commentNum:commentNum,
+				commentDelete:0
+			},
+			beforeSend : function(){
+			},
+			complete: function(){
+				commentDelete($("#pageR").val(),$("#nextToPage"+commentNum).val(),commentCount,$("#pageCountBlock").val(),number,$("#bookArticleNum").val(),commentNum,1)
+				var num=$("#nextToPage"+commentNum).val()
+				 num++;
+				 	
+				 var nextPageNum = $("#nextToPage"+commentNum).val();
+				 if(nextPageNum==number){
+					 $("#scrollViewTo"+commentNum).attr("type", "hidden");
+				 }
+				 $("#nextToPage"+commentNum).val(num);
+				 $("#commentGroup"+commentNum).val(1);
+				 
+				 var commentNumber="";
+					$(".commentToWrite"+commentNum).on("mousedown", function() {
+						commentNumber = 1;
+						$("#commentTo").val(commentNumber);
+						commentNumber = $(".conetToText"+commentNum).val();
+						$("#conet").val(commentNumber);
+						commentNumber = commentNum;
+						$("#commentTop").val(commentNumber);
+					});
+					
+				
+					var commentEnter="";
+				 	$('.conetToText'+commentNum).keydown(function(event){
+				 		  if(event.keyCode == 13){
+				 			 commentEnter = 1;
+				 	 		$("#commentTo").val(commentEnter);
+				 	 		commentEnter = $(".conetToText"+commentNum).val();
+				 	 		$("#conet").val(commentEnter);
+				 	 		commentEnter = commentNum;
+							$("#commentTop").val(commentEnter);
+				 	 		$(".commentToWrite"+commentNum).trigger('click');
+				 		  }
+				 		});
+			},
+			success:function(data){
+				
+				var html=" ";
+				
+				 $.each(data, function(index,item) {
+					 var commentNum=item.commentNum;
+					 var commentCount=item.commentCount;
+					 var commentGroup=item.commentGroup;
+					 
+				 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
+				 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
+				 +"<div>"+item.conet+"</div>"			
+				 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
+				 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
+				 +"<hr></div>"
+				 });
+				 
+				 $(".innerReply"+commentNum).append(html);
+				 
+// 				 html="<input class='scrollViewTo' id='scrollViewTo"+commentNum+"' type='button' onclick='commentToGet("+commentNum+","+commentCount+")' value='더보기' style='width:380px;'>"
+				 html= '<input type="button" class="moreSee" id="moreSee'+commentNum+'" onclick="commentToGet('+commentNum+','+commentCount+')" value="더보기">'
+				 
+				 if(loginCheck!=""){
+					 
+					 html+="<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
+					  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
+					  }
+				 $(".innerReply"+commentNum).append(html);
+			}					
+		}); 
+	 
+ 	}else{
+ 		$("#commentGroup"+commentNum).val(0);
+ 		$("#nextToPage"+commentNum).val(1);
+ 		$(".innerReply"+commentNum).empty();
+ 	}
+
+}
+
+	
+	function commentToGet(commentNum,commentCount){ //덧글의 답글의 '더보기'
 		var num=commentCount/$("#pageSize").val();
 		var number=Math.ceil(num);
 			 $.ajax({	
@@ -177,366 +655,6 @@
 				}); 
 			
 	}
-	function commentGet_R(){ //"메인 더보기"
-		let html="";
-		$.ajax({	
-			url:"/textant/commentRead.comment",
-			data:{				
-				page:$("#pageR").val(),
-				nextPage:$("#nextPageR").val(),
-				pageListCount:$("#pageListCount").val(),
-				pageCountBlock:$("#pageCountBlock").val(),
-				pageCut:$("#pageCut").val(),
-				bookArticleNum:$("#bookArticleNum").val(),
-				commentNum:0,
-				commentDelete:0
-			},
-			complete: function(){
-				
-				commentDelete($("#pageR").val(),$("#nextPageR").val(),$("#pageListCount").val(),$("#pageCountBlock").val(),$("#pageCut").val(),$("#bookArticleNum").val(),0,1)
-				 
-				let num=$("#nextPageR").val()
-				 num++;
-							 
-				let nextPageNum = $("#nextPageR").val(); 
-				let pageCutNum = $("#pageCut").val();
-				if(nextPageNum==pageCutNum){
-					 $("#moreSee").attr("type", "hidden");
-				 }else{
-					 $("#moreSee").attr("type", "button");
-				 }
-				 $("#nextPageR").val(num);
-			},
-			success:function(data){
-			
-				 $.each(data, function(index,item) {
-					 let commentNum=item.commentNum;
-					 let commentCount=item.commentCount;
-					 let commentGroup=item.commentGroup;
-					 
-					 html +='<div class="commentDelete'+commentNum+'">'+
-					 '<table border="1" class="padding10">'+
-						'<tr>'+
-						'<td rowspan="4" width="30px">+ profilePicture+</td>'+
-						'<td colspan="2" ><i class="font7">'+item.commentNum+'</i><br><p class="ellipsis100">'+item.conet+'</p></td>'+
-					'</tr>'+
-					'<tr>'+
-						'<td class="font7" colspan="2" align="right">더보기 ▼</td>'+
-					'</tr>'+
-					'<tr>'+
-						'<td class="font7" colspan="2">'+item.nickName+'┃'+item.writeDate+'┃'+' ♥ ('+item.commentGood+') ┃  (☞'+item.commentBad+') ┃ '+
-// 						'<a href="#" id="showReCo'+commentNum+'" class="comment'+commentNum+'" name="chk" onClick="commentReply('+commentNum+','+commentCount+')">댓글보기('+data[index].commentCount+')</a></td>'+
-						"<input type='checkbox' id='c"+commentNum+"' class='comment"+commentNum+"' name='chk' onClick='commentReply("+commentNum+","+commentCount+")' value='"+commentNum+"'><label for='c"+commentNum+"' class='commentCount"+commentNum+"'><span></span>답글달기: "+data[index].commentCount+"</label></td>"+
-					'</tr>'+
-					
-					'<tr>'+
-						'<td class="font7" colspan="2" align="right">'+
-							'<input id="commentDeleteButton'+commentNum+'" type="hidden" onclick="commentDeleteOk('+commentNum+','+commentGroup+')" value="삭제"> ┃'+
-							'<a href="#" class="commentGood'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentGood+')">좋아요</a> ┃'+ 
-							'<a href="#" class="commentBad'+commentNum+'" onclick="commentGoodOrBad('+commentNum+','+commentBad+')">싫어요</a> ┃'+
-							'<a href="#" class="reportComment" id="reportComment'+commentNum+'" onclick="reportComment('+commentNum+')">신고하기</a> ┃'+
-							'<a href="#" id="reCoWrite" class="toggle2">댓글쓰기</a>'+
-							'<input id="nextToPage'+commentNum+'" type="hidden" name="nextToPage'+commentNum+'" value="1">'+	
-							'<input id="commentGroup'+commentNum+'" type="hidden" name="commentGroup" value="0">'+
-						'</td>'+
-					'</tr></table><div class="innerReply'+commentNum+'"></div></div>'
-				 });
-				$("#coShowBox").append(html);
-			}					
-		}); 
-};
-
-	
-	
-	
-	
-	function commentWrite(){ //답글 쓰기 
-		let commentNum="";
-		let scrollCommentTopCount="";
-		let scrollResetDivision="";
-		
-		$.ajax({
-			url:"/textant/commentWrite.comment",
-			data:{
-				page:$("#pageR").val(),
-				commentTo:$("#commentTo").val(),
-				commentTop:$("#commentTop").val(),
-				commentCheck:$("#commentCheck").val(),
-				conet:$("#conet").val(),
-				depth:$("#depth").val(),
-				bookArticleNum:$("#bookArticleNum").val(),
-				commentGroup:$("#commentGroup").val()
-			},
-			error : function(xhr){
-				alert("error html = " + xhr.statusText);
-			},
-			complete: function(){
-	 			if(scrollResetDivision!=0){
-	 			$(".commentCount"+commentNum).html("<span></span>답글달기: "+scrollCommentTopCount);	
-	 			$("#commentCount"+commentNum).attr("onClick","commentReply("+commentNum+","+commentCount+")");
-	 			commentReply(commentNum,scrollCommentTopCount);
-	 			}
-	 		},
-			success: function(data){
-				if(data.ScrollResetDivision == 1){
-					commentNum = $("#commentTop").val();
-					scrollCommentTopCount = data.scrollCommentTopCount;
-					scrollResetDivision = data.ScrollResetDivision;
-					$(".innerReply"+commentNum).empty();
-					$("#nextToPage"+commentNum).val(1);
-					$("#commentGroup"+commentNum).val(0);
-					$(".coPlace").val("");
-					$(".commentToText"+commentNum).val("");
-					
-				}else if(data.ScrollResetDivision == 0){
-					$("#nowP").empty();
-					$("#coShowBox").empty();
-					$("#nextPageR").val(1);
-					$(".coPlace").val("");
-					$(".commentToText"+commentNum).val("");
-					commentCount()
-				}else{
-					alert("로그인 하셔야 가능한 서비스 입니다");
-				}
-			},
-		});
-	}
-	function commentDelete(page,nextPage,pageListCount,pageCountBlock,pageCut,bookArticleNum,commentNum,commentDelete){
-		 $.ajax({	
-				url:"/textant/commentRead.comment",
-				data:{		
-					page:page,
-					nextPage:nextPage,
-					pageListCount:pageListCount,
-					pageCountBlock:pageCountBlock,
-					pageCut:pageCut,
-					bookArticleNum:bookArticleNum,
-					commentNum:commentNum,
-					commentDelete:commentDelete
-				},
-				beforeSend : function(){
-				},
-				complete: function(){
-					
-				},
-				success:function(data){
-				
-					$.each(data, function(index,item) {
-						 var commentNum=item.commentNum;
-					 	$("#commentDeleteButton"+commentNum).attr("type", "button");
-					 });
-					
-					
-				}					
-			});
-	}
-	function commentDeleteOk(commentNum,commentGroup){
-		var commentCountNum ="";
-		$.ajax({	
-			url:"/textant/commentDelete.comment",
-			data:{		
-				commentNum:commentNum,
-				commentGroup:commentGroup
-			},
-			beforeSend : function(){
-			},
-			complete: function(){
-				if(commentGroup!=0){
-					$(".commentCount"+commentGroup).html("<span></span>답글달기: "+commentCountNum);	
-					$("#commentCount"+commentGroup).attr("onClick","commentReply("+commentGroup+","+commentCountNum+")");
-					commentReply(commentGroup,commentCountNum);
-					}
-			},
-			success:function(data){
-				commentCountNum =data;
-				if(commentGroup!=0){
-					$(".innerReply"+commentGroup).empty();
-					$("#nextToPage"+commentGroup).val(1);
-					$("#commentGroup"+commentGroup).val(0);
-				}else{
-					$("#nowP").empty();
-					$("#coShowBox").empty();
-					$("#nextPageR").val(1);
-					commentCount();
-				}
-			}					
-		});
-	}
-	
-	function commentReply(commentNum,commentCount){ 
-	var num=commentCount/$("#pageSize").val();
-	var number=Math.ceil(num);
-	var loginCheck=$("#loginCheck").val();
-	 if($(".comment"+commentNum).is(":checked")){
-		 $.ajax({	
-				url:"/textant/commentRead.comment",
-				error : function(xhr){
-					var loginCheckOk="";
-					alert("읽어들일 코맨트 업엉ㅋ");
-					if (loginCheck == "") {
-						alert("로그인 하셔야 가능한 서비스 입니다");
-					}else{
-						
-						loginCheckOk+="<div>답글을 남겨주세요.</div>"
-							  +"<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
-							  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
-							  $(".innerReply"+commentNum).append(loginCheckOk);
-					}
-// 					html="<div>답글을 남겨주세요.</div>"
-// 					  +"<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
-// 					  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
-// 					  $(".innerReply"+commentNum).append(html);
-				},
-				data:{		
-					page:$("#pageR").val(),
-					nextPage:$("#nextToPage"+commentNum).val(),
-					pageListCount:commentCount,
-					pageCountBlock:$("#pageCountBlock").val(),
-					pageCut:number,
-					bookArticleNum:$("#bookArticleNum").val(),
-					commentNum:commentNum,
-					commentDelete:0
-				},
-				beforeSend : function(){
-				},
-				complete: function(){
-					commentDelete($("#pageR").val(),$("#nextToPage"+commentNum).val(),commentCount,$("#pageCountBlock").val(),number,$("#bookArticleNum").val(),commentNum,1)
-					var num=$("#nextToPage"+commentNum).val()
-					 num++;
-					 	
-					 var nextPageNum = $("#nextToPage"+commentNum).val();
-					 if(nextPageNum==number){
-						 $("#scrollViewTo"+commentNum).attr("type", "hidden");
-					 }
-					 $("#nextToPage"+commentNum).val(num);
-					 $("#commentGroup"+commentNum).val(1);
-					 
-					 var commentNumber="";
-						$(".commentToWrite"+commentNum).on("mousedown", function() {
-							commentNumber = 1;
-							$("#commentTo").val(commentNumber);
-							commentNumber = $(".conetToText"+commentNum).val();
-							$("#conet").val(commentNumber);
-							commentNumber = commentNum;
-							$("#commentTop").val(commentNumber);
-						});
-						
-					
-						var commentEnter="";
-					 	$('.conetToText'+commentNum).keydown(function(event){
-					 		  if(event.keyCode == 13){
-					 			 commentEnter = 1;
-					 	 		$("#commentTo").val(commentEnter);
-					 	 		commentEnter = $(".conetToText"+commentNum).val();
-					 	 		$("#conet").val(commentEnter);
-					 	 		commentEnter = commentNum;
-								$("#commentTop").val(commentEnter);
-					 	 		$(".commentToWrite"+commentNum).trigger('click');
-					 		  }
-					 		});
-				},
-				success:function(data){
-					
-					var html="<hr>";
-					 $.each(data, function(index,item) {
-						 var commentNum=item.commentNum;
-						 var commentCount=item.commentCount;
-						 var commentGroup=item.commentGroup;
-					 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
-					 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
-					 +"<div>이것은 답글의 답글 ★: "+item.conet+"</div>"			
-					 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
-					 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
-					 +"<hr></div>"
-					 });
-					 $(".innerReply"+commentNum).append(html);
-					 html="<input class='scrollViewTo' id='scrollViewTo"+commentNum+"' type='button' onclick='commentToGet("+commentNum+","+commentCount+")' value='더보기' style='width:380px;'>"
-					 if(loginCheck!=""){
-						 html+="<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
-						  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
-						  }
-					 $(".innerReply"+commentNum).append(html);
-				}					
-			}); 
-		 
-	 	}else{
-	 		$("#commentGroup"+commentNum).val(0);
-	 		$("#nextToPage"+commentNum).val(1);
-	 		$(".innerReply"+commentNum).empty();
-	 	}
-	
-}
-	
-	
-	//commentReplyWrite('+commentNum+')답글의 답글 쓰기
-	/*
-	 $(".innerReply"+commentNum).append(html);
-					 html="<input class='scrollViewTo' id='scrollViewTo"+commentNum+"' type='button' onclick='commentToGet("+commentNum+","+commentCount+")' value='더보기' style='width:380px;'>"
-						  +"<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
-						  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
-						  $(".innerReply"+commentNum).append(html);
-	*/
-	
-	
-	
-	
-	//commentGoodOrBad('+commentNum+','+commentBad+')//싫어요
-	function commentGoodOrBad(commentNum,commentGoodOrBad){
-	
-	$.ajax({	
-		url:"/textant/commentGoodOrBad.comment",
-		data:{				
-			commentNum:commentNum,
-			commentGoodOrBad:commentGoodOrBad
-		},
-		success:function(data){
-			var AllCheckCount =data.commentGoodOrBadAllCount;
-			var coodBadCheck=data.commentGoodOrBadAllCheck;
-			if(AllCheckCount!=0){
-				if(coodBadCheck==1){
-					setTimeout(function() {
-						$(".comGoodCount"+commentNum).text("좋아용용ㅇ"+AllCheckCount);
-					},500);
-					
-				}else{
-					$(".commentBad"+commentNum).val("싫어요"+AllCheckCount);
-				}
-			}else if(coodBadCheck==1){
-				alert("이미 싫어요를 누르셨습니다.");
-			}else if(coodBadCheck==2){
-				alert("이미 좋아요를 누르셨습니다.");
-			}
-			 
-		}					
-	}); 
-}
-	function reportComment(commentNum){
-		$.ajax({	
-			url:"/textant/reportComment.comment",
-			data:{		
-				commentNum:commentNum
-			},
-			beforeSend : function(){
-			},
-			complete: function(){
-				
-			},
-			success:function(data){
-				if(data==1){
-					alert("정상적으로 신고 되었습니다");
-				}else if(data==0){
-					alert("이미 신고 하셨습니다");
-				}else{
-					alert("로그인 하셔야 가능한 서비스 입니다");
-				}
-				
-			}					
-		});
-	}
-	//reportComment('+commentNum+')//신고하기
-	
-	//commentDeleteOk('+commentNum+','+commentGroup+')//삭제하기
-	
 	
 </script>
 </body>

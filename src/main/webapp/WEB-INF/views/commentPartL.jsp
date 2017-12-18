@@ -21,27 +21,27 @@ input[type="checkbox"]{
 
 </head>
 <body>		
-<%-- 	<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="${bookArticleNum}"> --%>
-<!-- 	<input id="pageL" type="hidden" name="page" value="1"> -->
-<!-- 	<input id="nextPage" type="hidden" name="nextPage" value="1"> -->
-<!-- 	<input id='pageListCount' type='hidden' name='pageListCount'> -->
-<!-- 	<input id='pageCountBlock' type='hidden' name='pageCountBlock'> -->
-<!-- 	<input id='pageCut' type='hidden' name='pageCut'> -->
-<!-- 	<input id='pageSize' type='hidden' name='pageSize'> -->
-<!-- 	<input id='commentTo' type='hidden' name='commentTo'> -->
-<!-- 	<input id='conet' type='hidden' name='conet'> -->
-<!-- 	<input id='commentTop' type="hidden" name='commentTop' value='0'> -->
-<!-- 	<input id='commentCheck' type="hidden" name='commentCheck' value='0'> -->
+	<input id="bookArticleNum" type="hidden" name="bookArticleNum" value="${bookArticleNum}">
+	<input id="pageL" type="hidden" name="page" value="1">
+	<input id="nextPage" type="hidden" name="nextPage" value="1">
+	<input id='pageListCount' type='hidden' name='pageListCount'>
+	<input id='pageCountBlock' type='hidden' name='pageCountBlock'>
+	<input id='pageCut' type='hidden' name='pageCut'>
+	<input id='pageSize' type='hidden' name='pageSize'>
+	<input id='commentTo' type='hidden' name='commentTo'>
+	<input id='conet' type='hidden' name='conet'>
+	<input id='commentTop' type="hidden" name='commentTop' value='0'>
+	<input id='commentCheck' type="hidden" name='commentCheck' value='0'>
 	
-<!-- 	<!-- 덧글을 보여주는 책의 페이지 / 현재페이지 / 전체답글 갯수 --> -->
-<!-- 	<div class="bbb"></div> -->
+	<!-- 덧글을 보여주는 책의 페이지 / 현재페이지 / 전체답글 갯수 -->
+	<div class="bbb"></div>
 		
-<!-- 	<div class="ccc" style="overflow-y:scroll;width:400px;height:500px;"> -->
-<!-- 			<div class="aaa"></div> -->
-<!-- 		<input class="scrollView" id="scrollView" type="button" onclick="commentGet()" value="더보기" style="width:380px;"> -->
-<!-- 	</div> -->
-<!-- 	<input class="conetText" name="conetText" type="text"> -->
-<!-- 	<input class="commentWrite" type="button" onclick="commentWrite()" value="쓰기"> -->
+	<div class="ccc" style="overflow-y:scroll;width:400px;height:500px;">
+			<div class="aaa"></div>
+		<input class="scrollView" id="scrollView" type="button" onclick="commentGet()" value="더보기" style="width:380px;">
+	</div>
+	<input class="conetText" name="conetText" type="text">
+	<input class="commentWrite" type="button" onclick="commentWrite()" value="쓰기">
 
 
 	<script>
