@@ -1,6 +1,7 @@
 package com.besideYou.textant.main.read;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,10 @@ public class ReadServiceImpl implements ReadService {
 	@Autowired
 	BookInfoDao bookInfoDao;
 	
-	public String read(String fileName, Model model, String bookType) throws Exception{
+	public String read(String fileName, Model model, String bookType, HttpSession session) throws Exception{
 		
 		
-//		bookInfoDao.setReadBook(bookInfoDao.getBookArticleNum(fileName));
+//		bookInfoDao.setReadBook(bookInfoDao.getBookArticleNum(fileName),);
 		
 		
 	int totalPageNum = 0;

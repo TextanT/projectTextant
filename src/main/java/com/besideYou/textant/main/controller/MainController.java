@@ -181,8 +181,8 @@ public class MainController {
 
 
 	@RequestMapping(value = "/read.text")
-	public String read(String fileName, Model model, String bookType) throws Exception {
-		return readService.read(fileName, model, bookType);
+	public String read(String fileName, Model model, String bookType, HttpSession session) throws Exception {
+		return readService.read(fileName, model, bookType, session);
 	}
 
 	@RequestMapping(value = "/displayFile.text")
@@ -191,8 +191,8 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/test.text")
-	public String test(String fileName, Model model, String bookType) throws Exception {
-		readService.read(fileName, model, bookType);
+	public String test(String fileName, Model model, String bookType, HttpSession session) throws Exception {
+		readService.read(fileName, model, bookType, session);
 		return "viewer/test";
 	}
 	
