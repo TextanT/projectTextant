@@ -18,6 +18,10 @@ public class ReadServiceImpl implements ReadService {
 	
 	public String read(String fileName, Model model, String bookType) throws Exception{
 		
+		
+//		bookInfoDao.setReadBook(bookInfoDao.getBookArticleNum(fileName));
+		
+		
 	int totalPageNum = 0;
 	String bookName = null;
 	System.out.println(fileName);

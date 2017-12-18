@@ -28,7 +28,17 @@
 	-moz-box-shadow:2px 2px 5px #aaa;
 	-o-box-shadow:2px 2px 5px #aaa;
 	-ms-box-shadow:2px 2px 5px #aaa;
-	box-shadow:2px 2px 5px #aaa; }		
+	box-shadow:2px 2px 5px #aaa; }	
+	
+.innerComment >div {margin: 5px;}	
+.buttonOption{
+	color:#999;
+	margin-left:5px;
+	width:65px; height:22px; line-height:22px;
+	background-color:white; 
+	border:1px solid #999;
+	border-radius:5px;}
+		
 </style>
 
 </head>
@@ -496,6 +506,7 @@
 	
 	
 	//////////////////////////////덧글의 답글에 대한 기능 
+	
 
 function commentReply(commentNum,commentCount){  //덧글의 답글 보기와 쓰기
 	var num=commentCount/$("#pageSize").val();
@@ -516,7 +527,7 @@ function commentReply(commentNum,commentCount){  //덧글의 답글 보기와 �
 					
 					loginCheckOk+="<div>답글을 남겨주세요.</div><br>"
 						  +"<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
-						  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
+						  +"<input class='commentToWrite"+commentNum+" buttonOption' type='button' onclick='commentWrite()' value='쓰기'>"
 						  $(".innerReply"+commentNum).append(loginCheckOk);
 				}
 			},
@@ -577,11 +588,11 @@ function commentReply(commentNum,commentCount){  //덧글의 답글 보기와 �
 					 var commentCount=item.commentCount;
 					 var commentGroup=item.commentGroup;
 					 
-				 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
-				 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
+				 html+="<div class='commentDelete"+commentNum+" innerComment'><div style='position:relative;'>"+item.nickName+"&nbsp;<span class='gray6'>님</span>&nbsp;&nbsp;&nbsp;"
+				 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제' class='buttonOption' style='position:absolute; right:0px;'></div>"
 				 +"<div>"+item.conet+"</div>"			
-				 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
-				 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
+				 +"<input type='button' class='commentGood"+commentNum+" buttonOption' onclick='reCommentGoodBad("+commentNum+","+commentGood+")' value='좋아요&nbsp;"+item.commentGood+"'>"
+				 +"<input type='button' class='commentBad"+commentNum+" buttonOption' onclick='reCommentGoodBad("+commentNum+","+commentBad+")' value='싫어요&nbsp;"+item.commentBad+"'>"
 				 +"<hr></div>"
 				 });
 				 
@@ -593,7 +604,7 @@ function commentReply(commentNum,commentCount){  //덧글의 답글 보기와 �
 				 if(loginCheck!=""){
 					 
 					 html+="<input class='conetToText"+commentNum+"' name='conetToText' type='text'>"
-					  +"<input class='commentToWrite"+commentNum+"' type='button' onclick='commentWrite()' value='쓰기'>"
+					  +"<input class='commentToWrite"+commentNum+" buttonOption' type='button' onclick='commentWrite()' value='쓰기'>"
 					  }
 				 $(".innerReply"+commentNum).append(html);
 			}					
@@ -607,6 +618,35 @@ function commentReply(commentNum,commentCount){  //덧글의 답글 보기와 �
 
 }
 
+	function reCommentGoodBad(commentNum,commentGoodOrBad){  // 좋아요 싫어요
+	
+	$.ajax({	
+		url:"/textant/commentGoodOrBad.comment",
+		data:{				
+			commentNum:commentNum,
+			commentGoodOrBad:commentGoodOrBad
+		},
+		success:function(data){
+			var AllCheckCount =data.commentGoodOrBadAllCount;
+			var coodBadCheck=data.commentGoodOrBadAllCheck;
+			if(AllCheckCount!=0){
+				if(coodBadCheck==1){
+					$(".commentGood"+commentNum).val("좋아요"+AllCheckCount);
+					
+				}else{
+					$(".commentBad"+commentNum).val("싫어요"+AllCheckCount);
+				}
+			}else if(coodBadCheck==1){
+				alert("이 글에 이미 '싫어요'를 누르셨습니다.");
+			}else if(coodBadCheck==2){
+				alert("이 글에 이미 '좋아요'를 누르셨습니다.");
+			}
+			 
+		}					
+	}); 
+}	
+	
+	
 	
 	function commentToGet(commentNum,commentCount){ //덧글의 답글의 '더보기'
 		var num=commentCount/$("#pageSize").val();
@@ -643,13 +683,15 @@ function commentReply(commentNum,commentCount){  //덧글의 답글 보기와 �
 							 var commentNum=item.commentNum;
 							 var commentCount=item.commentCount;
 							 var commentGroup=item.commentGroup;
-							 html+="<div class='commentDelete"+commentNum+"'><div>"+item.nickName+"</div>"
-							 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제'>"
-							 +"<div>답글: "+item.conet+"</div>"			
-							 +"<input type='button' class='commentGood"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentGood+")' value='좋아요"+item.commentGood+"'>"
-							 +"<input type='button' class='commentBad"+commentNum+"' onclick='commentGoodOrBad("+commentNum+","+commentBad+")' value='싫어요"+item.commentBad+"'>"
+							 
+							 html+="<div class='commentDelete"+commentNum+" innerComment'><div style='position:relative;'>&nbsp;&nbsp;&nbsp;"+item.nickName+"&nbsp;<span class='gray6'>님</span>&nbsp;&nbsp;&nbsp;"
+							 +"<input id='commentDeleteButton"+commentNum+"' type='hidden' onclick='commentDeleteOk("+commentNum+","+commentGroup+")' value='삭제' class='buttonOption' style='position:absolute; right:0px;'></div>"
+							 +"<div>"+item.conet+"</div>"			
+							 +"<input type='button' class='commentGood"+commentNum+" buttonOption' onclick='reCommentGoodBad("+commentNum+","+commentGood+")' value='좋아요&nbsp;"+item.commentGood+"'>"
+							 +"<input type='button' class='commentBad"+commentNum+" buttonOption' onclick='reCommentGoodBad("+commentNum+","+commentBad+")' value='싫어요&nbsp;"+item.commentBad+"'>"
 							 +"<hr></div>"
 							 });
+						 
 						 $(html).insertAfter($(".innerReply"+commentNum).children("div").last());
 					}					
 				}); 

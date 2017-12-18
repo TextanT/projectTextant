@@ -164,7 +164,10 @@ nav a{text-decoration:none;}
 
 .coOpen {display:block; width:50px; height:30px; line-height:30px;}
 
-
+#starCounting {width: 300px; height: 25px; background-color:yellow;
+	position:absolute; bottom:75px; right:10px;
+	display:none; z-index: 501;}
+#starCounting li {line-height: 25px; display:inline-block;}
 
 /* COMMENT */
 .coClose {display:block; width:30px; height:30px; 
@@ -280,8 +283,6 @@ nav a{text-decoration:none;}
 	padding: 16px;}
 
 
-/* BUTTON */
-
 </style>
 
 <!-- <script type="text/javascript" src="/textant/resources/js/jquery-1.11.1.min.js"></script> -->
@@ -363,9 +364,9 @@ nav a{text-decoration:none;}
 					<a href="#">책장에서 빼기   <img src="/textant/resources/img/icon_05.png" alt="책장에서 빼기"></a>
 				</c:if>
 			</li>
-			<li><a href="#">별점주기   <img src="/textant/resources/img/icon_06.png" alt="별점주기"></a></li>
+			<li><a href="#" id="starClick">별점주기   <img src="/textant/resources/img/icon_06.png" alt="별점주기"></a></li>
 			<li>
-				<a href="/reportComment.comment">신고하기   <img src="/textant/resources/img/icon_08.png" alt="신고하기"></a>
+				<a href="/reportComment.comment">책 신고하기   <img src="/textant/resources/img/icon_08.png" alt="신고하기"></a>
 			</li>
 			<c:if test="${isText != 'isText'}">
 				<c:if test="${bookType=='jpg'}">
@@ -377,11 +378,24 @@ nav a{text-decoration:none;}
 
 			</c:if>
 		</ul>
+		
+		<div id="starCounting">
+			<ul>
+				<li><a href=""><img src="/textant/resources/img/icon_07.png" alt="별점주기"></a></li>
+				<li><a href=""><img src="/textant/resources/img/icon_07.png" alt="별점주기"></a></li>
+				<li><a href=""><img src="/textant/resources/img/icon_07.png" alt="별점주기"></a></li>
+				<li><a href=""><img src="/textant/resources/img/icon_07.png" alt="별점주기"></a></li>
+				<li><a href=""><img src="/textant/resources/img/icon_07.png" alt="별점주기"></a></li>
+				<li><a href="" id="statComp">별점주기</a></li>
+			</ul>
+		</div>
 	</div>
 	<div id="nav-config" class="margin10">
 		<a href="#" class="navPopBtn"><img src="/textant/resources/img/if_settings_103345.png" alt="메뉴 열기" class="xBtn"></a>
 	</div>
 </nav>
+
+
 
 
 
@@ -398,13 +412,21 @@ nav a{text-decoration:none;}
 
 
 <div class="LeftWrap comment">
+
+
+
+<div id="RightWrapShadow" class="RightWrapShadow"></div>
+
+
+
 		<a href="#" class="coClose closeR close2"><img src="/textant/resources/img/icon_x.png" alt"X" class="xBtn"></a>
 		
 		<div class="commentL">
 		
-				<%@include file="commentPartL.jsp" %>
+<%-- 				<%@include file="commentPartL.jsp" %> --%>
+				<%@include file="commentPartR.jsp" %>
 		</div> <!--//#comment -->
-</div> <!--//.LeftWrap -->
+</div> <!--//.LeftWrap --> 
 
 
 
@@ -987,6 +1009,30 @@ $('#goJpg').click(function(){
 		    $('.Bookmark').hide();  
 		});      
 	});
+	
+	
+	//**********************별점주기 보기
+// 	function wrapWindowByMask1(){
+// 		var bgHeight = $(document).height();  
+// 		var bgWidth = $(window).width();  
+
+// 		$('#modalBg').css({'width':bgWidth,'height':bgHeight});  
+// 		$('#modalBg').fadeIn(1000);      
+// 		$('#modalBg').fadeTo("slow",0.5);    
+
+// 		$('.Bookmark').show();
+// 	}
+
+	$(document).ready(function(){
+		$('#starClick').click(function(e){
+			e.preventDefault();
+			$('#starCounting').show();
+		});
+		$('#statComp').click(function (e) {  
+		    e.preventDefault();  
+		    $('#starCounting').hide();  
+		});       
+	});	
 
 
 
