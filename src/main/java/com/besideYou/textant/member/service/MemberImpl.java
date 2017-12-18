@@ -71,8 +71,7 @@ public class MemberImpl implements MemberService{
 			model.addAttribute("fileList", fileList);
 			model.addAttribute("fileCount", fileList.size());
 		}else{
-//			기존의 글이 파일 업로드가 없는 글이었을 경우는 updateForm.jsp의 fileCount에 공백값이
-//			들어가므로 update.bbs 요청시 400에러가 남..그래서 편법으로 0 줬음
+
 			model.addAttribute("fileCount", 0);
 		}
 		
