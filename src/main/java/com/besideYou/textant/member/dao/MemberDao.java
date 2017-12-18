@@ -17,16 +17,18 @@ public interface MemberDao {
 
 	public int modifyMyInfo(MemberDto memberDao);
 
-	public int getNextUserNum();
-	
-	public void insertFile(FileDto fileDto);
-	
-	public List<String> getFiles(String articleNum);
-	
-	public void dbDelFileName(ArrayList<String> delFileList);
-
 	public MemberDto getMie(String userNum);
 
 	public int mie(MemberDto mDto);
+	
+	public int getUserNum();
+	
+	public void insertFile(FileDto fileDto);
+	
+	public List<String> getFiles(String userNum);
+	
+	public void dbDelFileName(ArrayList<String> delFileList);
+	
+	
 
 }

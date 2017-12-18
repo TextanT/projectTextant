@@ -29,6 +29,8 @@ public class MemberImpl implements MemberService{
 	
 	@Resource(name="saveProfile")
 	String saveProfile;
+	
+	MemberDto mDto;
 
 	
 	@Override
@@ -50,22 +52,9 @@ public class MemberImpl implements MemberService{
 		memberDao.modifyMyInfo(memberDto);
 		}
 
-	
-	public void commonFileUpload(int articleNum, List<String> fileNames) {
-		FileDto fileDto = null;
-		
-		for(String storedFname: fileNames){					
-			fileDto = new FileDto();			
-			fileDto.setStoredFname(storedFname);			
-			fileDto.setArticleNum(articleNum);
-			memberDao.insertFile(fileDto);				
-		}
-		
-	}
-
 	@Override
 	public void getMie(String userNum, int fileStatus, Model model) {
-		model.addAttribute("profile", memberDao.getMie(userNum));
+		model.addAttribute("mDto", memberDao.getMie(userNum));
 		if(fileStatus==1){	
 			List<String> fileList = memberDao.getFiles(userNum);
 			model.addAttribute("fileList", fileList);
@@ -79,8 +68,61 @@ public class MemberImpl implements MemberService{
 
 	@Override
 	public void mie(MemberDto mDto, String[] deleteFileName, Model model, int fileCount) {
-		// TODO Auto-generated method stub
+		if(deleteFileName != null) {
+	
+			ArrayList<String> delFileList = new ArrayList<>();
+			for(String delFileName : deleteFileName) {
+				delFileList.add(delFileName);
+			}
+			memberDao.dbDelFileName(delFileList);
+			for(String storedFname : deleteFileName) {
+				storageDelFileName(storedFname);
+			}
+		}
+
+		if(mDto.getFileNames() == null) {
+
+			if(deleteFileName != null) {
+				if(fileCount == deleteFileName.length) {
+					mDto.setFileStatus((byte)0);
+				}
+			}
+		}else {
+			commonFileUpload(mDto.getUserNum(), mDto.getFileNames());
+			mDto.setFileStatus((byte)1);
+		}
+		memberDao.mie(mDto);	
+		model.addAttribute("fileStatus", mDto.getFileStatus());
 		
+	}
+
+	private void storageDelFileName(String storedFname) {
+		if(storedFname != null) {
+			String formatName = storedFname.substring(storedFname.lastIndexOf(".")+1);    
+			MediaType mType = MediaUtils.getMediaType(formatName);
+			
+			if(mType != null) {
+				
+				String front = storedFname.substring(0,12);
+				String end = storedFname.substring(12);
+				new File(saveProfile+(front+"s_"+end).replace('/', File.separatorChar)).delete();
+			}
+			File file = new File(saveProfile+storedFname);
+			if(file.exists()) {
+				file.delete();
+			}
+		}
+	}
+	
+	public void commonFileUpload(int userNum, List<String> fileNames) {
+		FileDto fileDto = null;
+		
+		for(String storedFname: fileNames){					
+			fileDto = new FileDto();			
+			fileDto.setStoredFname(storedFname);			
+			fileDto.setArticleNum(userNum);
+			memberDao.insertFile(fileDto);				
+		}
 	}
 	
 }

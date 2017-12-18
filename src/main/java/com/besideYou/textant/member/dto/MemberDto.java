@@ -13,6 +13,9 @@ public class MemberDto {
 	private int age;
 	private int gender;
 	private String comments;
+	private byte fileStatus;
+	private List<String> fileNames;
+	
 	public byte getFileStatus() {
 		return fileStatus;
 	}
@@ -25,8 +28,7 @@ public class MemberDto {
 	public void setFileNames(List<String> fileNames) {
 		this.fileNames = fileNames;
 	}
-	private byte fileStatus;
-	private List<String> fileNames;
+	
 	
 	public int getUserNum() {
 		return userNum;

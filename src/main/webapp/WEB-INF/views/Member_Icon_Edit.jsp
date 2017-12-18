@@ -35,7 +35,7 @@ small {
 </form>
 </div>
 <script>
-// 글쓰기 취소시에 업로드 되어있는 파일 삭제
+
    $("input[type=reset]").on("click", function(){	 
 	   allDeleteFiles();	
 	});

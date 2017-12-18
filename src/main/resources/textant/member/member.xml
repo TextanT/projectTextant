@@ -21,18 +21,22 @@
 		nickName=#{nickName}, comments =#{comments}, pass=#{pass}, email=#{email} 
 		WHERE userNum=#{userNum}
 	</update>
-    
-
-	<select id="getUserNum" resultType="int">
-		SELECT profile_seq.nextval FROM DUAL
+	
+	<select id="getMie" parameterType="String" resultType="member">
+		SELECT userNum FROM PROFILE WHERE userNum=#{userNum}
 	</select>
+	<update id="mie" parameterType="member" >
+		UPDATE PROFILE SET fileStatus=#{fileStatus} WHERE userNum=#{userNum}
+	</update> 
+
+<!-- 	<select id="getUserNum" resultType="int"> -->
+<!-- 		SELECT profile_seq.nextval FROM DUAL -->
+<!-- 	</select> -->
 	
-	
-	<insert id="insertFile" parameterType="profile">
-		INSERT INTO PROFILEPIC  VALUES (file2_seq.nextval, #{storedFname}, #{fileLength}, #{articleNum})
+	<insert id="insertFile" parameterType="file">
+		INSERT INTO PROFILEPIC  VALUES (profile_seq.nextval, #{storedFname}, #{fileLength}, #{userNum})
 	</insert>
 	
-	<!-- filelist 테이블에서 파일정보 가져오기 -->
 	<select id="getFiles" resultType="String" parameterType="String">
 		SELECT storedFname
 		FROM PROFILEPIC
