@@ -777,7 +777,7 @@
 	</script>
 	<script type="text/javascript">
 		function modalemp() {
-			$('#mologinId').val('Default Value');
+// 			$('#mologinId').val('Default Value');
 			$('#mologinPass').empty();
 		}
 	</script>

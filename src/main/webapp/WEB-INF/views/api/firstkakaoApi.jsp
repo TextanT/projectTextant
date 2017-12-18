@@ -13,17 +13,17 @@
 </head>
 <body>
 <form action="naverData.text" class="kakao_mit" id="kakao_mit" method="post">
-	<input type="button" class="mit" id="mit" onclick="kakao_submit()" style="display: none;">
-	<input type="text" name="kaId" class="id" id="id" style="display:none;">
-	<input type="text" name="email" class="email" id="email" style="display:none;">
-	<input type="text" name="nickName" class="nickname" id="nickname" style="display:none;">
-		<input type="text" name="age" class="age" id="age" value="0" style="display:none;">
-		<input type="text" name="realName" class="realname" id="realname" style="display:none;">
-		<input type="text" name="siteFrom" class="siteFrom" value="2" style="display:none;">
+	<input type="button" hidden class="mit" id="mit" onclick="kakao_submit()" hidden>
+	<input type="text" name="kaId" class="id" id="id" hidden>
+	<input type="text" name="email" class="email" id="email" hidden>
+	<input type="text" name="nickName" class="nickname" id="nickname" hidden>
+		<input type="text" name="age" class="age" id="age" value="0" hidden>
+		<input type="text" name="realName" class="realname" id="realname" hidden>
+		<input type="text" name="siteFrom" class="siteFrom" value="2" hidden>
 	</form>
 
 <!-- 	<a  href="javascript:loginWithKakao()" style="position:absolute; left:19%;top:40%;"><img src="/textant/resources/icon_img/kakao_width_bar.png"></a> -->
-	<div id="kakao-login-btn"style="position:absolute; left:20%;top:43%;" class="kakao-log-btn"></div>
+	<div id="kakao-login-btn"style="position:absolute; left:41.7%;top:51%;" class="kakao-log-btn"></div>
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js"type="text/javascript"></script>       
 	<script type='text/javascript'>
 // 	//<![CDATA[

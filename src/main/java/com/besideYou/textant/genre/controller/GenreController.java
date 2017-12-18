@@ -25,7 +25,7 @@ public class GenreController {
 	
 	@RequestMapping(value="/genre.genre", method = RequestMethod.GET)
 	@ResponseBody
-	public HashMap<Object, Object> genre(Model model, BookInfoDto bookInfoDto, String genre,int pageNum,int booktype) {
+	public HashMap<Object, Object> genre(HttpSession session, Model model, BookInfoDto bookInfoDto, String genre,int pageNum,int booktype) {
 	
 		
 //		HashMap<String,List> a = new HashMap();
