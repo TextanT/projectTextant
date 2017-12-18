@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 <link href="/textant/resources/css/footer.css" rel="stylesheet"
 	type="text/css">
+	<style type="text/css">
+	.pointerless:hover{
+		cursor: text;
+	}
+	</style>
 </head>
 <body>
 <footer>
@@ -15,7 +20,7 @@
 			class="footer_img">
 	</div>
 	<address>
-		Tel. 010-1234-1234<br> Fax. 051)555-555<br> E-Mail.
+		Tel. 010-1234-1234<br> Fax. 051)555-<a href="managerMain.text" style="text-decoration: none;color: black; cursor: text;" class="pointerless">5</a>55<br> E-Mail.
 		cwj1102@naver.com<br> 주소. 부산광역시 남구 신선로 365 부경대학교<br> <br>
 		<br> <a href="#" class="foo_a">회사소개</a> <a href="#" class="foo_a">광고문의</a>
 		<a href="#" class="foo_a">제휴문의</a> <a href="#" class="foo_a">인재채용</a>
