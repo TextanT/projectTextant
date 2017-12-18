@@ -60,6 +60,7 @@ public class KakaoController {
 		//loginDto와 age의 타입이 달라 생기는 오류 - 받는것 - 스트링 loginDto age - Integer
 		
 		LoginDto loginDto = new LoginDto();
+		loginDto.setGrade(0);
 		if(kaId!=null) {
 			loginDto.setUserId(kaId);
 		}else {

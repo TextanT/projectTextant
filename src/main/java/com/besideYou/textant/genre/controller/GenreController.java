@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -77,12 +79,19 @@ public class GenreController {
 	
 	
 	@RequestMapping(value="/serchpage.genre")
-	public String serchpage(Model model) {
+	public String serchpage(Model model, HttpSession session) {
+		
+		model.addAttribute("nickname", session.getAttribute("nickname"));
+		model.addAttribute("id", session.getAttribute("id"));
 		
 		return "/WEB-INF/views/main/searchpage.jsp";
 	}
 	@RequestMapping(value = "/creativeSerch.genre")
-	public String createSerch(Model model) {
+	public String createSerch(Model model, HttpSession session) {
+		
+		model.addAttribute("nickname", session.getAttribute("nickname"));
+		model.addAttribute("id", session.getAttribute("id"));
+		
 		return "/WEB-INF/views/main/creativeSerch.jsp";
 	}
 	

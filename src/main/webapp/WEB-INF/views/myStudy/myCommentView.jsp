@@ -53,7 +53,7 @@ background-color: #EFEEEE;
 			<a href="/textant/main.text" class="logo_a" style="height:55px;"> <img
 				src="/textant/resources/icon_img/logo_mini.png" class="logo">
 			</a>
-			</div><div style="float:left;"><span style="margin-top: auto; margin-bottom: auto;font-size: 33px; color: white;"> &nbsp | 관리자 메뉴</span></div>
+			</div><div style="float:left;"><span style="margin-top: auto; margin-bottom: auto;font-size: 33px; color: white;"> &nbsp | 내 서재</span></div>
 		</div>
 		<div class="menu_box">
 			<c:if test="${id!=null}">

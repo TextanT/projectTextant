@@ -58,7 +58,7 @@
 	<form action="/textant/write.text" method="post"
 		enctype="multipart/form-data" id="writeForm">
 		<input type="hidden" id="userNum" name="userNum" value="${userNum}">
-		<input type="hidden" id="line" name="line" value="3">
+		<input type="hidden" id="linehidden" class="linehidden" name="line" value="3">
 		<div class="header">
 			<div class="header_logo" style="padding-top: 20px;">
 				<div style="float: left;">
@@ -207,9 +207,11 @@
 	<script type="text/javascript">
 		function textselect() {
 			$('.book_propDiv').css("display", "block");
+			$(".linehidden").val("2");
 		}
 		function pdfselect() {
 			$('.book_propDiv').css("display", "none");
+			$(".linehidden").val("3");
 		}
 		function textantcover() {
 			$('.userimgDiv').css("display", "none");
@@ -278,9 +280,9 @@
 						+ "줄바꿈<input type='number' value='30' class='lineOfOnePage' name='lineOfOnePage' onblur='pageText()'>"
 						+ "</td>"
 				$("#setting").html(html);
-				$("#line").val("2");
+				$(".linehidden").val("2");
 			} else {
-				$("#line").val("3");
+				$(".linehidden").val("3");
 				$("#setting").html("");
 			}
 
@@ -289,10 +291,10 @@
 		function kokoko() {
 			alert("check박스?!");
 			if ($("#linener").is(":checked")) {
-				$("#line").val("1");
+				$("#linehidden").val("1");
 				alert("1");
 			} else {
-				$("#line").val("2");
+				$("#linehidden").val("2");
 				alert("2");
 			}
 

@@ -58,7 +58,7 @@
 	<form action="/textant/writeAmateur.text" method="post"
 		enctype="multipart/form-data" id="writeForm">
 		<input type="hidden" id="userNum" name="userNum" value="${userNum}">
-		<input type="hidden" id="line" name="line" value="3">
+		<input type="hidden" id="hiddenline" name="line" value="3">
 		<div class="header">
 			<div class="header_logo" style="padding-top: 20px;">
 				<div style="float: left;">
@@ -210,9 +210,11 @@
 	<script type="text/javascript">
 		function textselect() {
 			$('.book_propDiv').css("display", "block");
+			$("#hiddenline").val("2");
 		}
 		function pdfselect() {
 			$('.book_propDiv').css("display", "none");
+			$("#hiddenline").val("3");
 		}
 		function textantcover() {
 			$('.userimgDiv').css("display", "none");

@@ -144,6 +144,7 @@ public class MainController {
 	public String write(HttpServletRequest req, HttpSession session, BookInfoDto bookInfoDto, int inside) throws Exception {
 		bookInfoDto.setBookType("0");
 		System.out.println("inside : " + inside);
+		System.out.println(bookInfoDto);
 		view = pdfServiceText.check(bookInfoDto, inside);
 		if (view == null) {
 			view = "redirect:main.text";
@@ -158,11 +159,13 @@ public class MainController {
 	@RequestMapping(value = "/writeAmateur.text", method = RequestMethod.POST)
 	public String writeAmateur(HttpServletRequest req, HttpSession session, BookInfoDto bookInfoDto,int inside) throws Exception {
 		bookInfoDto.setBookType("1");
+		System.out.println(bookInfoDto);
 		view = pdfServiceText.check(bookInfoDto,inside);
 		if (view == null) {
-			view = "redirect:main.text";
+			view = "redirect:creative.text";
 		}
-		return view;
+//		return view;
+		return "redirect:creative.text";
 	}
 
 	/*@RequestMapping(value = "/getProgress.text", produces = "application/json;charset=UTF-8")

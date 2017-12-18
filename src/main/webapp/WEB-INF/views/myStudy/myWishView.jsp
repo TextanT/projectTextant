@@ -341,6 +341,7 @@ h1{
 		<div class="header_logo" style="padding-top: 20px;">
 			<a href="/textant/main.text" class="logo_a"> <img
 				src="/textant/resources/icon_img/logo_mini.png" class="logo">
+				
 			</a>
 		</div>
 		<div class="menu_box">

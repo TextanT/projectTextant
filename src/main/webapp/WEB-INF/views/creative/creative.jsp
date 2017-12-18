@@ -46,7 +46,7 @@
 				</a>
 			</div>
 			<div style="float: left;">
-				<a href="/textant/managerMain.text" style="text-decoration: none;"><span
+				<a href="creative.text" style="text-decoration: none;"><span
 					style="margin-top: auto; margin-bottom: auto; font-size: 33px; color: white;">
 						&nbsp | 창작 카페</span></a>
 			</div>
@@ -57,16 +57,16 @@
 	<div class="sub_header">
 		<div class="menu_dd">
 			<div class="sub_sub1">
-				<a href='' class='sub_header_menu1'>내서재</a>
+				<a href='myStudy.text' class='sub_header_menu1'>내서재</a>
 			</div>
 			<div class="sub_sub2">
-				<a href='' class='sub_header_menu2' id="sub_menu2">창작카페</a>
+				<a href='creative.text' class='sub_header_menu2' id="sub_menu2">창작카페</a>
 			</div>
 			<div class="sub_sub3">
 				<a href='serchpage.genre' class='sub_header_menu3' id="sub_menu3">장르별검색</a>
 			</div>
 			<div class="sub_sub3">
-				<a href='/textant/write.text' class='sub_header_menu3'
+				<a href='/textant/writeAmateur.text' class='sub_header_menu3'
 					id="sub_menu3">책쓰기</a>
 			</div>
 		</div>
@@ -84,7 +84,7 @@
 			<div class="list_box2">
 				<ul>
 					<li><a href="#">창작도서</a></li>
-					<li><a href="#">일반도서</a></li>
+					<li><a href="serchpage.genre">일반도서</a></li>
 					<li style="cursor: default;">&nbsp</li>
 
 				</ul>
@@ -167,18 +167,18 @@
 				<div class="tab_container">
 					<div id="tab1" class="tab_content">
 						<ul>
-							<li><a href="#">17/11/24 공지사항 입니다.</a></li>
-							<li><a href="#">17/11/25 공지사항 입니다.</a></li>
-							<li><a href="#">17/11/26 공지사항 입니다.</a></li>
-							<li><a href="#">17/11/27 공지사항 입니다.</a></li>
+						<c:forEach var="noticeList" items="${getFirstNoticeList}">
+							<li><c:out value="${noticeList.writeDate.substring(0,10)}"/> 
+							<c:out value="${noticeList.title}"/></li>
+						</c:forEach>
 						</ul>
 					</div>
 					<div id="tab2" class="tab_content">
 						<ul>
-							<li><a href="#">17/11/24 업데이트 입니다.</a></li>
-							<li><a href="#">17/11/24 업데이트 입니다.</a></li>
-							<li><a href="#">17/11/24 업데이트 입니다.</a></li>
-							<li><a href="#">17/11/24 업데이트 입니다.</a></li>
+						<c:forEach var="eventList" items="${getFirstEventList}">
+							<li><c:out value="${eventList.writeDate.substring(0,10)}"/> 
+							<c:out value="${eventList.title}"/></li>
+						</c:forEach>
 						</ul>
 					</div>
 				</div>

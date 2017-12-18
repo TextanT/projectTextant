@@ -170,7 +170,7 @@
 <!--         	<div style="text-align: right;"><a href="/textant/myWishView.text?pageNum=1">더 보기</a></div> -->
         	<c:forEach var="wish" items="${wishList}">
 						<div style="; display: inline-block; margin-top: 1px">
-							<a href="/textant/read.text?fileName=${wish.fileLocation}">
+							<a href="/textant/read.text?fileName=${wish.fileLocation}&bookType=txt" target="_blank">
 						<div style="height: 152px; width: 140px; overflow: hidden;">
 								<img src="displayFile.text?fileName=${wish.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
 									 style="display: block; height: 100%; width: auto;"
@@ -187,7 +187,7 @@
 <!--         	<div style="text-align: right;"><a href="/textant/myBookWriteView.text?pageNum=1">더 보기</a></div> -->
         	<c:forEach var="bookWrite" items="${bookWriteList}">
 						<div style="; display: inline-block; margin-top: 1px">
-							<a href="/textant/read.text?fileName=${bookWrite.fileLocation}">
+							<a href="/textant/read.text?fileName=${bookWrite.fileLocation}&bookType=txt" target="_blank">
 						<div style="height: 152px; width: 140px; overflow: hidden;">
 
 								<img src="displayFile.text?fileName=${bookWrite.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
@@ -210,7 +210,7 @@
 <!--         	<div style="text-align: right;"><a href="/textant/myBookMarkView.text?pageNum=1">더 보기</a></div> -->
         	<c:forEach var="bookMark" items="${bookMarkList}">
 						<div style="; display: inline-block; margin-top: 1px">
-							<a href="/textant/read.text?fileName=${bookMark.fileLocation}">
+							<a href="/textant/read.text?fileName=${bookMark.fileLocation}&bookType=txt" target="_blank">
 						<div style="height: 152px; width: 140px; overflow: hidden;">
 
 								<img src="displayFile.text?fileName=${bookMark.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
@@ -227,7 +227,7 @@
 <!--         	<div style="text-align: right;"><a href="/textant/myBookReadView.text?pageNum=1">더 보기</a></div> -->
         	<c:forEach var="bookRead" items="${bookReadList}">
 						<div style="; display: inline-block; margin-top: 1px">
-							<a href="/textant/read.text?fileName=${bookRead.fileLocation}">
+							<a href="/textant/read.text?fileName=${bookRead.fileLocation}&bookType=txt" target="_blank">
 						<div style="height: 152px; width: 140px; overflow: hidden;">
 								<img src="displayFile.text?fileName=${bookRead.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
 									 style="display: block; height: 100%; width: auto;"
