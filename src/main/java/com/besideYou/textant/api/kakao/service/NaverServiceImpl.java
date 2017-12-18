@@ -26,15 +26,15 @@ public class NaverServiceImpl implements NaverService{
 		if(loDto == null) {
 			
 			naverLoginDao.naverLoginInsert(loginDto);
-			
-			session.setAttribute("nickname", loginDto.getNickName());
-			session.setAttribute("userNum", loginDto.getUserNum());
-			session.setAttribute("id", loginDto.getUserId());
+			loDto  = naverLoginDao.naverLoginCheck(loginDto);
+			session.setAttribute("nickname", loDto.getNickName());
+			session.setAttribute("userNum", loDto.getUserNum());
+			session.setAttribute("id", loDto.getUserId());
 		}else if(loDto != null){
 			
-			session.setAttribute("nickname", loginDto.getNickName());
-			session.setAttribute("userNum", loginDto.getUserNum());
-			session.setAttribute("id", loginDto.getUserId());
+			session.setAttribute("nickname", loDto.getNickName());
+			session.setAttribute("userNum", loDto.getUserNum());
+			session.setAttribute("id", loDto.getUserId());
 			
 		}
 		
