@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mybatis map 선언 표시 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.besideYou.textant.member.dao.MemberDao">
+
+	<select id="viewMyInfo" parameterType="String" resultType="member">
+        SELECT userNum, userId, pass, email, nickName, realName, age, gender, comments  FROM LOGIN
+        WHERE userNum=#{userNum}
+		
+    </select>
+    
+    <select id="modifyGetMyInfo" parameterType="String" resultType="member">
+        SELECT userNum, userId, pass, email, nickName, realName, age, gender, comments FROM LOGIN
+        WHERE userNum=#{userNum}		
+    </select>
+ 
+	<update id="modifyMyInfo" parameterType="member">
+		UPDATE LOGIN SET 
+		nickName=#{nickName}, comments =#{comments}, pass=#{pass}, email=#{email} 
+		WHERE userNum=#{userNum}
+	</update>
+    
+
+	<select id="getUserNum" resultType="int">
+		SELECT profile_seq.nextval FROM DUAL
+	</select>
+	
+	
+	<insert id="insertFile" parameterType="profile">
+		INSERT INTO PROFILEPIC  VALUES (file2_seq.nextval, #{storedFname}, #{fileLength}, #{articleNum})
+	</insert>
+	
+	<!-- filelist 테이블에서 파일정보 가져오기 -->
+	<select id="getFiles" resultType="String" parameterType="String">
+		SELECT storedFname
+		FROM PROFILEPIC
+		WHERE userNum = #{userNum}
+	</select>
+	
+	<delete id="dbDelFileName" parameterType="List">
+		DELETE FROM PROFILEPIC WHERE storedFname IN
+		<foreach collection="list" item="storedFname" open="(" separator="," close=")">
+			#{storedFname}
+		</foreach>
+	</delete>
+    
+</mapper>

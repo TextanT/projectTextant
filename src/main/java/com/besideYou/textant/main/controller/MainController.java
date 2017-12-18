@@ -179,14 +179,6 @@ public class MainController {
 		return pdfService.getProgress(model);
 	}*/
 
-	
-
-	@RequestMapping(value = "/mypage.text")
-	public String mypage() {
-
-		return "mypage";
-	}
-
 
 	@RequestMapping(value = "/read.text")
 	public String read(String fileName, Model model, String bookType) throws Exception {

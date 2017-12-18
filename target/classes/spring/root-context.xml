@@ -44,6 +44,7 @@
 <mybatis-spring:scan base-package="com.besideYou.textant.genre.dao"/>	
 <mybatis-spring:scan base-package="com.besideYou.textant.creative.dao"/>	
 <mybatis-spring:scan base-package="com.besideYou.textant.api.kakao.dao"/>	
+<mybatis-spring:scan base-package="com.besideYou.textant.member.dao"/>
 <!-- 서블릿에서 스캔한 빈과 중복되어서 에러발생 -->
 <!-- 	<mybatis-spring:scan base-package="com.pknu.bbs"/>	 -->
 	
@@ -69,5 +70,9 @@
 	
 	<bean id="saveDir" class="java.lang.String">
 		<constructor-arg value="d:/temp/convertedBook/"></constructor-arg>
+	</bean>
+	
+	<bean id="saveProfile" class="java.lang.String">
+		<constructor-arg value="d://upload//"/>
 	</bean>
 </beans>
