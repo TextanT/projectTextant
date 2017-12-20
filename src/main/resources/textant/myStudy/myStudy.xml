@@ -54,7 +54,7 @@
 			FROM (SELECT ROWNUM RM, human.* FROM 
 					(SELECT W.*,B.fileLocation,B.bookName,B.bookDesc
 					 FROM bookWish W, bookInfo B
-			         WHERE W.userNum=#{userNum} and W.userNum=B.userNum
+			         WHERE W.userNum=#{userNum} 
 			         and W.bookArticlenum=B.bookArticlenum
 			         ORDER BY W.wishNum desc) human)   
 			WHERE RM BETWEEN  #{startRow} AND #{endRow}
@@ -64,7 +64,7 @@
 			FROM (SELECT ROWNUM RM, human.* FROM 
 					(SELECT M.*,B.fileLocation,B.bookName,B.bookDesc
 					 FROM bookMark M, bookInfo B
-			         WHERE M.userNum=#{userNum} and M.userNum=B.userNum
+			         WHERE M.userNum=#{userNum} 
 			         and M.bookArticlenum=B.bookArticlenum
 			         ORDER BY M.bookMarkNum desc) human)   
 			WHERE RM BETWEEN  #{startRow} AND #{endRow}

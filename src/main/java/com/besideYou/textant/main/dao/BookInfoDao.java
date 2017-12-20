@@ -60,7 +60,7 @@ public interface BookInfoDao {
 
 	public void setReadBook(ReadBookDto readBookDto);
 
-	public ReadBookDto getReadBook(ReadBookDto readBookDto);
+	public String getReadBook(ReadBookDto readBookDto);
 
 	public void updateReadBook(ReadBookDto readBookDto);
 

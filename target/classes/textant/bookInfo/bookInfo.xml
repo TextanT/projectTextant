@@ -13,8 +13,8 @@
 		INSERT INTO READBOOK
 		VALUES(READBOOK_SEQ.nextval,#{bookArticleNum},#{userNum},0,SYSDATE)
 	</insert>
-<select id="getReadBook" parameterType="readBook" resultType="readBook">
-SELECT * FROM READBOOK WHERE bookArticleNum = #{bookArticleNum} and userNum = #{userNum}
+<select id="getReadBook" parameterType="readBook" resultType="String">
+SELECT readBookNum FROM READBOOK WHERE bookArticleNum = #{bookArticleNum} and userNum = #{userNum}
 </select>
 
 <update id="updateReadBook" parameterType="readBook">

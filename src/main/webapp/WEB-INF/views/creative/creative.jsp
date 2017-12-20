@@ -101,12 +101,12 @@
 					<div class="img-wrapper">
 						<div class="swiper-size"
 							style="height: 320px; width: 220px; overflow: hidden;">
-							<a href="/textant/read.text?fileName=${files.fileLocation}&bookType=txt"><img
+							<a href="/textant/read.text?fileName=${files.fileLocation}&bookType=txt" target="_blank"><img
 								src="displayFile.text?fileName=${files.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
 								style="display: block; height: 100%; width: auto; border: 1px solid #e8e8e8;"
 								class="bookimg" /></a>
 						</div>
-						<a href="/textant/read.text?fileName=${files.fileLocation}&bookType=txt"> <span
+						<a href="/textant/read.text?fileName=${files.fileLocation}&bookType=txt" target="_blank"> <span
 							class="bookname" style="text-align: center;">${files.bookName}</span><br />
 							<span class="bookname">${files.userNum}</span>
 						</a>
@@ -415,7 +415,7 @@
 					$("#booklistdiv").empty();
 					$.each(data.getMainBookList, function(index, item) {
 						html +="<div class='book_list"+(index+1)+"'style='width:176.66px; height:259px; overflow:hidden;'>"
-						+"<a href='/textant/read.text?fileName="+item.fileLocation+"&bookType="+/* item.fileLocation.substring(item.fileLocation.lastIndexOf('.')+1) */"txt"+"'>" 
+						+"<a href='/textant/read.text?fileName="+item.fileLocation+"&bookType="+/* item.fileLocation.substring(item.fileLocation.lastIndexOf('.')+1) */"txt"+"' target='_blank'>" 
 						+"<img "
 						+"src='displayFile.text?fileName="+item.fileLocation+"/OriginImg&pageNum=1&fileType=jpg'"
 							+"style='border: 1px solid #D8D8D8; position: absolute; z-index: 2; '"

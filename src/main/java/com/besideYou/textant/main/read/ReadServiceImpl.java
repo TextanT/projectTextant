@@ -25,12 +25,12 @@ public class ReadServiceImpl implements ReadService {
 			readBookDto.setBookArticleNum(bookInfoDao.getBookArticleNum(fileName));
 			readBookDto.setUserNum((int)session.getAttribute("userNum"));
 			
-			ReadBookDto readOk = bookInfoDao.getReadBook(readBookDto);
+			String readOk = bookInfoDao.getReadBook(readBookDto);
 			System.out.println("isItExist? : "+readOk);
-			if(readOk.getBookArticleNum()==0) {
-				bookInfoDao.setReadBook(readBookDto);
-			} else {
+			if(readOk !=null) {
 				bookInfoDao.updateReadBook(readBookDto);
+			} else {
+				bookInfoDao.setReadBook(readBookDto);
 			}
 		}
 		

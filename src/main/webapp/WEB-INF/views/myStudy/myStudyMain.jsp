@@ -168,14 +168,14 @@
         <div class="mycomment">
 <!--         	<div style="text-align: right;"><a href="/textant/myWishView.text?pageNum=1">더 보기</a></div> -->
         	<c:forEach var="wish" items="${wishList}">
-						<div style="; display: inline-block; margin-top: 1px">
+						<div style="; display: inline-block; margin-top: 1px;text-align: center;">
 							<a href="/textant/read.text?fileName=${wish.fileLocation}&bookType=txt" target="_blank">
-						<div style="height: 152px; width: 140px; overflow: hidden;">
+						<div style="height: 178px; width: 140px; overflow: hidden;">
 								<img src="displayFile.text?fileName=${wish.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
-									 style="display: block; height: 100%; width: auto;"
+									 style="display: block; height: 178px; width: 140px;"
 									class="bookimg" />
 							</div> 
-							<span style="position: relative; left: 45px" class="bookname">${wish.bookName}</span>
+							<span style="position: relative;" class="bookname">${wish.bookName}</span>
 							</a>
 						</div>
 					</c:forEach>
@@ -185,16 +185,16 @@
         <div class="mywritebook">
 <!--         	<div style="text-align: right;"><a href="/textant/myBookWriteView.text?pageNum=1">더 보기</a></div> -->
         	<c:forEach var="bookWrite" items="${bookWriteList}">
-						<div style="; display: inline-block; margin-top: 1px">
+						<div style="; display: inline-block; margin-top: 1px;text-align: center;">
 							<a href="/textant/read.text?fileName=${bookWrite.fileLocation}&bookType=txt" target="_blank">
-						<div style="height: 152px; width: 140px; overflow: hidden;">
+						<div style="height: 178px; width: 140px; overflow: hidden;">
 
 								<img src="displayFile.text?fileName=${bookWrite.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
-									 style="display: block; height: 100%; width: auto;"
+									 style="display: block; height: 178px; width: 140px;"
 									class="bookimg" />
 
 							</div> 
-							<span style="position: relative; left: 45px" class="bookname">${bookWrite.bookName}</span>
+							<span style="position: relative;" class="bookname">${bookWrite.bookName}</span>
 							</a>
 						</div>
 					</c:forEach>
@@ -208,16 +208,16 @@
         <div class="mycommentTocomment">
 <!--         	<div style="text-align: right;"><a href="/textant/myBookMarkView.text?pageNum=1">더 보기</a></div> -->
         	<c:forEach var="bookMark" items="${bookMarkList}">
-						<div style="; display: inline-block; margin-top: 1px">
+						<div style="; display: inline-block; margin-top: 1px;text-align: center;">
 							<a href="/textant/read.text?fileName=${bookMark.fileLocation}&bookType=txt" target="_blank">
-						<div style="height: 152px; width: 140px; overflow: hidden;">
+						<div style="height: 178px; width: 140px; overflow: hidden;">
 
 								<img src="displayFile.text?fileName=${bookMark.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
-									 style="display: block; height: 100%; width: auto;"
+									 style="display: block; height: 178px; width: 140px;"
 									class="bookimg" />
 
 							</div> 
-							<span style="position: relative; left: 45px" class="bookname">${bookMark.bookName}</span>
+							<span style="position: relative;" class="bookname">${bookMark.bookName}</span>
 							</a>
 						</div>
 					</c:forEach>
@@ -225,15 +225,15 @@
         <div class="myreadbook">
 <!--         	<div style="text-align: right;"><a href="/textant/myBookReadView.text?pageNum=1">더 보기</a></div> -->
         	<c:forEach var="bookRead" items="${bookReadList}">
-						<div style="; display: inline-block; margin-top: 1px">
+						<div style="; display: inline-block; margin-top: 1px; text-align: center;">
 							<a href="/textant/read.text?fileName=${bookRead.fileLocation}&bookType=txt" target="_blank">
-						<div style="height: 152px; width: 140px; overflow: hidden;">
+						<div style="height: 178px; width: 140px; overflow: hidden;">
 								<img src="displayFile.text?fileName=${bookRead.fileLocation}/OriginImg&pageNum=1&fileType=jpg"
-									 style="display: block; height: 100%; width: auto;"
+									 style="display: block; height: 178px; width: 140px;"
 									class="bookimg" />
 
-							</div> 
-							<span style="position: relative; left: 45px" class="bookname">${bookRead.bookName}</span>
+							</div>   
+							<span style="position: relative;" class="bookname">${bookRead.bookName}</span>
 							</a>
 						</div>
 					</c:forEach>
