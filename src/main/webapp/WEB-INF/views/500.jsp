@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-서버 오류입니다<br />
-<a href="/BBS/list.bbs?pageNum=1">메인으로 가기</a>
+<%
+	response.setStatus(HttpServletResponse.SC_OK);
+%>
+서버 오류입니다.<br />
+<a href="main.text">메인으로 가기</a>
 </body>
 </html>

@@ -10,7 +10,7 @@
 <%
 	response.setStatus(HttpServletResponse.SC_OK);
 %>
-페이지를 찾을수 없습니다.<br />
+에러가 발생하였습니다. 다시 시도해 주세요.<br />
 <a href="main.text">메인으로 가기</a>
 </body>
 </html>
