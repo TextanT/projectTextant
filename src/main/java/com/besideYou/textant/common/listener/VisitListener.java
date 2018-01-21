@@ -34,10 +34,10 @@ public class VisitListener implements HttpSessionListener{
 		 HttpSession session = sessionEvent.getSession();
 		 
 		 //ServletContext 객체 가져오기
-		 ServletContext conext = session.getServletContext();
+		 ServletContext context = session.getServletContext();
 		 
 		 //Spring Context 가져오기
-		 WebApplicationContext wContext = WebApplicationContextUtils.getWebApplicationContext(conext);
+		 WebApplicationContext wContext = WebApplicationContextUtils.getWebApplicationContext(context);
 		loginServiceDao = (LoginServiceDao) wContext.getBean("loginServiceDao");
 		 
 		loginServiceDao.setTotalCount();

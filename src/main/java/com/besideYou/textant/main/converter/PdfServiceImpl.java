@@ -109,6 +109,16 @@ public class PdfServiceImpl implements PdfService {
 				return "write/imageFail";
 			}
 		}
+		System.out.println("destinationDir = "+destinationDir);
+		File destFile = new File(destinationDir);
+		
+		if(!destFile.exists()) {
+			System.out.println("DestinationFile is not exist");
+			destFile.mkdirs();
+		} else {
+			System.out.println("DestinationFile is already exist");
+		}
+		
 		line = bookInfoDto.getLine();
 		if (line == 1 || line == 2) {
 			view = txtWrite(bookInfoDto.getBookFile(), bookInfoDto.getBookImg(), line, bookInfoDto.getNumOfOneLine(),
